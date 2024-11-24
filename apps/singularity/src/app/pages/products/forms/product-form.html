@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+        <div>
+            <label for="name" class="flex flex-col gap-1">
+                <p class="text-cyan-500">Nombre</p>
+                <input formControlName="name" type="text" name="name" id="name" class="border rounded p-1">
+            </label>
+            @if (formGroup.dirty && formGroup.controls.name.dirty && formGroup.controls.name.getError("required")) {
+                <p class="text-red-500">Ingrese el nombre</p>
+            }
+        </div>
+        <div>
+            <label for="description" class="flex flex-col gap-1">
+                <p class="text-cyan-500">Descripcion</p>
+                <input formControlName="description" formcon type="text" name="description" id="description" class="border rounded p-1">
+            </label>
+            @if ( formGroup.dirty && formGroup.controls.description.dirty && formGroup.controls.description.getError("required")) {
+                <p class="text-red-500">Ingrese la descripcion</p>
+            }
+        </div>
+    </div>
+    <div>
+        <button class="bg-cyan-500 text-white w-full p-2 rounded font-sans text-[1.1rem]">Registrar</button>
+    </div>
+</form>

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"backend/products"
+	"backend/inventory/products"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
