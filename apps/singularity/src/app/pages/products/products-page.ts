@@ -1,15 +1,15 @@
 import { Component, signal } from '@angular/core';
 import LocalProductService from './services/product.service';
 import Product from './classes/product.class';
-import ProductForm from './forms/product-form';
 import { SaveProduct } from './interfaces/product-service.interface';
 import { PageData } from '../../shared/types/pagination';
 import Paginator from "../../shared/paginator/paginator";
 import ProductsDisplay from "./display/products-display";
+import SaveProductForm from './forms/save-product-form';
 
 @Component({
   selector: 'app-products-page',
-  imports: [ProductForm, Paginator, ProductsDisplay],
+  imports: [SaveProductForm, Paginator, ProductsDisplay],
   templateUrl: './products-page.html',
 })
 export default class ProductsPage {

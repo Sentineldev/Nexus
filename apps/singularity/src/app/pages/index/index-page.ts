@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import Sidebar from "../../shared/sidebar/sidebar";
-import ProductsPage from "../products/products-page";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-index-page',
-  imports: [Sidebar, ProductsPage],
+  imports: [Sidebar, RouterOutlet],
   templateUrl: './index-page.html',
 })
 export default class IndexPage {

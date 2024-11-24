@@ -1,6 +1,6 @@
 
 <div class="m-auto flex flex-col gap-6 lg:w-[800px]">
-    <app-product-form (newProductEvent)="onSaveProduct($event)"/>
+    <app-save-product-form (newProductEvent)="onSaveProduct($event)"/>
 
     <div class="flex flex-col gap-4">
         <app-products-display [products]="products().data"/>

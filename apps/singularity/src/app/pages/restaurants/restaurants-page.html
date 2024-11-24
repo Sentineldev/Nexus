@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-4">
+    <div>
+        <app-save-restaurant-form (newRestaurantEvent)="onSaveRestaurantHandler($event)"/>
+    </div>
+    <div class="py-4">
+        <app-restaurants-display [restaurants]="restaurants().data"/>
+    </div>
+</div>

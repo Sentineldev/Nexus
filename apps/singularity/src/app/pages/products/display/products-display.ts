@@ -15,7 +15,7 @@ import ProductDisplay from './product-display';
                 <h1 class="text-[1.2rem] text-white font-sans">Descripcion</h1>
             </div>
         </div>
-        <div class="flex flex-col gap-4 border border-t-0 rounded-b overflow-auto h-[400px] max-h-[400px]">
+        <div class="flex flex-col  border border-t-0 rounded-b overflow-auto h-[400px] max-h-[400px]">
             @for (product of products(); track product.id) {
                 <app-product-display [product]="product"/>
             }

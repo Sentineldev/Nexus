@@ -3,11 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SaveProduct } from '../interfaces/product-service.interface';
 
 @Component({
-  selector: 'app-product-form',
+  selector: 'app-save-product-form',
   imports: [ReactiveFormsModule],
-  templateUrl: './product-form.html',
+  templateUrl: './save-product-form.html',
 })
-export default class ProductForm {
+export default class SaveProductForm {
 
 
     @Output() newProductEvent = new EventEmitter<SaveProduct>();    
