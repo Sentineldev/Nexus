@@ -12,5 +12,6 @@ export default interface RestaurantService {
     update(id: string, restaurant: SaveRestaurant): Promise<void>
     delete(id: string): Promise<void>
     getPage(filter: PageFilter<{}>): Promise<PageData<Restaurant>>
+    getById(id: string): Promise<Restaurant | undefined>
 
 }

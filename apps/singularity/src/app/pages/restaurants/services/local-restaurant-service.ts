@@ -23,7 +23,7 @@ export default class LocalRestaurantService implements RestaurantService {
         ];
     }
 
-    private async getById(id: string): Promise<Restaurant | undefined> {
+    async getById(id: string): Promise<Restaurant | undefined> {
 
         return this.restaurants.find((val) => val.id === id);
     }
