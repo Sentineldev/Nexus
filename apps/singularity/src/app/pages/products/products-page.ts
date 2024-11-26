@@ -1,11 +1,9 @@
-import { Component, signal } from '@angular/core';
-import LocalProductService from './services/product.service';
-import Product from './classes/product.class';
-import { SaveProduct } from './interfaces/product-service.interface';
-import { PageData } from '../../shared/types/pagination';
+import { Component, computed, signal } from '@angular/core';
 import Paginator from "../../shared/paginator/paginator";
 import ProductsDisplay from "./display/products-display";
 import SaveProductForm from './forms/save-product-form';
+import { SaveProduct } from './dto/product.dto';
+import ProductService from './services/product-service';
 
 @Component({
   selector: 'app-products-page',
@@ -14,40 +12,21 @@ import SaveProductForm from './forms/save-product-form';
 })
 export default class ProductsPage {
 
-  products = signal<PageData<Product>>({
-    data: [],
-    meta: {
-      dataSize: 0,
-      page: 1,
-      pageSize: 5,
-    }
-  });
 
-  constructor(
-    private readonly service: LocalProductService
-  ) {}
+  public state = computed(() => this.service.getState());
 
+  constructor(private readonly service: ProductService) {}
 
 
   async onSaveProduct(product: SaveProduct) {
-    await this.service.save(product);
-
-    this.products.set(await this.service.getPage({
-      page: this.products().meta.page,
-      pageSize: this.products().meta.pageSize, 
-      filter: {}
-    }))
+    this.service.save(product);
   }
 
   async pageChangeHandler(page: number) {
-
-    const meta = this.products().meta;
-    const newPage = await this.service.getPage({
-      page: page,
-      pageSize: meta.pageSize,
-      filter: {}
-    })
-    this.products.set(newPage)
+    this.service.getPage({
+      ...this.state().filter,
+      page,
+    });
   }
 
 }

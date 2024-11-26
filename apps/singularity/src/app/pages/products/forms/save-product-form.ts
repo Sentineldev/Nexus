@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SaveProduct } from '../interfaces/product-service.interface';
+import { SaveProduct } from '../dto/product.dto';
 
 @Component({
   selector: 'app-save-product-form',

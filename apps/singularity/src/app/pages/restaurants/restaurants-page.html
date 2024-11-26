@@ -3,6 +3,6 @@
         <app-save-restaurant-form (newRestaurantEvent)="onSaveRestaurantHandler($event)"/>
     </div>
     <div class="py-4">
-        <app-restaurants-display [restaurants]="restaurants().data"/>
+        <app-restaurants-display [restaurants]="state().page.data"/>
     </div>
 </div>

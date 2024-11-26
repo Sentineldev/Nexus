@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveRestaurant } from "../interfaces/restaurant-service.interface";
+import { SaveRestaurant } from "../dto/restaurant.dto";
 
 @Component({
     selector: 'app-save-restaurant-form',

@@ -3,13 +3,13 @@
     <app-save-product-form (newProductEvent)="onSaveProduct($event)"/>
 
     <div class="flex flex-col gap-4">
-        <app-products-display [products]="products().data"/>
+        <app-products-display [products]="state().page.data"/>
         <div class="self-center">
             <app-paginator 
             (pageChangeEvent)="pageChangeHandler($event)" 
-            [dataSize]="products().meta.dataSize" 
-            [pageSize]="products().meta.pageSize" 
-            [defaultPage]="products().meta.page" 
+            [dataSize]="state().page.meta.dataSize" 
+            [pageSize]="state().page.meta.pageSize" 
+            [defaultPage]="state().page.meta.page" 
             />
         </div>
     </div>
