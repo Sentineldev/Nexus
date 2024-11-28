@@ -14,7 +14,7 @@ export default class RestaurantsPage {
 
 
 
-    public page = computed(() => this.service.getState())
+    public state = computed(() => this.service.getState())
 
 
     constructor(

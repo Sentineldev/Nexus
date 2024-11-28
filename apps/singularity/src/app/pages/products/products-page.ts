@@ -1,25 +1,26 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import Paginator from "../../shared/paginator/paginator";
-import ProductsDisplay from "./display/products-display";
-import SaveProductForm from './forms/save-product-form';
-import { SaveProduct } from './dto/product.dto';
 import ProductService from './services/product-service';
+import ProductsDisplay from './components/display/products-display';
+import SaveProductModal from "./components/modals/save-modal/save-product-modal";
 
 @Component({
   selector: 'app-products-page',
-  imports: [SaveProductForm, Paginator, ProductsDisplay],
+  imports: [Paginator, ProductsDisplay, SaveProductModal],
   templateUrl: './products-page.html',
 })
-export default class ProductsPage {
+export default class ProductsPage implements OnInit {
 
 
   public state = computed(() => this.service.getState());
 
   constructor(private readonly service: ProductService) {}
-
-
-  async onSaveProduct(product: SaveProduct) {
-    this.service.save(product);
+  
+  ngOnInit(): void {
+    this.service.getPage(this.state().filter);
+  }
+  async onUpdateHandler() {
+    this.service.getPage(this.state().filter);
   }
 
   async pageChangeHandler(page: number) {

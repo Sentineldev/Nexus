@@ -15,7 +15,41 @@ export default class LocalProductRepository implements ProductRepository {
     private products: Product[];
 
     constructor() {
-        this.products = [];
+        this.products = [
+            {
+                description: "Some description",
+                id: "1",
+                name: "Some name"
+            }
+        ];
+    }
+    update(id: string, body: SaveProduct): Observable<string> {
+
+        const result = this.products.findIndex((val) => val.id === id);
+
+        return of(result).pipe(
+            switchMap((result) => {
+                if (result === -1) {
+                    return "Not found";
+                }
+                return of(result).pipe(
+                    tap((val) => {
+                        this.products[val].name = body.name;
+                        this.products[val].description = body.description;
+                    }),
+                    map(() => "Updated")
+                )
+            })
+        )
+    }
+    delete(id: string): Observable<string> {
+
+        const result = this.products.filter((val) => val.id !== id);
+        return of(result).pipe(
+            tap(result => { this.products = result; }),
+            map(() => "")
+        )
+
     }
     getById(id: string): Observable<Product | undefined> {
         return of(this.products.find((val) => val.id === id));

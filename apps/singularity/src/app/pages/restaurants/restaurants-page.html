@@ -2,9 +2,11 @@
 
     
     <div>
-        <app-save-restaurant-form (newRestaurantEvent)="onSaveRestaurantHandler($event)"/>
+        @if (!state().loading) {
+            <app-save-restaurant-form (newRestaurantEvent)="onSaveRestaurantHandler($event)"/>
+        }
     </div>
     <div class="py-4">
-        <app-restaurants-display [restaurants]="page().page.data"/>
+        <app-restaurants-display [restaurants]="state().page.data"/>
     </div>
 </div>

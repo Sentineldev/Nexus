@@ -5,6 +5,9 @@ import Product from "../classes/product.class";
 
 export default interface ProductRepository {
     save(body: SaveProduct): Observable<string>
+
+    update(id: string, body: SaveProduct): Observable<string>
+    delete(id: string): Observable<string>
     getById(id: string): Observable<Product | undefined>
     getPage(filter: PageFilter<{}>): Observable<PageData<Product>>
 }

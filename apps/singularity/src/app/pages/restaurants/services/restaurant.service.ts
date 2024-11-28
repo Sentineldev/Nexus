@@ -2,7 +2,7 @@ import { Inject, Injectable, signal, WritableSignal } from "@angular/core"
 import { PageData, PageFilter } from "../../../shared/types/pagination"
 import Restaurant from "../classes/restaurant.class";
 import { SaveRestaurant } from "../dto/restaurant.dto";
-import LocalRestaurantRepository from "./restaurant.repository";
+import LocalRestaurantRepository from "../restaurant/restaurant.repository";
 import RestaurantRepository from "../interfaces/restaurant-repository.interface";
 import { filter, take } from "rxjs";
 

@@ -1,9 +1,8 @@
 
 <div class="m-auto flex flex-col gap-6 lg:w-[800px]">
-    <app-save-product-form (newProductEvent)="onSaveProduct($event)"/>
-
+    <app-save-product-modal (onUpdate)="onUpdateHandler()"/>
     <div class="flex flex-col gap-4">
-        <app-products-display [products]="state().page.data"/>
+        <app-products-display (onUpdate)="onUpdateHandler()" [products]="state().page.data"/>
         <div class="self-center">
             <app-paginator 
             (pageChangeEvent)="pageChangeHandler($event)" 
