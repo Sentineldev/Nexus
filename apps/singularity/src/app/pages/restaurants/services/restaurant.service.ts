@@ -1,90 +1,78 @@
-import { Injectable, signal, WritableSignal } from "@angular/core";
-import { PageData, PageFilter } from "../../../shared/types/pagination";
+import { Inject, Injectable, signal, WritableSignal } from "@angular/core"
+import { PageData, PageFilter } from "../../../shared/types/pagination"
 import Restaurant from "../classes/restaurant.class";
-import { of } from "rxjs";
 import { SaveRestaurant } from "../dto/restaurant.dto";
+import LocalRestaurantRepository from "./restaurant.repository";
+import RestaurantRepository from "../interfaces/restaurant-repository.interface";
+import { filter, take } from "rxjs";
 
-type RestaurantStateProps = {
-
-    restaurants: Restaurant[];
-    page: PageData<Restaurant>
+type RestaurantServiceProps = {
     filter: PageFilter<{}>
-};
+    page: PageData<Restaurant>
+    loadingPage: boolean;
+    loading: boolean;
+}
 
 @Injectable({
-    providedIn: "root"
+    providedIn: "root",
 })
 export default class RestaurantService {
 
 
-    private state: WritableSignal<RestaurantStateProps>;
+    private state: WritableSignal<RestaurantServiceProps>;
 
 
-    constructor() {
-
-        const data = [{
-            id: "1",
-            name: "Restaurante Concorde"
-        },
-        {
-            id: "2",
-            name: "Restaurante Marea"
-        }]; 
-
-        this.state = signal<RestaurantStateProps>({
-            restaurants: data,
+    constructor(
+        @Inject(LocalRestaurantRepository)
+        private readonly repository: RestaurantRepository
+    ) {
+        this.state = signal<RestaurantServiceProps>({
+            filter: {
+                filter: {},
+                page: 1,
+                pageSize: 5,
+            },
             page: {
                 data: [],
                 meta: {
                     dataSize: 0,
                     page: 1,
                     pageSize: 5,
-                },
+                }
             },
-            filter: {
-                filter: {},
-                page: 1,
-                pageSize: 5,
-            }
+            loading: false,
+            loadingPage: false,
         });
-        this.getPage(this.state().filter);
-    }
 
+        this.getPage(this.state().filter);
+    } 
 
     getState() {
         return this.state();
     }
-
+   
     save(body: SaveRestaurant) {
-
-        const id = new Date().getTime().toString();
-        const newRestaurant = new Restaurant(id, body.name);
-        of({ status: 201 }).subscribe(() => {
-            this.state.update((current) => ({...current, products: [...current.restaurants, newRestaurant]}));
+        this.state.update((val) => ({...val, loading: true}));
+        this.repository.save(body)
+        .pipe(take(1))
+        .subscribe(() => {
+            this.state.update((val) => ({...val, loading: false }));
             this.getPage(this.state().filter);
         });
+        
     }
 
+
+   
     getPage(filter: PageFilter<{}>) {
-        const start = (filter.page - 1) * filter.pageSize;
-        const end = start + filter.pageSize;
+        this.state.update((val) => ({...val, loadingPage: true }));
 
-        const data = this.state().restaurants.slice(start, end)
-        const dataSize = this.state().restaurants.length;
 
-        const pageData = {
-            data: data,
-            meta: {
-                dataSize: dataSize,
-                page: filter.page,
-                pageSize: filter.pageSize,
-            }
-        }
-        of(pageData).subscribe((result) => {
-            this.state.update((current): RestaurantStateProps => {
-                return { ...current, page: result, filter: filter };
-            });
-        });
+        this.repository.getPage(filter).pipe(take(1)).subscribe((val) => {
+
+            this.state.update((current) => ({ ...current, loadingPage: false, page: val, filter: filter  }))
+        })
     }
+
 
 }
