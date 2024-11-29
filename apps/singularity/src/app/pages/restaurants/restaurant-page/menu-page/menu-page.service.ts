@@ -64,9 +64,7 @@ export default class MenuPageService {
 
 
     getMenu() {
-
         this.repository.getAll(this.state().restaurant.id).pipe(take(1)).subscribe(result => {
-            console.log(result);
             this.menuSignal.set(result);
         })
     }

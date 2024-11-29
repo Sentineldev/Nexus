@@ -6,6 +6,7 @@ import RestaurantsPage from './pages/restaurants/restaurants-page';
 import RestaurantPage from './pages/restaurants/restaurant-page/restaurant-page';
 import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
 import MenuPage from './pages/restaurants/restaurant-page/menu-page/menu-page';
+import MenuCategoryPage from './pages/restaurants/restaurant-page/menu-category-page/menu-category.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -31,7 +32,13 @@ export const routes: Routes = [
                     },
                     {
                         path: "menu",
-                        component: MenuPage
+                        component: MenuPage,
+                        children: [
+                            {
+                                path: ":menuId/:categoryId/products",
+                                component: MenuCategoryPage
+                            }
+                        ]
                     }
                 ]
             }

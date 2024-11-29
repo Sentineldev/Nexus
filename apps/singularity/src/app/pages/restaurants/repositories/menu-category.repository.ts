@@ -27,7 +27,7 @@ export default class LocalMenuCategoryRepository implements MenuCategoryReposito
 
     save({ name, menuId }: SaveMenuCategory): Observable<string> {
         
-        const id = new Date().getTime().toLocaleString();
+        const id = new Date().getTime().toString();
 
         return this.menuRepository.getById(menuId).pipe(
             switchMap(menu => {
