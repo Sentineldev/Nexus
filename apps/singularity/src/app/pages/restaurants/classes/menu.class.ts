@@ -1,25 +1,25 @@
 import MenuCategory from "./menu-category.class";
 import Restaurant from "./restaurant.class";
 
-
 export type MenuParams = {
     id: string;
-    restaurant: Restaurant;
     name: string;
+    restaurant: Restaurant;
     categories: MenuCategory[];
-}
+};
 export default class Menu {
 
     public id: string;
-    public restaurant: Restaurant;
     public name: string;
+    public restaurant: Restaurant;
     public categories: MenuCategory[];
-    private constructor(params: MenuParams) {
 
-        const { id, restaurant, name, categories } = params;
+
+
+    constructor({ id, name, restaurant, categories }: MenuParams) {
         this.id = id;
-        this.restaurant = restaurant;
         this.name = name;
+        this.restaurant = restaurant;
         this.categories = categories;
     }
 }

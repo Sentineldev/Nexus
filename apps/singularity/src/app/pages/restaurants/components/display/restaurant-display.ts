@@ -1,6 +1,6 @@
 import { Component, input } from "@angular/core";
-import Restaurant from "../classes/restaurant.class";
 import { RouterLink } from "@angular/router";
+import Restaurant from "../../classes/restaurant.class";
 
 @Component({
     selector: 'app-restaurant-display',
@@ -27,8 +27,5 @@ import { RouterLink } from "@angular/router";
 })
 export default class RestaurantDisplay {  
 
-    public restaurant = input<Restaurant>({
-        id: "",
-        name: ""
-    });
+    public restaurant = input.required<Restaurant>();
 }

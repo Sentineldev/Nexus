@@ -1,6 +1,6 @@
 import { Component, input } from "@angular/core";
-import Restaurant from "../classes/restaurant.class";
 import RestaurantDisplay from "./restaurant-display";
+import Restaurant from "../../classes/restaurant.class";
 
 @Component({
     selector: 'app-restaurants-display',

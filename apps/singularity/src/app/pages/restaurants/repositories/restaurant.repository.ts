@@ -6,18 +6,18 @@ import { SaveRestaurant } from "../dto/restaurant.dto";
 import RestaurantRepository from "../interfaces/restaurant-repository.interface";
 
 
+
+export let RESTAURANTS: Restaurant[] = [];
 @Injectable({
     providedIn: 'root'
 })
 export default class LocalRestaurantRepository implements RestaurantRepository {
 
 
-    private restaurants: Restaurant[];
-
 
     constructor() {
 
-        this.restaurants = [
+        RESTAURANTS = [
             {
                 id: "1",
                 name: "Restaurante Concorde"
@@ -29,7 +29,7 @@ export default class LocalRestaurantRepository implements RestaurantRepository {
         ];
     }
     getById(id: string): Observable<Restaurant | undefined> {
-        return of(this.restaurants.find((val) => val.id === id));
+        return of(RESTAURANTS.find((val) => val.id === id));
     }
 
 
@@ -44,7 +44,7 @@ export default class LocalRestaurantRepository implements RestaurantRepository {
                     return "Already exists";
                 }
                 return of(newRestaurant).pipe(
-                    tap(() => this.restaurants.push(newRestaurant)),
+                    tap(() => RESTAURANTS.push(newRestaurant)),
                     map(() => "Created")
                 )
             })
@@ -60,8 +60,8 @@ export default class LocalRestaurantRepository implements RestaurantRepository {
             const start = (filter.page - 1) * filter.pageSize;
             const end = start + filter.pageSize;
     
-            const data = this.restaurants.slice(start, end)
-            const dataSize = this.restaurants.length;
+            const data = RESTAURANTS.slice(start, end)
+            const dataSize = RESTAURANTS.length;
     
             const pageData: PageData<Restaurant> = {
                 data: data,

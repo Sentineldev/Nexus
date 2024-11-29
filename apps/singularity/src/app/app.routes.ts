@@ -3,8 +3,9 @@ import LoginPage from './pages/login/login-page';
 import IndexPage from './pages/index/index-page';
 import ProductsPage from './pages/products/products-page';
 import RestaurantsPage from './pages/restaurants/restaurants-page';
-import RestaurantPage from './pages/restaurants/restaurant/restaurant-page';
-import RestaurantHome from './pages/restaurants/restaurant/home/restaurant-home';
+import RestaurantPage from './pages/restaurants/restaurant-page/restaurant-page';
+import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
+import MenuPage from './pages/restaurants/restaurant-page/menu-page/menu-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -26,7 +27,11 @@ export const routes: Routes = [
                 children: [
                     {
                         path: "",
-                        component: RestaurantHome
+                        component: RestaurantHomePage
+                    },
+                    {
+                        path: "menu",
+                        component: MenuPage
                     }
                 ]
             }

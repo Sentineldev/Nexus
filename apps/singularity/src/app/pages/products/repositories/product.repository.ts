@@ -6,16 +6,16 @@ import ProductRepository from "../interfaces/product-repository.interface";
 import { Injectable } from "@angular/core";
 
 
+export let PRODUCTS: Product[] = [];
+
 @Injectable({
     providedIn: "root"
 })
 export default class LocalProductRepository implements ProductRepository {
     
-    
-    private products: Product[];
 
     constructor() {
-        this.products = [
+        PRODUCTS = [
             {
                 description: "Some description",
                 id: "1",
@@ -25,7 +25,7 @@ export default class LocalProductRepository implements ProductRepository {
     }
     update(id: string, body: SaveProduct): Observable<string> {
 
-        const result = this.products.findIndex((val) => val.id === id);
+        const result = PRODUCTS.findIndex((val) => val.id === id);
 
         return of(result).pipe(
             switchMap((result) => {
@@ -34,8 +34,8 @@ export default class LocalProductRepository implements ProductRepository {
                 }
                 return of(result).pipe(
                     tap((val) => {
-                        this.products[val].name = body.name;
-                        this.products[val].description = body.description;
+                        PRODUCTS[val].name = body.name;
+                        PRODUCTS[val].description = body.description;
                     }),
                     map(() => "Updated")
                 )
@@ -44,15 +44,15 @@ export default class LocalProductRepository implements ProductRepository {
     }
     delete(id: string): Observable<string> {
 
-        const result = this.products.filter((val) => val.id !== id);
+        const result = PRODUCTS.filter((val) => val.id !== id);
         return of(result).pipe(
-            tap(result => { this.products = result; }),
+            tap(result => { PRODUCTS = result; }),
             map(() => "")
         )
 
     }
     getById(id: string): Observable<Product | undefined> {
-        return of(this.products.find((val) => val.id === id));
+        return of(PRODUCTS.find((val) => val.id === id));
     }
 
     save(body: SaveProduct): Observable<string> {
@@ -66,7 +66,7 @@ export default class LocalProductRepository implements ProductRepository {
                     return "Already exists";
                 }
                 return of(newProduct).pipe(
-                    tap(() => this.products.push(newProduct)),
+                    tap(() => PRODUCTS.push(newProduct)),
                     map(() => {
                         return "Created";
                     })
@@ -83,8 +83,8 @@ export default class LocalProductRepository implements ProductRepository {
                 const start = (filter.page - 1) * filter.pageSize;
                 const end = start + filter.pageSize;
 
-                const data = this.products.slice(start, end)
-                const dataSize = this.products.length;
+                const data = PRODUCTS.slice(start, end)
+                const dataSize = PRODUCTS.length;
 
                 const pageData = {
                     data: data,

@@ -1,10 +1,10 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core"
-import { PageData, PageFilter } from "../../../shared/types/pagination"
-import Restaurant from "../classes/restaurant.class";
-import { SaveRestaurant } from "../dto/restaurant.dto";
-import LocalRestaurantRepository from "../restaurant/restaurant.repository";
-import RestaurantRepository from "../interfaces/restaurant-repository.interface";
-import { filter, take } from "rxjs";
+import { take } from "rxjs";
+import { PageFilter, PageData } from "../../shared/types/pagination";
+import Restaurant from "./classes/restaurant.class";
+import { SaveRestaurant } from "./dto/restaurant.dto";
+import RestaurantRepository from "./interfaces/restaurant-repository.interface";
+import LocalRestaurantRepository from "./repositories/restaurant.repository";
 
 type RestaurantServiceProps = {
     filter: PageFilter<{}>
@@ -43,8 +43,6 @@ export default class RestaurantService {
             loading: false,
             loadingPage: false,
         });
-
-        this.getPage(this.state().filter);
     } 
 
     getState() {
@@ -62,7 +60,9 @@ export default class RestaurantService {
         
     }
 
-
+    getById(id: string) {
+        return this.repository.getById(id);
+    }
    
     getPage(filter: PageFilter<{}>) {
         this.state.update((val) => ({...val, loadingPage: true }));
