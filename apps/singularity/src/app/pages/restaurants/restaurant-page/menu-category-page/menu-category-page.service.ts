@@ -15,9 +15,11 @@ type ServiceState = {
     restaurant: Restaurant;
     menu: Menu;
     category: MenuCategory;
+    loading: boolean;
+    errorMessage: string;
 };
 
-type ServiceState2 = {
+type ServiceLoadingState = {
     loading: boolean;
     error: string;
 };
@@ -28,7 +30,7 @@ type ServiceState2 = {
 export default class MenuCategoryPageService {
 
     private state: Signal<ServiceState>;
-    private state2: WritableSignal<ServiceState2>;
+    private loadingState: WritableSignal<ServiceLoadingState>;
 
     private menuSignal: WritableSignal<Menu>;
     private categorySignal: WritableSignal<MenuCategory>;
@@ -53,7 +55,7 @@ export default class MenuCategoryPageService {
             menu,
         });
 
-        this.state2 = signal<ServiceState2>({
+        this.loadingState = signal<ServiceLoadingState>({
             error: "",
             loading: false,
         })
@@ -67,7 +69,9 @@ export default class MenuCategoryPageService {
             return {
                 restaurant,
                 menu,
-                category
+                category,
+                loading: this.loadingState().loading,
+                errorMessage: this.loadingState().error
             }
         });
     }
@@ -77,23 +81,17 @@ export default class MenuCategoryPageService {
         return this.state();
     }
 
-    getState2() {
-        return this.state2();
-    }
-
-
     getById(menuId: string, categoryId: string) {
 
-        this.state2.update((current) => ({...current, loading: true }));
+        this.loadingState.update((current) => ({...current, loading: true }));
 
         const menuObservable = this.menuRepository.getById(menuId);
-        const categoryObservable = this.MenuCategoryRepository.getById(menuId);
+        const categoryObservable = this.MenuCategoryRepository.getById(categoryId);
 
         combineLatest([menuObservable, categoryObservable]).subscribe((([menu, category]) => {
-            this.state2.update((current) => ({...current, loading: true }));
-
+            this.loadingState.update((current) => ({...current, loading: false }));
             if (!menu || !category) {
-                this.state2.update((current) => ({ ...current,error: "Data failed to fetch"}));
+                this.loadingState.update((current) => ({ ...current, error: "Data failed to fetch"}));
             }
             if (menu && category) {
                 this.menuSignal.set(menu);

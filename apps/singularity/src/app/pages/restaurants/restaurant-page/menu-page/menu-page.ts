@@ -1,17 +1,17 @@
 import { Component, computed, OnInit } from "@angular/core";
-import RestaurantPageService from "../restaurant-page.service";
-import SaveMenuForm from "./components/forms/save-menu/save-menu-form";
+import SaveMenuForm from "./forms/save-menu/save-menu-form";
 import { SaveMenu } from "../../dto/menu.dto";
 import MenuPageService from "./menu-page.service";
-import MenusDisplay from "./components/display/menus-display";
 import { SaveMenuCategory } from "../../dto/menu-category.dto";
+import LoadingScreen from "../../../../shared/loader/loading-screen";
+import MenusDisplay from "./display/menus-display";
 
 @Component({
-    selector: `app-restaurant-menu-section`,
+    selector: `app-restaurant-menus-page`,
     templateUrl: `./menu-page.html`,
-    imports: [SaveMenuForm, MenusDisplay],
+    imports: [SaveMenuForm, MenusDisplay, LoadingScreen],
 })
-export default class MenuPage implements OnInit {
+export default class MenusPage implements OnInit {
 
 
     public state = computed(() =>  this.menuService.getState());

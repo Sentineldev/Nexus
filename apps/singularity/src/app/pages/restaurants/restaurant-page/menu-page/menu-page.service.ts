@@ -15,6 +15,7 @@ import RestaurantPageService from "../restaurant-page.service";
 type ServiceState = {
     restaurant: Restaurant
     menu: Menu[];
+    loading: boolean;
 }
 
 @Injectable({
@@ -25,6 +26,7 @@ export default class MenuPageService {
     private state: Signal<ServiceState>;
 
     private menuSignal: WritableSignal<Menu[]>;
+    private loadingSignal: WritableSignal<boolean>;
 
     
     constructor(
@@ -36,16 +38,16 @@ export default class MenuPageService {
     ) {
 
         this.menuSignal = signal<Menu[]>([]);
+        this.loadingSignal = signal<boolean>(false);
         this.state = computed(() => {
             return {
+                loading: this.loadingSignal(),
                 menu: this.menuSignal(),
                 restaurant: this.restaurantPageService.getRestaurant()
             }
         })
 
     }
-
-
 
     getState() {
         return this.state();
@@ -64,7 +66,9 @@ export default class MenuPageService {
 
 
     getMenu() {
+        this.loadingSignal.set(true);
         this.repository.getAll(this.state().restaurant.id).pipe(take(1)).subscribe(result => {
+            this.loadingSignal.set(false);
             this.menuSignal.set(result);
         })
     }

@@ -4,30 +4,15 @@ import Restaurant from "../classes/restaurant.class";
 import { PageData, PageFilter } from "../../../shared/types/pagination";
 import { SaveRestaurant } from "../dto/restaurant.dto";
 import RestaurantRepository from "../interfaces/restaurant-repository.interface";
+import { RESTAURANTS } from "../../../data/variables";
 
 
-
-export let RESTAURANTS: Restaurant[] = [];
 @Injectable({
     providedIn: 'root'
 })
 export default class LocalRestaurantRepository implements RestaurantRepository {
 
 
-
-    constructor() {
-
-        RESTAURANTS = [
-            {
-                id: "1",
-                name: "Restaurante Concorde"
-            }, 
-            {
-                id: "2",
-                name: "Restaurante Marea"
-            }
-        ];
-    }
     getById(id: string): Observable<Restaurant | undefined> {
         return of(RESTAURANTS.find((val) => val.id === id));
     }

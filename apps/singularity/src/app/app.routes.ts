@@ -5,7 +5,7 @@ import ProductsPage from './pages/products/products-page';
 import RestaurantsPage from './pages/restaurants/restaurants-page';
 import RestaurantPage from './pages/restaurants/restaurant-page/restaurant-page';
 import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
-import MenuPage from './pages/restaurants/restaurant-page/menu-page/menu-page';
+import MenusPage from './pages/restaurants/restaurant-page/menu-page/menu-page';
 import MenuCategoryPage from './pages/restaurants/restaurant-page/menu-category-page/menu-category.page';
 
 export const routes: Routes = [
@@ -31,15 +31,13 @@ export const routes: Routes = [
                         component: RestaurantHomePage
                     },
                     {
-                        path: "menu",
-                        component: MenuPage,
-                        children: [
-                            {
-                                path: ":menuId/:categoryId/products",
-                                component: MenuCategoryPage
-                            }
-                        ]
-                    }
+                        path: "menus",
+                        component: MenusPage,
+                    },
+                    {
+                        path: "menu/:menuId/category/:categoryId/products",
+                        component: MenuCategoryPage,
+                    },
                 ]
             }
         ],

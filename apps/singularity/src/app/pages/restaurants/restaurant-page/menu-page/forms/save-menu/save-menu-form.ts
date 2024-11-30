@@ -1,7 +1,7 @@
 import { Component, computed, EventEmitter, Output } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveMenu } from "../../../../../dto/menu.dto";
-import RestaurantPageService from "../../../../restaurant-page.service";
+import { SaveMenu } from "../../../../dto/menu.dto";
+import RestaurantPageService from "../../../restaurant-page.service";
 
 @Component({
     selector: `app-save-menu-form`,

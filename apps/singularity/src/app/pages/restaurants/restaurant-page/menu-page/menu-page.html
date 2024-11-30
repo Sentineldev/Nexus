@@ -1,5 +1,10 @@
 <div class="flex flex-col gap-12">
-    <app-save-menu-form (newMenuEvent)="onSaveMenuHandler($event)"/>
 
-    <app-menus-display (newCategoryEvent)="onSaveMenuCategoryHandler($event)" [menus]="state().menu"/>
+    @if (state().loading) {
+        <app-loading-screen label="Cargando menus..."/>
+    }
+    @if (!state().loading) {
+        <app-save-menu-form (newMenuEvent)="onSaveMenuHandler($event)"/>
+        <app-menus-display (newCategoryEvent)="onSaveMenuCategoryHandler($event)" [menus]="state().menu"/>
+    }
 </div>

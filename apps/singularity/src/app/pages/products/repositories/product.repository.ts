@@ -4,9 +4,9 @@ import Product from "../classes/product.class";
 import { SaveProduct } from "../dto/product.dto";
 import ProductRepository from "../interfaces/product-repository.interface";
 import { Injectable } from "@angular/core";
+import { PRODUCTS } from "../../../data/variables";
 
 
-export let PRODUCTS: Product[] = [];
 
 @Injectable({
     providedIn: "root"
@@ -14,15 +14,7 @@ export let PRODUCTS: Product[] = [];
 export default class LocalProductRepository implements ProductRepository {
     
 
-    constructor() {
-        PRODUCTS = [
-            {
-                description: "Some description",
-                id: "1",
-                name: "Some name"
-            }
-        ];
-    }
+    constructor() {}
     update(id: string, body: SaveProduct): Observable<string> {
 
         const result = PRODUCTS.findIndex((val) => val.id === id);
@@ -44,12 +36,9 @@ export default class LocalProductRepository implements ProductRepository {
     }
     delete(id: string): Observable<string> {
 
-        const result = PRODUCTS.filter((val) => val.id !== id);
-        return of(result).pipe(
-            tap(result => { PRODUCTS = result; }),
-            map(() => "")
-        )
-
+        const index = PRODUCTS.findIndex((val) => val.id === id);
+        PRODUCTS.splice(index, 1);
+        return of("");
     }
     getById(id: string): Observable<Product | undefined> {
         return of(PRODUCTS.find((val) => val.id === id));

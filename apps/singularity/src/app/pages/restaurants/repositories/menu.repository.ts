@@ -1,32 +1,23 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import MenuRepository from "../interfaces/menu-repository.interface";
 import { map, Observable, of, switchMap, tap } from "rxjs";
 import Menu from "../classes/menu.class";
 import { SaveMenu } from "../dto/menu.dto";
-import RestaurantRepository from "../interfaces/restaurant-repository.interface";
-import LocalRestaurantRepository from "./restaurant.repository";
-import { MENU_CATEGORIES } from "./menu-category.repository";
+import { MENU_ARRAY, MENU_CATEGORIES, RESTAURANTS } from "../../../data/variables";
 
-
-
-export let MENU_ARRAY: Menu[] = [];
 
 @Injectable({
     providedIn: "root"
 })
 export default class LocalMenuRepository implements MenuRepository {
 
-    constructor(
-        @Inject(LocalRestaurantRepository)
-        private readonly restaurantRepository: RestaurantRepository,
-    ) {
-        MENU_ARRAY = [];
-    }
+    constructor() {}
     save({ name, restaurantId }: SaveMenu): Observable<string> {
 
         const id = new Date().getTime().toString();
 
-        return this.restaurantRepository.getById(restaurantId).pipe(
+        const restaurant = RESTAURANTS.find((val) => val.id === restaurantId);
+        return of(restaurant).pipe(
             switchMap(restaurant => {
                 if (restaurant) {
                     const newMenu = new Menu({id, name, restaurant, categories: [] });
@@ -82,8 +73,6 @@ export default class LocalMenuRepository implements MenuRepository {
         );
     }
     getAll(restaurantId: string): Observable<Menu[]> {
-
-
         const mappedArray = MENU_ARRAY.filter((val) => val.restaurant.id === restaurantId).map((menu) => {
             menu.categories = MENU_CATEGORIES.filter((val) => val.menu.id === menu.id);
 

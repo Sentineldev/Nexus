@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
   imports: [],
   styles: `
     .loader {
-    width: 32px;
-    height: 32px;
-    border: 4px solid #FFF;
+    width: 36px;
+    height: 36px;
+    // border: 4px solid #FFF;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
     } 
   `,
   template: `
-      <span class="loader"></span>
+      <span class="loader border-[4px] border-white"></span>
   `,
 })
 export class Loader {

@@ -1,24 +1,20 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import MenuCategoryRepository from "../interfaces/menu-category-repository.interface";
 import { map, Observable, of, switchMap } from "rxjs";
 import { SaveMenuCategory } from "../dto/menu-category.dto";
 import MenuCategory from "../classes/menu-category.class";
-import MenuRepository from "../interfaces/menu-repository.interface";
-import LocalMenuRepository from "./menu.repository";
+import { MENU_ARRAY, MENU_CATEGORIES } from "../../../data/variables";
 
 
-export let MENU_CATEGORIES: MenuCategory[] = [];
+
+
 @Injectable({
     providedIn: "root"
 })
 export default class LocalMenuCategoryRepository implements MenuCategoryRepository {
 
 
-    constructor(
-        @Inject(LocalMenuRepository)
-        private readonly menuRepository: MenuRepository
-    ) {
-    }   
+    constructor() {}   
     getById(id: string): Observable<MenuCategory | undefined> {
 
         const result = MENU_CATEGORIES.find((val) => val.id === id);
@@ -29,7 +25,9 @@ export default class LocalMenuCategoryRepository implements MenuCategoryReposito
         
         const id = new Date().getTime().toString();
 
-        return this.menuRepository.getById(menuId).pipe(
+        const menu =  MENU_ARRAY.find((val) => val.id === menuId);
+
+        return of(menu).pipe(
             switchMap(menu => {
 
                 if (!menu) {

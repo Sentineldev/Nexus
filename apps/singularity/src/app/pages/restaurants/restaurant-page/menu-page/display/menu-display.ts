@@ -1,8 +1,8 @@
 import { Component, EventEmitter, input, Output } from "@angular/core";
-import Menu from "../../../../classes/menu.class";
-import SaveMenuCategoryForm from "../forms/save-menu-category/save-menu-category-form";
-import { SaveMenuCategory } from "../../../../dto/menu-category.dto";
 import { RouterLink } from "@angular/router";
+import Menu from "../../../classes/menu.class";
+import { SaveMenuCategory } from "../../../dto/menu-category.dto";
+import SaveMenuCategoryForm from "../forms/save-menu-category/save-menu-category-form";
 
 @Component({
     selector: `app-menu-display`,
@@ -17,7 +17,7 @@ import { RouterLink } from "@angular/router";
             </div>
             <div class="flex flex-col overflow-auto flex-1">
                 @for (category of menu().categories; track category.id) {
-                    <a routerLink="{{menu().id}}/{{category.id}}/products" class="font-sans text-[1.1rem] text-slate-700 hover:bg-slate-200 transition-all p-3 px-4">{{category.name}}</a>
+                    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/category/{{category.id}}/products" class="font-sans text-[1.1rem] text-slate-700 hover:bg-slate-200 transition-all p-3 px-4">{{category.name}}</a>
                 }
             </div>
         </div>

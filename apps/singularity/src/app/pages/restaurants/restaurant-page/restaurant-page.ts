@@ -3,9 +3,10 @@ import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import RestaurantPageService from "./restaurant-page.service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { Loader } from "../../../shared/loader/loader";
+import LoadingScreen from "../../../shared/loader/loading-screen";
 @Component({
     selector: 'app-restaurant-page',
-    imports: [RouterOutlet, ErrorAlert, Loader],
+    imports: [RouterOutlet, ErrorAlert, LoadingScreen],
     template: `
     @if (!state().loading && state().errorMessage.length === 0) {
         <router-outlet/>
@@ -14,7 +15,7 @@ import { Loader } from "../../../shared/loader/loader";
         <app-error-alert [message]="state().errorMessage"/>
     }
     @if (state().loading) {
-        <app-loader/>
+        <app-loading-screen label="Cargando restaurante..."/>
     }
     `,
 })

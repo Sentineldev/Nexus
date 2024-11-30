@@ -1,7 +1,7 @@
 import { Component, EventEmitter, input, Output } from "@angular/core";
-import Menu from "../../../../../classes/menu.class";
+import Menu from "../../../../classes/menu.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveMenuCategory } from "../../../../../dto/menu-category.dto";
+import { SaveMenuCategory } from "../../../../dto/menu-category.dto";
 
 @Component({
     selector: `app-save-menu-category`,
