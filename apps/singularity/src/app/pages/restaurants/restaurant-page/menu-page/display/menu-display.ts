@@ -17,7 +17,7 @@ import SaveMenuCategoryForm from "../forms/save-menu-category/save-menu-category
             </div>
             <div class="flex flex-col overflow-auto flex-1">
                 @for (category of menu().categories; track category.id) {
-                    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/category/{{category.id}}/products" class="font-sans text-[1.1rem] text-slate-700 hover:bg-slate-200 transition-all p-3 px-4">{{category.name}}</a>
+                    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu-category//{{category.id}}/products" class="font-sans text-[1.1rem] text-slate-700 hover:bg-slate-200 transition-all p-3 px-4">{{category.name}}</a>
                 }
             </div>
         </div>

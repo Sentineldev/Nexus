@@ -1,4 +1,5 @@
 import Product from "../pages/products/classes/product.class";
+import CategoryProduct from "../pages/restaurants/classes/category-product.class";
 import MenuCategory from "../pages/restaurants/classes/menu-category.class";
 import Menu from "../pages/restaurants/classes/menu.class";
 import Restaurant from "../pages/restaurants/classes/restaurant.class";
@@ -39,6 +40,8 @@ export let MENU_CATEGORIES: MenuCategory[] = [
     }
 ];
 
+
+export let CATEGORY_PRODUCTS: CategoryProduct[] = [];
 
 
 

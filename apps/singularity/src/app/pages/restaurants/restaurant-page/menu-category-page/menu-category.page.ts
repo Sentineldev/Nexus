@@ -3,16 +3,16 @@ import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import MenuCategoryPageService from "./menu-category-page.service";
 import { ErrorAlert } from "../../../../shared/alerts/error-alert";
 import LoadingScreen from "../../../../shared/loader/loading-screen";
-import ProductsSelector from "./products/products-selector";
+import SelectionContainer from "./products/selection-container";
 
 @Component({
     selector: `app-menu-category-page`,
-    imports: [RouterOutlet, ErrorAlert, LoadingScreen, ProductsSelector],
+    imports: [RouterOutlet, ErrorAlert, LoadingScreen, SelectionContainer],
     template: `
     
     @if (!state().loading && state().errorMessage.length === 0) {
         <router-outlet/>
-        <app-products-selector/>
+        <app-selection-container/>
     }
     @if (!state().loading && state().errorMessage) {
         <app-error-alert [message]="state().errorMessage"/>
@@ -36,11 +36,10 @@ export default class MenuCategoryPage implements OnInit {
 
     ngOnInit(): void {
 
-        const menuId = this.route.snapshot.paramMap.get('menuId');
         const categoryId = this.route.snapshot.paramMap.get('categoryId');
 
-        if (menuId && categoryId) {
-            this.service.getById(menuId, categoryId);
+        if (categoryId) {
+            this.service.getById(categoryId);
         }
     }
 

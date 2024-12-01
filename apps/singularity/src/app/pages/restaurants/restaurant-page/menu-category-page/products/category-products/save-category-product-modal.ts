@@ -1,9 +1,11 @@
-import { Component, computed, EventEmitter, input, Output } from "@angular/core";
-import CustomDialog from "../../../../../shared/dialog/custom-dialog";
-import Product from "../../../../products/classes/product.class";
+import { AfterViewInit, Component, computed, EventEmitter, input, OnInit, Output } from "@angular/core";
+import CustomDialog from "../../../../../../shared/dialog/custom-dialog";
+import Product from "../../../../../products/classes/product.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveCategoryProduct } from "../../../dto/category-product.dto";
-import MenuCategoryPageService from "../menu-category-page.service";
+import { SaveCategoryProduct } from "../../../../dto/category-product.dto";
+import MenuCategoryPageService from "../../menu-category-page.service";
+import CategoryProductsService from "./category-products.service";
+import { take } from "rxjs";
 
 @Component({
     selector: `app-save-category-product-modal`,
@@ -32,7 +34,7 @@ import MenuCategoryPageService from "../menu-category-page.service";
     `,
     imports: [CustomDialog, ReactiveFormsModule]
 })
-export default class SaveCategoryProductModal {
+export default class SaveCategoryProductModal implements AfterViewInit {
 
 
     @Output() onAddedProduct = new EventEmitter<SaveCategoryProduct>();
@@ -48,13 +50,21 @@ export default class SaveCategoryProductModal {
 
     public state = computed(() => this.service.getState());
 
+    public productsState = computed(() => this.categoryProductService.getState());
+
     constructor(
         private readonly service: MenuCategoryPageService,
+        private readonly categoryProductService: CategoryProductsService
     ) {}
+    ngAfterViewInit(): void {
+        const dialog = document.getElementById(this.dialogId()) as HTMLDialogElement;
+        if (dialog) {
+            dialog.showModal();
+        }
+    }
     onSubmitHandler() {
 
         if (this.formGroup.valid) {
-
             const data = this.formGroup.value;
 
             const newData: SaveCategoryProduct = {
@@ -63,8 +73,15 @@ export default class SaveCategoryProductModal {
                 productId: this.product().id,
                 isEnabled: true,
             };
+            this.categoryProductService.save(newData).pipe(take(1)).subscribe((result) => {
 
-            this.onAddedProduct.emit(newData);
+                if (result === "Created") {
+                    this.formGroup.reset();
+                    this.categoryProductService.getPage(this.productsState().filter);
+                    return;
+                }
+                alert(result);
+            })
         }
     }
 

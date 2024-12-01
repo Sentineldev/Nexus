@@ -3,7 +3,7 @@ import { SaveCategoryProduct } from "../dto/category-product.dto";
 import CategoryProduct from "../classes/category-product.class";
 import { PageData, PageFilter } from "../../../shared/types/pagination";
 
-export default interface CategoryProductInterface {
+export default interface CategoryProductRepository {
 
 
     save(body: SaveCategoryProduct): Observable<string>;
