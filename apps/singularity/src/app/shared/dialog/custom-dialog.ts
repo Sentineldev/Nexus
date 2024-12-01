@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 @Component({
   selector: 'app-custom-dialog',
   imports: [],
@@ -7,8 +7,15 @@ import { Component, input } from '@angular/core';
 export default class CustomDialog {
 
 
+  @Output() onCloseEvent = new EventEmitter();
+
   public dialogId = input<string>("");
 
   constructor() {}
+
+
+  onCloseHandler() {
+    this.onCloseEvent.emit();
+  }
 
 }

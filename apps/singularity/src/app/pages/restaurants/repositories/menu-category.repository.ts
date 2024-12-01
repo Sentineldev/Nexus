@@ -18,6 +18,7 @@ export default class LocalMenuCategoryRepository implements MenuCategoryReposito
     getById(id: string): Observable<MenuCategory | undefined> {
 
         const result = MENU_CATEGORIES.find((val) => val.id === id);
+
         return of(result);
     }
 

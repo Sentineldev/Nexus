@@ -7,6 +7,10 @@ import { CATEGORY_PRODUCTS, MENU_CATEGORIES, PRODUCTS } from "../../../data/vari
 import { Injectable } from "@angular/core";
 
 
+export type CategoryProductFilter = {
+    categoryId: string;
+}
+
 @Injectable({
     providedIn: "root"
 })
@@ -21,7 +25,7 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
 
         const category = MENU_CATEGORIES.find((category) => category.id === categoryId);
 
-        const exists = CATEGORY_PRODUCTS.find((val) => val.product.id === productId);
+        const exists = CATEGORY_PRODUCTS.find((val) => val.product.id === productId && val.category.id === categoryId);
 
         if (exists) {
 
@@ -65,12 +69,14 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
 
         return of(result);
     }
-    getPage(filter: PageFilter<{}>): Observable<PageData<CategoryProduct>> {
+    getPage(filter: PageFilter<CategoryProductFilter>): Observable<PageData<CategoryProduct>> {
         const start = (filter.page - 1) * filter.pageSize;
         const end = start + filter.pageSize;
 
-        const data = CATEGORY_PRODUCTS.slice(start, end)
-        const dataSize = CATEGORY_PRODUCTS.length;
+        const filteredProducts = CATEGORY_PRODUCTS.filter((val) => val.category.id === filter.filter.categoryId);
+
+        const data = filteredProducts.slice(start, end)
+        const dataSize = filteredProducts.length;
 
         const pageData: PageData<CategoryProduct> = {
             data: data,

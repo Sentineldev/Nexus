@@ -52,7 +52,6 @@ export default class MenuCategoryPageService {
         })
         this.categorySignal = signal<MenuCategory>(category);
 
-
         
         this.state = computed(() => {
             const restaurant = this.restaurantPageService.getRestaurant();
@@ -71,12 +70,17 @@ export default class MenuCategoryPageService {
         return this.state();
     }
 
+    getCategory() {
+        return this.state().category;
+    }
+
     getById(categoryId: string) {
 
         this.loadingState.update((current) => ({...current, loading: true }));
 
         this.MenuCategoryRepository.getById(categoryId).pipe(take(1)).subscribe((category) => {
             this.loadingState.update((current) => ({...current, loading: false }));
+
             if (!category) {
                 this.loadingState.update((current) => ({ ...current, error: "Data failed to fetch"}));
                 return;

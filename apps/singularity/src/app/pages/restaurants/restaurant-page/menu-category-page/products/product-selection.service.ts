@@ -31,13 +31,16 @@ export default class ProductSelectionService {
 
 
 
+    onDialogClose() {
+        this.state.set({ dialogId: ``, droped: false, product: undefined });
+    }
+
     onDragStart(product: Product) {
         const dialogId = `save-product-dialog-${product.id}`;
         this.state.set({ product, dialogId, droped: false });
     }
 
     onDragEnd() {
-
         if (!this.state().droped) {
             this.state.set({ dialogId: ``, droped: false, product: undefined });
         }
