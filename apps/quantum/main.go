@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"quantum/internal/routes"
 
 	"github.com/labstack/echo/v4"
 )
@@ -9,12 +9,7 @@ import (
 func main() {
 
 	server := echo.New()
-
-	server.GET("/", func(c echo.Context) error {
-
-		return c.String(http.StatusOK, "Hello, world!")
-	})
+	routes.ApiGroup(server)
 
 	server.Logger.Fatal(server.Start(":3000"))
-
 }
