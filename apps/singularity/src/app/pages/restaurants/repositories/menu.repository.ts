@@ -65,7 +65,8 @@ export default class LocalMenuRepository implements MenuRepository {
         return of(result).pipe(
             map((result) => {
                 if (result) {
-                    result.categories = MENU_CATEGORIES.filter((val) => val.menu.id === result.id);
+                    const filtered = MENU_CATEGORIES.filter((val) => val.menu.id === result.id);
+                    result.categories = filtered.map((val) => ({ id: val.id, name: val.name }));
                     return result;
                 }
                 return undefined;
@@ -74,10 +75,12 @@ export default class LocalMenuRepository implements MenuRepository {
     }
     getAll(restaurantId: string): Observable<Menu[]> {
         const mappedArray = MENU_ARRAY.filter((val) => val.restaurant.id === restaurantId).map((menu) => {
-            menu.categories = MENU_CATEGORIES.filter((val) => val.menu.id === menu.id);
-
+            const filtered = MENU_CATEGORIES.filter((val) => val.menu.id === menu.id);
+            menu.categories =  filtered.map((val) => ({ id: val.id, name: val.name }));
             return menu;
         });
+
+        console.log(mappedArray);
 
         return of(mappedArray);
     }

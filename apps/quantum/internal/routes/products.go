@@ -12,6 +12,9 @@ func ProductsRoutes(server *echo.Group) {
 
 	group := server.Group("/products")
 
-	group.GET("", handler.GetProducts)
+	group.POST("", handler.Save)
+	group.PUT("/:id", handler.Update)
+	group.DELETE("/:id", handler.Delete)
+	group.GET("", handler.GetPage)
 
 }

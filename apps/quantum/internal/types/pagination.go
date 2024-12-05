@@ -1,8 +1,8 @@
 package types
 
 type PageData[T any] struct {
-	Data []T
-	Meta PageMeta
+	Data []T      `json:"data"`
+	Meta PageMeta `json:"meta"`
 }
 
 type PageMeta struct {

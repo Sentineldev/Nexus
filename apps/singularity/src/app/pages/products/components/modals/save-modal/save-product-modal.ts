@@ -49,6 +49,7 @@ export default class SaveProductModal {
             this.successMessage.set("");
 
             this.service.save(data).pipe(take(1)).subscribe((result) => {
+
                 this.loading.set(false);
                 if (result === "Created") {
                     this.successMessage.set(`Creado correctamente`);

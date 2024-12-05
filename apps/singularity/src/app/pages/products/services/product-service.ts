@@ -4,6 +4,7 @@ import { PageData, PageFilter } from "../../../shared/types/pagination";
 import { SaveProduct } from "../dto/product.dto";
 import LocalProductRepository from "../repositories/product.repository";
 import ProductRepository from "../interfaces/product-repository.interface";
+import ApiProductRepository from "../repositories/product-api.repository";
 
 type ServiceStateProps = {
 
@@ -22,7 +23,7 @@ export default class ProductService {
 
 
     constructor(    
-        @Inject(LocalProductRepository)
+        @Inject(ApiProductRepository)
         private readonly repository: ProductRepository
     ) {
         this.state = signal({
