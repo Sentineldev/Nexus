@@ -9,6 +9,8 @@ import MenuCategoryRepository from "../../interfaces/menu-category-repository.in
 import LocalMenuCategoryRepository from "../../repositories/menu-category.repository";
 import Restaurant from "../../classes/restaurant.class";
 import RestaurantPageService from "../restaurant-page.service";
+import ApiMenuRepository from "../../repositories/menu-api.repository";
+import ApiMenuCategoryRepository from "../../repositories/menu-category-api.repository";
 
 
 
@@ -30,9 +32,9 @@ export default class MenuPageService {
 
     
     constructor(
-        @Inject(LocalMenuRepository)
+        @Inject(ApiMenuRepository)
         private readonly repository: MenuRepository,
-        @Inject(LocalMenuCategoryRepository)
+        @Inject(ApiMenuCategoryRepository)
         private readonly categoryRepository: MenuCategoryRepository,
         private readonly restaurantPageService: RestaurantPageService
     ) {

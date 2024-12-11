@@ -3,6 +3,7 @@ import RestaurantRepository from "../interfaces/restaurant-repository.interface"
 import LocalRestaurantRepository from "../repositories/restaurant.repository";
 import Restaurant from "../classes/restaurant.class";
 import { take } from "rxjs";
+import ApiRestaurantRepository from "../repositories/restaurant-api.repository";
 
 
 type ServiceState = {
@@ -19,7 +20,7 @@ export default class RestaurantPageService {
 
     private state: WritableSignal<ServiceState>;
     constructor(
-        @Inject(LocalRestaurantRepository)
+        @Inject(ApiRestaurantRepository)
         private readonly repository: RestaurantRepository,
     ) {
 

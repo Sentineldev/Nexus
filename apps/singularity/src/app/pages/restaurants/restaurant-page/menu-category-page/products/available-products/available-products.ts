@@ -6,7 +6,7 @@ import Product from "../../../../../products/classes/product.class";
 @Component({
     selector: `app-available-products`,
     template: `
-    <div class="max-h-[700px] w-[500px] h-[700px] flex flex-col">
+    <div class="max-h-[700px] w-[450px] h-[700px] flex flex-col">
         <div class="bg-cyan-500 p-3 rounded-t-xl">
             <h1 class="text-white font-sans text-[1.4rem] font-bold">Productos disponibles</h1>
         </div>

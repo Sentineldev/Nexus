@@ -6,6 +6,7 @@ import LocalMenuCategoryRepository from "../../repositories/menu-category.reposi
 import MenuCategoryRepository from "../../interfaces/menu-category-repository.interface";
 import { take } from "rxjs";
 import Menu from "../../classes/menu.class";
+import ApiMenuCategoryRepository from "../../repositories/menu-category-api.repository";
 
 type ServiceState = {
     restaurant: Restaurant;
@@ -29,7 +30,7 @@ export default class MenuCategoryPageService {
 
     private categorySignal: WritableSignal<MenuCategory>;
     constructor(
-        @Inject(LocalMenuCategoryRepository)
+        @Inject(ApiMenuCategoryRepository)
         private readonly MenuCategoryRepository: MenuCategoryRepository,
         private readonly restaurantPageService: RestaurantPageService,
     ) {

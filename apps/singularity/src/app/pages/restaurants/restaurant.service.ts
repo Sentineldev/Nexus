@@ -5,6 +5,7 @@ import Restaurant from "./classes/restaurant.class";
 import { SaveRestaurant } from "./dto/restaurant.dto";
 import RestaurantRepository from "./interfaces/restaurant-repository.interface";
 import LocalRestaurantRepository from "./repositories/restaurant.repository";
+import ApiRestaurantRepository from "./repositories/restaurant-api.repository";
 
 type RestaurantServiceProps = {
     filter: PageFilter<{}>
@@ -23,7 +24,7 @@ export default class RestaurantService {
 
 
     constructor(
-        @Inject(LocalRestaurantRepository)
+        @Inject(ApiRestaurantRepository)
         private readonly repository: RestaurantRepository
     ) {
         this.state = signal<RestaurantServiceProps>({

@@ -2,9 +2,9 @@
     <form class="w-full" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
         <div class="w-full  flex items-end gap-3">
             <div class="">
-                <label class="flex flex-col gap-1" for="name">
+                <label class="flex flex-col gap-1" [htmlFor]="'name'">
                     <p class="text-slate-700">Nombre del menu</p>
-                    <input class="border rounded border-cyan-500 outline-none p-1" type="text" name="name" id="name" formControlName="name">
+                    <input autocomplete="on" class="border rounded border-cyan-500 outline-none p-1" type="text" name="name" id="name" formControlName="name">
                 </label>
                 
             </div>

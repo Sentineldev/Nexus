@@ -80,8 +80,6 @@ export default class LocalMenuRepository implements MenuRepository {
             return menu;
         });
 
-        console.log(mappedArray);
-
         return of(mappedArray);
     }
 }

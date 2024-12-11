@@ -33,9 +33,9 @@ import ProductSelectionService from "../product-selection.service";
             <div>
                 <form class="flex flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
                     <div>
-                        <label class="flex flex-col gap-1" for="name">
+                        <label [htmlFor]="'price'" class="flex flex-col gap-1" for="name">
                             <p class="text-slate-700">Precio</p>
-                            <input class="border rounded border-slate-300 outline-none p-1" type="text"  formControlName="price">
+                            <input class="border rounded border-slate-300 outline-none p-1" type="text" id="price" name="price" formControlName="price">
                         </label>
                     </div>
                     <div>
@@ -103,13 +103,13 @@ export default class SaveCategoryProductModal implements AfterViewInit {
             this.loading.set(true);
             this.categoryProductService.save(newData).pipe(take(1)).subscribe((result) => {
                 this.loading.set(false);
-                if (result === "Created") {
+                if (result === "") {
                     this.successMessage.set("Agregado correctamente");
                     this.formGroup.reset();
                     this.categoryProductService.getPage(this.productsState().filter);
                     return;
                 }
-                this.errorMessage.set("Ya existe este producto en el menu");
+                this.errorMessage.set(result);
             })
         }
     }

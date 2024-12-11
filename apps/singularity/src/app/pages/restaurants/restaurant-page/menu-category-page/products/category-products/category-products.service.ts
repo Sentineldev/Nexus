@@ -5,6 +5,7 @@ import CategoryProduct from "../../../../classes/category-product.class";
 import { PageData, PageFilter } from "../../../../../../shared/types/pagination";
 import { SaveCategoryProduct } from "../../../../dto/category-product.dto";
 import { take } from "rxjs";
+import ApiCategoryProductRepository from "../../../../repositories/category-product-api.repository";
 
 type ServiceStateProps = {
     page: PageData<CategoryProduct>;
@@ -21,7 +22,7 @@ export default class CategoryProductsService {
     private state: WritableSignal<ServiceStateProps>;
 
     constructor(
-        @Inject(LocalCategoryProductRepository)
+        @Inject(ApiCategoryProductRepository)
         private readonly repository: CategoryProductRepository,
     ) {
 

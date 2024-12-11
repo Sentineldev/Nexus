@@ -7,11 +7,10 @@ import SelectionContainer from "./products/selection-container";
 
 @Component({
     selector: `app-menu-category-page`,
-    imports: [RouterOutlet, ErrorAlert, LoadingScreen, SelectionContainer],
+    imports: [ErrorAlert, LoadingScreen, SelectionContainer],
     template: `
     
     @if (!state().loading && state().errorMessage.length === 0) {
-        <router-outlet/>
         <app-selection-container/>
     }
     @if (!state().loading && state().errorMessage) {

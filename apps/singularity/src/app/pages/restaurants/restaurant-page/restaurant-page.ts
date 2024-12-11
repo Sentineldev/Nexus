@@ -2,7 +2,6 @@ import { Component, computed, OnInit, signal } from "@angular/core";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import RestaurantPageService from "./restaurant-page.service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { Loader } from "../../../shared/loader/loader";
 import LoadingScreen from "../../../shared/loader/loading-screen";
 @Component({
     selector: 'app-restaurant-page',
