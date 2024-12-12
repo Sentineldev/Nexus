@@ -27,7 +27,7 @@ func (service ProductService) Save(body dto.SaveProductDto) error {
 	newProduct := types.NewProduct(id, body.Name, body.Description)
 
 	if err := service.Repository.Save(*newProduct); err != nil {
-		return errors.New("User not created")
+		return errors.New("user not created")
 	}
 	return nil
 }
@@ -37,7 +37,7 @@ func (service ProductService) GetById(id string) (types.Product, error) {
 	result, err := service.Repository.GetById(id)
 
 	if err != nil {
-		return result, errors.New("User not found")
+		return result, errors.New("user not found")
 	}
 
 	return result, nil
@@ -54,7 +54,7 @@ func (service ProductService) Update(id string, body dto.SaveProductDto) error {
 
 	err = service.Repository.Update(product)
 	if err != nil {
-		return errors.New("Can't update product")
+		return errors.New("can't update product")
 	}
 	return nil
 }
@@ -64,7 +64,7 @@ func (service ProductService) Delete(id string) error {
 	result := service.Repository.Delete(id)
 
 	if result != nil {
-		return errors.New("Can't delete product")
+		return errors.New("can't delete product")
 	}
 	return nil
 }

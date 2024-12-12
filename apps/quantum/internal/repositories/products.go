@@ -33,7 +33,7 @@ func (repository LocalProductRepository) Update(product types.Product) error {
 		return nil
 	}
 
-	return errors.New("Product not found")
+	return errors.New("product not found")
 }
 func (repository LocalProductRepository) Delete(id string) error {
 
@@ -91,5 +91,5 @@ func (repository LocalProductRepository) GetById(id string) (types.Product, erro
 			return val, nil
 		}
 	}
-	return types.Product{}, errors.New("Product not found")
+	return types.Product{}, errors.New("product not found")
 }

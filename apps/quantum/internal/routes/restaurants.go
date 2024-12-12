@@ -12,6 +12,6 @@ func RestaurantsRoutes(server *echo.Group) {
 
 	group := server.Group("/restaurants")
 
-	group.GET("", handler.GetRestaurants)
-
+	group.GET("", handler.GetPage)
+	group.POST("", handler.Save)
 }
