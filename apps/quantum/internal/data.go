@@ -3,6 +3,9 @@ package internal
 import "quantum/internal/types"
 
 var (
-	PRODUCTS    = []types.Product{}
-	RESTAURANTS = []types.Restaurant{}
+	CATEGORY_PRODUCTS = []types.CategoryProduct{}
+	CATEGORIES        = []types.MenuCategory{}
+	RESTAURANTS       = []types.Restaurant{}
+	MENUS             = []types.Menu{}
+	PRODUCTS          = []types.Product{}
 )

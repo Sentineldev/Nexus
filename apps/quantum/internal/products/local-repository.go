@@ -1,4 +1,4 @@
-package repositories
+package products
 
 import (
 	"errors"

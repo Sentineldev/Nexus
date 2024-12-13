@@ -1,4 +1,4 @@
-package repositories
+package restaurants
 
 import (
 	"errors"
@@ -29,7 +29,14 @@ func (repository LocalRestaurantsRepository) Delete(id string) error {
 func (repository LocalRestaurantsRepository) GetById(id string) (types.Restaurant, error) {
 
 	result := types.Restaurant{}
-	return result, nil
+
+	for _, v := range internal.RESTAURANTS {
+		if v.Id == id {
+			return v, nil
+		}
+	}
+
+	return result, errors.New("restaurant not found")
 }
 
 func (repository LocalRestaurantsRepository) GetByName(name string) (types.Restaurant, error) {

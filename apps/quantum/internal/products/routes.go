@@ -1,14 +1,10 @@
-package routes
+package products
 
-import (
-	"quantum/internal/handlers"
-
-	"github.com/labstack/echo/v4"
-)
+import "github.com/labstack/echo/v4"
 
 func ProductsRoutes(server *echo.Group) {
 
-	handler := handlers.NewProductsHandler()
+	handler := NewProductsHandler()
 
 	group := server.Group("/products")
 

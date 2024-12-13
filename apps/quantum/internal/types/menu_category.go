@@ -6,7 +6,7 @@ type MenuCategory struct {
 	Menu Menu   `json:"menu"`
 }
 
-func NewMenuCategory(id, name string, menu Menu) *MenuCategory {
+func NewCategory(id, name string, menu Menu) *MenuCategory {
 
 	return &MenuCategory{
 		Id:   id,

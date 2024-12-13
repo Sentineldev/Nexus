@@ -1,9 +1,6 @@
-package services
+package restaurants
 
 import (
-	"quantum/internal/dto"
-	"quantum/internal/interfaces"
-	"quantum/internal/repositories"
 	"quantum/internal/types"
 
 	"github.com/google/uuid"
@@ -11,17 +8,17 @@ import (
 )
 
 type RestaurantService struct {
-	Repository interfaces.RestaurantsRepository
+	Repository RestaurantsRepository
 }
 
 func NewRestaurantService() *RestaurantService {
 
 	return &RestaurantService{
-		Repository: repositories.NewLocalRestaurantRepository(),
+		Repository: NewLocalRestaurantRepository(),
 	}
 }
 
-func (service RestaurantService) Save(body dto.SaveRestaurantDto) error {
+func (service RestaurantService) Save(body SaveRestaurantDto) error {
 
 	_, err := service.Repository.GetByName(body.Name)
 
@@ -40,6 +37,15 @@ func (service RestaurantService) Save(body dto.SaveRestaurantDto) error {
 	}
 
 	return nil
+}
+
+func (service RestaurantService) GetById(id string) (types.Restaurant, error) {
+	restaurant, err := service.Repository.GetById(id)
+	if err != nil {
+		return types.Restaurant{}, echo.ErrNotFound
+	}
+
+	return restaurant, nil
 }
 
 func (service RestaurantService) GetPage(filter types.PageFilter[any]) types.PageData[types.Restaurant] {

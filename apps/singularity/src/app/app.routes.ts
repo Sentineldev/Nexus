@@ -35,6 +35,10 @@ export const routes: Routes = [
                         component: MenusPage,
                     },
                     {
+                        path: "menus",
+                        component: MenusPage,
+                    },
+                    {
                         path: "menu-category/:categoryId/products",
                         component: MenuCategoryPage,
                     },

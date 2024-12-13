@@ -1,17 +1,16 @@
-package routes
+package restaurants
 
 import (
-	"quantum/internal/handlers"
-
 	"github.com/labstack/echo/v4"
 )
 
 func RestaurantsRoutes(server *echo.Group) {
 
-	handler := handlers.NewRestaurantHandler()
+	handler := NewRestaurantHandler()
 
 	group := server.Group("/restaurants")
 
+	group.GET("/:id", handler.GetById)
 	group.GET("", handler.GetPage)
 	group.POST("", handler.Save)
 }

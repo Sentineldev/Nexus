@@ -1,4 +1,4 @@
-package interfaces
+package restaurants
 
 import "quantum/internal/types"
 

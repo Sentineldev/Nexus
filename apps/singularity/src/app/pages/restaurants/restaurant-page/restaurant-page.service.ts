@@ -47,14 +47,16 @@ export default class RestaurantPageService {
     getById(restaurantId: string) {
 
 
+
+
         this.state.update((current) => ({ ...current, loading: true }));
         this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {
             this.state.update((current) => ({ ...current, loading: false }));
-
             if (!result) {
                 this.state.update((current) => ({ ...current, errorMessage: "Not found" }));
                 return;
             }
+
             this.state.update((current) => ({ ...current, restaurant: result }));
         })
     }

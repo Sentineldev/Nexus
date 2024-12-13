@@ -49,7 +49,6 @@ export default class ApiMenuRepository implements MenuRepository {
         throw new Error("Method not implemented.");
     }
     getAll(restaurantId: string): Observable<Menu[]> {
-
         return this.http.get<Menu[]>(`${this.URL}/${restaurantId}`)
     }
 }

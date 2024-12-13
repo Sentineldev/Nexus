@@ -1,26 +1,24 @@
-package services
+package products
 
 import (
 	"errors"
-	"quantum/internal/dto"
-	"quantum/internal/interfaces"
-	"quantum/internal/repositories"
 	"quantum/internal/types"
 
 	"github.com/google/uuid"
+	"github.com/labstack/echo/v4"
 )
 
 type ProductService struct {
-	Repository interfaces.ProductRepository
+	Repository ProductRepository
 }
 
 func NewProductService() *ProductService {
 	return &ProductService{
-		Repository: repositories.NewLocalRepository(),
+		Repository: NewLocalRepository(),
 	}
 }
 
-func (service ProductService) Save(body dto.SaveProductDto) error {
+func (service ProductService) Save(body SaveProductDto) error {
 
 	id := uuid.New().String()
 
@@ -37,13 +35,13 @@ func (service ProductService) GetById(id string) (types.Product, error) {
 	result, err := service.Repository.GetById(id)
 
 	if err != nil {
-		return result, errors.New("user not found")
+		return result, echo.ErrNotFound
 	}
 
 	return result, nil
 }
 
-func (service ProductService) Update(id string, body dto.SaveProductDto) error {
+func (service ProductService) Update(id string, body SaveProductDto) error {
 
 	product, err := service.GetById(id)
 	if err != nil {

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, input, Output } from "@angular/core";
-import MenuDisplay from "./menu-display";
+import { Component, EventEmitter, input, Output, signal } from "@angular/core";
 import Menu from "../../../classes/menu.class";
 import { SaveMenuCategory } from "../../../dto/menu-category.dto";
+import MenuDisplay from "./menu-display";
 
 @Component({
     selector: `app-menus-display`,
@@ -13,7 +13,7 @@ import { SaveMenuCategory } from "../../../dto/menu-category.dto";
     }
     `,
     template: `
-    <div class="menus-display-container justify-center gap-6 items-center">
+    <div class="menus-display-container justify-start gap-4 items-start">
         @for (menu of menus(); track menu.id) {
             <app-menu-display (newCategoryEvent)="onNewCategory($event)" [menu]="menu"/>
         }
@@ -22,9 +22,12 @@ import { SaveMenuCategory } from "../../../dto/menu-category.dto";
     imports: [MenuDisplay]
 })
 export default class MenusDisplay {
+    
 
 
     @Output() newCategoryEvent = new EventEmitter<SaveMenuCategory>();
+
+    public selectedMenu = signal<Menu | undefined>(undefined);
 
     onNewCategory(body: SaveMenuCategory) {
         this.newCategoryEvent.emit(body);

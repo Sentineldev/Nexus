@@ -53,7 +53,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
             fromObject: { page: filter.page, pageSize: filter.pageSize }
         });
 
-        return this.http.get<PageData<CategoryProduct>>(this.URL, {
+        return this.http.get<PageData<CategoryProduct>>(`${this.URL}/${filter.filter.categoryId}`, {
             params: params
         });
     }

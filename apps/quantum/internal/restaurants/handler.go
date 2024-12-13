@@ -1,26 +1,24 @@
-package handlers
+package restaurants
 
 import (
 	"net/http"
-	"quantum/internal/dto"
-	"quantum/internal/services"
 	"quantum/internal/types"
 
 	"github.com/labstack/echo/v4"
 )
 
 type RestaurantsHandler struct {
-	Service services.RestaurantService
+	Service RestaurantService
 }
 
 func NewRestaurantHandler() *RestaurantsHandler {
 	return &RestaurantsHandler{
-		Service: *services.NewRestaurantService(),
+		Service: *NewRestaurantService(),
 	}
 }
 func (handler RestaurantsHandler) Save(context echo.Context) error {
 
-	body := dto.SaveRestaurantDto{}
+	body := SaveRestaurantDto{}
 
 	context.Bind(&body)
 
@@ -37,5 +35,17 @@ func (handler RestaurantsHandler) GetPage(context echo.Context) error {
 		PageSize: 5,
 	}
 	result := handler.Service.GetPage(pageFilter)
+	return context.JSON(http.StatusOK, result)
+}
+
+func (handler RestaurantsHandler) GetById(context echo.Context) error {
+
+	id := context.Param("id")
+
+	result, err := handler.Service.GetById(id)
+
+	if err != nil {
+		return err
+	}
 	return context.JSON(http.StatusOK, result)
 }

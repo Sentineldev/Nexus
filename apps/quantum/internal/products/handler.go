@@ -1,27 +1,25 @@
-package handlers
+package products
 
 import (
 	"net/http"
-	"quantum/internal/dto"
-	"quantum/internal/services"
 	"quantum/internal/types"
 
 	"github.com/labstack/echo/v4"
 )
 
 type ProductsHandler struct {
-	Service services.ProductService
+	Service ProductService
 }
 
 func NewProductsHandler() *ProductsHandler {
 	return &ProductsHandler{
-		Service: *services.NewProductService(),
+		Service: *NewProductService(),
 	}
 }
 
 func (handler ProductsHandler) Save(context echo.Context) error {
 
-	data := dto.SaveProductDto{}
+	data := SaveProductDto{}
 	context.Bind(&data)
 
 	if err := handler.Service.Save(data); err != nil {
@@ -33,7 +31,7 @@ func (handler ProductsHandler) Save(context echo.Context) error {
 func (handler ProductsHandler) Update(context echo.Context) error {
 
 	id := context.Param("id")
-	body := dto.SaveProductDto{}
+	body := SaveProductDto{}
 	context.Bind(&body)
 
 	return handler.Service.Update(id, body)

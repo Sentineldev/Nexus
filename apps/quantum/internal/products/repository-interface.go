@@ -1,4 +1,4 @@
-package interfaces
+package products
 
 import "quantum/internal/types"
 
