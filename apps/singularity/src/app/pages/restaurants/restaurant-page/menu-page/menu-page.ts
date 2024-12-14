@@ -1,32 +1,41 @@
 import { Component, computed, OnInit } from "@angular/core";
-import SaveMenuForm from "./forms/save-menu/save-menu-form";
-import { SaveMenu } from "../../dto/menu.dto";
+import RestaurantPageService from "../restaurant-page.service";
 import MenuPageService from "./menu-page.service";
-import { SaveMenuCategory } from "../../dto/menu-category.dto";
-import LoadingScreen from "../../../../shared/loader/loading-screen";
-import MenusDisplay from "./display/menus-display";
+import { ActivatedRoute } from "@angular/router";
+import SaveMenuCategoryForm from "../menus-page/forms/save-menu-category/save-menu-category-form";
+import CategoriesDisplay from "./display/categories";
 
 @Component({
-    selector: `app-restaurant-menus-page`,
-    templateUrl: `./menu-page.html`,
-    imports: [SaveMenuForm, MenusDisplay, LoadingScreen],
-})
-export default class MenusPage implements OnInit {
+    selector: `app-menu-page-2`,
+    template: `
 
-
-    public state = computed(() =>  this.menuService.getState());
-
-    constructor(
-        private readonly menuService: MenuPageService,
-    ) {}
-    ngOnInit(): void {
-        this.menuService.getMenu();
-    }
-    onSaveMenuCategoryHandler(body: SaveMenuCategory) {
-        this.menuService.addCategory(body);
+    @if (state().menu) {
+        <div class="py-4 px-1 flex flex-col gap-4">
+            <h1 class="text-[2rem] font-sans text-slate-500 font-bold">{{state().menu!.name}}</h1>
+            <app-save-menu-category [menu]="state().menu!"/>
+            <app-categories-display [categories]="state().menu!.categories"/>
+        </div>
     }
     
-    onSaveMenuHandler(body: SaveMenu) {
-        this.menuService.save(body);
+    `,
+    imports: [SaveMenuCategoryForm, CategoriesDisplay]
+})
+export default class MenuPage implements OnInit {
+
+
+
+    public state = computed(() => this.menuPageService.getState());
+
+    constructor(
+        private readonly menuPageService: MenuPageService,
+        private readonly routes: ActivatedRoute,
+    ) {}
+    ngOnInit(): void {
+        const menuId  = this.routes.snapshot.paramMap.get("menuId");
+
+        if (menuId) {
+            this.menuPageService.getById(menuId);
+        }
     }
+
 }

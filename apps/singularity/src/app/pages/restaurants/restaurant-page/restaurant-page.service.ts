@@ -6,8 +6,8 @@ import { take } from "rxjs";
 import ApiRestaurantRepository from "../repositories/restaurant-api.repository";
 
 
-type ServiceState = {
-    restaurant: Restaurant;
+export type RestaurantPageState = {
+    restaurant: Restaurant | undefined;
     loading: boolean;
     errorMessage: string;
 }
@@ -18,40 +18,41 @@ type ServiceState = {
 export default class RestaurantPageService {
 
 
-    private state: WritableSignal<ServiceState>;
+    private state: WritableSignal<RestaurantPageState>;
     constructor(
         @Inject(ApiRestaurantRepository)
         private readonly repository: RestaurantRepository,
     ) {
 
-        this.state = signal<ServiceState>({
+        this.state = signal<RestaurantPageState>({
             errorMessage: "",
             loading: false,
-            restaurant: {
-                id: "",
-                name: ""
-            }
+            restaurant: undefined
         });
     }
 
 
     
-    getRestaurant() {
-        return this.state().restaurant;
+    getRestaurant(): Restaurant {
+
+        const restaurant = this.state().restaurant
+        if (!restaurant) {
+            throw new Error("Restaurant not loaded");
+        }
+        return restaurant;
     }
     getState() {
         return this.state();
     }
 
+    setLoading(loading: boolean) {
+        this.state.update((current) => ({ ...current, loading }));
+    }
 
     getById(restaurantId: string) {
-
-
-
-
         this.state.update((current) => ({ ...current, loading: true }));
         this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {
-            this.state.update((current) => ({ ...current, loading: false }));
+            // this.state.update((current) => ({ ...current, loading: false }));
             if (!result) {
                 this.state.update((current) => ({ ...current, errorMessage: "Not found" }));
                 return;

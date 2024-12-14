@@ -56,3 +56,12 @@ func (service MenuService) GetAll(restaurantId string) []types.Menu {
 
 	return service.Repository.GetAll(restaurantId)
 }
+
+func (service MenuService) getById(menuId string) (types.Menu, error) {
+
+	result, err := service.Repository.GetById(menuId)
+	if err != nil {
+		return types.Menu{}, echo.ErrNotFound
+	}
+	return result, nil
+}

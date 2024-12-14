@@ -9,11 +9,11 @@ import RestaurantTopHero from "./components/restaurant-top-hero";
     imports: [RouterOutlet, ErrorAlert, LoadingScreen, RestaurantTopHero],
     template: `
     <div class="w-full overflow-auto">
-        @if (!state().loading && state().errorMessage.length === 0) {
-            <app-restaurant-top-hero [restaurant]="state().restaurant"/>
+        @if (state().restaurant && state().errorMessage.length === 0) {
+            <app-restaurant-top-hero [restaurant]="state().restaurant!"/>
             <router-outlet/>
         }
-        @if (!state().loading && state().errorMessage.length !== 0) {
+        @if (state().errorMessage.length !== 0) {
             <app-error-alert [message]="state().errorMessage"/>
         }
         @if (state().loading) {

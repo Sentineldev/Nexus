@@ -1,7 +1,9 @@
-import { Component, EventEmitter, input, Output } from "@angular/core";
+import { Component, EventEmitter, Inject, input, Output } from "@angular/core";
 import Menu from "../../../../classes/menu.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SaveMenuCategory } from "../../../../dto/menu-category.dto";
+import MenuCategoryRepository from "../../../../interfaces/menu-category-repository.interface";
+import ApiMenuCategoryRepository from "../../../../repositories/menu-category-api.repository";
 
 @Component({
     selector: `app-save-menu-category`,
@@ -20,6 +22,12 @@ export default class SaveMenuCategoryForm {
     });
 
 
+    constructor(
+        @Inject(ApiMenuCategoryRepository)
+        private readonly categoriesRepository: MenuCategoryRepository
+    ) {}
+
+
     onSubmitHandler() {
         if (this.formGroup.valid) {
 
@@ -29,8 +37,14 @@ export default class SaveMenuCategoryForm {
                 name: data.name!,
                 menuId: this.menu().id
             };
-            this.formGroup.reset();
-            this.newCategoryEvent.emit(newCategory);
+            this.categoriesRepository.save(newCategory).subscribe((result) => {
+
+                if (result.length === 0) {
+                    this.formGroup.reset();
+                    this.newCategoryEvent.emit(newCategory);
+                }
+            })
+            
         }
     }
 

@@ -45,6 +45,14 @@ func (repository LocalMenuRepository) Delete(id string) error {
 func (repository LocalMenuRepository) GetById(id string) (types.Menu, error) {
 	for _, v := range internal.MENUS {
 		if v.Id == id {
+			for _, category := range internal.CATEGORIES {
+				if category.Menu.Id == id {
+					v.Categories = append(v.Categories, types.MenuCategoryShort{
+						Id:   category.Id,
+						Name: category.Name,
+					})
+				}
+			}
 			return v, nil
 		}
 	}

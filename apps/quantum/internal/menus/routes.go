@@ -10,6 +10,7 @@ func MenusRoutes(server *echo.Group) {
 
 	group := server.Group("/menus")
 
-	group.GET("/:restaurantId", handler.GetAll)
+	group.GET("/all/:restaurantId", handler.GetAll)
+	group.GET("/by-id/:menuId", handler.getById)
 	group.POST("", handler.Save)
 }

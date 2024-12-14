@@ -13,9 +13,9 @@ import MenuDisplay from "./menu-display";
     }
     `,
     template: `
-    <div class="menus-display-container justify-start gap-4 items-start">
+    <div class="menus-display-container justify-start gap-8 items-start">
         @for (menu of menus(); track menu.id) {
-            <app-menu-display (newCategoryEvent)="onNewCategory($event)" [menu]="menu"/>
+            <app-menu-display [menu]="menu"/>
         }
     </div>
     `,
@@ -28,10 +28,6 @@ export default class MenusDisplay {
     @Output() newCategoryEvent = new EventEmitter<SaveMenuCategory>();
 
     public selectedMenu = signal<Menu | undefined>(undefined);
-
-    onNewCategory(body: SaveMenuCategory) {
-        this.newCategoryEvent.emit(body);
-    }
 
     public menus = input<Menu[]>([]);
 }

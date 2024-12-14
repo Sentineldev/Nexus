@@ -1,7 +1,9 @@
-import { Component, computed, EventEmitter, Output } from "@angular/core";
+import { Component, computed, EventEmitter, Inject, Output } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SaveMenu } from "../../../../dto/menu.dto";
 import RestaurantPageService from "../../../restaurant-page.service";
+import MenuRepository from "../../../../interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../../repositories/menu-api.repository";
 
 @Component({
     selector: `app-save-menu-form`,
@@ -11,7 +13,7 @@ import RestaurantPageService from "../../../restaurant-page.service";
 export default class SaveMenuForm {
     
 
-    @Output() newMenuEvent = new EventEmitter<SaveMenu>();
+    @Output() newMenuEvent = new EventEmitter();
 
     public formGroup = new FormGroup({
         name: new FormControl('',[Validators.required])
@@ -20,18 +22,23 @@ export default class SaveMenuForm {
     public restaurant = computed(() => this.service.getRestaurant());
     constructor(
         private readonly service: RestaurantPageService,
+        @Inject(ApiMenuRepository)
+        private readonly menuRepository: MenuRepository
     ) {} 
 
     onSubmitHandler() {
-
         if (this.formGroup.valid) {
             const data = this.formGroup.value;
             const newMenu: SaveMenu = {
                 name: data.name!,
-                restaurantId: this.restaurant().id
+                restaurantId: this.restaurant()!.id
             };
-            this.newMenuEvent.emit(newMenu);
-            this.formGroup.reset();
+            this.menuRepository.save(newMenu).subscribe((result) => {
+                if (result.length === 0) {
+                    this.newMenuEvent.emit();
+                    this.formGroup.reset();
+                }
+            });
         }
     }
 }

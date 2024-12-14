@@ -46,9 +46,12 @@ export default class ApiMenuRepository implements MenuRepository {
         throw new Error("Method not implemented.");
     }
     getById(id: string): Observable<Menu | undefined> {
-        throw new Error("Method not implemented.");
+        return this.http.get<Menu>(`${this.URL}/by-id/${id}`).pipe(
+            map((result) => result),
+            catchError(() => of(undefined))
+        )
     }
     getAll(restaurantId: string): Observable<Menu[]> {
-        return this.http.get<Menu[]>(`${this.URL}/${restaurantId}`)
+        return this.http.get<Menu[]>(`${this.URL}/all/${restaurantId}`)
     }
 }

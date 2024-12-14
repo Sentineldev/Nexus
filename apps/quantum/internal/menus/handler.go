@@ -29,6 +29,19 @@ func (handler MenuHandler) Save(context echo.Context) error {
 
 }
 
+func (handler MenuHandler) getById(context echo.Context) error {
+
+	menuId := context.Param("menuId")
+
+	result, err := handler.Service.getById(menuId)
+
+	if err != nil {
+		return err
+	}
+	return context.JSON(http.StatusOK, result)
+
+}
+
 func (handler MenuHandler) GetAll(context echo.Context) error {
 
 	restaurantId := context.Param("restaurantId")

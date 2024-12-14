@@ -40,7 +40,7 @@ export default class MenuCategoryPageService {
             categories: [],
             id: "",
             name: "",
-            restaurant: aux.restaurant
+            restaurant: aux.restaurant!
         });
         const category = new MenuCategory({
             id: "",
@@ -55,7 +55,7 @@ export default class MenuCategoryPageService {
 
         
         this.state = computed(() => {
-            const restaurant = this.restaurantPageService.getRestaurant();
+            const restaurant = this.restaurantPageService.getRestaurant()!;
             const category = this.categorySignal();
             return {
                 restaurant,
