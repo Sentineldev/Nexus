@@ -6,11 +6,11 @@ import LoadingScreen from "../../../shared/loader/loading-screen";
 import RestaurantTopHero from "./components/restaurant-top-hero";
 @Component({
     selector: 'app-restaurant-page',
-    imports: [RouterOutlet, ErrorAlert, LoadingScreen, RestaurantTopHero],
+    imports: [RouterOutlet, ErrorAlert, LoadingScreen],
     template: `
-    <div class="w-full overflow-auto">
+    <div class="w-full overflow-auto h-full">
         @if (state().restaurant && state().errorMessage.length === 0) {
-            <app-restaurant-top-hero [restaurant]="state().restaurant!"/>
+            <!-- <app-restaurant-top-hero [restaurant]="state().restaurant!"/> -->
             <router-outlet/>
         }
         @if (state().errorMessage.length !== 0) {

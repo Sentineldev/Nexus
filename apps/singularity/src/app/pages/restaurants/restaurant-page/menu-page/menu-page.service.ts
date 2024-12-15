@@ -33,6 +33,15 @@ export default class MenuPageService {
         return this.state();
     }
 
+    getMenu(): Menu {
+
+        const menu = this.state().menu;
+        if (!menu) {
+            throw new Error("Menu not found")
+        }   
+        return menu;
+    }
+
     getById(menuId: string) {
         this.menuRepository.getById(menuId).subscribe((result) => {
             this.restaurantPageService.setLoading(false);

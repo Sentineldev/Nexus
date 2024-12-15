@@ -15,7 +15,10 @@ import Menu from "../../../classes/menu.class";
         <div class="relative h-[180px] rounded-xl">
             <img src="/placeholder-menu.jpg" class="rounded-xl h-[180px] min-w-[280px] w-[500px]">
             <div class="gradient-selector w-full h-full flex items-end p-7 absolute top-0 rounded-xl">
-                <h1 class="text-white text-[1.4rem] font-medium font-sans">{{menu().name}}</h1>
+                <div class="flex flex-col">
+                    <h1 class="text-white text-[1.4rem] font-medium font-sans">{{menu().name}}</h1>
+                    <p class="text-slate-200 font-sans text-[0.95rem]">Ver menu</p>
+                </div>
             </div>
         </div>
     </a>

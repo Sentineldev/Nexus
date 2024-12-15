@@ -10,10 +10,12 @@ import SaveCategoryProductModal from "./category-products/save-category-product-
     @if (state().droped && state().product) {
         <app-save-category-product-modal [dialogId]="state().dialogId" [product]="state().product!"/>
     }  
-    <div class="flex items-center gap-6  h-full">
-        <app-available-products/>
-        <div class="w-full">
+    <div class="grid grid-cols-4 gap-4 h-full px-3 ">
+        <div class="col-span-3">
             <app-category-products/>
+        </div>    
+        <div class="">
+            <app-available-products/>
         </div>
     </div>
     

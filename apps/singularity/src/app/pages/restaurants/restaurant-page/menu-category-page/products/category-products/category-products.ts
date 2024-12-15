@@ -7,7 +7,7 @@ import MenuCategoryPageService from "../../menu-category-page.service";
 @Component({
     selector: `app-category-products`,
     template: `
-    <div class="max-h-[700px] h-[700px] flex flex-col">
+    <div class="flex flex-col  h-full">
         <div class="bg-cyan-500 p-3 rounded-t-xl">
             <h1 class="text-white font-sans text-[1.4rem] font-bold">Productos del menu</h1>
         </div>

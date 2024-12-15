@@ -15,7 +15,7 @@ type ServiceState = {
 @Injectable({
     providedIn: "root"
 })
-export default class MenuPageService {
+export default class MenusPageService {
 
     private state: WritableSignal<ServiceState>;
 

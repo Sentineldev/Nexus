@@ -63,7 +63,7 @@ export default class SaveCategoryProductModal implements AfterViewInit {
     }); 
 
 
-    public state = computed(() => this.service.getState());
+    public category = computed(() => this.service.getCategory());
 
     public productsState = computed(() => this.categoryProductService.getState());
 
@@ -93,7 +93,7 @@ export default class SaveCategoryProductModal implements AfterViewInit {
 
             const newData: SaveCategoryProduct = {
                 price: Number(data.price),
-                categoryId: this.state().category.id,
+                categoryId: this.category().id,
                 productId: this.product().id,
                 isEnabled: true,
             };
