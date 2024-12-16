@@ -1,0 +1,26 @@
+<div class="w-full ">
+    <form class="w-full" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
+        <div class="w-full  flex flex-col gap-4">
+            <div class="">
+                <label class="flex flex-col gap-1" [htmlFor]="'name'">
+                    <!-- <p class="text-slate-700">Nombre del restaurante</p> -->
+                    <input autocomplete="on" class="border-b border-slate-700 p-3 outline-none" placeholder="Ingresar nombre" type="text" name="name" id="name" formControlName="name">
+                </label>
+            </div>
+            <div class="px-3 flex flex-col gap-2">
+                
+                <button [disabled]="loading()" class="w-fit bg-slate-700 text-white p-3 rounded-lg border-none" type="submit">
+                    @if (!loading()) {
+                        Crear restaurante
+                    }
+                    @else {
+                        <app-loader/>
+                    }
+                </button>
+                @if (errorMessage().length > 0) {
+                    <app-error-alert [message]="errorMessage()"/>
+                }
+            </div>
+        </div>
+    </form>
+</div>

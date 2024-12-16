@@ -1,0 +1,11 @@
+<div class="flex flex-col gap-4">
+
+    @if (!state().loading) {
+    <div>
+            <app-save-restaurant-form (newRestaurantEvent)="onSaveRestaurantHandler()"/>
+    </div>
+    }
+    <div class="p-3">
+        <app-restaurants-display [restaurants]="state().page.data"/>
+    </div>
+</div>

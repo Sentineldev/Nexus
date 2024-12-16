@@ -1,0 +1,35 @@
+<div class="h-screen w-full flex items-center justify-center">
+    <div class="w-[450px] rounded-lg gap-8 border">
+        <div class="flex flex-col  gap-6  h-fit self-center">
+            <div class="bg-cyan-500 rounded-t-lg p-3 px-6">
+                <h1 class="font-sans text-[1.4rem] text-white">Bienvenido</h1>
+                <p class="text-white text-[1rem]">Ingresa tus datos</p>
+            </div>
+            <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-16 p-6">
+                <div class="flex flex-col gap-8">
+                    <div>
+                        <label for="username" class="flex flex-col gap-1">
+                            <p class="font-sans text-cyan-500">Nombre de usuario</p>
+                            <input formControlName="username" class="border-b border-cyan-500 w-full p-1 outline-none" type="text" name="username" id="username">
+                        </label>
+                        @if (formGroup.controls.username.getError("required") && formGroup.controls.username.dirty) {
+                            <p class="text-red-500">Ingrese el nombre de usuario</p>
+                        }
+                    </div>
+                    <div>
+                        <label for="password" class="flex flex-col gap-1">
+                            <p class="font-sans text-cyan-500">Contraseña</p>
+                            <input formControlName="password" class="border-b border-cyan-500 w-full  p-1 outline-none" type="password" name="password" id="password">
+                        </label>
+                        @if (formGroup.controls.password.getError("required") && formGroup.controls.password.dirty) {
+                            <p class="text-red-500">Ingrese la contraseña</p>
+                        }
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow font-sans text-[1.2rem]">Ingresar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
