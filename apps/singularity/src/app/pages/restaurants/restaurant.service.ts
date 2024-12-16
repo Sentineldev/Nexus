@@ -50,17 +50,6 @@ export default class RestaurantService {
         return this.state();
     }
    
-    save(body: SaveRestaurant) {
-        this.state.update((val) => ({...val, loading: true}));
-        this.repository.save(body)
-        .pipe(take(1))
-        .subscribe(() => {
-            this.state.update((val) => ({...val, loading: false }));
-            this.getPage(this.state().filter);
-        });
-        
-    }
-
     getById(id: string) {
         return this.repository.getById(id);
     }

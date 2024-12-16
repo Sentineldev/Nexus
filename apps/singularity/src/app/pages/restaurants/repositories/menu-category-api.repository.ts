@@ -14,6 +14,7 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
     constructor(private readonly http: HttpClient) {
         this.URL = "http://localhost:3000/api/menu-categories";
     }
+  
 
     save(body: SaveMenuCategory): Observable<string> {
         return this.http.post<HttpResponse<unknown>>(this.URL,body,{ observe: "response" })
@@ -22,7 +23,7 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
             catchError((result: HttpErrorResponse) => {
                 let err = "";
                 if (result.status === 409) {
-                    err = "El nombre del restaurant debe ser unico";
+                    err = "El nombre de la categoria debe ser unico";
                 }
                 else if (result.status === 422) {
                     err = "No puedes dejar el nombre vacio";
@@ -45,9 +46,16 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
         throw new Error("Method not implemented.");
     }
     getById(id: string): Observable<MenuCategory | undefined> {
-        return this.http.get<MenuCategory>(`${this.URL}/${id}`).pipe(
+        return this.http.get<MenuCategory>(`${this.URL}/by-id/${id}`).pipe(
             map((result) => result),
             catchError(() => of(undefined))
+        )
+    }
+
+    getAll(menuId: string): Observable<MenuCategory[]> {
+        return this.http.get<MenuCategory[]>(`${this.URL}/all/${menuId}`).pipe(
+            map((result) => result),
+            catchError(() => of([]))
         )
     }
 } 

@@ -42,3 +42,12 @@ func (handler MenuCategoryHandler) GetById(context echo.Context) error {
 
 	return context.JSON(http.StatusOK, result)
 }
+
+func (handler MenuCategoryHandler) GetAll(context echo.Context) error {
+
+	menuId := context.Param("menuId")
+
+	result := handler.Service.GetAll(menuId)
+
+	return context.JSON(http.StatusOK, result)
+}

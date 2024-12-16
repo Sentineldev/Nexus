@@ -36,12 +36,17 @@ export default class MenusPageService {
     }
     getMenus() {
 
+        if (!this.restaurantPageService.isLoading()) {
+            this.restaurantPageService.setLoading(true);
+        }
         const restaurant = this.restaurantPageService.getRestaurant();
         this.repository.getAll(restaurant.id).pipe(take(1)).subscribe(result => {
-            this.restaurantPageService.setLoading(false);
-            this.state.set({
-                 menus: result
-            });
+            setTimeout(() => {
+                this.restaurantPageService.setLoading(false);
+                this.state.set({
+                    menus: result
+                });
+            }, 1000);
         })
     }
 }

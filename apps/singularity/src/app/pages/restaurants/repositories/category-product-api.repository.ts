@@ -23,7 +23,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
             catchError((result: HttpErrorResponse) => {
                 let err = "";
                 if (result.status === 409) {
-                    err = "El nombre del restaurant debe ser unico";
+                    err = "El producto ya se encuentra asignado";
                 }
                 else if (result.status === 422) {
                     err = "No puedes dejar el nombre vacio";

@@ -23,7 +23,7 @@ export default class ApiMenuRepository implements MenuRepository {
             catchError((result: HttpErrorResponse) => {
                 let err = "";
                 if (result.status === 409) {
-                    err = "El nombre del restaurant debe ser unico";
+                    err = "El nombre del menu debe ser unico";
                 }
                 else if (result.status === 422) {
                     err = "No puedes dejar el nombre vacio";

@@ -33,7 +33,7 @@ func (service MenuService) Save(body SaveMenuDto) error {
 		return err
 	}
 
-	newMenu := types.NewMenu2(uuid.NewString(), body.Name, restaurant)
+	newMenu := types.NewMenu(uuid.NewString(), body.Name, restaurant)
 
 	if err := service.Repository.Save(*newMenu); err != nil {
 		return echo.ErrInternalServerError

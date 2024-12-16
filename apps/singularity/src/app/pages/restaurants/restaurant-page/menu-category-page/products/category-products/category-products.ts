@@ -8,15 +8,15 @@ import MenuCategoryPageService from "../../menu-category-page.service";
     selector: `app-category-products`,
     template: `
     <div class="flex flex-col  h-full">
-        <div class="bg-cyan-500 p-3 rounded-t-xl">
-            <h1 class="text-white font-sans text-[1.4rem] font-bold">Productos del menu</h1>
+        <div class="bg-slate-700 p-3 rounded-t-xl">
+            <h1 class="text-white font-sans text-[1.2rem] font-bold">Productos del menu</h1>
         </div>
         <div class="border flex-1 flex flex-col gap-3 rounded-b-xl">
             <div (dragleave)="onDragLeaveHandler($event)" (drop)="onDropHandler($event)"  (dragover)="onDragOverHandler($event)" class="flex-1 transition-all">
                 @for (product of state().page.data; track product.id) {
                     <div class="p-4 flex items-center hover:bg-slate-200 transition-all hover:cursor-pointer">
-                        <p class="font-sans text-slate-700 text-[1.1rem] flex-1">{{product.product.name}}</p>
-                        <p>{{product.price}} $</p>
+                        <p class="font-sans text-slate-700 text-[1.3rem] flex-1">{{product.product.name}}</p>
+                        <p class="font-nsas text-slate-700 text-[1.3rem] font-bold">{{product.price}} $</p>
                     </div>
                 }
             </div>

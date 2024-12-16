@@ -12,11 +12,12 @@ type ServiceState = {
 @Injectable({
     providedIn: 'root'
 })
-export default class MenuCategoryPageService {
+export default class CategoriesPageService {
 
     private state: WritableSignal<ServiceState>;
 
     constructor(
+        private readonly restaurantPageService: RestaurantPageService,
         @Inject(ApiMenuCategoryRepository)
         private readonly MenuCategoryRepository: MenuCategoryRepository,
     ) {
@@ -44,6 +45,7 @@ export default class MenuCategoryPageService {
     getById(categoryId: string) {
         
         this.MenuCategoryRepository.getById(categoryId).subscribe((result) => {
+            this.restaurantPageService.setLoading(false);
             if (result) {
                 this.state.set({ category: result });
             }

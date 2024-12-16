@@ -36,3 +36,16 @@ func (repository LocalMenuCategoryRepository) GetByName(menuId, name string) (ty
 	}
 	return types.MenuCategory{}, errors.New("category not found")
 }
+
+func (repository LocalMenuCategoryRepository) GetAll(menuId string) []types.MenuCategory {
+
+	data := []types.MenuCategory{}
+
+	for _, category := range internal.CATEGORIES {
+		if category.Menu.Id == menuId {
+			data = append(data, category)
+		}
+	}
+
+	return data
+}

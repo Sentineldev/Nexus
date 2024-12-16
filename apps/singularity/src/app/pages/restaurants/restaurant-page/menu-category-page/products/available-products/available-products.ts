@@ -7,8 +7,8 @@ import Product from "../../../../../products/classes/product.class";
     selector: `app-available-products`,
     template: `
     <div class="flex flex-col h-full">
-        <div class="bg-cyan-500 p-3 rounded-t-xl">
-            <h1 class="text-white font-sans text-[1.4rem] font-bold">Productos disponibles</h1>
+        <div class="bg-slate-700 p-3 rounded-t-xl">
+            <h1 class="text-white font-sans text-[1.2rem] font-bold">Productos disponibles</h1>
         </div>
         <div class="border flex-1 flex flex-col gap-3 rounded-b-xl">
             <div class="flex-1">

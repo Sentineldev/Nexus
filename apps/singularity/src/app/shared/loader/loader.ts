@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   imports: [],
   styles: `
     .loader {
-    width: 36px;
-    height: 36px;
+    width: 20px;
+    height: 20px;
     // border: 4px solid #FFF;
     border-bottom-color: transparent;
     border-radius: 50%;

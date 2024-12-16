@@ -24,8 +24,8 @@ export default class RestaurantsPage implements OnInit {
         this.service.getPage(this.state().filter);
     }
 
-    async onSaveRestaurantHandler(body: SaveRestaurant) {
-        this.service.save(body);
+    async onSaveRestaurantHandler() {
+        this.service.getPage(this.state().filter);
     }
 }
   

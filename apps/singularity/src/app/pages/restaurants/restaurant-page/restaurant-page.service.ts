@@ -49,6 +49,10 @@ export default class RestaurantPageService {
         this.state.update((current) => ({ ...current, loading }));
     }
 
+    isLoading() {
+        return this.state().loading;
+    }
+
     getById(restaurantId: string) {
         this.state.update((current) => ({ ...current, loading: true }));
         this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {

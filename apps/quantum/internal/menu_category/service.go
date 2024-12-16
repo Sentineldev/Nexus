@@ -53,3 +53,10 @@ func (service MenuCategoryService) GetById(id string) (types.MenuCategory, error
 
 	return result, nil
 }
+
+func (service MenuCategoryService) GetAll(menuId string) []types.MenuCategory {
+
+	result := service.Repository.GetAll(menuId)
+
+	return result
+}

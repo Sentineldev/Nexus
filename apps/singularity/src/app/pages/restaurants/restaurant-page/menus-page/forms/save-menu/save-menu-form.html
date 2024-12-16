@@ -1,15 +1,24 @@
-<div class="w-full">
+<div class="w-full ">
     <form class="w-full" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
-        <div class="w-full  flex items-end gap-3">
+        <div class="w-full  flex flex-col gap-3">
             <div class="">
                 <label class="flex flex-col gap-1" [htmlFor]="'name'">
-                    <p class="text-slate-700">Nombre del menu</p>
-                    <input autocomplete="on" class="border rounded border-cyan-500 outline-none p-1" type="text" name="name" id="name" formControlName="name">
+                    <!-- <p class="text-slate-700">Nombre del menu</p> -->
+                    <input autocomplete="on" class=" w-full border-b border-b-slate-700 outline-none py-3 font-sans text-lg" placeholder="Nombre" type="text" name="name" id="name" formControlName="name">
                 </label>
-                
             </div>
-            <div>
-                <button class="bg-cyan-500 text-white text-[1.4rem] rounded   px-4 border-none flex items-center justify-center" type="submit">+</button>
+            <div class="flex flex-col gap-3">
+                <button [disabled]="loading()" class="bg-slate-700 text-white p-3 rounded-lg w-fit" type="submit">
+                    @if (!loading()) {
+                        Crear Menu
+                    }
+                    @else {
+                        <app-loader/>
+                    }
+                </button>
+                @if (errorMessage().length > 0) {
+                    <app-error-alert [message]="errorMessage()"/>
+                }
             </div>
         </div>
     

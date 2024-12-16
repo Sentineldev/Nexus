@@ -6,26 +6,15 @@ type MenuCategoryShort struct {
 }
 
 type Menu struct {
-	Id         string              `json:"id"`
-	Name       string              `json:"name"`
-	Restaurant Restaurant          `json:"restaurant"`
-	Categories []MenuCategoryShort `json:"categories"`
+	Id         string     `json:"id"`
+	Name       string     `json:"name"`
+	Restaurant Restaurant `json:"restaurant"`
 }
 
-func NewMenu1(id, name string, restaurant Restaurant, categories []MenuCategoryShort) *Menu {
+func NewMenu(id, name string, restaurant Restaurant) *Menu {
 	return &Menu{
 		Id:         id,
 		Name:       name,
 		Restaurant: restaurant,
-		Categories: categories,
-	}
-}
-
-func NewMenu2(id, name string, restaurant Restaurant) *Menu {
-	return &Menu{
-		Id:         id,
-		Name:       name,
-		Restaurant: restaurant,
-		Categories: []MenuCategoryShort{},
 	}
 }

@@ -19,7 +19,6 @@ export default class MenuPageService {
     private state: WritableSignal<ServiceState>;
 
     constructor(
-        private readonly restaurantPageService: RestaurantPageService,
         @Inject(ApiMenuRepository)
         private readonly menuRepository: MenuRepository,
     ) {
@@ -44,7 +43,6 @@ export default class MenuPageService {
 
     getById(menuId: string) {
         this.menuRepository.getById(menuId).subscribe((result) => {
-            this.restaurantPageService.setLoading(false);
             if (result) {
                 this.state.set({
                     menu: result
