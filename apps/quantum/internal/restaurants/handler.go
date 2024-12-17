@@ -2,7 +2,6 @@ package restaurants
 
 import (
 	"net/http"
-	"quantum/internal/types"
 
 	"github.com/labstack/echo/v4"
 )
@@ -22,6 +21,10 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 
 	context.Bind(&body)
 
+	if !body.Validate() {
+		return echo.ErrUnprocessableEntity
+	}
+
 	if err := handler.Service.Save(body); err != nil {
 		return err
 	}
@@ -30,12 +33,20 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 }
 func (handler RestaurantsHandler) GetPage(context echo.Context) error {
 
-	pageFilter := types.PageFilter[any]{
-		Page:     1,
-		PageSize: 5,
+	page := context.QueryParam("page")
+	pageSize := context.QueryParam("pageSize")
+
+	body := RestaurantPageFilter{
+		Page:     page,
+		PageSize: pageSize,
 	}
-	result := handler.Service.GetPage(pageFilter)
-	return context.JSON(http.StatusOK, result)
+
+	if filter, err := body.Validate(); err != nil {
+		return err
+	} else {
+		result := handler.Service.GetPage(filter)
+		return context.JSON(http.StatusOK, result)
+	}
 }
 
 func (handler RestaurantsHandler) GetById(context echo.Context) error {

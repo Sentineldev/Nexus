@@ -41,7 +41,12 @@ export default class MenuPageService {
         return menu;
     }
 
+    clear() {
+        this.state.update((current) => ({...current, menu: undefined}));
+    }
+
     getById(menuId: string) {
+        this.clear();
         this.menuRepository.getById(menuId).subscribe((result) => {
             if (result) {
                 this.state.set({

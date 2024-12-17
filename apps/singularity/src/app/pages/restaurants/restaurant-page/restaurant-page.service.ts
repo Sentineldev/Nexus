@@ -53,7 +53,13 @@ export default class RestaurantPageService {
         return this.state().loading;
     }
 
+
+    clear() {
+        this.state.update((current) => ({...current, restaurant: undefined}));
+    }
+
     getById(restaurantId: string) {
+        this.clear();
         this.state.update((current) => ({ ...current, loading: true }));
         this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {
             // this.state.update((current) => ({ ...current, loading: false }));

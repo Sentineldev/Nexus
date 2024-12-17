@@ -33,9 +33,11 @@ export default class CategoriesPageService {
         return this.state();
     }
 
-
+    clear() {
+        this.state.update((current) => ({...current, categories: []}))
+    }
     getAll(menuId: string) {
-
+        this.clear();
         if (!this.restaurantPageService.isLoading()) {
             this.restaurantPageService.setLoading(true);
         }

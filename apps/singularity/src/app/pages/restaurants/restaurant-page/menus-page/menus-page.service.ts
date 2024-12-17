@@ -34,8 +34,13 @@ export default class MenusPageService {
     getState() {
         return this.state();
     }
+
+    clear() {
+        this.state.update((current) => ({...current, menus: []}))
+    }
     getMenus() {
 
+        this.clear();
         if (!this.restaurantPageService.isLoading()) {
             this.restaurantPageService.setLoading(true);
         }
