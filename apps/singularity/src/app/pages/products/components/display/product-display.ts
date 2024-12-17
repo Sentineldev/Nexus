@@ -9,10 +9,10 @@ scrollbars
   template: `
     <div class="grid grid-cols-3 p-3 items-center justify-center">
         <div>
-            <p class="font-sans text-slate-700 text-[1rem] text-wrap break-words">{{ product().name }}</p>
+            <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words">{{ product().name }}</p>
         </div>
         <div>
-            <p class="font-sans text-slate-700 text-[1rem] text-wrap break-words">{{ product().description }}</p>
+            <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words">{{ product().description }}</p>
         </div>
         <div class="flex items-center gap-2">
             <app-delete-product-modal (onUpdate)="onUpdateHandler()" [product]="product()"/>

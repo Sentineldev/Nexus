@@ -26,7 +26,7 @@ import { RouterLink } from "@angular/router";
         </div>
         <div class="flex flex-col bg-transparent rounded-xl w-full">
             <div class="relative w-full h-full min-h-[220px]">
-                <img src="/placeholder-menu.jpg" class="rounded-xl h-[220px] w-full">
+                <img src="/placeholder-menu.jpg" class="rounded-xl h-[220px] w-full object-cover">
                 <div class="absolute gradient-selector w-full top-0 h-full rounded-xl flex flex-col p-6">
                     <div class="flex-1">
                         <img src="/restaurant-menu-svgrepo-com-white.svg" width="42" height="42" alt="store icon">

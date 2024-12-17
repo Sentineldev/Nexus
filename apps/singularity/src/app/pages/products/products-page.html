@@ -1,15 +1,17 @@
 
-<div class="m-auto flex flex-col gap-6 lg:w-[800px]">
+<div class="p-6 flex flex-col gap-6">
     <app-save-product-modal (onUpdate)="onUpdateHandler()"/>
     <div class="flex flex-col gap-4">
         <app-products-display (onUpdate)="onUpdateHandler()" [products]="state().page.data"/>
-        <div class="self-center">
-            <app-paginator 
-            (pageChangeEvent)="pageChangeHandler($event)" 
-            [dataSize]="state().page.meta.dataSize" 
-            [pageSize]="state().page.meta.pageSize" 
-            [defaultPage]="state().page.meta.page" 
-            />
-        </div>
+        @if (state().page.data.length !== 0) {
+            <div class="self-center">
+                <app-paginator 
+                (pageChangeEvent)="pageChangeHandler($event)" 
+                [dataSize]="state().page.meta.dataSize" 
+                [pageSize]="state().page.meta.pageSize" 
+                [defaultPage]="state().page.meta.page" 
+                />
+            </div>
+        }
     </div>
 </div>

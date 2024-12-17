@@ -18,7 +18,7 @@ import RestaurantTopHero from "./components/restaurant-top-hero";
         }
         @if (state().loading) {
             <app-loading-screen label="Cargando restaurante..."/>
-    }
+        }
     </div>
     `,
 })

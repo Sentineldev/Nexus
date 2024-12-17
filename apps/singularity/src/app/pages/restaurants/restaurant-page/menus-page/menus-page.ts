@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from "@angular/core";
+import { AfterViewInit, Component, computed, OnInit } from "@angular/core";
 import SaveMenuForm from "./forms/save-menu/save-menu-form";
 import MenusDisplay from "./display/menus-display";
 import RestaurantTopHero from "../components/restaurant-top-hero";
