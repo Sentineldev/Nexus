@@ -1,11 +1,12 @@
 import { Component, computed, EventEmitter, Inject, Output, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveMenu } from "../../../../dto/menu.dto";
-import RestaurantPageService from "../../../restaurant-page.service";
-import MenuRepository from "../../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../../repositories/menu-api.repository";
-import { Loader } from "../../../../../../shared/loader/loader";
-import { ErrorAlert } from "../../../../../../shared/alerts/error-alert";
+import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
+import { Loader } from "../../../../../shared/loader/loader";
+import { SaveMenu } from "../../../dto/menu.dto";
+import MenuRepository from "../../../interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../repositories/menu-api.repository";
+import RestaurantPageService from "../../restaurant-page.service";
+
 
 @Component({
     selector: `app-save-menu-form`,

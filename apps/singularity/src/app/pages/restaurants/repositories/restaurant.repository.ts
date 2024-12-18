@@ -11,6 +11,9 @@ import { RESTAURANTS } from "../../../data/variables";
     providedIn: 'root'
 })
 export default class LocalRestaurantRepository implements RestaurantRepository {
+    update(id: string, body: SaveRestaurant): Observable<string> {
+        throw new Error("Method not implemented.");
+    }
 
 
     getById(id: string): Observable<Restaurant | undefined> {
@@ -20,7 +23,7 @@ export default class LocalRestaurantRepository implements RestaurantRepository {
 
     save(body: SaveRestaurant): Observable<string> {
         const id = new Date().getTime().toString();
-        const newRestaurant = new Restaurant(id, body.name);
+        const newRestaurant = new Restaurant(id, body.name, false);
 
         return this.getById(id)
         .pipe(

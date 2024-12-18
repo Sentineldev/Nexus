@@ -3,7 +3,7 @@
         <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-center text-[1.2rem] font-sans text-cyan-500">Eliminar producto</h1>
+                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Eliminar producto</h1>
                     @if (errorMessage()) {
                         <app-error-alert [message]="errorMessage()"/>
                     }
@@ -14,12 +14,21 @@
                     <p class="font-sans text-[0.9rem]">Descripcion: {{ product().description }}</p>
                 </div>
                 <div>
-                    <button [disabled]="loading()" (click)="onClickHandler()" type="button" class="w-full bg-red-500 p-2 text-white rounded-lg">Eliminar</button>
+                    <button [disabled]="loading()" (click)="onClickHandler()" type="button" class="w-full bg-red-500 p-2 text-white rounded-lg">
+                        @if (loading()) {
+                            <app-loader/>
+                        }
+                        @else {
+                            Eliminar
+                        }
+                    </button>
                 </div>
             </div>
         </div>
     </app-custom-dialog>
     <app-dialog-toggler [dialogId]="dialogId()">
-        <h1 class="text-slate-700 text-[1rem]">Eliminar</h1>
+        <h1 class="text-slate-700 text-[1rem]">
+            <img class="" src="./svg/trash-svgrepo-com.svg" alt="trash-icon" width="32" height="32">
+        </h1>
     </app-dialog-toggler>
 </div>

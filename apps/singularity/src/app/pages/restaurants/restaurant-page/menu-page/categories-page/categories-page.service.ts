@@ -7,6 +7,7 @@ import RestaurantPageService from "../../restaurant-page.service";
 
 type ServiceState = {
     categories: MenuCategory[];
+    loading: boolean;
 };
 
 @Injectable({
@@ -24,7 +25,8 @@ export default class CategoriesPageService {
     ) {
 
         this.state = signal({
-            categories: []
+            categories: [],
+            loading: false,
         })
     }
 
@@ -38,15 +40,16 @@ export default class CategoriesPageService {
     }
     getAll(menuId: string) {
         this.clear();
+        if (this.restaurantPageService.isLoading()) {
+            this.restaurantPageService.startLoading("Cargando categorias");
+        }
         if (!this.restaurantPageService.isLoading()) {
-            this.restaurantPageService.setLoading(true);
+            this.state.update((current) => ({...current, loading: true }));
         }
         this.repository.getAll(menuId).subscribe((result) => {
             setTimeout(() => {
-                this.restaurantPageService.setLoading(false);
-                this.state.set({
-                    categories: result
-                });
+                this.restaurantPageService.stopLoading();
+                this.state.update((current) => ({...current, categories: result, loading: false }));
             }, 1000);
         });
     }

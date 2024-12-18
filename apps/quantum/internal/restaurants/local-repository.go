@@ -20,6 +20,13 @@ func (repository LocalRestaurantsRepository) Save(body types.Restaurant) error {
 	return nil
 }
 func (repository LocalRestaurantsRepository) Update(body types.Restaurant) error {
+
+	for index, restaurant := range internal.RESTAURANTS {
+		if restaurant.Id == body.Id {
+			internal.RESTAURANTS[index] = body
+			break
+		}
+	}
 	return nil
 }
 func (repository LocalRestaurantsRepository) Delete(id string) error {

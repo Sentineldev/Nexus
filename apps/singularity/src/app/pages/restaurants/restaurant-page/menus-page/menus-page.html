@@ -4,8 +4,14 @@
         <app-loading-screen label="Cargando menus..."/>
     } -->
     <app-restaurant-top-hero [restaurant]="restaurant()"/>
-    <div class="flex flex-col gap-6">
-        <app-save-menu-form (newMenuEvent)="onSaveMenuHandler()"/>
-        <app-menus-display  [menus]="state().menus"/>
-    </div>
+    @if (state().loading) {
+        <div class="p-4">
+            <app-loader [color]="'secondary'"/>
+        </div>
+    } @else {
+        <div class="flex flex-col gap-6">
+            <app-save-menu-form (newMenuEvent)="onSaveMenuHandler()"/>
+            <app-menus-display  [menus]="state().menus"/>
+        </div>
+    }
 </div>

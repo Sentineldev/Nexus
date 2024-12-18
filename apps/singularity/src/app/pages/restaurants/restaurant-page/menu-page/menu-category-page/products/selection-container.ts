@@ -1,8 +1,8 @@
 import { Component, computed } from "@angular/core";
-import AvailableProducts from "./available-products/available-products";
 import CategoryProducts from "./category-products/category-products";
 import ProductSelectionService from "./product-selection.service";
 import SaveCategoryProductModal from "./category-products/save-category-product-modal";
+import AvailableProducts from "./available-products/available-products";
 
 @Component({
     selector: `app-selection-container`,

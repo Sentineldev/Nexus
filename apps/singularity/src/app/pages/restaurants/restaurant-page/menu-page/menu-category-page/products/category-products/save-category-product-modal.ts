@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, computed, EventEmitter, input, OnInit, Output, signal } from "@angular/core";
-import CustomDialog from "../../../../../../shared/dialog/custom-dialog";
-import Product from "../../../../../products/classes/product.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { SaveCategoryProduct } from "../../../../dto/category-product.dto";
 import MenuCategoryPageService from "../../menu-category-page.service";
 import CategoryProductsService from "./category-products.service";
 import { take } from "rxjs";
-import { ErrorAlert } from "../../../../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../../../../shared/alerts/success-alert";
 import ProductSelectionService from "../product-selection.service";
+import { ErrorAlert } from "../../../../../../../shared/alerts/error-alert";
+import { SuccessAlert } from "../../../../../../../shared/alerts/success-alert";
+import CustomDialog from "../../../../../../../shared/dialog/custom-dialog";
+import Product from "../../../../../../products/classes/product.class";
+import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
 
 @Component({
     selector: `app-save-category-product-modal`,

@@ -10,6 +10,7 @@ import Restaurant from "../../classes/restaurant.class";
 
 type ServiceState = {
     menus: Menu[];
+    loading: boolean;
 }
 
 @Injectable({
@@ -27,7 +28,8 @@ export default class MenusPageService {
     ) {
 
         this.state = signal({
-            menus: []
+            menus: [],
+            loading: false,
         });
 
     }
@@ -41,15 +43,20 @@ export default class MenusPageService {
     getMenus() {
 
         this.clear();
-        if (!this.restaurantPageService.isLoading()) {
-            this.restaurantPageService.setLoading(true);
+        if (this.restaurantPageService.isLoading()) {
+            this.restaurantPageService.startLoading("Cargando menus");
         }
+        if (!this.restaurantPageService.isLoading()) {
+            this.state.update((current) => ({...current, loading: true }));
+        }
+
         const restaurant = this.restaurantPageService.getRestaurant();
         this.repository.getAll(restaurant.id).pipe(take(1)).subscribe(result => {
             setTimeout(() => {
-                this.restaurantPageService.setLoading(false);
+                this.restaurantPageService.stopLoading();
                 this.state.set({
-                    menus: result
+                    menus: result,
+                    loading: false,
                 });
             }, 1000);
         })

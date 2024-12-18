@@ -15,11 +15,13 @@ export let PRODUCTS: Product[] = [
 export let RESTAURANTS: Restaurant[] = [
     {
         id: "1",
-        name: "Restaurante Concorde"
+        name: "Restaurante Concorde",
+        isActive: true,
     }, 
     {
         id: "2",
-        name: "Restaurante Marea"
+        name: "Restaurante Marea",
+        isActive: false,
     }
 ];
 

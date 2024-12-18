@@ -16,6 +16,27 @@ export default class ApiRestaurantRepository implements RestaurantRepository {
 
         this.URL = "http://localhost:3000/api/restaurants";
     }
+    update(id: string, body: SaveRestaurant): Observable<string> {
+        return this.http.put(`${this.URL}/${id}`, body).pipe(
+            map(() => ""),
+            catchError((result: HttpErrorResponse) => {
+                let err = "";
+                if (result.status === 404) {
+                    err = "El restaurante no existe";
+                }
+                else if (result.status === 422) {
+                    err = "Formato de datos invalido";
+                }
+                else if (result.status === 401) {
+                    err = "No tienes autorizacion para realizar esta accion";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor";
+                }
+                return of(err)
+            })
+        )
+    }
 
 
     save(body: SaveRestaurant): Observable<string> {

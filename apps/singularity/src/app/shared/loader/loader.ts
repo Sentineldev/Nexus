@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 @Component({
   selector: 'app-loader',
   imports: [],
@@ -24,8 +24,15 @@ import { Component } from '@angular/core';
     } 
   `,
   template: `
-      <span class="loader border-[4px] border-white"></span>
+      <span [className]="className()"></span>
   `,
 })
 export class Loader {
+
+
+  public color = input<"primary" | "secondary">("primary");
+
+  public className = computed(() => {
+    return `loader border-[4px] ${this.color() === "primary" ? "border-white" : "border-black"}`;
+  })
 }

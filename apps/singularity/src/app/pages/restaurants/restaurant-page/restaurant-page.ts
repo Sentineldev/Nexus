@@ -10,14 +10,13 @@ import RestaurantTopHero from "./components/restaurant-top-hero";
     template: `
     <div class="w-full overflow-auto h-full">
         @if (state().restaurant && state().errorMessage.length === 0) {
-            <!-- <app-restaurant-top-hero [restaurant]="state().restaurant!"/> -->
             <router-outlet/>
         }
         @if (state().errorMessage.length !== 0) {
             <app-error-alert [message]="state().errorMessage"/>
         }
         @if (state().loading) {
-            <app-loading-screen label="Cargando restaurante..."/>
+            <app-loading-screen [label]="state().loadingLabel"/>
         }
     </div>
     `,

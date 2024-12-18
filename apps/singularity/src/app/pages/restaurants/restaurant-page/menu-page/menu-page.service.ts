@@ -1,9 +1,8 @@
-import { computed, Inject, Injectable, signal, Signal, WritableSignal } from "@angular/core";
-import Restaurant from "../../classes/restaurant.class";
+import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import Menu from "../../classes/menu.class";
-import RestaurantPageService from "../restaurant-page.service";
 import MenuRepository from "../../interfaces/menu-repository.interface";
 import ApiMenuRepository from "../../repositories/menu-api.repository";
+import RestaurantPageService from "../restaurant-page.service";
 
 
 type ServiceState = {
@@ -21,6 +20,7 @@ export default class MenuPageService {
     constructor(
         @Inject(ApiMenuRepository)
         private readonly menuRepository: MenuRepository,
+        private readonly restaurantPageService: RestaurantPageService,
     ) {
         this.state = signal({
             menu: undefined
@@ -47,12 +47,21 @@ export default class MenuPageService {
 
     getById(menuId: string) {
         this.clear();
+
+        if (this.restaurantPageService.isLoading()) {
+            this.restaurantPageService.startLoading("Cargando menu");
+        }
+        if (!this.restaurantPageService.isLoading()) {
+            this.restaurantPageService.startLoading("Cargando menu");
+        }
         this.menuRepository.getById(menuId).subscribe((result) => {
-            if (result) {
-                this.state.set({
-                    menu: result
-                });
-            }
+           setTimeout(() => {
+             if (result) {
+                 this.state.set({
+                     menu: result
+                 });
+             }
+           }, 1000);
 
         })
     }

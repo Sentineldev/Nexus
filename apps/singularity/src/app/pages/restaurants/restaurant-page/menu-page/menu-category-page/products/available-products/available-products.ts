@@ -1,7 +1,8 @@
-import { Component, computed, OnInit } from "@angular/core";
-import ProductService from "../../../../../products/services/product-service";
+import { Component, OnInit, computed } from "@angular/core";
+import Product from "../../../../../../products/classes/product.class";
+import ProductService from "../../../../../../products/services/product-service";
 import ProductSelectionService from "../product-selection.service";
-import Product from "../../../../../products/classes/product.class";
+
 
 @Component({
     selector: `app-available-products`,

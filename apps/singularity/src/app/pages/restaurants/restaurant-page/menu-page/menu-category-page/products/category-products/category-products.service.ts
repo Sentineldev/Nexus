@@ -1,11 +1,12 @@
-import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import CategoryProductRepository from "../../../../interfaces/category-product.repository";
-import LocalCategoryProductRepository, { CategoryProductFilter } from "../../../../repositories/category-product.repository";
-import CategoryProduct from "../../../../classes/category-product.class";
-import { PageData, PageFilter } from "../../../../../../shared/types/pagination";
-import { SaveCategoryProduct } from "../../../../dto/category-product.dto";
+import { Injectable, WritableSignal, Inject, signal } from "@angular/core";
 import { take } from "rxjs";
-import ApiCategoryProductRepository from "../../../../repositories/category-product-api.repository";
+import { PageData, PageFilter } from "../../../../../../../shared/types/pagination";
+import CategoryProduct from "../../../../../classes/category-product.class";
+import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
+import CategoryProductRepository from "../../../../../interfaces/category-product.repository";
+import ApiCategoryProductRepository from "../../../../../repositories/category-product-api.repository";
+import { CategoryProductFilter } from "../../../../../repositories/category-product.repository";
+
 
 type ServiceStateProps = {
     page: PageData<CategoryProduct>;

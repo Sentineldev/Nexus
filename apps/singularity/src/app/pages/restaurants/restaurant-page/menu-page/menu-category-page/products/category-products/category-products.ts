@@ -1,5 +1,4 @@
 import { Component, computed, OnInit } from "@angular/core";
-import ProductService from "../../../../../products/services/product-service";
 import CategoryProductsService from "./category-products.service";
 import ProductSelectionService from "../product-selection.service";
 import MenuCategoryPageService from "../../menu-category-page.service";

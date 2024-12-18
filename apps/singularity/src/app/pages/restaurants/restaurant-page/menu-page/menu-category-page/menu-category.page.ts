@@ -1,8 +1,8 @@
 import { Component, computed, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterOutlet } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import MenuCategoryPageService from "./menu-category-page.service";
 import SelectionContainer from "./products/selection-container";
-import MenuPageService from "../menu-page/menu-page.service";
+import MenuPageService from "../menu-page.service";
 
 @Component({
     selector: `app-menu-category-page`,

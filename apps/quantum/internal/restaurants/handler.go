@@ -31,6 +31,25 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 
 	return context.JSON(http.StatusCreated, "")
 }
+
+func (handler RestaurantsHandler) Update(context echo.Context) error {
+
+	id := context.Param("id")
+	body := UpdateRestaurantDto{}
+
+	context.Bind(&body)
+
+	if !body.Validate() {
+		return echo.ErrUnprocessableEntity
+	}
+
+	if err := handler.Service.Update(id, body); err != nil {
+		return err
+	}
+
+	return context.JSON(http.StatusCreated, "")
+}
+
 func (handler RestaurantsHandler) GetPage(context echo.Context) error {
 
 	page := context.QueryParam("page")

@@ -7,11 +7,12 @@ import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
 import { take } from "rxjs";
+import { Loader } from "../../../../../shared/loader/loader";
 
 @Component({
     selector: `app-update-product-modal`,
     templateUrl: `./update-product-modal.html`,
-    imports: [CustomDialog, DialogToggler, ErrorAlert, ReactiveFormsModule, SuccessAlert]
+    imports: [CustomDialog, DialogToggler, ErrorAlert, ReactiveFormsModule, SuccessAlert, Loader]
 })
 export default class UpdateProductModal implements OnInit {
 
@@ -47,13 +48,15 @@ export default class UpdateProductModal implements OnInit {
                 name: this.formGroup.controls.name.value!,
                 description: this.formGroup.controls.description.value!
             }).pipe(take(1)).subscribe((result) => {
-                this.loading.set(false);
-                if (result === "Updated") {
-                    this.successMessage.set("Actualizado correctamente");
-                    this.onUpdate.emit();
-                    return;
-                }
-                this.errorMessage.set("No se pudo actualizar");
+                setTimeout(() => {
+                    this.loading.set(false);
+                    if (result === "Updated") {
+                        this.successMessage.set("Actualizado correctamente");
+                        this.onUpdate.emit();
+                        return;
+                    }
+                    this.errorMessage.set("No se pudo actualizar");
+                }, 1000);
             })
         }
     }
