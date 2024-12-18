@@ -10,7 +10,7 @@ import AvailableProducts from "./available-products/available-products";
     @if (state().droped && state().product) {
         <app-save-category-product-modal [dialogId]="state().dialogId" [product]="state().product!"/>
     }  
-    <div class="grid grid-cols-4 gap-4 h-full px-3 ">
+    <div class="grid grid-cols-4 h-full px-3 ">
         <div class="col-span-3">
             <app-category-products/>
         </div>    

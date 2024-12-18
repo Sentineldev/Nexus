@@ -8,16 +8,16 @@ import { Component, computed, EventEmitter, input, Output, signal } from '@angul
   @if ( page() <= 1) {
         <button disabled (click)="decrementPage()" type="button" class="bg-slate-300 p-2 px-3 rounded-l-xl"> < </button>
     } @else {
-        <button (click)="decrementPage()" type="button" class="p-2 px-3 rounded-l-xl bg-cyan-500"> < </button>
+        <button (click)="decrementPage()" type="button" class="p-2 px-3 rounded-l-xl bg-slate-700 text-white"> < </button>
     }
     
     
-    <p class="p-2 bg-slate-200 text-slate-700">Page {{ page() }}</p>
+    <p class="p-2 bg-slate-200 text-slate-700 px-6">Page {{ page() }}</p>
     @if (page() >= numberOfPages()) {
 
         <button disabled (click)="incrementPage()" type="button" class="bg-slate-300 p-2 px-3 rounded-r-xl"> > </button>
     } @else {
-        <button (click)="incrementPage()" type="button" class="p-2 px-3 rounded-r-xl bg-cyan-500"> > </button>
+        <button (click)="incrementPage()" type="button" class="p-2 px-3 rounded-r-xl bg-slate-700 text-white"> > </button>
     }
   </div>
   `,

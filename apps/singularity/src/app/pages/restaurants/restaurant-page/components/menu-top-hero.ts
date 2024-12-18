@@ -28,8 +28,11 @@ import { RouterLink } from "@angular/router";
             <div class="relative w-full h-full min-h-[220px]">
                 <img src="/placeholder-menu.jpg" class="rounded-xl h-[220px] w-full object-cover">
                 <div class="absolute gradient-selector w-full top-0 h-full rounded-xl flex flex-col p-6">
-                    <div class="flex-1">
+                    <div class="flex-1 flex items-start gap-2">
                         <img src="/restaurant-menu-svgrepo-com-white.svg" width="42" height="42" alt="store icon">
+                        <a routerLink="config">
+                            <img src="/svg/config-svgrepo-com-white.svg" width="42" height="42" alt="configuration icon">
+                        </a>
                     </div>
                     <div class="">
                         <h1 class="text-white text-[1.6rem] font-sans font-bold"> {{menu().name}} </h1>

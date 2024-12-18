@@ -7,11 +7,11 @@ import ProductSelectionService from "../product-selection.service";
 @Component({
     selector: `app-available-products`,
     template: `
-    <div class="flex flex-col h-full">
-        <div class="bg-slate-700 p-3 rounded-t-xl">
-            <h1 class="text-white font-sans text-[1.2rem] font-bold">Productos disponibles</h1>
+    <div class="flex flex-col h-full ">
+        <div class=" p-2 rounded-t-xl">
+            <h1 class="text-slate-700 font-sans text-[1.2rem] font-bold text-center">Productos disponibles</h1>
         </div>
-        <div class="border flex-1 flex flex-col gap-3 rounded-b-xl">
+        <div class="flex-1 flex flex-col gap-3">
             <div class="flex-1">
                 @for (product of state().page.data; track product.id) {
                     <div (dragend)="onDragEndHandler()" (dragstart)="onDragStartHandler(product)" draggable="true" class="p-4 transition-all hover:bg-slate-200 cursor-pointer">

@@ -39,7 +39,7 @@ import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
                         </label>
                     </div>
                     <div>
-                        <button type="submit" [disabled]="loading()" class="w-full bg-cyan-500 p-2 rounded-lg text-white  transition-all ">Agregar</button>
+                        <button type="submit" [disabled]="loading()" class="w-full bg-slate-700 p-2 rounded-lg text-white  transition-all ">Agregar</button>
                     </div>
                 </form>
             </div>

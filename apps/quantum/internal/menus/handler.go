@@ -29,6 +29,20 @@ func (handler MenuHandler) Save(context echo.Context) error {
 
 }
 
+func (handler MenuHandler) Update(context echo.Context) error {
+
+	id := context.Param("id")
+	body := UpdateMenuDto{}
+
+	context.Bind(&body)
+
+	if err := handler.Service.Update(id, body); err != nil {
+		return err
+	}
+	return context.JSON(http.StatusCreated, "")
+
+}
+
 func (handler MenuHandler) getById(context echo.Context) error {
 
 	menuId := context.Param("menuId")

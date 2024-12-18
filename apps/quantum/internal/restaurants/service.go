@@ -41,9 +41,9 @@ func (service RestaurantService) Save(body SaveRestaurantDto) error {
 
 func (service RestaurantService) Update(id string, body UpdateRestaurantDto) error {
 
-	restaurant, err := service.Repository.GetById(id)
+	restaurant, err := service.GetById(id)
 	if err != nil {
-		return echo.ErrNotFound
+		return err
 	}
 
 	if restaurant.Name != body.Name {

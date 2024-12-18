@@ -28,7 +28,7 @@ export let RESTAURANTS: Restaurant[] = [
 export let MENU_ARRAY: Menu[] = [
     {
         id: "1",
-        categories: [],
+        isActive: true,
         name: "Bebidas",
         restaurant: RESTAURANTS[0],
     }
