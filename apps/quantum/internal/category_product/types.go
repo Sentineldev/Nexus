@@ -6,6 +6,11 @@ type SaveCategoryProductDto struct {
 	Price      float64 `json:"price"`
 }
 
+type UpdateCategoryProductDto struct {
+	Price    float64 `json:"price"`
+	IsActive bool    `json:"isActive"`
+}
+
 type CategoryPageFilter struct {
 	CategoryId string `json:"categoryId"`
 }

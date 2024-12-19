@@ -53,6 +53,34 @@ func (service CategoryProductService) Save(body SaveCategoryProductDto) error {
 
 }
 
+func (service CategoryProductService) Update(id string, body UpdateCategoryProductDto) error {
+
+	product, err := service.GetById(id)
+
+	if err != nil {
+		return err
+	}
+
+	product.Price = body.Price
+	product.IsActive = body.IsActive
+
+	err = service.Repository.Update(product)
+
+	if err != nil {
+		return echo.ErrInternalServerError
+	}
+	return nil
+}
+
+func (service CategoryProductService) GetById(id string) (types.CategoryProduct, error) {
+
+	if result, err := service.Repository.GetById(id); err == nil {
+		return result, nil
+	}
+	return types.CategoryProduct{}, echo.ErrNotFound
+
+}
+
 func (service CategoryProductService) getPage(filter types.PageFilter[CategoryPageFilter]) types.PageData[types.CategoryProduct] {
 	return service.Repository.GetPage(filter)
 }

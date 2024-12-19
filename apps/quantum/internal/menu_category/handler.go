@@ -30,6 +30,20 @@ func (handler MenuCategoryHandler) Save(context echo.Context) error {
 	return context.JSON(http.StatusCreated, "")
 }
 
+func (handler MenuCategoryHandler) Update(context echo.Context) error {
+
+	id := context.Param("id")
+	body := UpdateMenuCategoryDto{}
+
+	context.Bind(&body)
+	err := handler.Service.Update(id, body)
+	if err != nil {
+		return err
+	}
+
+	return context.JSON(http.StatusCreated, "")
+}
+
 func (handler MenuCategoryHandler) GetById(context echo.Context) error {
 
 	id := context.Param("id")

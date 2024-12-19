@@ -43,6 +43,27 @@ func (service MenuCategoryService) Save(body SaveMenuCategoryDto) error {
 	return nil
 }
 
+func (service MenuCategoryService) Update(id string, body UpdateMenuCategoryDto) error {
+
+	category, err := service.GetById(id)
+	if err != nil {
+		return err
+	}
+
+	if category.Name != body.Name {
+		if _, err := service.Repository.GetByName(category.Menu.Id, body.Name); err == nil {
+			return echo.ErrConflict
+		}
+	}
+
+	category.Name = body.Name
+	category.IsActive = body.IsActive
+
+	service.Repository.Update(category)
+
+	return nil
+}
+
 func (service MenuCategoryService) GetById(id string) (types.MenuCategory, error) {
 
 	result, err := service.Repository.GetById(id)

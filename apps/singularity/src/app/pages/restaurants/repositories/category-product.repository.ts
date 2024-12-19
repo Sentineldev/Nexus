@@ -1,7 +1,7 @@
 import { map, Observable, of } from "rxjs";
 import { PageFilter, PageData } from "../../../shared/types/pagination";
 import CategoryProduct from "../classes/category-product.class";
-import { SaveCategoryProduct } from "../dto/category-product.dto";
+import { SaveCategoryProduct, UpdateCategoryProduct } from "../dto/category-product.dto";
 import CategoryProductRepository from "../interfaces/category-product.repository";
 import { CATEGORY_PRODUCTS, MENU_CATEGORIES, PRODUCTS } from "../../../data/variables";
 import { Injectable } from "@angular/core";
@@ -17,7 +17,7 @@ export type CategoryProductFilter = {
 export default class LocalCategoryProductRepository implements CategoryProductRepository {
     save(body: SaveCategoryProduct): Observable<string> {
 
-        const { categoryId, isEnabled, price, productId } = body;
+        const { categoryId, price, productId } = body;
 
 
 
@@ -38,7 +38,7 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
                 category,
                 product,
                 id,
-                isEnabled,
+                isActive: false,
                 price
             });
             CATEGORY_PRODUCTS.push(newProduct);
@@ -60,7 +60,7 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
 
 
     }
-    update(id: string, body: SaveCategoryProduct): Observable<string> {
+    update(id: string, body: UpdateCategoryProduct): Observable<string> {
         throw new Error("Method not implemented.");
     }
     getById(id: string): Observable<CategoryProduct | undefined> {

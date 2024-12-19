@@ -38,7 +38,8 @@ export let MENU_CATEGORIES: MenuCategory[] = [
     {
         id: "1",
         menu: MENU_ARRAY[0],
-        name: "Sopas"
+        name: "Sopas",
+        isActive: true,
     }
 ];
 

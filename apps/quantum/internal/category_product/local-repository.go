@@ -18,6 +18,18 @@ func (repository LocalCategoryProductRepository) Save(body types.CategoryProduct
 	return nil
 }
 
+func (repository LocalCategoryProductRepository) Update(body types.CategoryProduct) error {
+
+	for index, product := range internal.CATEGORY_PRODUCTS {
+		if product.Id == body.Id {
+			internal.CATEGORY_PRODUCTS[index] = body
+			break
+		}
+	}
+
+	return nil
+}
+
 func (repository LocalCategoryProductRepository) GetByProductId(categoryId, productId string) (types.CategoryProduct, error) {
 
 	for _, product := range internal.CATEGORY_PRODUCTS {
@@ -28,6 +40,18 @@ func (repository LocalCategoryProductRepository) GetByProductId(categoryId, prod
 
 	return types.CategoryProduct{}, errors.New("product not found")
 }
+
+func (repository LocalCategoryProductRepository) GetById(id string) (types.CategoryProduct, error) {
+
+	for _, product := range internal.CATEGORY_PRODUCTS {
+		if product.Id == id {
+			return product, nil
+		}
+	}
+
+	return types.CategoryProduct{}, errors.New("product not found")
+}
+
 func (repository LocalCategoryProductRepository) GetPage(filter types.PageFilter[CategoryPageFilter]) types.PageData[types.CategoryProduct] {
 
 	data := types.PageData[types.CategoryProduct]{}

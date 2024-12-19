@@ -19,6 +19,19 @@ func (repository LocalMenuCategoryRepository) Save(body types.MenuCategory) erro
 
 	return nil
 }
+
+func (repository LocalMenuCategoryRepository) Update(body types.MenuCategory) error {
+
+	for index, category := range internal.CATEGORIES {
+		if category.Id == body.Id {
+			internal.CATEGORIES[index] = body
+			break
+		}
+	}
+
+	return nil
+}
+
 func (repository LocalMenuCategoryRepository) GetById(id string) (types.MenuCategory, error) {
 
 	for _, v := range internal.CATEGORIES {

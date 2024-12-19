@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import MenuCategoryRepository from "../interfaces/menu-category-repository.interface";
 import { catchError, map, Observable, of } from "rxjs";
 import MenuCategory from "../classes/menu-category.class";
-import { SaveMenuCategory } from "../dto/menu-category.dto";
+import { SaveMenuCategory, UpdateMenuCategory } from "../dto/menu-category.dto";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 
 @Injectable({
@@ -39,8 +39,29 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
             })
         )
     }
-    update(id: string, body: SaveMenuCategory): Observable<string> {
-        throw new Error("Method not implemented.");
+    update(id: string, body: UpdateMenuCategory): Observable<string> {
+
+        return this.http.put(`${this.URL}/${id}`, body).pipe(
+            map(() => ""),
+            catchError((result: HttpErrorResponse) => {
+                let err = '';
+
+                if (result.status === 409) {
+                    err = "El nombre de la categoria debe ser unico";
+                }
+                else if (result.status === 422) {
+                    err = "No puedes dejar el nombre vacio";
+                }
+                else if (result.status === 401) {
+                    err = "No tienes permisos para realizar esta accion";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor";
+                }
+
+                return of(err);
+            })
+        )
     }
     delete(id: string): Observable<string> {
         throw new Error("Method not implemented.");

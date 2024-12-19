@@ -9,11 +9,11 @@ import ProductSelectionService from "../product-selection.service";
     template: `
     <div class="flex flex-col h-full ">
         <div class=" p-2 rounded-t-xl">
-            <h1 class="text-slate-700 font-sans text-[1.2rem] font-bold text-center">Productos disponibles</h1>
+            <h1 class="text-slate-700 font-sans text-[1.2rem] font-bold text-center">Inventario</h1>
         </div>
         <div class="flex-1 flex flex-col gap-3">
             <div class="flex-1">
-                @for (product of state().page.data; track product.id) {
+                @for (product of state().page.data; track $index) {
                     <div (dragend)="onDragEndHandler()" (dragstart)="onDragStartHandler(product)" draggable="true" class="p-4 transition-all hover:bg-slate-200 cursor-pointer">
                         <p class="font-sans text-slate-700 text-[1.1rem]">{{product.name}}</p>
                     </div>

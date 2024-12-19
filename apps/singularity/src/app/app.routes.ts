@@ -10,6 +10,8 @@ import CategoriesPage from './pages/restaurants/restaurant-page/menu-page/catego
 import MenuCategoryPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/menu-category.page';
 import RestaurantConfigPage from './pages/restaurants/restaurant-page/config-page/config-page';
 import MenuConfigPage from './pages/restaurants/restaurant-page/menu-page/config-page/config-page';
+import CategoryProductSelectionPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/products/category-product-selection-page';
+import MenuCategoryConfigPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/config-page/config-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -29,10 +31,6 @@ export const routes: Routes = [
                 path: "restaurant/:restaurantId",
                 component: RestaurantPage,
                 children: [
-                    // {
-                    //     path: "",
-                    //     component: RestaurantHomePage
-                    // },
                     {
                         path: "",
                         component: MenusPage,
@@ -57,7 +55,17 @@ export const routes: Routes = [
                             },
                             {
                                 path: "category/:categoryId",
-                                component: MenuCategoryPage
+                                component: MenuCategoryPage,
+                                children: [
+                                    {
+                                        path: "",
+                                        component: CategoryProductSelectionPage
+                                    },
+                                    {
+                                        path: "config",
+                                        component: MenuCategoryConfigPage
+                                    }
+                                ]
                             }
                         ]
                     },

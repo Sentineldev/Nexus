@@ -6,7 +6,7 @@ export type CategoryProductParams = {
     product: Product;
     category: MenuCategory;
     price: number;
-    isEnabled: boolean;
+    isActive: boolean;
 }
 
 export default class CategoryProduct {
@@ -14,16 +14,16 @@ export default class CategoryProduct {
     public product: Product;
     public category: MenuCategory;
     public price: number;
-    public isEnabled: boolean;
+    public isActive: boolean;
 
 
     constructor(params: CategoryProductParams) {
-        const { category, id, isEnabled, price, product } = params;
+        const { category, id, isActive, price, product } = params;
 
 
         this.category = category;
         this.id = id;
-        this.isEnabled = isEnabled;
+        this.isActive = isActive;
         this.price = price;
         this.product = product;
     }

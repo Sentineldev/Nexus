@@ -31,6 +31,22 @@ func (handler CategoryProductHandler) Save(context echo.Context) error {
 	return context.JSON(http.StatusCreated, "")
 
 }
+
+func (handler CategoryProductHandler) Update(context echo.Context) error {
+
+	id := context.Param("id")
+	body := UpdateCategoryProductDto{}
+
+	context.Bind(&body)
+
+	if err := handler.Service.Update(id, body); err != nil {
+		return err
+	}
+
+	return context.JSON(http.StatusOK, "")
+
+}
+
 func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 
 	categoryId := context.Param("categoryId")
