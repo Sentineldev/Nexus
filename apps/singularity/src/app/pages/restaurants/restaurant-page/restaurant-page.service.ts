@@ -9,6 +9,7 @@ import ApiRestaurantRepository from "../repositories/restaurant-api.repository";
 export type RestaurantPageState = {
     restaurant: Restaurant | undefined;
     loading: boolean;
+    loadingLabel: string;
     errorMessage: string;
 }
 
@@ -27,6 +28,7 @@ export default class RestaurantPageService {
         this.state = signal<RestaurantPageState>({
             errorMessage: "",
             loading: false,
+            loadingLabel: "",
             restaurant: undefined
         });
     }
@@ -45,24 +47,35 @@ export default class RestaurantPageService {
         return this.state();
     }
 
-    setLoading(loading: boolean) {
-        this.state.update((current) => ({ ...current, loading }));
+    startLoading(loadingLabel: string) {
+        this.state.update((current) => ({...current, loadingLabel, loading: true }));
+    }
+    stopLoading() {
+        this.state.update((current) => ({...current, loadingLabel: "", loading: false }))
     }
 
     isLoading() {
         return this.state().loading;
     }
 
-    getById(restaurantId: string) {
-        this.state.update((current) => ({ ...current, loading: true }));
-        this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {
-            // this.state.update((current) => ({ ...current, loading: false }));
-            if (!result) {
-                this.state.update((current) => ({ ...current, errorMessage: "Not found" }));
-                return;
-            }
 
-            this.state.update((current) => ({ ...current, restaurant: result }));
+    clear() {
+        this.state.update((current) => ({...current, restaurant: undefined}));
+    }
+
+    getById(restaurantId: string) {
+        this.clear();
+
+        this.startLoading("Cargando restaurante");
+        this.repository.getById(restaurantId).pipe(take(1)).subscribe((result) => {
+            setTimeout(() => {
+                if (!result) {
+                    this.state.update((current) => ({ ...current, errorMessage: "Not found" }));
+                    return;
+                }
+    
+                this.state.update((current) => ({ ...current, restaurant: result }));
+            }, 100);
         })
     }
 

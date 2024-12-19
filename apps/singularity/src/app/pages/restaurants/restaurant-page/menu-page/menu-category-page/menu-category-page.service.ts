@@ -1,9 +1,9 @@
-import { Inject, Injectable, signal, Signal, WritableSignal } from "@angular/core";
-import MenuCategory from "../../classes/menu-category.class";
-import MenuCategoryRepository from "../../interfaces/menu-category-repository.interface";
-import { take } from "rxjs";
-import ApiMenuCategoryRepository from "../../repositories/menu-category-api.repository";
-import RestaurantPageService from "../restaurant-page.service";
+import { Injectable, WritableSignal, Inject, signal } from "@angular/core";
+import MenuCategory from "../../../classes/menu-category.class";
+import ApiMenuCategoryRepository from "../../../repositories/menu-category-api.repository";
+import RestaurantPageService from "../../restaurant-page.service";
+import MenuCategoryRepository from "../../../interfaces/menu-category-repository.interface";
+
 
 type ServiceState = {
     category: MenuCategory | undefined;
@@ -45,7 +45,7 @@ export default class CategoriesPageService {
     getById(categoryId: string) {
         
         this.MenuCategoryRepository.getById(categoryId).subscribe((result) => {
-            this.restaurantPageService.setLoading(false);
+            this.restaurantPageService.stopLoading();
             if (result) {
                 this.state.set({ category: result });
             }

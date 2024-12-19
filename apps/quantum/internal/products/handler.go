@@ -2,7 +2,7 @@ package products
 
 import (
 	"net/http"
-	"quantum/internal/types"
+	"quantum/internal/restaurants"
 
 	"github.com/labstack/echo/v4"
 )
@@ -45,9 +45,20 @@ func (handler ProductsHandler) Delete(context echo.Context) error {
 }
 
 func (handler ProductsHandler) GetPage(context echo.Context) error {
-	filter := types.PageFilter[any]{
-		Page:     1,
-		PageSize: 5,
+
+	page := context.QueryParam("page")
+	pageSize := context.QueryParam("pageSize")
+
+	body := restaurants.RestaurantPageFilter{
+		Page:     page,
+		PageSize: pageSize,
 	}
-	return context.JSON(http.StatusOK, handler.Service.GetPage(filter))
+
+	if filter, err := body.Validate(); err != nil {
+		return err
+	} else {
+		result := handler.Service.GetPage(filter)
+		return context.JSON(http.StatusOK, result)
+	}
+	// return context.JSON(http.StatusOK, handler.Service.GetPage(filter))
 }

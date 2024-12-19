@@ -5,9 +5,11 @@ import ProductsPage from './pages/products/products-page';
 import RestaurantsPage from './pages/restaurants/restaurants-page';
 import RestaurantPage from './pages/restaurants/restaurant-page/restaurant-page';
 import MenusPage from './pages/restaurants/restaurant-page/menus-page/menus-page';
-import MenuCategoryPage from './pages/restaurants/restaurant-page/menu-category-page/menu-category.page';
 import MenuPage from './pages/restaurants/restaurant-page/menu-page/menu-page';
 import CategoriesPage from './pages/restaurants/restaurant-page/menu-page/categories-page/categories-page';
+import MenuCategoryPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/menu-category.page';
+import RestaurantConfigPage from './pages/restaurants/restaurant-page/config-page/config-page';
+import MenuConfigPage from './pages/restaurants/restaurant-page/menu-page/config-page/config-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -37,8 +39,9 @@ export const routes: Routes = [
                         
                     },
                     {
-                        path: "menus",
-                        component: MenusPage,
+                        path: "config",
+                        component: RestaurantConfigPage,
+                        
                     },
                     {
                         path: "menu/:menuId",
@@ -47,6 +50,10 @@ export const routes: Routes = [
                             {
                                 path: "",
                                 component: CategoriesPage
+                            },
+                            {
+                                path: "config",
+                                component: MenuConfigPage
                             },
                             {
                                 path: "category/:categoryId",

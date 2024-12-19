@@ -39,6 +39,29 @@ func (service RestaurantService) Save(body SaveRestaurantDto) error {
 	return nil
 }
 
+func (service RestaurantService) Update(id string, body UpdateRestaurantDto) error {
+
+	restaurant, err := service.GetById(id)
+	if err != nil {
+		return err
+	}
+
+	if restaurant.Name != body.Name {
+		if _, err = service.Repository.GetByName(body.Name); err == nil {
+			return echo.ErrConflict
+		}
+	}
+	restaurant.Name = body.Name
+	restaurant.IsActive = body.IsActive
+
+	err = service.Repository.Update(restaurant)
+	if err != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
+
 func (service RestaurantService) GetById(id string) (types.Restaurant, error) {
 	restaurant, err := service.Repository.GetById(id)
 	if err != nil {

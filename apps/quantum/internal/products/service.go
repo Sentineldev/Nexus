@@ -25,7 +25,7 @@ func (service ProductService) Save(body SaveProductDto) error {
 	newProduct := types.NewProduct(id, body.Name, body.Description)
 
 	if err := service.Repository.Save(*newProduct); err != nil {
-		return errors.New("user not created")
+		return echo.ErrInternalServerError
 	}
 	return nil
 }

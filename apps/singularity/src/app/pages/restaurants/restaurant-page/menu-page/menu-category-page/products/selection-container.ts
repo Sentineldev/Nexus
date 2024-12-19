@@ -1,8 +1,8 @@
 import { Component, computed } from "@angular/core";
-import AvailableProducts from "./available-products/available-products";
 import CategoryProducts from "./category-products/category-products";
 import ProductSelectionService from "./product-selection.service";
 import SaveCategoryProductModal from "./category-products/save-category-product-modal";
+import AvailableProducts from "./available-products/available-products";
 
 @Component({
     selector: `app-selection-container`,
@@ -10,7 +10,7 @@ import SaveCategoryProductModal from "./category-products/save-category-product-
     @if (state().droped && state().product) {
         <app-save-category-product-modal [dialogId]="state().dialogId" [product]="state().product!"/>
     }  
-    <div class="grid grid-cols-4 gap-4 h-full px-3 ">
+    <div class="grid grid-cols-4 h-full px-3 ">
         <div class="col-span-3">
             <app-category-products/>
         </div>    

@@ -1,6 +1,5 @@
 import { Injectable, signal, WritableSignal } from "@angular/core";
-import Product from "../../../../products/classes/product.class";
-
+import Product from "../../../../../products/classes/product.class";
 
 type ServiceState = {
     product: Product | undefined;

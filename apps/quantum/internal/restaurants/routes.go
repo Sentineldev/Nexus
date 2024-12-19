@@ -13,4 +13,5 @@ func RestaurantsRoutes(server *echo.Group) {
 	group.GET("/:id", handler.GetById)
 	group.GET("", handler.GetPage)
 	group.POST("", handler.Save)
+	group.PUT("/:id", handler.Update)
 }
