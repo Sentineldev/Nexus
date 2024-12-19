@@ -30,6 +30,22 @@ func (repository LocalCategoryProductRepository) Update(body types.CategoryProdu
 	return nil
 }
 
+func (repository LocalCategoryProductRepository) Delete(id string) error {
+
+	aux := []types.CategoryProduct{}
+
+	for _, product := range internal.CATEGORY_PRODUCTS {
+
+		if product.Id != id {
+			aux = append(aux, product)
+		}
+	}
+
+	internal.CATEGORY_PRODUCTS = aux
+
+	return nil
+}
+
 func (repository LocalCategoryProductRepository) GetByProductId(categoryId, productId string) (types.CategoryProduct, error) {
 
 	for _, product := range internal.CATEGORY_PRODUCTS {

@@ -8,11 +8,14 @@ import DeleteCategoryProductModal from "./modals/delete-category-product-modal";
     selector: `app-display-category-product`,
     template: `
     <app-update-category-product-modal (onUpdate)="onUpdateHandler()" [product]="product()" [dialogId]="updateDialogId()"/>
-    <app-delete-category-product-modal [product]="product()" [dialogId]="deleteDialogId()"/>
+    <app-delete-category-product-modal (onDelete)="onUpdateHandler()" [product]="product()" [dialogId]="deleteDialogId()"/>
     <div class="relative">
         <div (click)="showMenuHandler()" 
         class="p-4 flex items-center hover:bg-slate-200 transition-all hover:cursor-pointer {{showMenu() && 'bg-slate-200'}}">
-            <p class="font-sans text-slate-700 text-[1.3rem] flex-1">{{product().product.name}}</p>
+            <div class="flex-1 flex flex-col">
+                <p class="font-sans text-slate-700 text-[1.3rem]">{{product().product.name}}</p>
+                <p class="text-slate-500 text-sm">{{product().isActive ? "Activo" : "Inactivo"}}</p>
+            </div>
             <p class="font-nsas text-slate-700 text-[1.3rem] font-bold">{{product().price}} $</p>
         </div>
         @if (showMenu()) {

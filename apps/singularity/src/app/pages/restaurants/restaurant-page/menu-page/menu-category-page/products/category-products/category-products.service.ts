@@ -60,7 +60,9 @@ export default class CategoryProductsService {
     getPage(filter: PageFilter<CategoryProductFilter>) {
         this.state.update((current) => ({ ...current, loading: true }));
         return this.repository.getPage(filter).pipe(take(1)).subscribe((result) => {
-            this.state.update((current) => ({ ...current, page: result, loading: false, filter }));
+            setTimeout(() => {
+                this.state.update((current) => ({ ...current, page: result, loading: false, filter }));
+            }, 1000);
         });
     }
 

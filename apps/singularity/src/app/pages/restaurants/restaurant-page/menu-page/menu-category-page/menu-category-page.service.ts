@@ -43,12 +43,14 @@ export default class MenuCategoryPageService {
     }
 
     getById(categoryId: string) {
-        
+        this.restaurantPageService.startLoading("Cargando categoria");
         this.MenuCategoryRepository.getById(categoryId).subscribe((result) => {
-            this.restaurantPageService.stopLoading();
-            if (result) {
-                this.state.set({ category: result });
-            }
+            setTimeout(() => {
+                this.restaurantPageService.stopLoading();
+                if (result) {
+                    this.state.set({ category: result });
+                }
+            }, 1000);
         })
     }
 

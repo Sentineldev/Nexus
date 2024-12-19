@@ -3,22 +3,27 @@ import CategoryProductsService from "./category-products.service";
 import ProductSelectionService from "../product-selection.service";
 import MenuCategoryPageService from "../../menu-category-page.service";
 import DisplayCategoryProduct from "./display-category-product";
+import { Loader } from "../../../../../../../shared/loader/loader";
 
 @Component({
     selector: `app-category-products`,
     template: `
     <div class="flex flex-col  h-full">
         <div class=" border-slate-400 border-r flex-1 flex flex-col gap-3">
-            <div (dragleave)="onDragLeaveHandler($event)" (drop)="onDropHandler($event)"  (dragover)="onDragOverHandler($event)" class="flex-1 transition-all">
-                @for (product of state().page.data; track product.id) {
-                    <app-display-category-product (onUpdate)="onUpdateHandler()" [product]="product"/>
-                }
-            </div>
+            @if (!state().loading) {
+                <div (dragleave)="onDragLeaveHandler($event)" (drop)="onDropHandler($event)"  (dragover)="onDragOverHandler($event)" class="flex-1 transition-all">
+                    @for (product of state().page.data; track product.id) {
+                        <app-display-category-product (onUpdate)="onUpdateHandler()" [product]="product"/>
+                    }
+                </div>
+            } @else {
+                <app-loader [color]="'secondary'"/>
+            }
         </div>
     </div>
 
     `,
-    imports: [DisplayCategoryProduct]
+    imports: [DisplayCategoryProduct, Loader]
 })
 export default class CategoryProducts implements OnInit {
 

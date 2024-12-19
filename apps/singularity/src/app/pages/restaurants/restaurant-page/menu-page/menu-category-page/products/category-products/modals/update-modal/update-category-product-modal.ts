@@ -3,6 +3,7 @@ import CustomDialog from "../../../../../../../../../shared/dialog/custom-dialog
 import CategoryProduct from "../../../../../../../classes/category-product.class";
 import UpdateMenuCategoryForm from "../../../../config-page/update-form";
 import UpdateCategoryProductForm from "./update-form";
+import ProductFieldsetContainer from "../product-fieldset-container";
 
 @Component({
     selector: `app-update-category-product-modal`,
@@ -13,12 +14,13 @@ import UpdateCategoryProductForm from "./update-form";
             <div>
                 <h1 class="text-slate-700 text-[1.1rem] text-center font-sans">Actualizar producto</h1>
             </div>
+            <app-product-fieldset-container [product]="product()"/>
             <app-update-category-product-form (onUpdate)="onUpdateHandler()" [product]="product()"/>
         </div>
     </app-custom-dialog>
 
     `,
-    imports: [CustomDialog, UpdateCategoryProductForm]
+    imports: [CustomDialog, UpdateCategoryProductForm, ProductFieldsetContainer]
 })
 export default class UpdateCategoryProductModal {   
 

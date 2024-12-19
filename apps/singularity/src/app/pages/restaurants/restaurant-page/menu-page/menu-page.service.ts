@@ -48,12 +48,7 @@ export default class MenuPageService {
     getById(menuId: string) {
         this.clear();
 
-        if (this.restaurantPageService.isLoading()) {
-            this.restaurantPageService.startLoading("Cargando menu");
-        }
-        if (!this.restaurantPageService.isLoading()) {
-            this.restaurantPageService.startLoading("Cargando menu");
-        }
+        this.restaurantPageService.startLoading("Cargando menu");
         this.menuRepository.getById(menuId).subscribe((result) => {
            setTimeout(() => {
              if (result) {

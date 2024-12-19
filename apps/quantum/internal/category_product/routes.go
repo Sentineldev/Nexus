@@ -10,5 +10,6 @@ func MenuCategoriesRoutes(server *echo.Group) {
 
 	group.POST("", handler.Save)
 	group.PUT("/:id", handler.Update)
+	group.DELETE("/:id", handler.Delete)
 	group.GET("/:categoryId", handler.GetPage)
 }

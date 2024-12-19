@@ -15,7 +15,7 @@ import ProductSelectionService from "../product-selection.service";
             <div class="flex-1">
                 @for (product of state().page.data; track $index) {
                     <div (dragend)="onDragEndHandler()" (dragstart)="onDragStartHandler(product)" draggable="true" class="p-4 transition-all hover:bg-slate-200 cursor-pointer">
-                        <p class="font-sans text-slate-700 text-[1.1rem]">{{product.name}}</p>
+                        <p class="font-sans text-slate-700 text-[0.95rem]">{{product.name}}</p>
                     </div>
                 }
             </div>

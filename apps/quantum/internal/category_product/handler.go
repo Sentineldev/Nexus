@@ -47,6 +47,18 @@ func (handler CategoryProductHandler) Update(context echo.Context) error {
 
 }
 
+func (handler CategoryProductHandler) Delete(context echo.Context) error {
+
+	id := context.Param("id")
+
+	if err := handler.Service.Delete(id); err != nil {
+		return err
+	}
+
+	return context.JSON(http.StatusOK, "")
+
+}
+
 func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 
 	categoryId := context.Param("categoryId")

@@ -14,7 +14,7 @@ import MenuCategory from "../../../../classes/menu-category.class";
     
     <div class="flex flex-col">
         @for (category of categories(); track category.id) {
-            <a routerLink="category/{{category.id}}" class="flex gap-4 hover:bg-slate-300 transition-all p-4 px-5">
+            <a routerLink="/admin/restaurant/{{category.menu.restaurant.id}}/menu/{{category.menu.id}}/category/{{category.id}}" class="flex gap-4 hover:bg-slate-300 transition-all p-4 px-5">
                 <img src="/restaurant-fork-knife-svgrepo-com-black.svg" width="42" height="42" alt="restaurant fork knife">
                 <div class="flex flex-col">
                     <span class="font-sans text-[1.4rem] text-slate-700">{{category.name}}</span>

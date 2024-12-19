@@ -69,10 +69,6 @@ export const routes: Routes = [
                             }
                         ]
                     },
-                    // {
-                    //     path: "menu-category/:categoryId/products",
-                    //     component: MenuCategoryPage,
-                    // },
                 ]
             }
         ],

@@ -72,6 +72,15 @@ func (service CategoryProductService) Update(id string, body UpdateCategoryProdu
 	return nil
 }
 
+func (service CategoryProductService) Delete(id string) error {
+
+	if err := service.Repository.Delete(id); err != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
+
 func (service CategoryProductService) GetById(id string) (types.CategoryProduct, error) {
 
 	if result, err := service.Repository.GetById(id); err == nil {
