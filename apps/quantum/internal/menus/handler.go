@@ -39,7 +39,18 @@ func (handler MenuHandler) Update(context echo.Context) error {
 	if err := handler.Service.Update(id, body); err != nil {
 		return err
 	}
-	return context.JSON(http.StatusCreated, "")
+	return context.JSON(http.StatusOK, "")
+
+}
+
+func (handler MenuHandler) Delete(context echo.Context) error {
+
+	id := context.Param("id")
+
+	if err := handler.Service.Delete(id); err != nil {
+		return err
+	}
+	return context.JSON(http.StatusOK, "")
 
 }
 

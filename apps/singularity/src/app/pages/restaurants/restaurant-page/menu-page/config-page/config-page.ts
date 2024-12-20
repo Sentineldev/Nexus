@@ -1,6 +1,5 @@
 import { Component, computed, OnInit } from "@angular/core";
 import MenuPageService from "../menu-page.service";
-import MenuTopHero from "../../components/menu-top-hero";
 import RestaurantPageService from "../../restaurant-page.service";
 import UpdateMenuForm from "./update-form";
 import DeleteMenuModal from "./delete-modal";

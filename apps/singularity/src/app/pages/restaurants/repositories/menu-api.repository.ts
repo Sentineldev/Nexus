@@ -40,7 +40,27 @@ export default class ApiMenuRepository implements MenuRepository {
         )
     }
     delete(id: string): Observable<string> {
-        throw new Error("Method not implemented.");
+        return this.http.delete(`${this.URL}/${id}`)
+        .pipe(
+            map(() => ""),
+            catchError((result: HttpErrorResponse) => {
+                let err = "";
+                if (result.status === 409) {
+                    err = "El nombre del menu debe ser unico";
+                }
+                else if (result.status === 422) {
+                    err = "No puedes dejar el nombre vacio";
+                }
+                else if (result.status === 401) {
+                    err = "No tienes permisos para realizar esta accion";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor";
+                }
+                
+                return of(err);
+            })
+        )
     }
     update(id: string, body: UpdateMenu): Observable<string> {
         return this.http.put(`${this.URL}/${id}`, body).pipe(

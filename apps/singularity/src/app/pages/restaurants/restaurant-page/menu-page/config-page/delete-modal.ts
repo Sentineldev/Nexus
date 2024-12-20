@@ -61,5 +61,23 @@ export default class DeleteMenuModal {
         private readonly repository: MenuRepository
     ) {}
 
-    onClickHandler() {}
+    onClickHandler() {
+
+        this.loading.set(true);
+        this.errorMessage.set("");
+
+        this.repository.delete(this.menu().id).subscribe((result) => {
+
+            setTimeout(() => {
+                if (result.length === 0) {
+                    window.location.replace(`/admin/restaurant/${this.menu().restaurant.id}`)
+                    return;
+                }
+                this.loading.set(false);
+                this.errorMessage.set(result);
+            }, 1000);
+        })
+
+        
+    }
 }

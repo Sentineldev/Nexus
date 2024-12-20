@@ -14,4 +14,5 @@ func MenusRoutes(server *echo.Group) {
 	group.GET("/by-id/:menuId", handler.getById)
 	group.POST("", handler.Save)
 	group.PUT("/:id", handler.Update)
+	group.DELETE("/:id", handler.Delete)
 }

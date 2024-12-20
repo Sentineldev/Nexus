@@ -64,6 +64,17 @@ func (service MenuService) Update(id string, body UpdateMenuDto) error {
 	return nil
 }
 
+func (service MenuService) Delete(id string) error {
+
+	err := service.Repository.Delete(id)
+
+	if err != nil {
+		return echo.ErrInternalServerError
+	}
+
+	return nil
+}
+
 func (service MenuService) GetById(id string) (types.Menu, error) {
 
 	result, err := service.Repository.GetById(id)
