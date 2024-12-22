@@ -97,6 +97,7 @@ export default class SaveUserModal {
                     if (result.length === 0) {
                         this.successMessage.set("Usuario creado correctamente");
                         this.pageService.getUsers();
+                        this.formGroup.reset();
                         return;
                     }
                     this.errorMessage.set(result);

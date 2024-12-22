@@ -9,6 +9,7 @@ import UsersPageService from "../users-page-service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import User from "../user.class";
+import UserContainer from "../display/user-container";
 
 @Component({
     selector: `app-change-password-modal`,
@@ -16,6 +17,7 @@ import User from "../user.class";
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Actualizar clave</h1>
+            <app-user-container [user]="user()"/>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
                 @if (errorMessage().length > 0) {
@@ -45,7 +47,7 @@ import User from "../user.class";
         </div>
     </app-custom-dialog>
     `,
-    imports: [CustomDialog,Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert]
+    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer]
 })
 export default class ChangePasswordModal {
 

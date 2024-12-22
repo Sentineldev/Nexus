@@ -17,6 +17,7 @@ import UserContainer from "../display/user-container";
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Eliminar usuario</h1>
 
+            
             <app-user-container [user]="user()"/>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
