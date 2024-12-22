@@ -45,7 +45,7 @@ func (service UserService) Save(body SaveUserDto) error {
 
 }
 
-func (service UserService) Update(id string, body SaveUserDto) error {
+func (service UserService) Update(id string, body UpdateUserDto) error {
 
 	user, err := service.GetById(id)
 	if err != nil {
@@ -57,13 +57,32 @@ func (service UserService) Update(id string, body SaveUserDto) error {
 			return echo.ErrConflict
 		}
 	}
+	user.Username = body.Username
 
-	hashedPasssword, err := utils.HashPassword(body.Password)
+	err = service.Repository.Update(user)
+
 	if err != nil {
 		return echo.ErrInternalServerError
 	}
-	user.Username = body.Username
-	user.Password = hashedPasssword
+
+	return nil
+
+}
+
+func (service UserService) ChangePassword(id string, body UpdateUserPassword) error {
+
+	user, err := service.GetById(id)
+	if err != nil {
+		return err
+	}
+
+	hashedPassword, err := utils.HashPassword(body.Password)
+
+	if err != nil {
+		return echo.ErrInternalServerError
+	}
+
+	user.Password = hashedPassword
 
 	err = service.Repository.Update(user)
 
@@ -93,4 +112,9 @@ func (service UserService) GetById(id string) (types.User, error) {
 	}
 
 	return types.User{}, echo.ErrNotFound
+}
+
+func (service UserService) GetAll() []types.User {
+
+	return service.Repository.GetAll()
 }

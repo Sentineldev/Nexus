@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import ProductRepository from "../interfaces/product-repository.interface";
 import { catchError, map, Observable, of, switchMap } from "rxjs";
 import { PageFilter, PageData } from "../../../shared/types/pagination";
 import Product from "../classes/product.class";
 import { SaveProduct } from "../dto/product.dto";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
+import ProductRepository from "../../../shared/interfaces/product-repository.interface";
 
 @Injectable({
     providedIn: "root"

@@ -6,6 +6,7 @@ import (
 	"quantum/internal/menus"
 	"quantum/internal/products"
 	"quantum/internal/restaurants"
+	"quantum/internal/users"
 
 	"github.com/labstack/echo/v4"
 )
@@ -18,4 +19,5 @@ func ApiGroup(server *echo.Echo) {
 	menus.MenusRoutes(group)
 	menu_category.MenuCategoriesRoutes(group)
 	category_product.MenuCategoriesRoutes(group)
+	users.UsersRoutes(group)
 }
