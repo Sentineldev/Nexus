@@ -7,8 +7,14 @@ var (
 	CATEGORIES        = []types.MenuCategory{}
 	RESTAURANTS       = []types.Restaurant{}
 	MENUS             = []types.Menu{}
-	USERS             = []types.User{}
-	PRODUCTS          = []types.Product{
+	USERS             = []types.User{
+		{
+			Id:       "some",
+			Username: "admin",
+			Password: "$2a$14$jcp9oXAw1keAZ3g9hn7p8e1uBjYV7ME7E0kg9TmHg7pTCMC3Je6zK",
+		},
+	}
+	PRODUCTS = []types.Product{
 		{
 			Id:          "id-2",
 			Name:        "Ensalada César con Camarones",

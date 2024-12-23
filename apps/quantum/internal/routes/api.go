@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"quantum/internal/auth"
 	"quantum/internal/category_product"
 	"quantum/internal/menu_category"
 	"quantum/internal/menus"
@@ -14,6 +15,8 @@ import (
 func ApiGroup(server *echo.Echo) {
 
 	group := server.Group("/api")
+
+	auth.AuthRoutes(group)
 	products.ProductsRoutes(group)
 	restaurants.RestaurantsRoutes(group)
 	menus.MenusRoutes(group)

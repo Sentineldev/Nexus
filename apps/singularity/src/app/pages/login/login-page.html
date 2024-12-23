@@ -5,6 +5,11 @@
                 <h1 class="font-sans text-[1.4rem] text-white">Bienvenido</h1>
                 <p class="text-white text-[1rem]">Ingresa tus datos</p>
             </div>
+            @if (errorMessage().length > 0) {
+                <div class="px-3">
+                    <app-error-alert [message]="errorMessage()"/>
+                </div>
+            }
             <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-16 p-6">
                 <div class="flex flex-col gap-8">
                     <div>
@@ -27,7 +32,13 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow font-sans text-[1.2rem]">Ingresar</button>
+                    <button [disabled]="loading()" type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow font-sans text-[1.2rem]">
+                        @if (loading()) {
+                            <app-loader/>
+                        } @else {
+                            Ingresar
+                        }
+                    </button>
                 </div>
             </form>
         </div>
