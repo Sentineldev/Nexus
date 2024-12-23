@@ -7,6 +7,12 @@ import ApiAuthRepository from '../../shared/repositories/api-auth-repository';
 import { LogInDto } from '../../shared/dto/auth';
 import { Loader } from "../../shared/loader/loader";
 import { ErrorAlert } from "../../shared/alerts/error-alert";
+import { catchError, finalize, map, of } from 'rxjs';
+import { Result } from '../../shared/types/result';
+import { jwtDecode } from 'jwt-decode';
+import { JwtData } from '../../shared/types/jwt';
+import LocalStorageUtils from '../../utils/local-storage';
+import JwtUtils from '../../utils/jwt';
 @Component({
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, Loader, ErrorAlert],
@@ -32,10 +38,20 @@ export default class LoginPage implements OnInit {
   ) {}
   ngOnInit(): void {
 
+
+    const token = LocalStorageUtils.GetToken();
+
+    if (token.length === 0) {
+      return;
+    }
+    this.authService.logIn(token);
+
     if (this.authService.isLogIn()) {
       this.router.navigate(['/admin']);
+      return;
     }
   }
+
 
   onSubmitHandler() {
     if (this.formGroup.valid) {
@@ -49,24 +65,28 @@ export default class LoginPage implements OnInit {
 
       this.loading.set(true);
       this.errorMessage.set("");
-      this.repository.logIn(body).subscribe((result) => {
-        setTimeout(() => {
+      this.repository.logIn(body).pipe(
+        map((success) => {
+
+          const token = success.body;
+
+          this.authService.logIn(token);
+
+
+          LocalStorageUtils.SaveToken(token);
+
+          this.router.navigate(['/admin']);
+
+        }),
+        catchError((error: Result<string>) => {
+          this.errorMessage.set(error.message)
+          return of()
+        })
+        ,
+        finalize(() => {
           this.loading.set(false);
-          if (!result.hasError) {
-            this.formGroup.reset();
-
-            this.authService.logIn({
-              id: "",
-              username: ""
-            });
-            this.router.navigate(['/admin'])
-            return;
-          }
-          this.errorMessage.set(result.message)
-        }, 1000);
-      })
-      
-
+        })
+      ).subscribe()
     }
 
   }

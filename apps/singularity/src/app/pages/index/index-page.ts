@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, effect, OnInit } from '@angular/core';
 import Sidebar from "../../shared/sidebar/sidebar";
 import { Router, RouterOutlet } from '@angular/router';
 import AuthService from '../../shared/services/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import { JwtData } from '../../shared/types/jwt';
+import JwtUtils from '../../utils/jwt';
+import LocalStorageUtils from '../../utils/local-storage';
 
 @Component({
   selector: 'app-index-page',
@@ -19,11 +23,16 @@ export default class IndexPage implements OnInit {
   ngOnInit(): void {
 
 
-    if(this.authService.isLogIn()) {
-      this.router.navigate(['/admin']);
+    const token = LocalStorageUtils.GetToken();
+    if (token.length > 0) {
+      this.authService.logIn(token);
+      if (this.authService.isLogIn()) {
+        this.router.navigate(['/admin']);
+      }
       return;
     }
-
-    this.router.navigate(['/'])
+   
+    this.router.navigate(['/']);
+      
   }
 }

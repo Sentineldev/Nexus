@@ -35,7 +35,7 @@ func (service AuthService) LogIn(body LogInDto) (string, error) {
 		user.Id,
 		user.Username,
 		jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 72)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * 1)),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

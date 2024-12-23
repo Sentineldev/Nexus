@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import AuthRepository from "../interfaces/auth-repository.interface";
-import { catchError, map, Observable, of } from "rxjs";
+import { catchError, map, Observable, of, throwError } from "rxjs";
 import { LogInDto } from "../dto/auth";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Result } from "../types/result";
@@ -51,7 +51,7 @@ export default class ApiAuthRepository implements AuthRepository {
                     err = "Ocurrio un error en el servidor"
                 }
                 response.message = err;
-                return of(response);
+                return throwError(() => response);
             })
         )
     }
