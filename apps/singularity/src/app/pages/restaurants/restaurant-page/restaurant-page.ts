@@ -3,7 +3,6 @@ import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import RestaurantPageService from "./restaurant-page.service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import LoadingScreen from "../../../shared/loader/loading-screen";
-import RestaurantTopHero from "./components/restaurant-top-hero";
 @Component({
     selector: 'app-restaurant-page',
     imports: [RouterOutlet, ErrorAlert, LoadingScreen],

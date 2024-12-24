@@ -1,20 +1,17 @@
 import { Component, computed, OnInit } from "@angular/core";
 import RestaurantPageService from "../restaurant-page.service";
-import RestaurantTopHero from "../components/restaurant-top-hero";
 import RestaurantUpdateForm from "./update-form";
 
 @Component({
     selector: `app-restaurant-config-page`,
     template: `
 
-    <div class="p-6">
-        <app-restaurant-top-hero [restaurant]="restaurant()"/>
-    </div>
-    <div class="p-6">
+    <div class="flex flex-col gap-4 p-2 pt-4">
+        <!-- <app-restaurant-top-hero [restaurant]="restaurant()"/> -->
         <app-restaurant-update-form [restaurant]="restaurant()"/>
     </div>
     `,
-    imports: [RestaurantTopHero, RestaurantUpdateForm]
+    imports: [RestaurantUpdateForm]
 })
 export default class RestaurantConfigPage implements OnInit {
     public restaurant = computed(() => this.restaurantPageService.getRestaurant());

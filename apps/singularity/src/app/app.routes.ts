@@ -13,6 +13,7 @@ import MenuConfigPage from './pages/restaurants/restaurant-page/menu-page/config
 import CategoryProductSelectionPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/products/category-product-selection-page';
 import MenuCategoryConfigPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/config-page/config-page';
 import UsersPage from './pages/users/users-page';
+import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -42,12 +43,19 @@ export const routes: Routes = [
                 children: [
                     {
                         path: "",
-                        component: MenusPage,
-                        
-                    },
-                    {
-                        path: "config",
-                        component: RestaurantConfigPage,
+                        component: RestaurantHomePage,
+                        children: [
+                            {
+                                path: "menus",
+                                component: MenusPage,
+                                
+                            },
+                            {
+                                path: "config",
+                                component: RestaurantConfigPage,
+                                
+                            },
+                        ]
                         
                     },
                     {

@@ -1,9 +1,10 @@
 import { Component, computed } from "@angular/core";
 import RestaurantPageService from "../restaurant-page.service";
-import { RouterLink } from "@angular/router";
+import { RouterLink, RouterOutlet } from "@angular/router";
+import RestaurantTopHero from "../components/restaurant-top-hero";
 @Component({
     selector: 'app-restaurant-home',
-    imports: [RouterLink],
+    imports: [RouterLink, RouterOutlet, RestaurantTopHero],
     templateUrl: `./restaurant-home-page.html`
 })
 export default class RestaurantHomePage {
