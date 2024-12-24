@@ -1,0 +1,6 @@
+#sidebar-toggler {
+    display: none;
+}
+#sidebar-toggler:checked ~ #sidebar {
+    left: 0;
+}

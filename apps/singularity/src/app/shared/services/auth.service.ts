@@ -21,9 +21,6 @@ export default class AuthService {
 
 
     constructor() {
-
-
-
         this.state = signal({
             logIn: false,
             user: undefined
@@ -42,7 +39,7 @@ export default class AuthService {
     logOut() {
         LocalStorageUtils.DeleteToken();
         this.state.update((current) => ({...current, user: undefined, logIn: false }))
-        
+        window.location.replace("/");
     }
 
     logIn(token: string) {
@@ -56,7 +53,7 @@ export default class AuthService {
 
         setInterval(() => {
             
-            if (JwtUtils.IsJwtExpired(data.exp)) {
+            if (!JwtUtils.IsJwtExpired(data.exp)) {
                 this.logOut();
             }
         }, 1000);

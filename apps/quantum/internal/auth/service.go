@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"fmt"
+	"quantum/internal"
 	"quantum/internal/users"
 	"quantum/internal/utils"
 	"time"
@@ -35,15 +35,14 @@ func (service AuthService) LogIn(body LogInDto) (string, error) {
 		user.Id,
 		user.Username,
 		jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * 1)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(internal.LOGIN_TIME)),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	t, err := token.SignedString([]byte("sasdasdasdkasjfsdlkfjsdkl"))
+	t, err := token.SignedString([]byte(internal.SECRET_KEY))
 
 	if err != nil {
-		fmt.Printf("%s\n", err)
 		return "", echo.ErrInternalServerError
 	}
 	return t, nil

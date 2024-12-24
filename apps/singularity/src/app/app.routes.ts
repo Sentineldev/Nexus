@@ -20,7 +20,10 @@ export const routes: Routes = [
         path: "admin",
         component: IndexPage,
         children: [
-            
+            {
+                path: "",
+                component: RestaurantsPage,
+            },
             {
                 path: "users",
                 component: UsersPage

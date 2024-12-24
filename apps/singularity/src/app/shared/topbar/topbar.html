@@ -1,0 +1,35 @@
+<nav class="p-3 px-6">
+    <input type="checkbox" name="sidebar-toggler" id="sidebar-toggler">
+    <div class="flex items-center gap-2">
+        <label class="cursor-pointer hover:opacity-60 transition-all p-1 text-sm rounded-full block border border-slate-600 w-fit" for="sidebar-toggler">
+            <img src="./svg/menu-horizontal-svgrepo-com.svg" alt="menu vertical" width="28" height="28">
+        </label>
+        <h1 class="font-sans text-xl ">Nexus</h1>
+    </div>
+    <div id="sidebar" class="absolute left-[-100%] top-0 z-50 w-full h-screen  transition-all">
+        <label for="sidebar-toggler" class="h-full w-full absolute "></label>
+        <div class="w-64 bg-slate-700 h-full absolute z-60 flex flex-col">
+            <div class="p-3 flex items-center">
+                <h1 class="text-xl font-sans text-white font-bold flex-1 ">Nexus</h1>
+            </div>
+            <ul class="flex-1">
+                <li>
+                    <a class="block p-3 text-slate-100 text-[1.1rem] font-sans hover:bg-slate-600 transition-all" routerLink="/admin/restaurants">Restaurantes</a>
+                </li>
+                <li>
+                    <a class="block p-3 text-slate-100 text-[1.1rem] font-sans hover:bg-slate-600 transition-all" routerLink="/admin/products">Productos</a>
+                </li>
+                <li>
+                    <a class="block p-3 text-slate-100 text-[1.1rem] font-sans hover:bg-slate-600 transition-all" routerLink="/admin/users">Usuarios</a>
+                </li>
+            </ul>
+            <div>
+                <button (click)="onClickHandler()"
+                    class="p-3 block text-white hover:bg-slate-600 transition-all w-full text-start" 
+                    >Cerrar Sesion
+                </button>
+            </div>
+        </div>
+    </div>
+
+</nav>
