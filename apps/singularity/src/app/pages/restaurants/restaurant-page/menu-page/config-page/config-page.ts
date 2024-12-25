@@ -7,7 +7,7 @@ import DeleteMenuModal from "./delete-modal";
 @Component({
     selector: `app-menu-config-page`,
     template: `
-        <div class="py-4 px-6 flex flex-col gap-4">
+        <div class="py-6 flex flex-col gap-4">
             <app-delete-menu-modal [menu]="menu()"/>
             <app-update-menu-form [menu]="menu()"/>
         </div>

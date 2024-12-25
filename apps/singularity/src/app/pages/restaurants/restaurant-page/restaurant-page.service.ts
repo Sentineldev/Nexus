@@ -75,7 +75,7 @@ export default class RestaurantPageService {
                 }
     
                 this.state.update((current) => ({ ...current, restaurant: result }));
-            }, 100);
+            }, 1000);
         })
     }
 

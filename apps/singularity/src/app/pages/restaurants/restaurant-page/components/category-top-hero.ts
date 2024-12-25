@@ -13,10 +13,10 @@ import { RouterLink } from "@angular/router";
     `,
     template: `
     <div class="flex items-center gap-2 p-2  gradient-selector rounded-lg">
-        <a routerLink="config">
+        <!-- <a routerLink="config">
             <img src="/svg/config-svgrepo-com-white.svg" width="24" height="24" alt="configuration icon">
-        </a>
-        <a routerLink="/admin/restaurant/{{category().menu.restaurant.id}}/menu/{{category().menu.id}}/category/{{category().id}}" class="flex items-center gap-1">
+        </a> -->
+        <a routerLink="/admin/restaurant/{{category().menu.restaurant.id}}/menu/{{category().menu.id}}/category/{{category().id}}/products" class="flex items-center gap-1">
             <img src="/restaurant-fork-knife-svgrepo-com-white.svg" width="24" height="24" alt="restaurnt fork knife">
             <h1 class="font-sans text-[1.2rem] text-white">{{category().name}}</h1>
         </a>

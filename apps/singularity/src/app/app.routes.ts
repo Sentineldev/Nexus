@@ -14,6 +14,8 @@ import CategoryProductSelectionPage from './pages/restaurants/restaurant-page/me
 import MenuCategoryConfigPage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/config-page/config-page';
 import UsersPage from './pages/users/users-page';
 import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
+import MenuHomePage from './pages/restaurants/restaurant-page/menu-page/home-page/menu-home-page';
+import MenuCategoryHomePage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/home-page/menu-category-home-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -64,11 +66,17 @@ export const routes: Routes = [
                         children: [
                             {
                                 path: "",
-                                component: CategoriesPage
-                            },
-                            {
-                                path: "config",
-                                component: MenuConfigPage
+                                component: MenuHomePage,
+                                children: [
+                                    {
+                                        path: "categories",
+                                        component: CategoriesPage
+                                    },
+                                    {
+                                        path: "config",
+                                        component: MenuConfigPage
+                                    },
+                                ]
                             },
                             {
                                 path: "category/:categoryId",
@@ -76,12 +84,19 @@ export const routes: Routes = [
                                 children: [
                                     {
                                         path: "",
-                                        component: CategoryProductSelectionPage
+                                        component: MenuCategoryHomePage,
+                                        children: [
+                                            {
+                                                path: "products",
+                                                component: CategoryProductSelectionPage
+                                            },
+                                            {
+                                                path: "config",
+                                                component: MenuCategoryConfigPage
+                                            }
+                                        ]
                                     },
-                                    {
-                                        path: "config",
-                                        component: MenuCategoryConfigPage
-                                    }
+                                    
                                 ]
                             }
                         ]

@@ -7,18 +7,13 @@ import MenuTopHero from "../components/menu-top-hero";
     selector: `app-menu-page-2`,
     template: `
 
-    <div class="flex flex-col h-full">
+    <div class="w-full overflow-auto h-full">
         @if (state().menu) {
-            <div class="p-4 flex flex-col gap-4 ">
-                <app-menu-top-hero [menu]="state().menu!"/>
-            </div>
-            <div class="flex-1">
-                <router-outlet/>
-            </div>
+            <router-outlet/>
         }
     </div>
     `,
-    imports: [MenuTopHero,RouterOutlet]
+    imports: [RouterOutlet]
 })
 export default class MenuPage implements OnInit {
 

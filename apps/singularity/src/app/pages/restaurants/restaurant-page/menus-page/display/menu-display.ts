@@ -11,7 +11,7 @@ import Menu from "../../../classes/menu.class";
     }
     `,
     template: `
-    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}" class=" flex items-end hover:opacity-90 transition-all ">
+    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/categories" class=" flex items-end hover:opacity-90 transition-all ">
         <div class="relative h-[180px] rounded-xl">
             <img src="/placeholder-menu.jpg" class="rounded-xl h-[180px] min-w-[280px] w-[500px] object-cover">
             <div class="gradient-selector w-full h-full flex items-end p-7 absolute top-0 rounded-xl">

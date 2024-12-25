@@ -2,16 +2,15 @@ import { Component, computed, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterLink, RouterOutlet } from "@angular/router";
 import MenuCategoryPageService from "./menu-category-page.service";
 import MenuPageService from "../menu-page.service";
-import CategoryTopHero from "../../components/category-top-hero";
 
 @Component({
     selector: `app-menu-category-page`,
-    imports: [RouterOutlet, CategoryTopHero],
+    imports: [RouterOutlet],
     template: `
 
     @if (state().category) {
-        <div class=" flex flex-col gap-4 h-full px-4">
-            <app-category-top-hero [category]="state().category!"/>
+        <div class="w-full h-full overflow-auto">
+            <!-- <app-category-top-hero [category]="state().category!"/> -->
             <div class="h-full">
                 <router-outlet/>
             </div>

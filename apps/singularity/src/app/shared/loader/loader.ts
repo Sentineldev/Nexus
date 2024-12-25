@@ -6,7 +6,6 @@ import { Component, computed, input } from '@angular/core';
     .loader {
     width: 20px;
     height: 20px;
-    // border: 4px solid #FFF;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
