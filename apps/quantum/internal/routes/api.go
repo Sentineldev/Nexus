@@ -3,6 +3,7 @@ package routes
 import (
 	"quantum/internal/auth"
 	"quantum/internal/category_product"
+	"quantum/internal/clients"
 	"quantum/internal/menu_category"
 	"quantum/internal/menus"
 	"quantum/internal/products"
@@ -23,4 +24,5 @@ func ApiGroup(server *echo.Echo) {
 	menu_category.MenuCategoriesRoutes(group)
 	category_product.MenuCategoriesRoutes(group)
 	users.UsersRoutes(group)
+	clients.ClientsRoutes(group)
 }

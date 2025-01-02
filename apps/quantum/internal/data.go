@@ -7,6 +7,7 @@ var (
 	CATEGORIES        = []types.MenuCategory{}
 	RESTAURANTS       = []types.Restaurant{}
 	MENUS             = []types.Menu{}
+	CLIENTS           = []types.Client{}
 	USERS             = []types.User{
 		{
 			Id:       "some",
