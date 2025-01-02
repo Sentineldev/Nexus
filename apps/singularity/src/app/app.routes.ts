@@ -16,6 +16,7 @@ import UsersPage from './pages/users/users-page';
 import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/restaurant-home-page';
 import MenuHomePage from './pages/restaurants/restaurant-page/menu-page/home-page/menu-home-page';
 import MenuCategoryHomePage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/home-page/menu-category-home-page';
+import ClientsPage from './pages/clients/clients-page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -34,6 +35,10 @@ export const routes: Routes = [
             {
                 path: "products",
                 component: ProductsPage
+            },
+            {
+                path: "clients",
+                component: ClientsPage
             },
             {
                 path: "restaurants",
