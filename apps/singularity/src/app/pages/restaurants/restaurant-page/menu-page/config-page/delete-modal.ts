@@ -70,7 +70,7 @@ export default class DeleteMenuModal {
 
             setTimeout(() => {
                 if (result.length === 0) {
-                    window.location.replace(`/admin/restaurant/${this.menu().restaurant.id}`)
+                    window.location.replace(`/admin/restaurant/${this.menu().restaurant.id}/menus`)
                     return;
                 }
                 this.loading.set(false);

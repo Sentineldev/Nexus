@@ -1,10 +1,52 @@
-import { Component } from "@angular/core"
+import { Component, computed, OnInit } from "@angular/core"
+import Paginator from "../../shared/paginator/paginator";
+import ClientsService from "./client.service";
+import ClientsDisplay from "./components/clients-display";
+import SaveClientModal from "./modals/save-client-modal";
 
 
 @Component({
     selector: `app-clients-page`,
     template: `
-    <h1>Hello world from the clients page</h1>
-    `
+    <div class="p-6 flex flex-col gap-6">
+        <app-save-client-modal dialogId="save-client-modal" (onUpdate)="onUpdateHandler()"/>
+        <div class="flex flex-col gap-4">
+            <app-clients-display [clients]="state().page.data"/>
+            @if (state().page.data.length !== 0) {
+                <div class="self-center">
+                    <app-paginator 
+                    (pageChangeEvent)="pageChangeHandler($event)" 
+                    [dataSize]="state().page.meta.dataSize" 
+                    [pageSize]="state().page.meta.pageSize" 
+                    [defaultPage]="state().page.meta.page" 
+                    />
+                </div>
+            }
+        </div>
+    </div>
+    `,
+    imports: [SaveClientModal, ClientsDisplay, Paginator]
 })
-export default class ClientsPage {}
+export default class ClientsPage implements OnInit{
+
+
+
+    public state = computed(() => this.service.getState());
+
+    constructor(
+        private readonly service: ClientsService
+    ) {}
+    ngOnInit(): void {
+        this.service.getPage(this.state().filter);
+    }
+
+    onUpdateHandler() {
+        this.service.getPage(this.state().filter);
+    }
+    pageChangeHandler(page: number) {
+        this.service.getPage({
+          ...this.state().filter,
+          page,
+        });
+      }
+}
