@@ -10,7 +10,7 @@ import SaveClientModal from "./modals/save-client-modal";
     template: `
     <div class="p-6 flex flex-col gap-6">
         <app-save-client-modal dialogId="save-client-modal" (onUpdate)="onUpdateHandler()"/>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 p-1">
             <app-clients-display [clients]="state().page.data"/>
             @if (state().page.data.length !== 0) {
                 <div class="self-center">
