@@ -20,7 +20,7 @@ export default class ApiClientRepository implements ClientRepository {
     ) {
         this.URL = "http://localhost:3000/api/clients";
     }
-    Save(body: SaveClient): Observable<string> {
+    save(body: SaveClient): Observable<string> {
         return this.http.post(this.URL, body).pipe(
             map(() => ""),
             catchError((error: HttpErrorResponse) => {
@@ -44,7 +44,7 @@ export default class ApiClientRepository implements ClientRepository {
             })
         )
     }
-    Update(id: string, body: SaveClient): Observable<string> {
+    update(id: string, body: SaveClient): Observable<string> {
         return this.http.put(`${this.URL}/${id}`, body).pipe(
             map(() => ""),
             catchError((error: HttpErrorResponse) => {
@@ -68,13 +68,34 @@ export default class ApiClientRepository implements ClientRepository {
             })
         )
     }
-    Delete(id: string): Observable<string> {
+    delete(id: string): Observable<string> {
+        return this.http.delete(`${this.URL}/${id}`).pipe(
+            map(() => ""),
+            catchError((error: HttpErrorResponse) => {
+
+                let err = "";
+
+                if (error.status === 401) {
+                    err = "No tienes permisos para realizar esta accion";
+                }
+                else if (error.status === 404) {
+                    err = "El cliente no existe";
+                }
+                else if (error.status === 422) {
+                    err = "Formato de datos invalido";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor"
+                }
+                
+                return of(err)
+            })
+        )
+    }
+    getByIdentification(identification: string): Observable<Result<Client>> {
         throw new Error("Method not implemented.");
     }
-    GetByIdentification(identification: string): Observable<Result<Client>> {
-        throw new Error("Method not implemented.");
-    }
-    GetPage(filter: PageFilter<any>): Observable<PageData<Client>> {
+    getPage(filter: PageFilter<any>): Observable<PageData<Client>> {
 
         const params = new HttpParams({
             fromObject: { page: filter.page, pageSize: filter.pageSize }

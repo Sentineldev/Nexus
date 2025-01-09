@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from "@angular/core";
+import { Component, EventEmitter, Inject, Output, signal } from "@angular/core";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import { take } from "rxjs";
 import { SaveProduct } from "../../../dto/product.dto";
@@ -7,6 +7,8 @@ import CustomDialog from "../../../../../shared/dialog/custom-dialog";
 import DialogToggler from "../../../../../shared/dialog/dialog-toggler";
 import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
+import ProductRepository from "../../../../../shared/interfaces/product-repository.interface";
+import ApiProductRepository from "../../../repositories/product-api.repository";
 
 @Component({
     selector: "app-save-product-modal",
@@ -66,6 +68,8 @@ export default class SaveProductModal {
 
 
     constructor(
+        @Inject(ApiProductRepository)
+        private readonly repository: ProductRepository,
         private readonly service: ProductService
     ) {}    
 
@@ -75,21 +79,23 @@ export default class SaveProductModal {
         const formFields = this.formGroup.value;
 
         if (this.formGroup.valid) {
+
             const data: SaveProduct = {
                 name: formFields.name!, 
                 description: formFields.description!, 
             }
+
             this.loading.set(true);
             this.errorMessage.set("");
             this.successMessage.set("");
 
-            this.service.save(data).pipe(take(1)).subscribe((result) => {
+            this.repository.save(data).pipe(take(1)).subscribe((result) => {
 
                 this.loading.set(false);
                 if (result === "Created") {
                     this.successMessage.set(`Creado correctamente`);
                     this.formGroup.reset();
-                    this.onUpdate.emit();
+                    this.service.refreshPage();
                     return;
                 }
                 this.errorMessage.set("No se pudo crear")

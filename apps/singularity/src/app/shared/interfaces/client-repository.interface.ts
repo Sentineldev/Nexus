@@ -7,9 +7,9 @@ import { Result } from "../types/result";
 export default interface ClientRepository {
 
 
-    Save(body: SaveClient): Observable<string>
-    Update(id: string, body: SaveClient): Observable<string>
-    Delete(id: string): Observable<string>
-    GetByIdentification(identification: string): Observable<Result<Client>>
-    GetPage(filter: PageFilter<any>): Observable<PageData<Client>>
+    save(body: SaveClient): Observable<string>
+    update(id: string, body: SaveClient): Observable<string>
+    delete(id: string): Observable<string>
+    getByIdentification(identification: string): Observable<Result<Client>>
+    getPage(filter: PageFilter<any>): Observable<PageData<Client>>
 }

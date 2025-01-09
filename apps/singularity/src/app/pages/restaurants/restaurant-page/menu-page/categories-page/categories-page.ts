@@ -10,7 +10,7 @@ import { Loader } from "../../../../../shared/loader/loader";
     template: `
     <div class="flex flex-col">
         <div class="p-2">
-            <app-save-menu-category (newCategoryEvent)="newCategoryHandler()" [menu]="menu()"/>
+            <app-save-menu-category [menu]="menu()"/>
         </div>
         @if (state().loading) {
             <div class="px-4">
@@ -41,10 +41,7 @@ export default class CategoriesPage implements OnInit {
         private readonly menuPageService: MenuPageService
     ) {}
     ngOnInit(): void {
-        this.newCategoryHandler();
+        this.service.getAll();
     }
-    newCategoryHandler() {
-        this.service.getAll(this.menu().id);
-    } 
 
 }

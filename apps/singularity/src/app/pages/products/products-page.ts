@@ -19,10 +19,6 @@ export default class ProductsPage implements OnInit {
   ngOnInit(): void {
     this.service.getPage(this.state().filter);
   }
-  async onUpdateHandler() {
-    this.service.getPage(this.state().filter);
-  }
-
   async pageChangeHandler(page: number) {
     this.service.getPage({
       ...this.state().filter,

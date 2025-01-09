@@ -12,4 +12,5 @@ func ClientsRoutes(server *echo.Group) {
 	group.GET("", handler.GetPage)
 	group.POST("", handler.Save)
 	group.PUT("/:id", handler.Update)
+	group.DELETE("/:id", handler.Delete)
 }

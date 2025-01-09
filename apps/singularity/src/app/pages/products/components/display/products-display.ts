@@ -18,7 +18,7 @@ import Product from '../../classes/product.class';
         @if (products().length !== 0) {
             <div class="flex flex-col gap-4  overflow-auto  max-h-[700px]">
                 @for (product of products(); track product.id) {
-                    <app-product-display (onUpdate)="onUpdateHandler()" [product]="product"/>
+                    <app-product-display [product]="product"/>
                 }
             </div>
         } 
@@ -31,11 +31,6 @@ import Product from '../../classes/product.class';
 export default class ProductsDisplay {
 
 
-    @Output() onUpdate = new EventEmitter();
     public products = input<Product[]>([]);
 
-
-    onUpdateHandler() {
-        this.onUpdate.emit();
-    }
 }

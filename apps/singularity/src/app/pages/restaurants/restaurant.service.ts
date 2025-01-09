@@ -49,6 +49,11 @@ export default class RestaurantService {
     getState() {
         return this.state();
     }
+
+    refreshPage() {
+        const filter = this.state().filter;
+        this.getPage(filter);
+    }
    
     getById(id: string) {
         return this.repository.getById(id);

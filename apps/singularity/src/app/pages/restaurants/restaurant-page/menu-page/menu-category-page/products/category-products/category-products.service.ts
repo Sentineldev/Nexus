@@ -52,10 +52,9 @@ export default class CategoryProductsService {
     getState() {
         return this.state();
     }
-
-
-    save(body: SaveCategoryProduct) {
-        return this.repository.save(body);
+    refreshPage() {
+        const filter = this.state().filter ;
+        this.getPage(filter);
     }
     getPage(filter: PageFilter<CategoryProductFilter>) {
         this.state.update((current) => ({ ...current, loading: true }));

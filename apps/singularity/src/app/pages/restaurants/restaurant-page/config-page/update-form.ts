@@ -6,7 +6,6 @@ import ApiRestaurantRepository from "../../repositories/restaurant-api.repositor
 import { UpdateRestaurant } from "../../dto/restaurant.dto";
 import { Loader } from "../../../../shared/loader/loader";
 import { ErrorAlert } from "../../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../../shared/alerts/success-alert";
 
 @Component({
     selector: `app-restaurant-update-form`,

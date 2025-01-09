@@ -23,7 +23,4 @@ export default class MenusPage implements OnInit {
     ngOnInit(): void {
         this.menuService.getMenus();
     }
-    onSaveMenuHandler() {
-        this.menuService.getMenus();
-    }
 }

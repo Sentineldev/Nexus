@@ -49,11 +49,17 @@ export default class ClientsService {
     }
 
 
+    refreshPage() {
+
+        const filter = this.state().filter;
+        this.getPage(filter);
+    }
+
     getPage(filter: PageFilter<any>) {
 
         this.state.update((current) => ({...current, loading: true }));
 
-        this.repository.GetPage(filter).subscribe((page) => {
+        this.repository.getPage(filter).subscribe((page) => {
             setTimeout(() => {
                 this.state.update((current) => ({...current, loading: false, page, filter }))
             }, 1000);

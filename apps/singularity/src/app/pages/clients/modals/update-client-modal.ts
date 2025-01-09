@@ -1,21 +1,22 @@
-import { Component, EventEmitter, Inject, input, Output, signal } from "@angular/core";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import { Component, EventEmitter, Inject, input, OnInit, Output, signal } from "@angular/core";
+import Client from "../classes/client.class";
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import ClientRepository from "../../../shared/interfaces/client-repository.interface";
 import ApiClientRepository from "../../../shared/repositories/api-client-repository";
 import { SaveClient } from "../dto/client.dto";
+import CustomDialog from "../../../shared/dialog/custom-dialog";
+import { ErrorAlert } from "../../../shared/alerts/error-alert";
+import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import { Loader } from "../../../shared/loader/loader";
+import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import ClientsService from "../client.service";
 
 @Component({
-    selector: `app-save-client-modal`,
-    imports: [CustomDialog, DialogToggler, ErrorAlert, SuccessAlert, ReactiveFormsModule, Loader],
+    selector: `app-update-client-modal`,
+    imports: [CustomDialog, ErrorAlert, SuccessAlert, Loader, DialogToggler, ReactiveFormsModule],
     template: `
     <div>
-        <app-custom-dialog [dialogId]="dialogId">
+        <app-custom-dialog [dialogId]="dialogId()">
             <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-col gap-4">
@@ -91,21 +92,23 @@ import ClientsService from "../client.service";
                 </div>
             </div>
         </app-custom-dialog>
-        <app-dialog-toggler [dialogId]="dialogId">
-            <div class="bg-slate-700 border-none text-white p-3 rounded-lg transition-all hover:opacity-90 outline-none">
-                <h1>Registrar Cliente</h1>
-            </div>
+        <app-dialog-toggler [dialogId]="dialogId()">
+            <h1 class="text-slate-700 text-[1rem]">
+                <img class="" src="./svg/edit-svgrepo-com.svg" alt="trash-icon" width="32" height="32">
+            </h1>
         </app-dialog-toggler>
     </div>
     `
 })
-export default class SaveClientModal {
+export default class UpdateClientModal implements OnInit {
 
+    public client = input.required<Client>();
+    public dialogId = input.required<string>();
 
     public errorMessage = signal("");
     public successMessage = signal("");
     public loading = signal(false);
-    public dialogId = `save-product-modal`;
+    @Output() onUpdate = new EventEmitter();
 
 
     public formGroup = new FormGroup({
@@ -116,11 +119,18 @@ export default class SaveClientModal {
     });
 
     constructor(
-
         private readonly service: ClientsService,
         @Inject(ApiClientRepository)
         private readonly repository: ClientRepository
     ) {}
+    ngOnInit(): void {
+        this.formGroup.setValue({
+            email: this.client().email,
+            fullName: this.client().fullName,
+            identification: this.client().identification,
+            identificationType: this.client().identificationType
+        })
+    }
 
     onSubmitHandler() {
         if (this.formGroup.valid) {
@@ -136,12 +146,11 @@ export default class SaveClientModal {
             this.loading.set(true);
             this.errorMessage.set("");
             this.successMessage.set("");
-            this.repository.save(body).subscribe((result) => {
+            this.repository.update(this.client().id, body).subscribe((result) => {
                 setTimeout(() => {
                     this.loading.set(false);
                     if (result.length === 0) {
-                        this.successMessage.set("Registrado correctamente");
-                        this.formGroup.reset();
+                        this.successMessage.set("Actualizado correctamente");
                         this.service.refreshPage();
                         return;
                     }

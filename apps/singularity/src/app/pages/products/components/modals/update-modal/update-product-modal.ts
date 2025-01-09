@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, input, OnInit, Output, signal } from "@angular/core";
+import { Component, computed, EventEmitter, Inject, input, OnInit, Output, signal } from "@angular/core";
 import Product from "../../../classes/product.class";
 import ProductService from "../../../services/product-service";
 import CustomDialog from "../../../../../shared/dialog/custom-dialog";
@@ -8,6 +8,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
 import { take } from "rxjs";
 import { Loader } from "../../../../../shared/loader/loader";
+import ProductRepository from "../../../../../shared/interfaces/product-repository.interface";
+import ApiProductRepository from "../../../repositories/product-api.repository";
+import { SaveProduct } from "../../../dto/product.dto";
 
 @Component({
     selector: `app-update-product-modal`,
@@ -33,7 +36,9 @@ export default class UpdateProductModal implements OnInit {
 
 
     constructor(
-        private readonly service: ProductService
+        private readonly service: ProductService,
+        @Inject(ApiProductRepository)
+        private readonly repository: ProductRepository
     ) {}
     ngOnInit(): void {
         this.formGroup.controls.name.setValue(this.product().name);
@@ -41,18 +46,23 @@ export default class UpdateProductModal implements OnInit {
     }
     onSubmitHandler() {
         if (this.formGroup.valid) {
+
+            const value = this.formGroup.value;
+
+            const body: SaveProduct = {
+                description: value.description!,
+                name: value.name!,
+            };
+
             this.errorMessage.set("");
             this.successMessage.set("");
             this.loading.set(true);
-            this.service.update(this.product().id, {
-                name: this.formGroup.controls.name.value!,
-                description: this.formGroup.controls.description.value!
-            }).pipe(take(1)).subscribe((result) => {
+            this.repository.update(this.product().id, body).subscribe((result) => {
                 setTimeout(() => {
                     this.loading.set(false);
                     if (result === "Updated") {
                         this.successMessage.set("Actualizado correctamente");
-                        this.onUpdate.emit();
+                        this.service.refreshPage();
                         return;
                     }
                     this.errorMessage.set("No se pudo actualizar");

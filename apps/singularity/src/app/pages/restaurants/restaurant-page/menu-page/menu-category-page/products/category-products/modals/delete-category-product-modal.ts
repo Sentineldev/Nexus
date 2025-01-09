@@ -6,6 +6,7 @@ import { Loader } from "../../../../../../../../shared/loader/loader";
 import { ErrorAlert } from "../../../../../../../../shared/alerts/error-alert";
 import CategoryProductRepository from "../../../../../../interfaces/category-product.repository";
 import ApiCategoryProductRepository from "../../../../../../repositories/category-product-api.repository";
+import CategoryProductsService from "../category-products.service";
 
 @Component({
     selector: `app-delete-category-product-modal`,
@@ -38,17 +39,17 @@ import ApiCategoryProductRepository from "../../../../../../repositories/categor
 export default class DeleteCategoryProductModal {
 
 
-    @Output() onDelete = new EventEmitter();
-
     public loading = signal(false);
     public errorMessage = signal("");
+    public successMessage = signal("");
 
     public dialogId = input.required<string>();
     public product = input.required<CategoryProduct>();
 
     constructor(
         @Inject(ApiCategoryProductRepository)
-        private readonly repository: CategoryProductRepository
+        private readonly repository: CategoryProductRepository,
+        private readonly categoriesPageService: CategoryProductsService,
     ) {}
 
     onClickHandler() {
@@ -58,7 +59,8 @@ export default class DeleteCategoryProductModal {
         this.repository.delete(this.product().id).subscribe((result) => {
 
             if (result.length === 0) {
-                this.onDelete.emit();
+                this.successMessage.set("Eliminado correctamente");
+                this.categoriesPageService.refreshPage();
                 return;
             }
             this.loading.set(false);

@@ -35,7 +35,6 @@ export default class UsersPageService {
         return this.state();
     }
 
-
     getUsers() {
 
         this.state.update((current) => ({...current, loading: true, users: [] }));

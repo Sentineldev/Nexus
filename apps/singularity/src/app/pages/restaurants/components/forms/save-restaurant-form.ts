@@ -5,6 +5,7 @@ import RestaurantRepository from "../../interfaces/restaurant-repository.interfa
 import ApiRestaurantRepository from "../../repositories/restaurant-api.repository";
 import { ErrorAlert } from "../../../../shared/alerts/error-alert";
 import { Loader } from "../../../../shared/loader/loader";
+import RestaurantService from "../../restaurant.service";
 
 @Component({
     selector: 'app-save-restaurant-form',
@@ -13,8 +14,6 @@ import { Loader } from "../../../../shared/loader/loader";
 })
 export default class SaveRestaurantForm {  
 
-
-    @Output() newRestaurantEvent = new EventEmitter();
 
 
     public errorMessage = signal("");
@@ -27,7 +26,8 @@ export default class SaveRestaurantForm {
 
     constructor(
         @Inject(ApiRestaurantRepository)
-        private readonly repository: RestaurantRepository
+        private readonly repository: RestaurantRepository,
+        private readonly service: RestaurantService
     ) {}
 
     async onSubmitHandler() {
@@ -47,7 +47,7 @@ export default class SaveRestaurantForm {
                     this.loading.set(false);
                 if (result.length === 0) {
                     this.formGroup.reset();
-                    this.newRestaurantEvent.emit()
+                    this.service.refreshPage();
                     return;
                 }
                 this.errorMessage.set(result);

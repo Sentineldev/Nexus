@@ -15,7 +15,7 @@ import ProductFieldsetContainer from "../product-fieldset-container";
                 <h1 class="text-slate-700 text-[1.1rem] text-center font-sans">Actualizar producto</h1>
             </div>
             <app-product-fieldset-container [product]="product()"/>
-            <app-update-category-product-form (onUpdate)="onUpdateHandler()" [product]="product()"/>
+            <app-update-category-product-form [product]="product()"/>
         </div>
     </app-custom-dialog>
 
@@ -25,12 +25,6 @@ import ProductFieldsetContainer from "../product-fieldset-container";
 export default class UpdateCategoryProductModal {   
 
 
-    @Output() onUpdate = new EventEmitter();
     public dialogId = input.required<string>();
     public product = input.required<CategoryProduct>();
-
-
-    onUpdateHandler() {
-        this.onUpdate.emit();
-    }
 }

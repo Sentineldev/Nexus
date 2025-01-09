@@ -7,6 +7,7 @@ import { UpdateCategoryProduct } from "../../../../../../../dto/category-product
 import { ErrorAlert } from "../../../../../../../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../../../../../../../shared/alerts/success-alert";
 import { Loader } from "../../../../../../../../../shared/loader/loader";
+import CategoryProductsService from "../../category-products.service";
 
 @Component({
     selector: `app-update-category-product-form`,
@@ -63,7 +64,8 @@ export default class UpdateCategoryProductForm implements OnInit {
 
     constructor(
         @Inject(ApiCategoryProductRepository)
-        private readonly repository: CategoryProductRepository
+        private readonly repository: CategoryProductRepository,
+        private readonly categoryProductService: CategoryProductsService,
     ) {}
 
     ngOnInit(): void {
@@ -93,8 +95,8 @@ export default class UpdateCategoryProductForm implements OnInit {
             this.repository.update(this.product().id, body).subscribe((result) => {
                 this.loading.set(false);
                 if (result.length === 0) {
-                    this.onUpdate.emit();
                     this.successMessage.set("Actualizacion correcta");
+                    this.categoryProductService.refreshPage();
                     return;
                 }
                 this.errorMessage.set(result);

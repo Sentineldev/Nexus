@@ -21,8 +21,6 @@ func (repository LocalClientRepository) Save(body types.Client) error {
 
 func (repository LocalClientRepository) Update(body types.Client) error {
 
-	internal.CLIENTS = append(internal.CLIENTS, body)
-
 	for index, client := range internal.CLIENTS {
 		if client.Id == body.Id {
 			internal.CLIENTS[index] = body
@@ -41,6 +39,8 @@ func (repository LocalClientRepository) Delete(id string) error {
 			aux = append(aux, client)
 		}
 	}
+
+	internal.CLIENTS = aux
 	return nil
 }
 

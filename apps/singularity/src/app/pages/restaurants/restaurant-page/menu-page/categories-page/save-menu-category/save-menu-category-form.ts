@@ -6,6 +6,7 @@ import MenuCategoryRepository from "../../../../interfaces/menu-category-reposit
 import ApiMenuCategoryRepository from "../../../../repositories/menu-category-api.repository";
 import { Loader } from "../../../../../../shared/loader/loader";
 import { ErrorAlert } from "../../../../../../shared/alerts/error-alert";
+import CategoriesPageService from "../categories-page.service";
 
 @Component({
     selector: `app-save-menu-category`,
@@ -15,8 +16,6 @@ import { ErrorAlert } from "../../../../../../shared/alerts/error-alert";
 export default class SaveMenuCategoryForm {
 
     public menu = input.required<Menu>();
-
-    @Output() newCategoryEvent = new EventEmitter<SaveMenuCategory>();
 
 
     formGroup = new FormGroup({
@@ -28,7 +27,8 @@ export default class SaveMenuCategoryForm {
 
     constructor(
         @Inject(ApiMenuCategoryRepository)
-        private readonly categoriesRepository: MenuCategoryRepository
+        private readonly categoriesRepository: MenuCategoryRepository,
+        private readonly service: CategoriesPageService,
     ) {}
 
 
@@ -49,7 +49,7 @@ export default class SaveMenuCategoryForm {
                     this.loading.set(false);
                     if (result.length === 0) {
                         this.formGroup.reset();
-                        this.newCategoryEvent.emit(newCategory);
+                        this.service.getAll();
                         return;
                     }
                     this.errorMessage.set(result);

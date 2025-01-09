@@ -6,6 +6,7 @@ import { SaveMenu } from "../../../dto/menu.dto";
 import MenuRepository from "../../../interfaces/menu-repository.interface";
 import ApiMenuRepository from "../../../repositories/menu-api.repository";
 import RestaurantPageService from "../../restaurant-page.service";
+import MenusPageService from "../menus-page.service";
 
 
 @Component({
@@ -15,8 +16,6 @@ import RestaurantPageService from "../../restaurant-page.service";
 })
 export default class SaveMenuForm {
     
-
-    @Output() newMenuEvent = new EventEmitter();
 
     public formGroup = new FormGroup({
         name: new FormControl('',[Validators.required])
@@ -28,6 +27,7 @@ export default class SaveMenuForm {
     public restaurant = computed(() => this.service.getRestaurant());
     constructor(
         private readonly service: RestaurantPageService,
+        private readonly menusPageService: MenusPageService,
         @Inject(ApiMenuRepository)
         private readonly menuRepository: MenuRepository
     ) {} 
@@ -47,8 +47,8 @@ export default class SaveMenuForm {
                 setTimeout(() => {
                     this.loading.set(false);
                     if (result.length === 0) {
-                        this.newMenuEvent.emit();
                         this.formGroup.reset();
+                        this.menusPageService.refreshMenus();
                         return;
                     }
                     this.errorMessage.set(result);

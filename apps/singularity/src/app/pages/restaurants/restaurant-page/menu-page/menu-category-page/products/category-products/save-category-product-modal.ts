@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, computed, EventEmitter, input, OnInit, Output, signal } from "@angular/core";
+import { AfterViewInit, Component, computed, EventEmitter, Inject, input, OnInit, Output, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import MenuCategoryPageService from "../../menu-category-page.service";
 import CategoryProductsService from "./category-products.service";
@@ -9,6 +9,8 @@ import { SuccessAlert } from "../../../../../../../shared/alerts/success-alert";
 import CustomDialog from "../../../../../../../shared/dialog/custom-dialog";
 import Product from "../../../../../../products/classes/product.class";
 import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
+import CategoryProductRepository from "../../../../../interfaces/category-product.repository";
+import ApiCategoryProductRepository from "../../../../../repositories/category-product-api.repository";
 
 @Component({
     selector: `app-save-category-product-modal`,
@@ -72,6 +74,8 @@ export default class SaveCategoryProductModal implements AfterViewInit {
     constructor(
         private readonly service: MenuCategoryPageService,
         private readonly categoryProductService: CategoryProductsService,
+        @Inject(ApiCategoryProductRepository)
+        private readonly repository: CategoryProductRepository,
         private readonly categoryPageService: MenuCategoryPageService,
         private readonly selectionService: ProductSelectionService,
     ) {}
@@ -100,12 +104,12 @@ export default class SaveCategoryProductModal implements AfterViewInit {
             this.errorMessage.set("");
             this.successMessage.set("");
             this.loading.set(true);
-            this.categoryProductService.save(newData).pipe(take(1)).subscribe((result) => {
+            this.repository.save(newData).subscribe((result) => {
                 this.loading.set(false);
                 if (result === "") {
                     this.successMessage.set("Agregado correctamente");
                     this.formGroup.reset();
-                    this.categoryProductService.getPage(this.productsState().filter);
+                    this.categoryProductService.refreshPage()
                     return;
                 }
                 this.errorMessage.set(result);

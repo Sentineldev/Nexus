@@ -40,6 +40,10 @@ export default class MenusPageService {
     clear() {
         this.state.update((current) => ({...current, menus: []}))
     }
+
+    refreshMenus() {
+        this.getMenus();
+    }
     getMenus() {
 
         this.clear();

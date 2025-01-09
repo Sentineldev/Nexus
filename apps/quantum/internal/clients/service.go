@@ -40,7 +40,7 @@ func (service ClientService) Save(body SaveClientDto) error {
 
 func (service ClientService) Update(id string, body SaveClientDto) error {
 
-	client, err := service.Repository.GetById(body.Identification)
+	client, err := service.Repository.GetByIdentification(body.Identification)
 
 	if err != nil {
 		return echo.ErrNotFound

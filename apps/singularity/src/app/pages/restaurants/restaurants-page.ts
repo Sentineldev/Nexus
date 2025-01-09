@@ -23,9 +23,5 @@ export default class RestaurantsPage implements OnInit {
     ngOnInit(): void {
         this.service.getPage(this.state().filter);
     }
-
-    async onSaveRestaurantHandler() {
-        this.service.getPage(this.state().filter);
-    }
 }
   

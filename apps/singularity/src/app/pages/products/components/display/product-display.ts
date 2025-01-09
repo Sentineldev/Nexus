@@ -15,8 +15,8 @@ scrollbars
             <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words italic">{{ product().description }}</p>
         </div>
         <div class="flex items-center gap-2">
-            <app-update-product-modal (onUpdate)="onUpdateHandler()" [product]="product()"/>
-            <app-delete-product-modal (onUpdate)="onUpdateHandler()" [product]="product()"/>
+            <app-update-product-modal [product]="product()"/>
+            <app-delete-product-modal [product]="product()"/>
         </div>
     </div>
   `
@@ -24,17 +24,5 @@ scrollbars
 export default class ProductDisplay {
 
 
-    @Output() onUpdate = new EventEmitter();
-
-    public product = input<Product>({
-        description: "",
-        id: "",
-        name: ''
-    });
-
-
-
-    onUpdateHandler() {
-        this.onUpdate.emit();
-    }
+    public product = input.required<Product>();
 }

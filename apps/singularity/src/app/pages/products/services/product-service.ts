@@ -46,17 +46,9 @@ export default class ProductService {
         return this.state();
     }
 
-    save(body: SaveProduct) {
-        return this.repository.save(body);
-    }   
-
-
-    update(id: string, body: SaveProduct) {
-        return this.repository.update(id, body);
-    }
-
-    delete(id: string) {
-        return this.repository.delete(id);
+    refreshPage() {
+        const filter = this.state().filter;
+        this.getPage(filter);
     }
 
     getPage(filter: PageFilter<{}>) {

@@ -7,8 +7,8 @@ import DeleteCategoryProductModal from "./modals/delete-category-product-modal";
 @Component({
     selector: `app-display-category-product`,
     template: `
-    <app-update-category-product-modal (onUpdate)="onUpdateHandler()" [product]="product()" [dialogId]="updateDialogId()"/>
-    <app-delete-category-product-modal (onDelete)="onUpdateHandler()" [product]="product()" [dialogId]="deleteDialogId()"/>
+    <app-update-category-product-modal  [product]="product()" [dialogId]="updateDialogId()"/>
+    <app-delete-category-product-modal  [product]="product()" [dialogId]="deleteDialogId()"/>
     <div class="relative">
         <div (click)="showMenuHandler()" 
         class="p-4 flex items-center hover:bg-slate-200 transition-all hover:cursor-pointer {{showMenu() && 'bg-slate-200'}}">
@@ -38,8 +38,6 @@ import DeleteCategoryProductModal from "./modals/delete-category-product-modal";
 export default class DisplayCategoryProduct {
 
 
-    @Output() onUpdate = new EventEmitter();
-
     public showMenu = signal(false);
 
     public product = input.required<CategoryProduct>()
@@ -62,9 +60,5 @@ export default class DisplayCategoryProduct {
                 DialogUtils.OpenModal(this.deleteDialogId())    
             break;
         }
-    }
-
-    onUpdateHandler() {
-        this.onUpdate.emit();
     }
 }
