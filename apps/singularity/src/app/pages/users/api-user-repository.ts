@@ -17,7 +17,7 @@ export default class ApiUserRepository implements UserRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://localhost:3000/api/users";
+        this.URL = "http://10.80.22.178:3000/api/users";
     }
 
     save(body: SaveUserDto): Observable<string> {

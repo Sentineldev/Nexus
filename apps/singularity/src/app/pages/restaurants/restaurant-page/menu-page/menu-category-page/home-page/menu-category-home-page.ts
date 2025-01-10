@@ -8,19 +8,18 @@ import CategoryTopHero from "../../../components/category-top-hero";
     selector: `app-menu-category-home-page`,
     imports: [RouterLink, RouterOutlet, CategoryTopHero, MenuTopHero],
     template:  `
-    <div class="flex gap-4 p-3 h-full overflow-auto">
-        <div class="rounded-lg bg-slate-600 w-60">
-            <div class="flex flex-col gap-2">
-                <h1 class="text-center text-slate-300 p-3 pt-4">Categoria</h1>
-                <ul>
+    <div class="flex lg:flex-row flex-col gap-2 p-3 h-full overflow-auto">
+        <div class="lg:w-60 w-full px-2">
+            <div class="flex flex-col gap-2 border-b lg:border-b-0 lg:border-r h-full">
+                <ul class="flex lg:flex-col">
                     <li>
-                        <a routerLink="/admin/restaurant/{{category().menu.restaurant.id}}/menu/{{category().menu.id}}/categories" class="text-slate-200 block p-3 hover:bg-slate-500 hover:text-white transition-all">Volver al menu</a>
+                        <a routerLink="/admin/restaurant/{{category().menu.restaurant.id}}/menu/{{category().menu.id}}/categories" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Volver al menu</a>
                     </li>
                     <li>
-                        <a routerLink="products" class="text-slate-200 block p-3 hover:bg-slate-500 hover:text-white transition-all">Productos</a>
+                        <a routerLink="products" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Productos</a>
                     </li>
                     <li>
-                        <a routerLink="config" class="text-slate-200 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
+                        <a routerLink="config" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
                     </li>
                 </ul>
             </div>

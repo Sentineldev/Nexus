@@ -9,7 +9,7 @@ import MenuDisplay from "./menu-display";
     
     .menus-display-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(400px, auto))
+        grid-template-columns: repeat(auto-fit,minmax(350px, auto))
     }
     `,
     template: `

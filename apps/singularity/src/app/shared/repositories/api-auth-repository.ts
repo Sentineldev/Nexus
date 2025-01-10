@@ -15,7 +15,7 @@ export default class ApiAuthRepository implements AuthRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://localhost:3000/api/auth";
+        this.URL = "http://10.80.22.178:3000/api/auth";
     }
     logIn(body: LogInDto): Observable<Result<string>> {
         return this.http.post<string>(this.URL,body,{ observe: "response" }).pipe(

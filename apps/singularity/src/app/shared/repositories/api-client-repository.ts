@@ -18,7 +18,7 @@ export default class ApiClientRepository implements ClientRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://localhost:3000/api/clients";
+        this.URL = "http://10.80.22.178:3000/api/clients";
     }
     save(body: SaveClient): Observable<string> {
         return this.http.post(this.URL, body).pipe(

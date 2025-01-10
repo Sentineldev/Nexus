@@ -15,5 +15,5 @@ func main() {
 
 	routes.ApiGroup(server)
 
-	server.Logger.Fatal(server.Start(":3000"))
+	server.Logger.Fatal(server.Start("0.0.0.0:3000"))
 }

@@ -14,7 +14,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
     
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = "http://localhost:3000/api/category-products";
+        this.URL = "http://10.80.22.178:3000/api/category-products";
     }
     save(body: SaveCategoryProduct): Observable<string> {
         return this.http.post<HttpResponse<unknown>>(this.URL,body,{ observe: "response" })

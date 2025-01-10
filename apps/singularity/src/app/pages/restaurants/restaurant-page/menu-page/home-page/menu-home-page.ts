@@ -7,16 +7,15 @@ import MenuPageService from "../menu-page.service";
     selector: `app-menu-home-page`,
     imports: [RouterOutlet, RouterLink, MenuTopHero], 
     template: `
-    <div class="flex gap-4 p-3 h-full overflow-auto">
-        <div class="rounded-lg bg-slate-600 w-60">
-            <div class="flex flex-col gap-2">
-                <h1 class="text-center text-slate-300 p-3 pt-4">Menu</h1>
-                <ul>
+    <div class="flex lg:flex-row flex-col gap-2 p-3 h-full overflow-auto">
+        <div class="lg:w-60 w-full px-2">
+            <div class="flex flex-col gap-2 border-b lg:border-b-0 lg:border-r h-full">
+                <ul class="flex lg:flex-col">
                     <li>
-                        <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/categories" class="text-slate-200 block p-3 hover:bg-slate-500 hover:text-white transition-all">Categorias</a>
+                        <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/categories" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Categorias</a>
                     </li>
                     <li>
-                        <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/config" class="text-slate-200 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
+                        <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/config" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
                     </li>
                 </ul>
             </div>
@@ -26,6 +25,7 @@ import MenuPageService from "../menu-page.service";
             <router-outlet/>
         </div>
     </div>
+
     `
 })
 export default class MenuHomePage {

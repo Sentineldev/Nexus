@@ -14,7 +14,7 @@ export default class ApiRestaurantRepository implements RestaurantRepository {
     private URL: string;
     constructor(private readonly http: HttpClient) {
 
-        this.URL = "http://localhost:3000/api/restaurants";
+        this.URL = "http://10.80.22.178:3000/api/restaurants";
     }
     update(id: string, body: SaveRestaurant): Observable<string> {
         return this.http.put(`${this.URL}/${id}`, body).pipe(

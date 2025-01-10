@@ -12,7 +12,7 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
 
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = "http://localhost:3000/api/menu-categories";
+        this.URL = "http://10.80.22.178:3000/api/menu-categories";
     }
   
 

@@ -13,7 +13,7 @@ export default class ApiMenuRepository implements MenuRepository {
 
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = "http://localhost:3000/api/menus";
+        this.URL = "http://10.80.22.178:3000/api/menus";
     }
     save(body: SaveMenu): Observable<string> {
 
