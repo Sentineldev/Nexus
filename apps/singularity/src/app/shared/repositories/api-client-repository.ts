@@ -7,6 +7,7 @@ import { SaveClient } from "../../pages/clients/dto/client.dto";
 import ClientRepository from "../interfaces/client-repository.interface";
 import { PageFilter, PageData } from "../types/pagination";
 import { Result } from "../types/result";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn:"root"
@@ -18,7 +19,7 @@ export default class ApiClientRepository implements ClientRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://10.80.22.178:3000/api/clients";
+        this.URL = `${CONFIGURATION.API_URL}/clients`;
     }
     save(body: SaveClient): Observable<string> {
         return this.http.post(this.URL, body).pipe(

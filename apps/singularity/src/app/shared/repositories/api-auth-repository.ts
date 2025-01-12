@@ -4,6 +4,7 @@ import { catchError, map, Observable, of, throwError } from "rxjs";
 import { LogInDto } from "../dto/auth";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Result } from "../types/result";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn: "root"
@@ -15,7 +16,7 @@ export default class ApiAuthRepository implements AuthRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://10.80.22.178:3000/api/auth";
+        this.URL = `${CONFIGURATION.API_URL}/auth`;
     }
     logIn(body: LogInDto): Observable<Result<string>> {
         return this.http.post<string>(this.URL,body,{ observe: "response" }).pipe(

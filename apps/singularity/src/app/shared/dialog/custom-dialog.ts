@@ -20,7 +20,15 @@ export default class CustomDialog {
 
   onClickHandler(event: MouseEvent) {
 
+
+
+
     const dialog = event.target as HTMLDialogElement;
+
+
+    if (!(dialog.tagName === "DIALOG")) {
+      return;
+    }
 
     var rect = dialog.getBoundingClientRect();
     var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&

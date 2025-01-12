@@ -33,7 +33,7 @@ import ApiCategoryProductRepository from "../../../../../repositories/category-p
                 </div>
             }
             <div>
-                <form class="flex flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
+                <form  class="flex flex-col gap-4" [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()">
                     <div>
                         <label [htmlFor]="'price'" class="flex flex-col gap-1" for="name">
                             <p class="text-slate-700">Precio</p>

@@ -4,6 +4,7 @@ import { catchError, map, Observable, of } from "rxjs";
 import MenuCategory from "../classes/menu-category.class";
 import { SaveMenuCategory, UpdateMenuCategory } from "../dto/menu-category.dto";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import CONFIGURATION from "../../../shared/configuration";
 
 @Injectable({
     providedIn: "root"
@@ -12,7 +13,7 @@ export default class ApiMenuCategoryRepository implements MenuCategoryRepository
 
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = "http://10.80.22.178:3000/api/menu-categories";
+        this.URL = `${CONFIGURATION.API_URL}/menu-categories`;
     }
   
 

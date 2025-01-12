@@ -4,6 +4,7 @@ import { SaveMenu, UpdateMenu } from "../dto/menu.dto";
 import MenuRepository from "../interfaces/menu-repository.interface";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import CONFIGURATION from "../../../shared/configuration";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export default class ApiMenuRepository implements MenuRepository {
 
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = "http://10.80.22.178:3000/api/menus";
+        this.URL = `${CONFIGURATION.API_URL}/menus`;
     }
     save(body: SaveMenu): Observable<string> {
 

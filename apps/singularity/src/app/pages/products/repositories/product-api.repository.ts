@@ -5,6 +5,7 @@ import Product from "../classes/product.class";
 import { SaveProduct } from "../dto/product.dto";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import ProductRepository from "../../../shared/interfaces/product-repository.interface";
+import CONFIGURATION from "../../../shared/configuration";
 
 @Injectable({
     providedIn: "root"
@@ -14,7 +15,7 @@ export default class ApiProductRepository implements ProductRepository {
     private URL: string;
     constructor(private readonly http: HttpClient) {
 
-        this.URL = "http://10.80.22.178:3000/api/products";
+        this.URL = `${CONFIGURATION.API_URL}/products`;
     }
 
     save(body: SaveProduct): Observable<string> {

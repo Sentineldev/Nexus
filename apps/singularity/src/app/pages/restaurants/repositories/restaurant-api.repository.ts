@@ -5,6 +5,7 @@ import { PageFilter, PageData } from "../../../shared/types/pagination";
 import Restaurant from "../classes/restaurant.class";
 import { SaveRestaurant } from "../dto/restaurant.dto";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
+import CONFIGURATION from "../../../shared/configuration";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export default class ApiRestaurantRepository implements RestaurantRepository {
     private URL: string;
     constructor(private readonly http: HttpClient) {
 
-        this.URL = "http://10.80.22.178:3000/api/restaurants";
+        this.URL = `${CONFIGURATION.API_URL}/restaurants`;
     }
     update(id: string, body: SaveRestaurant): Observable<string> {
         return this.http.put(`${this.URL}/${id}`, body).pipe(

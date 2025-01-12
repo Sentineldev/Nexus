@@ -46,7 +46,7 @@ export default class CategoryProducts implements OnInit {
     }
 
     onUpdateHandler() {
-        this.categoryProductService.getPage(this.state().filter);
+        this.categoryProductService.refreshPage();
     }
 
     onDragLeaveHandler(event: DragEvent) {
