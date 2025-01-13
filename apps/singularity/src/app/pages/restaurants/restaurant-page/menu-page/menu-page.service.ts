@@ -1,7 +1,7 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import Menu from "../../classes/menu.class";
 import MenuRepository from "../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../repositories/menu-api.repository";
+import ApiMenuRepository from "../../../../shared/repositories/api/menu-api.repository";
 import RestaurantPageService from "../restaurant-page.service";
 
 

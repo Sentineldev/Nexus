@@ -1,9 +1,8 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import RestaurantRepository from "../interfaces/restaurant-repository.interface";
-import LocalRestaurantRepository from "../repositories/restaurant.repository";
 import Restaurant from "../classes/restaurant.class";
 import { take } from "rxjs";
-import ApiRestaurantRepository from "../repositories/restaurant-api.repository";
+import ApiRestaurantRepository from "../../../shared/repositories/api/restaurant-api.repository";
 
 
 export type RestaurantPageState = {

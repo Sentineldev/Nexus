@@ -1,9 +1,8 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import Product from "../classes/product.class";
 import { PageData, PageFilter } from "../../../shared/types/pagination";
-import { SaveProduct } from "../dto/product.dto";
-import ApiProductRepository from "../repositories/product-api.repository";
 import ProductRepository from "../../../shared/interfaces/product-repository.interface";
+import ApiProductRepository from "../../../shared/repositories/api/product-api.repository";
 
 type ServiceStateProps = {
 

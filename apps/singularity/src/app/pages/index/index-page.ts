@@ -1,8 +1,9 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,computed,OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import AuthService from '../../shared/services/auth.service';
 import LocalStorageUtils from '../../utils/local-storage';
 import Topbar from "../../shared/topbar/topbar";
+import IndexPageService from './index-page.service';
 
 @Component({
   selector: 'app-index-page',
@@ -12,10 +13,12 @@ import Topbar from "../../shared/topbar/topbar";
 export default class IndexPage implements OnInit {
 
 
+  public state = computed(() => this.service.getState());
 
   constructor(
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly service: IndexPageService,
   ) {}
   ngOnInit(): void {
 

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import AuthService from '../../shared/services/auth.service';
 import AuthRepository from '../../shared/interfaces/auth-repository.interface';
-import ApiAuthRepository from '../../shared/repositories/api-auth-repository';
+import ApiAuthRepository from '../../shared/repositories/api/api-auth-repository';
 import { LogInDto } from '../../shared/dto/auth';
 import { Loader } from "../../shared/loader/loader";
 import { ErrorAlert } from "../../shared/alerts/error-alert";

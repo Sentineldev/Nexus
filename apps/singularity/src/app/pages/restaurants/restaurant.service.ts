@@ -2,10 +2,8 @@ import { Inject, Injectable, signal, WritableSignal } from "@angular/core"
 import { take } from "rxjs";
 import { PageFilter, PageData } from "../../shared/types/pagination";
 import Restaurant from "./classes/restaurant.class";
-import { SaveRestaurant } from "./dto/restaurant.dto";
 import RestaurantRepository from "./interfaces/restaurant-repository.interface";
-import LocalRestaurantRepository from "./repositories/restaurant.repository";
-import ApiRestaurantRepository from "./repositories/restaurant-api.repository";
+import ApiRestaurantRepository from "../../shared/repositories/api/restaurant-api.repository";
 
 type RestaurantServiceProps = {
     filter: PageFilter<{}>

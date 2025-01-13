@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Inject, input, Output, signal } from "@angular/core";
+import { Component, Inject, input, signal } from "@angular/core";
 import CustomDialog from "../../../../../../../../shared/dialog/custom-dialog";
 import CategoryProduct from "../../../../../../classes/category-product.class";
 import ProductFieldsetContainer from "./product-fieldset-container";
 import { Loader } from "../../../../../../../../shared/loader/loader";
 import { ErrorAlert } from "../../../../../../../../shared/alerts/error-alert";
-import CategoryProductRepository from "../../../../../../interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../../../../repositories/category-product-api.repository";
 import CategoryProductsService from "../category-products.service";
+import CategoryProductRepository from "../../../../../../interfaces/category-product.repository";
+import ApiCategoryProductRepository from "../../../../../../../../shared/repositories/api/category-product-api.repository";
 
 @Component({
     selector: `app-delete-category-product-modal`,

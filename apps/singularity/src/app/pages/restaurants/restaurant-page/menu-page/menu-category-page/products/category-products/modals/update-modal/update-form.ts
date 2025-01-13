@@ -2,12 +2,12 @@ import { Component, EventEmitter, Inject, input, OnInit, Output, signal } from "
 import CategoryProduct from "../../../../../../../classes/category-product.class";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import CategoryProductRepository from "../../../../../../../interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../../../../../repositories/category-product-api.repository";
 import { UpdateCategoryProduct } from "../../../../../../../dto/category-product.dto";
 import { ErrorAlert } from "../../../../../../../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../../../../../../../shared/alerts/success-alert";
 import { Loader } from "../../../../../../../../../shared/loader/loader";
 import CategoryProductsService from "../../category-products.service";
+import ApiCategoryProductRepository from "../../../../../../../../../shared/repositories/api/category-product-api.repository";
 
 @Component({
     selector: `app-update-category-product-form`,

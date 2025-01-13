@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable, of } from "rxjs";
-import Client from "../../pages/clients/classes/client.class";
-import clientClass from "../../pages/clients/classes/client.class";
-import { SaveClient } from "../../pages/clients/dto/client.dto";
-import ClientRepository from "../interfaces/client-repository.interface";
-import { PageFilter, PageData } from "../types/pagination";
-import { Result } from "../types/result";
-import CONFIGURATION from "../configuration";
+import Client from "../../../pages/clients/classes/client.class";
+import clientClass from "../../../pages/clients/classes/client.class";
+import { SaveClient } from "../../../pages/clients/dto/client.dto";
+import ClientRepository from "../../interfaces/client-repository.interface";
+import { PageFilter, PageData } from "../../types/pagination";
+import { Result } from "../../types/result";
+import CONFIGURATION from "../../configuration";
 
 @Injectable({
     providedIn:"root"

@@ -2,7 +2,7 @@ import { Component, computed, EventEmitter, Inject, input, Output, signal } from
 import Client from "../classes/client.class";
 import ClientsService from "../client.service";
 import ClientRepository from "../../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../../shared/repositories/api-client-repository";
+import ApiClientRepository from "../../../shared/repositories/api/api-client-repository";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import { Loader } from "../../../shared/loader/loader";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";

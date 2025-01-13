@@ -18,7 +18,7 @@ import { RouterLink } from "@angular/router";
                 <img src="/table-rows-svgrepo-com.svg" width="28" height="28" alt="store icon">
                 Categorias
             </a>     -->
-            <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menus" class="hover:bg-slate-300 transition-all w-fit p-2 rounded-lg font-sans text-[1.2rem] flex items-center gap-2">
+            <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/home/menus" class="hover:bg-slate-300 transition-all w-fit p-2 rounded-lg font-sans text-[1.2rem] flex items-center gap-2">
                 <img src="/store-svgrepo-com-black.svg" width="28" height="28" alt="store icon">
                 {{menu().restaurant.name}}
             </a>

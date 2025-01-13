@@ -5,10 +5,16 @@
             <!-- <img class="self-center border rounded-full p-2 border-slate-700" src="/svg/menu-vertical-svgrepo-com.svg" alt="menu icon" width="42" height="42"> -->
             <ul class="flex lg:flex-col">
                 <li>
-                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/menus'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Menus</a>
+                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/home/menus'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Menus</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/home/orders'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Ordenes</a>
                 </li>
                 <li>    
-                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/config'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
+                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/home/config'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Configuracion</a>
+                </li>
+                <li>    
+                    <a [routerLink]="'/admin/restaurant/'+restaurant().id+'/make-order'" class="text-slate-700 block p-3 hover:bg-slate-500 hover:text-white transition-all">Crear Orden</a>
                 </li>
             </ul>
         </div>

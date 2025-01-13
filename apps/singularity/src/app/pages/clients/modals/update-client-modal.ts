@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, input, OnInit, Output, signal } from "
 import Client from "../classes/client.class";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import ClientRepository from "../../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../../shared/repositories/api-client-repository";
+import ApiClientRepository from "../../../shared/repositories/api/api-client-repository";
 import { SaveClient } from "../dto/client.dto";
 import CustomDialog from "../../../shared/dialog/custom-dialog";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";

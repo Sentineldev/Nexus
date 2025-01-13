@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import MenuCategoryRepository from "../interfaces/menu-category-repository.interface";
 import { catchError, map, Observable, of } from "rxjs";
-import MenuCategory from "../classes/menu-category.class";
-import { SaveMenuCategory, UpdateMenuCategory } from "../dto/menu-category.dto";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import CONFIGURATION from "../../../shared/configuration";
+import MenuCategory from "../../../pages/restaurants/classes/menu-category.class";
+import { SaveMenuCategory, UpdateMenuCategory } from "../../../pages/restaurants/dto/menu-category.dto";
+import MenuCategoryRepository from "../../../pages/restaurants/interfaces/menu-category-repository.interface";
 
 @Injectable({
     providedIn: "root"

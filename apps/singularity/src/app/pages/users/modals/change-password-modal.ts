@@ -1,15 +1,15 @@
 import { Component, Inject, input, OnInit, signal } from "@angular/core";
 import CustomDialog from "../../../shared/dialog/custom-dialog";
 import UserRepository from "../../../shared/interfaces/user-repository";
-import ApiUserRepository from "../api-user-repository";
 import { Loader } from "../../../shared/loader/loader";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { UpdateUserDto, UpdateUserPasswordDto } from "../user.dto";
+import { UpdateUserPasswordDto } from "../user.dto";
 import UsersPageService from "../users-page-service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import User from "../user.class";
 import UserContainer from "../display/user-container";
+import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
 
 @Component({
     selector: `app-change-password-modal`,

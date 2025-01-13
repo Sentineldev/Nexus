@@ -17,6 +17,9 @@ import RestaurantHomePage from './pages/restaurants/restaurant-page/home-page/re
 import MenuHomePage from './pages/restaurants/restaurant-page/menu-page/home-page/menu-home-page';
 import MenuCategoryHomePage from './pages/restaurants/restaurant-page/menu-page/menu-category-page/home-page/menu-category-home-page';
 import ClientsPage from './pages/clients/clients-page';
+import MapSelectorPage from './pages/map/map';
+import OrdersPage from './pages/restaurants/restaurant-page/orders-page/orders-page';
+import MakeOrderPage from './pages/restaurants/restaurant-page/make-order/make-order';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -27,6 +30,10 @@ export const routes: Routes = [
             {
                 path: "",
                 component: RestaurantsPage,
+            },
+            {
+                path: "map",
+                component: MapSelectorPage,
             },
             {
                 path: "users",
@@ -49,13 +56,21 @@ export const routes: Routes = [
                 component: RestaurantPage,
                 children: [
                     {
-                        path: "",
+                        path: "make-order",
+                        component: MakeOrderPage
+                    },
+                    {
+                        path: "home",
                         component: RestaurantHomePage,
                         children: [
                             {
                                 path: "menus",
                                 component: MenusPage,
                                 
+                            },
+                            {
+                                path: "orders",
+                                component: OrdersPage
                             },
                             {
                                 path: "config",

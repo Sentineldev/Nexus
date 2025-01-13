@@ -6,11 +6,10 @@ import DialogToggler from "../../../../../shared/dialog/dialog-toggler";
 import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
-import { take } from "rxjs";
 import { Loader } from "../../../../../shared/loader/loader";
 import ProductRepository from "../../../../../shared/interfaces/product-repository.interface";
-import ApiProductRepository from "../../../repositories/product-api.repository";
 import { SaveProduct } from "../../../dto/product.dto";
+import ApiProductRepository from "../../../../../shared/repositories/api/product-api.repository";
 
 @Component({
     selector: `app-update-product-modal`,

@@ -1,30 +1,30 @@
-import { catchError, map, Observable, of } from "rxjs";
-import Menu from "../classes/menu.class";
-import { SaveMenu, UpdateMenu } from "../dto/menu.dto";
-import MenuRepository from "../interfaces/menu-repository.interface";
-import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { catchError, map, Observable, of } from "rxjs";
+import { PageFilter, PageData } from "../../../shared/types/pagination";
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import CONFIGURATION from "../../../shared/configuration";
-
+import CategoryProduct from "../../../pages/restaurants/classes/category-product.class";
+import { SaveCategoryProduct, UpdateCategoryProduct } from "../../../pages/restaurants/dto/category-product.dto";
+import CategoryProductRepository from "../../../pages/restaurants/interfaces/category-product.repository";
+import { CategoryProductFilter } from "../../../pages/restaurants/repositories/category-product.repository";
 
 @Injectable({
     providedIn: "root"
 })
-export default class ApiMenuRepository implements MenuRepository {
-
+export default class ApiCategoryProductRepository implements CategoryProductRepository {
+    
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = `${CONFIGURATION.API_URL}/menus`;
+        this.URL = `${CONFIGURATION.API_URL}/category-products`;
     }
-    save(body: SaveMenu): Observable<string> {
-
+    save(body: SaveCategoryProduct): Observable<string> {
         return this.http.post<HttpResponse<unknown>>(this.URL,body,{ observe: "response" })
         .pipe(
             map(() => ""),
             catchError((result: HttpErrorResponse) => {
                 let err = "";
                 if (result.status === 409) {
-                    err = "El nombre del menu debe ser unico";
+                    err = "El producto ya se encuentra asignado";
                 }
                 else if (result.status === 422) {
                     err = "No puedes dejar el nombre vacio";
@@ -40,17 +40,39 @@ export default class ApiMenuRepository implements MenuRepository {
             })
         )
     }
+
+    update(id: string, body: UpdateCategoryProduct): Observable<string> {
+        return this.http.put<HttpResponse<unknown>>(`${this.URL}/${id}`,body,{ observe: "response" })
+        .pipe(
+            map(() => ""),
+            catchError((result: HttpErrorResponse) => {
+                let err = "";
+                if (result.status === 409) {
+                    err = "El producto ya se encuentra asignado";
+                }
+                else if (result.status === 422) {
+                    err = "No puedes dejar el nombre vacio";
+                }
+                else if (result.status === 401) {
+                    err = "No tienes permisos para realizar esta accion";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor";
+                }
+                
+                return of(err);
+            })
+        )
+    }
+
     delete(id: string): Observable<string> {
         return this.http.delete(`${this.URL}/${id}`)
         .pipe(
             map(() => ""),
             catchError((result: HttpErrorResponse) => {
                 let err = "";
-                if (result.status === 409) {
-                    err = "El nombre del menu debe ser unico";
-                }
-                else if (result.status === 422) {
-                    err = "No puedes dejar el nombre vacio";
+                if (result.status === 404) {
+                    err = "El producto ya fue eliminado";
                 }
                 else if (result.status === 401) {
                     err = "No tienes permisos para realizar esta accion";
@@ -63,34 +85,16 @@ export default class ApiMenuRepository implements MenuRepository {
             })
         )
     }
-    update(id: string, body: UpdateMenu): Observable<string> {
-        return this.http.put(`${this.URL}/${id}`, body).pipe(
-            map(() => ""),
-            catchError((result: HttpErrorResponse) => {
-                let err = "";
-                if (result.status === 409) {
-                    err = "El nombre del menu debe ser unico";
-                }
-                else if (result.status === 422) {
-                    err = "No puedes dejar el nombre vacio";
-                }
-                else if (result.status === 401) {
-                    err = "No tienes permisos para realizar esta accion";
-                }
-                else {
-                    err = "Ocurrio un error en el servidor";
-                }
-                return of(err)
-            })
-        )
+    getById(id: string): Observable<CategoryProduct | undefined> {
+        throw new Error("Method not implemented.");
     }
-    getById(id: string): Observable<Menu | undefined> {
-        return this.http.get<Menu>(`${this.URL}/by-id/${id}`).pipe(
-            map((result) => result),
-            catchError(() => of(undefined))
-        )
-    }
-    getAll(restaurantId: string): Observable<Menu[]> {
-        return this.http.get<Menu[]>(`${this.URL}/all/${restaurantId}`)
+    getPage(filter: PageFilter<CategoryProductFilter>): Observable<PageData<CategoryProduct>> {
+        const params = new HttpParams({
+            fromObject: { page: filter.page, pageSize: filter.pageSize }
+        });
+
+        return this.http.get<PageData<CategoryProduct>>(`${this.URL}/${filter.filter.categoryId}`, {
+            params: params
+        });
     }
 }

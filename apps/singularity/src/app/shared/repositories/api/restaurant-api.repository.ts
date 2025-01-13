@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import RestaurantRepository from "../interfaces/restaurant-repository.interface";
 import { catchError, map, Observable, of } from "rxjs";
 import { PageFilter, PageData } from "../../../shared/types/pagination";
-import Restaurant from "../classes/restaurant.class";
-import { SaveRestaurant } from "../dto/restaurant.dto";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import CONFIGURATION from "../../../shared/configuration";
+import Restaurant from "../../../pages/restaurants/classes/restaurant.class";
+import { SaveRestaurant } from "../../../pages/restaurants/dto/restaurant.dto";
+import RestaurantRepository from "../../../pages/restaurants/interfaces/restaurant-repository.interface";
 
 @Injectable({
     providedIn: 'root'

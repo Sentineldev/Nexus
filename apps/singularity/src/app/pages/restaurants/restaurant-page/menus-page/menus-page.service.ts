@@ -1,10 +1,9 @@
-import { computed, Inject, Injectable, Signal, signal, WritableSignal } from "@angular/core";
+import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import MenuRepository from "../../interfaces/menu-repository.interface";
 import Menu from "../../classes/menu.class";
 import { take } from "rxjs";
 import RestaurantPageService from "../restaurant-page.service";
-import ApiMenuRepository from "../../repositories/menu-api.repository";
-import Restaurant from "../../classes/restaurant.class";
+import ApiMenuRepository from "../../../../shared/repositories/api/menu-api.repository";
 
 
 

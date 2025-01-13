@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable, of, switchMap } from "rxjs";
 import { PageFilter, PageData } from "../../../shared/types/pagination";
-import Product from "../classes/product.class";
-import { SaveProduct } from "../dto/product.dto";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import ProductRepository from "../../../shared/interfaces/product-repository.interface";
 import CONFIGURATION from "../../../shared/configuration";
+import Product from "../../../pages/products/classes/product.class";
+import { SaveProduct } from "../../../pages/products/dto/product.dto";
 
 @Injectable({
     providedIn: "root"

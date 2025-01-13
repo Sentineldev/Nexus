@@ -2,10 +2,9 @@ import { Injectable, WritableSignal, Inject, signal } from "@angular/core";
 import { take } from "rxjs";
 import { PageData, PageFilter } from "../../../../../../../shared/types/pagination";
 import CategoryProduct from "../../../../../classes/category-product.class";
-import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
 import CategoryProductRepository from "../../../../../interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../../../repositories/category-product-api.repository";
 import { CategoryProductFilter } from "../../../../../repositories/category-product.repository";
+import ApiCategoryProductRepository from "../../../../../../../shared/repositories/api/category-product-api.repository";
 
 
 type ServiceStateProps = {

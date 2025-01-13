@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, computed, EventEmitter, Inject, input, OnInit, Output, signal } from "@angular/core";
+import { AfterViewInit, Component, computed, Inject, input, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import MenuCategoryPageService from "../../menu-category-page.service";
 import CategoryProductsService from "./category-products.service";
-import { take } from "rxjs";
 import ProductSelectionService from "../product-selection.service";
 import { ErrorAlert } from "../../../../../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../../../../../shared/alerts/success-alert";
@@ -10,7 +9,7 @@ import CustomDialog from "../../../../../../../shared/dialog/custom-dialog";
 import Product from "../../../../../../products/classes/product.class";
 import { SaveCategoryProduct } from "../../../../../dto/category-product.dto";
 import CategoryProductRepository from "../../../../../interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../../../repositories/category-product-api.repository";
+import ApiCategoryProductRepository from "../../../../../../../shared/repositories/api/category-product-api.repository";
 
 @Component({
     selector: `app-save-category-product-modal`,

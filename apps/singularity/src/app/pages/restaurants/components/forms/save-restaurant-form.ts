@@ -2,10 +2,10 @@ import { Component, EventEmitter, Inject, Output, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SaveRestaurant } from "../../dto/restaurant.dto";
 import RestaurantRepository from "../../interfaces/restaurant-repository.interface";
-import ApiRestaurantRepository from "../../repositories/restaurant-api.repository";
 import { ErrorAlert } from "../../../../shared/alerts/error-alert";
 import { Loader } from "../../../../shared/loader/loader";
 import RestaurantService from "../../restaurant.service";
+import ApiRestaurantRepository from "../../../../shared/repositories/api/restaurant-api.repository";
 
 @Component({
     selector: 'app-save-restaurant-form',

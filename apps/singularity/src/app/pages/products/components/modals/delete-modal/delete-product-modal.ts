@@ -6,8 +6,8 @@ import ProductService from '../../../services/product-service';
 import { ErrorAlert } from '../../../../../shared/alerts/error-alert';
 import { Loader } from "../../../../../shared/loader/loader";
 import ProductRepository from '../../../../../shared/interfaces/product-repository.interface';
-import ApiProductRepository from '../../../repositories/product-api.repository';
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
+import ApiProductRepository from '../../../../../shared/repositories/api/product-api.repository';
 @Component({
   selector: 'app-delete-product-modal',
   imports: [CustomDialog, DialogToggler, ErrorAlert, Loader, SuccessAlert],

@@ -1,14 +1,11 @@
 import { Component, Inject, input, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import MenuCategory from "../../../../classes/menu-category.class";
-import { UpdateMenu } from "../../../../dto/menu.dto";
-import MenuRepository from "../../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../../repositories/menu-api.repository";
-import ApiMenuCategoryRepository from "../../../../repositories/menu-category-api.repository";
 import MenuCategoryRepository from "../../../../interfaces/menu-category-repository.interface";
 import { ErrorAlert } from "../../../../../../shared/alerts/error-alert";
 import { Loader } from "../../../../../../shared/loader/loader";
 import { UpdateMenuCategory } from "../../../../dto/menu-category.dto";
+import ApiMenuCategoryRepository from "../../../../../../shared/repositories/api/menu-category-api.repository";
 
 @Component({
     selector: `app-update-menu-category-form`,

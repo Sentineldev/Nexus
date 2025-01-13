@@ -12,7 +12,7 @@ import Restaurant from "../../classes/restaurant.class";
     }
     `,
     template: `
-        <a routerLink="/admin/restaurant/{{restaurant().id}}/menus" class="transition-all hover:opacity-90 duration-300 border-slate-200 lg:w-[380px] flex flex-col gap-2 border-none">
+        <a routerLink="/admin/restaurant/{{restaurant().id}}/home/menus" class="transition-all hover:opacity-90 duration-300 border-slate-200 lg:w-[380px] flex flex-col gap-2 border-none">
             <div class="border-none min-h-[180px] relative">
                 <img src="/default-restaurant-img.jpg" class="rounded-xl opacity-80" alt="Restaurant Placeholder Image">
                 <div class="gradient-selector w-full h-full flex items-center rounded-xl absolute bottom-0">

@@ -5,7 +5,7 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import CustomDialog from "../../../shared/dialog/custom-dialog";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import ClientRepository from "../../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../../shared/repositories/api-client-repository";
+import ApiClientRepository from "../../../shared/repositories/api/api-client-repository";
 import { SaveClient } from "../dto/client.dto";
 import { Loader } from "../../../shared/loader/loader";
 import ClientsService from "../client.service";

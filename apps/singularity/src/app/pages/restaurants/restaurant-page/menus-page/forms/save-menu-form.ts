@@ -4,7 +4,7 @@ import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { Loader } from "../../../../../shared/loader/loader";
 import { SaveMenu } from "../../../dto/menu.dto";
 import MenuRepository from "../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../repositories/menu-api.repository";
+import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.repository";
 import RestaurantPageService from "../../restaurant-page.service";
 import MenusPageService from "../menus-page.service";
 

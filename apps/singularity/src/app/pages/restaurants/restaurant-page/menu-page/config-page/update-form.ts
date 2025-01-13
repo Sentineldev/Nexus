@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angula
 import { Loader } from "../../../../../shared/loader/loader";
 import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import MenuRepository from "../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../repositories/menu-api.repository";
+import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.repository";
 import { UpdateMenu } from "../../../dto/menu.dto";
 
 @Component({

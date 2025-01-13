@@ -1,9 +1,10 @@
 import { catchError, map, Observable, of } from "rxjs";
-import UserRepository from "../../shared/interfaces/user-repository";
-import User from "./user.class";
-import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "./user.dto";
+import UserRepository from "../../interfaces/user-repository";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import CONFIGURATION from "../../configuration";
+import User from "../../../pages/users/user.class";
+import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../../../pages/users/user.dto";
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export default class ApiUserRepository implements UserRepository {
     constructor(
         private readonly http: HttpClient
     ) {
-        this.URL = "http://10.80.22.178:3000/api/users";
+        this.URL = `${CONFIGURATION.API_URL}/users`
     }
 
     save(body: SaveUserDto): Observable<string> {

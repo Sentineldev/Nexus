@@ -5,7 +5,7 @@ import CustomDialog from "../../../../../shared/dialog/custom-dialog";
 import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { Loader } from "../../../../../shared/loader/loader";
 import MenuRepository from "../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../repositories/menu-api.repository";
+import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.repository";
 
 @Component({
     selector: `app-delete-menu-modal`,

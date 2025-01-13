@@ -2,13 +2,13 @@ import { Component, Inject, signal } from "@angular/core";
 import CustomDialog from "../../../shared/dialog/custom-dialog";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import UserRepository from "../../../shared/interfaces/user-repository";
-import ApiUserRepository from "../api-user-repository";
 import { Loader } from "../../../shared/loader/loader";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SaveUserDto } from "../user.dto";
 import UsersPageService from "../users-page-service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../shared/alerts/success-alert";
+import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
 
 @Component({
     selector: `app-save-user-modal`,
