@@ -90,6 +90,10 @@ func (service CategoryProductService) GetById(id string) (types.CategoryProduct,
 
 }
 
-func (service CategoryProductService) getPage(filter types.PageFilter[CategoryPageFilter]) types.PageData[types.CategoryProduct] {
+func (service CategoryProductService) GetPage(filter types.PageFilter[CategoryPageFilter]) types.PageData[types.CategoryProduct] {
 	return service.Repository.GetPage(filter)
+}
+
+func (service CategoryProductService) GetAllProductsPaginate(filter types.PageFilter[AllProductsFilter]) types.PageData[types.CategoryProduct] {
+	return service.Repository.GetAllProductsPaginate(filter)
 }

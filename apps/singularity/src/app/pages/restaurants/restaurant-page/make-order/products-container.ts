@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, computed } from "@angular/core";
 import ProductButton from "./product-button";
+import MakeOrderPageService from "./make-order-page.service";
 
 @Component({
     selector: `app-products-container`,
@@ -25,13 +26,10 @@ import ProductButton from "./product-button";
             </label>
         </div>
         <div class="buttons-container justify-start">
-            <app-product-button/>
-            <app-product-button/>
-            <app-product-button/>
-            <app-product-button/>
-            <app-product-button/>
-            <app-product-button/>
-            
+
+            @for (product of products(); track $index) {
+                <app-product-button [product]="product"/>
+            }   
         </div>
     </div>
     `,
@@ -39,4 +37,10 @@ import ProductButton from "./product-button";
 })
 export default class ProductsContainer {
 
+
+    public products = computed(() => this.service.getProducts());
+
+    constructor(
+        private readonly service: MakeOrderPageService
+    ) {}
 }

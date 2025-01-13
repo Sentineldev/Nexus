@@ -6,7 +6,7 @@ import CONFIGURATION from "../../../shared/configuration";
 import CategoryProduct from "../../../pages/restaurants/classes/category-product.class";
 import { SaveCategoryProduct, UpdateCategoryProduct } from "../../../pages/restaurants/dto/category-product.dto";
 import CategoryProductRepository from "../../../pages/restaurants/interfaces/category-product.repository";
-import { CategoryProductFilter } from "../../../pages/restaurants/repositories/category-product.repository";
+import { AllProductsFilter, CategoryProductFilter } from "../../../pages/restaurants/repositories/category-product.repository";
 
 @Injectable({
     providedIn: "root"
@@ -94,6 +94,16 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
         });
 
         return this.http.get<PageData<CategoryProduct>>(`${this.URL}/${filter.filter.categoryId}`, {
+            params: params
+        });
+    }
+
+    getAllProductsPaginate(filter: PageFilter<AllProductsFilter>): Observable<PageData<CategoryProduct>> {
+        const params = new HttpParams({
+            fromObject: { page: filter.page, pageSize: filter.pageSize }
+        });
+
+        return this.http.get<PageData<CategoryProduct>>(`${this.URL}/all-products/${filter.filter.restaurantId}`, {
             params: params
         });
     }

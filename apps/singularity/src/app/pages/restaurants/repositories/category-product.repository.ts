@@ -11,10 +11,16 @@ export type CategoryProductFilter = {
     categoryId: string;
 }
 
+export type AllProductsFilter = {
+    restaurantId: string;
+}
+
+
 @Injectable({
     providedIn: "root"
 })
 export default class LocalCategoryProductRepository implements CategoryProductRepository {
+   
     save(body: SaveCategoryProduct): Observable<string> {
 
         const { categoryId, price, productId } = body;
@@ -74,6 +80,26 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
         const end = start + filter.pageSize;
 
         const filteredProducts = CATEGORY_PRODUCTS.filter((val) => val.category.id === filter.filter.categoryId);
+
+        const data = filteredProducts.slice(start, end)
+        const dataSize = filteredProducts.length;
+
+        const pageData: PageData<CategoryProduct> = {
+            data: data,
+            meta: {
+                dataSize: dataSize,
+                page: filter.page,
+                pageSize: filter.pageSize,
+            }
+        }
+        return of(pageData);
+    }
+
+    getAllProductsPaginate(filter: PageFilter<AllProductsFilter>): Observable<PageData<CategoryProduct>> {
+        const start = (filter.page - 1) * filter.pageSize;
+        const end = start + filter.pageSize;
+
+        const filteredProducts = CATEGORY_PRODUCTS.filter((val) => val.category.menu.restaurant.id === filter.filter.restaurantId);
 
         const data = filteredProducts.slice(start, end)
         const dataSize = filteredProducts.length;

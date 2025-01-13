@@ -9,4 +9,5 @@ type CategoryProductRepository interface {
 	GetById(string) (types.CategoryProduct, error)
 	GetByProductId(categoryId string, productId string) (types.CategoryProduct, error)
 	GetPage(types.PageFilter[CategoryPageFilter]) types.PageData[types.CategoryProduct]
+	GetAllProductsPaginate(types.PageFilter[AllProductsFilter]) types.PageData[types.CategoryProduct]
 }

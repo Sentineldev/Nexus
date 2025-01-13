@@ -114,3 +114,50 @@ func (repository LocalCategoryProductRepository) GetPage(filter types.PageFilter
 
 	return data
 }
+
+func (repository LocalCategoryProductRepository) GetAllProductsPaginate(filter types.PageFilter[AllProductsFilter]) types.PageData[types.CategoryProduct] {
+
+	data := types.PageData[types.CategoryProduct]{}
+
+	filtered := []types.CategoryProduct{}
+	for _, category := range internal.CATEGORY_PRODUCTS {
+
+		if category.Category.Menu.Restaurant.Id == filter.Filter.RestaurantId {
+			filtered = append(filtered, category)
+		}
+
+	}
+	data.Data = []types.CategoryProduct{}
+	data.Meta = types.PageMeta{
+		Page:     filter.Page,
+		PageSize: filter.PageSize,
+		DataSize: int64(len(filtered)),
+	}
+
+	page := filter.Page
+	pageSize := filter.PageSize
+
+	// Validamos los parámetros de entrada
+	if page <= 0 || pageSize <= 0 {
+		return data
+	}
+
+	// Calculamos el índice de inicio
+	startIndex := (page - 1) * pageSize
+
+	// Verificamos si el índice de inicio excede el tamaño del arreglo
+	if startIndex >= int64(len(filtered)) {
+		return data
+	}
+
+	// Calculamos el índice final (teniendo en cuenta el tamaño del arreglo)
+	endIndex := min(startIndex+pageSize, int64(len(filtered)))
+
+	// Retornamos la porción paginada del arreglo
+	data.Data = filtered
+	if len(filtered) == 0 {
+		data.Data = filtered[startIndex:endIndex]
+	}
+
+	return data
+}

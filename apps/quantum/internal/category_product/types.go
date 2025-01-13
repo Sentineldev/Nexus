@@ -14,3 +14,7 @@ type UpdateCategoryProductDto struct {
 type CategoryPageFilter struct {
 	CategoryId string `json:"categoryId"`
 }
+
+type AllProductsFilter struct {
+	RestaurantId string `json:"restaurantId"`
+}
