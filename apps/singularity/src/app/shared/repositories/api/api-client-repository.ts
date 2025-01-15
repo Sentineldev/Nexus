@@ -94,7 +94,40 @@ export default class ApiClientRepository implements ClientRepository {
         )
     }
     getByIdentification(identification: string): Observable<Result<Client>> {
-        throw new Error("Method not implemented.");
+        return this.http.get<Client>(`${this.URL}/${identification}`).pipe(
+            map((result) => ({ body: result, hasError: false, message: "", status: 200 })),
+            catchError((error: HttpErrorResponse) => {
+                let err = "";
+
+                const response: Result<Client> = {
+                    body: {
+                        email: "",
+                        fullName: "",
+                        id: "",
+                        identification: "",
+                        identificationType: "",
+                    },
+                    message: "",
+                    hasError: true,
+                    status: error.status
+                };
+
+                if (error.status === 404) {
+                    err = "El usuario no existe"
+                }
+                else if (error.status === 422) {
+                    err = "Formato de datos incorrecto"
+                }
+                else if (error.status === 401) {
+                    err = "No tienes autorizacion para realizar esta accion";
+                }
+                else {
+                    err = "Ocurrio un error en el servidor"
+                }
+                response.message = err;
+                return of(response);
+            })
+        )
     }
     getPage(filter: PageFilter<any>): Observable<PageData<Client>> {
 

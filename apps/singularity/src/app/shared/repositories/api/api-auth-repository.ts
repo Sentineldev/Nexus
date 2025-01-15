@@ -52,7 +52,7 @@ export default class ApiAuthRepository implements AuthRepository {
                     err = "Ocurrio un error en el servidor"
                 }
                 response.message = err;
-                return throwError(() => response);
+                return of(response);
             })
         )
     }

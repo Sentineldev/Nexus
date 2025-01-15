@@ -1,7 +1,13 @@
 import { Injectable, signal, WritableSignal } from "@angular/core";
 import CategoryProduct from "../../classes/category-product.class";
+import DecimalsUtils from "../../../../utils/decimals";
 
 
+export type OrderClient = {
+    name: string;
+    identification: string;
+    identificationType: string;
+};
 export type SaveOrderProduct = {
     quantity: number;
     total: number;
@@ -11,6 +17,8 @@ export type SaveOrderProduct = {
 type ServiceState = {
     products: SaveOrderProduct[];
     total: number;
+    client: OrderClient;
+    isClientSet: boolean;
 };
 
 @Injectable({
@@ -25,7 +33,13 @@ export default class OrderService {
 
         this.state = signal<ServiceState>({
             products: [],
-            total: 0,
+            total: 0,   
+            client: {
+                identification: "",
+                identificationType: "",
+                name: "",
+            },
+            isClientSet: false,
         });
     }
 
@@ -39,6 +53,14 @@ export default class OrderService {
         return this.state().total;
     }
 
+    getState() {
+        return this.state();
+    }
+
+
+    setClient(body: OrderClient) {
+        this.state.update((current) => ({...current, client:body, isClientSet: true}));
+    }
 
     modifyProduct(product: SaveOrderProduct) {
         
@@ -61,19 +83,20 @@ export default class OrderService {
                 };
                 
             }
-            current.total = current.products.reduce((a,b) => a + b.total ,0)
-
             return {...current,};
         });
+
+        this.updateTotal();
     }
 
     removeProduct(product: CategoryProduct) {
 
         this.state.update((current) => {
             current.products = current.products.filter((val) => val.product.id !== product.id);
-            current.total = current.products.reduce((a,b) => a + b.total ,0)
             return {...current};
-        } )
+        });
+
+        this.updateTotal();
     }
 
     addProduct(product: CategoryProduct) {
@@ -84,7 +107,7 @@ export default class OrderService {
 
             if (productIndex !== -1) {
                 current.products[productIndex].quantity+=1;
-                current.products[productIndex].total+=product.price;
+                current.products[productIndex].total = DecimalsUtils.ROUND_TO_2_DECIMALS(current.products[productIndex].total + product.price);
             }
             if (productIndex === -1) {
                 current.products.push({
@@ -93,7 +116,17 @@ export default class OrderService {
                     total: product.price,
                 });
             }
-            current.total = current.products.reduce((a,b) => a + b.total ,0)
+            return {...current};
+        });
+        this.updateTotal();
+    }
+
+    private updateTotal() {
+
+
+        this.state.update((current) => {
+            current.total = current.products.reduce((a,b) => DecimalsUtils.ROUND_TO_2_DECIMALS(a + b.total) ,0);
+
             return {...current};
         });
     }
