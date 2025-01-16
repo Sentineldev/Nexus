@@ -1,6 +1,7 @@
 import { Injectable, signal, WritableSignal } from "@angular/core";
 import CategoryProduct from "../../classes/category-product.class";
 import DecimalsUtils from "../../../../utils/decimals";
+import RestaurantPageService from "../restaurant-page.service";
 
 
 export type OrderClient = {
@@ -8,17 +9,20 @@ export type OrderClient = {
     identification: string;
     identificationType: string;
 };
-export type SaveOrderProduct = {
+export type OrderProductState = {
     quantity: number;
     total: number;
     product: CategoryProduct;
 };
 
 type ServiceState = {
-    products: SaveOrderProduct[];
+    products: OrderProductState[];
     total: number;
     client: OrderClient;
     isClientSet: boolean;
+    type: string;
+    location: string;
+    readyToProcess: boolean;
 };
 
 @Injectable({
@@ -29,21 +33,50 @@ export default class OrderService {
 
     private state: WritableSignal<ServiceState>
 
-    constructor() {
+    constructor(
+        private readonly restaurantPageService: RestaurantPageService,
+    ) {
 
         this.state = signal<ServiceState>({
             products: [],
             total: 0,   
+            client: {
+                identification: "29660012",
+                identificationType: "V",
+                name: "Jesus Antonio Figuera Yaguare",
+            },
+            isClientSet: true,
+            type: "RESTAURANT",
+            location: this.restaurantPageService.getRestaurant().name,
+            readyToProcess: true,
+        });
+    }
+
+
+
+    reset() {
+        this.state.set({
             client: {
                 identification: "",
                 identificationType: "",
                 name: "",
             },
             isClientSet: false,
-        });
+            location: "",
+            products: [],
+            readyToProcess: false,
+            total: 0,
+            type: "RESTAURANT"
+        })
     }
 
+    isRoomService() {
+        return this.state().type === "ROOM_SERVICE";
+    }
 
+    isInRestaurant() {
+        return this.state().type === "RESTAURANT";
+    }
 
     getOrderProducts() {
         return this.state().products;
@@ -58,11 +91,40 @@ export default class OrderService {
     }
 
 
-    setClient(body: OrderClient) {
-        this.state.update((current) => ({...current, client:body, isClientSet: true}));
+    updateStatus() {
+
+        const state = this.state();
+
+        if (!state.isClientSet) {
+            return ;
+        }
+
+        if (state.products.length === 0) {
+            return;
+        }
+
+        if (state.location.length === 0) {
+            return;
+        }
+
+        this.state.update((current) => ({...current, readyToProcess: true }));
     }
 
-    modifyProduct(product: SaveOrderProduct) {
+    setRoom(room: string) {
+        this.state.update((current) => ({
+            ...current,
+            location: room,
+            type: "ROOM_SERVICE"
+        }));
+        this.updateStatus();
+    }
+
+    setClient(body: OrderClient) {
+        this.state.update((current) => ({...current, client:body, isClientSet: true}));
+        this.updateStatus();
+    }
+
+    modifyProduct(product: OrderProductState) {
         
         if (product.quantity === 0) {
             this.removeProduct(product.product);
@@ -75,7 +137,7 @@ export default class OrderService {
 
             if (productIndex !== -1) {
 
-                const newProductTotal = product.quantity * product.product.price; 
+                const newProductTotal = DecimalsUtils.ROUND_TO_2_DECIMALS(product.quantity * product.product.price); 
                 current.products[productIndex] = {
                     ...product,
                     quantity: product.quantity,
@@ -87,6 +149,7 @@ export default class OrderService {
         });
 
         this.updateTotal();
+        this.updateStatus();
     }
 
     removeProduct(product: CategoryProduct) {
@@ -97,6 +160,7 @@ export default class OrderService {
         });
 
         this.updateTotal();
+        this.updateStatus();
     }
 
     addProduct(product: CategoryProduct) {
@@ -119,6 +183,7 @@ export default class OrderService {
             return {...current};
         });
         this.updateTotal();
+        this.updateStatus();
     }
 
     private updateTotal() {

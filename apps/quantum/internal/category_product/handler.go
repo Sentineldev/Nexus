@@ -75,11 +75,16 @@ func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 func (handler CategoryProductHandler) GetAllProductsPaginate(context echo.Context) error {
 
 	restaurantId := context.Param("restaurantId")
+	menuId := context.QueryParam("menuId")
+	search := context.QueryParam("search")
+
 	filter := types.PageFilter[AllProductsFilter]{
 		Page:     1,
 		PageSize: 5,
 		Filter: AllProductsFilter{
 			RestaurantId: restaurantId,
+			MenuId:       menuId,
+			Search:       search,
 		},
 	}
 	return context.JSON(http.StatusOK, handler.Service.GetAllProductsPaginate(filter))

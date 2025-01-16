@@ -1,7 +1,7 @@
-import { Component, computed, effect, input, Signal } from "@angular/core";
+import { Component, computed, input  } from "@angular/core";
 import CustomDialog from "../../../../../shared/dialog/custom-dialog";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import OrderService, { SaveOrderProduct } from "../order-service";
+import OrderService, { OrderProductState } from "../order-service";
 
 @Component({
     selector: `app-modify-quantity-modal`,
@@ -29,7 +29,7 @@ export default class ModifyQuantityModal {
     
     
     public dialogId  = input.required<string>();
-    public product = input.required<SaveOrderProduct>();
+    public product = input.required<OrderProductState>();
 
     public quantity = input.required<number>();
 

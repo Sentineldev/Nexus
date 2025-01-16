@@ -122,6 +122,12 @@ func (repository LocalCategoryProductRepository) GetAllProductsPaginate(filter t
 	filtered := []types.CategoryProduct{}
 	for _, category := range internal.CATEGORY_PRODUCTS {
 
+		if len(filter.Filter.MenuId) > 0 {
+			if category.GetRestaurantId() == filter.Filter.RestaurantId && category.GetMenuId() == filter.Filter.MenuId {
+				filtered = append(filtered, category)
+			}
+			continue
+		}
 		if category.Category.Menu.Restaurant.Id == filter.Filter.RestaurantId {
 			filtered = append(filtered, category)
 		}

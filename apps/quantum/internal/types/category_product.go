@@ -8,6 +8,18 @@ type CategoryProduct struct {
 	IsActive bool         `json:"isActive"`
 }
 
+func (product CategoryProduct) GetMenuId() string {
+	return product.Category.Menu.Id
+}
+
+func (product CategoryProduct) GetCategoryId() string {
+	return product.Category.Id
+}
+
+func (product CategoryProduct) GetRestaurantId() string {
+	return product.Category.Menu.Restaurant.Id
+}
+
 func NewCategoryProduct1(id string, product Product, category MenuCategory, price float64, isActive bool) *CategoryProduct {
 	return &CategoryProduct{
 		Id:       id,

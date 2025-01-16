@@ -20,6 +20,7 @@ export default class CustomDialog {
 
   onClickHandler(event: MouseEvent) {
 
+    
 
 
 
@@ -30,12 +31,13 @@ export default class CustomDialog {
       return;
     }
 
-    var rect = dialog.getBoundingClientRect();
-    var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-      rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-    if (!isInDialog) {
-      dialog.close();
-    }
+    dialog.close();
+    // var rect = dialog.getBoundingClientRect();
+    // var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+    //   rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    // if (!isInDialog) {
+    //   dialog.close();
+    // }
   }
 
 }

@@ -100,7 +100,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
 
     getAllProductsPaginate(filter: PageFilter<AllProductsFilter>): Observable<PageData<CategoryProduct>> {
         const params = new HttpParams({
-            fromObject: { page: filter.page, pageSize: filter.pageSize }
+            fromObject: { page: filter.page, pageSize: filter.pageSize, menuId: filter.filter.menuId, search: filter.filter.search }
         });
 
         return this.http.get<PageData<CategoryProduct>>(`${this.URL}/all-products/${filter.filter.restaurantId}`, {

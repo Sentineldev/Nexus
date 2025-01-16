@@ -17,4 +17,6 @@ type CategoryPageFilter struct {
 
 type AllProductsFilter struct {
 	RestaurantId string `json:"restaurantId"`
+	MenuId       string `json:"menuId"`
+	Search       string `json:"search"`
 }

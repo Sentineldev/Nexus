@@ -1,7 +1,7 @@
 import { Component, computed, input } from "@angular/core";
-import { SaveOrderProduct } from "./order-service";
 import ModifyQuantityModal from "./modals/modify-quantity-modal";
 import DialogUtils from "../../../../utils/dialog";
+import { OrderProductState } from "./order-service";
 
 @Component({
     selector: `app-order-list-item`,
@@ -21,7 +21,7 @@ import DialogUtils from "../../../../utils/dialog";
 })
 export default class OrderListItem {
 
-    public product = input.required<SaveOrderProduct>();
+    public product = input.required<OrderProductState>();
 
     public dialogId = computed(() => `modify-quantity-product-${this.product().product.id}`);
 

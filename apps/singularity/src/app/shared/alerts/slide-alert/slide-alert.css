@@ -1,0 +1,15 @@
+.slide-alert {
+    animation-iteration-count: 1;
+    animation: slide-in;
+    background-color: red;
+}
+
+@keyframes slide-in {
+
+    from {
+        right: -100%;
+    }
+    to{
+        right: 0;
+    }
+}

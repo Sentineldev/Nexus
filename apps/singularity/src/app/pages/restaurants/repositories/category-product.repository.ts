@@ -13,6 +13,8 @@ export type CategoryProductFilter = {
 
 export type AllProductsFilter = {
     restaurantId: string;
+    menuId: string;
+    search: string;
 }
 
 

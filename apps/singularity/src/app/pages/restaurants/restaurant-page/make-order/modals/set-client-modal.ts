@@ -4,6 +4,7 @@ import ClientRepository from "../../../../../shared/interfaces/client-repository
 import ApiClientRepository from "../../../../../shared/repositories/api/api-client-repository";
 import OrderService from "../order-service";
 import CustomDialog from "../../../../../shared/dialog/custom-dialog";
+import DialogUtils from "../../../../../utils/dialog";
 
 @Component({
     selector: `app-set-client-modal`,
@@ -14,9 +15,9 @@ import CustomDialog from "../../../../../shared/dialog/custom-dialog";
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Registrar Cliente</h1>
             <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <label for="quantity">
+                    <label for="identification">
                         <p class="font-sans text-slate-700">Ingresar identificacion</p>
-                        <input formControlName="identification" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="identification" id="identification"/>
+                        <input formControlName="identification" class="border border-slate-300 rounded w-full outline-none p-1" type="tel" name="identification" id="identification"/>
                     </label>
                 </div>
                 <div>
@@ -26,7 +27,7 @@ import CustomDialog from "../../../../../shared/dialog/custom-dialog";
             @if (registerClient()) {
                 <form [formGroup]="formGroup2" (ngSubmit)="registerClientHandler()" class="w-full flex flex-col gap-6">
                     <div class="flex flex-col gap-4">
-                        <label for="quantity">
+                        <label for="name">
                             <p class="font-sans text-slate-700">Nombre</p>
                             <input formControlName="name" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="name" id="name"/>
                         </label>
@@ -87,7 +88,8 @@ export default class SetClientModal {
                         name: body.name,
                         identification: body.identification,
                         identificationType: body.identificationType,
-                    })
+                    });
+                    DialogUtils.CloseModal(this.dialogId());
                     return;
                 }
             })
@@ -111,7 +113,8 @@ export default class SetClientModal {
                         identification: client.identification,
                         identificationType: client.identificationType,
                         name: client.fullName,
-                    })
+                    });
+                    DialogUtils.CloseModal(this.dialogId());
                     return;
                 }
                 if(result.status === 404) {
