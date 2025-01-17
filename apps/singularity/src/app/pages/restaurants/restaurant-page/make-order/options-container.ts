@@ -11,7 +11,9 @@ import DialogUtils from "../../../../utils/dialog";
     template: `
     <app-set-client-modal/>
     <app-room-service-modal/>
-    <app-order-confirmation-modal/>
+    @if (state().readyToProcess) {
+        <app-order-confirmation-modal/>
+    }
     <div class="flex flex-col gap-4 h-full">
         
         <app-dialog-toggler dialogId="save-client-modal">

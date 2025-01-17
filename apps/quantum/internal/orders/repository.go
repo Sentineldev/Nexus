@@ -1,6 +1,9 @@
 package orders
 
-import "quantum/internal/types"
+import (
+	"quantum/internal"
+	"quantum/internal/types"
+)
 
 type OrdersLocalRepository struct {
 }
@@ -10,7 +13,11 @@ func NewOrdersLocalRepository() *OrdersLocalRepository {
 	return &OrdersLocalRepository{}
 }
 
-func (repository OrdersLocalRepository) Save(order types.Order, products types.OrderProduct) error {
+func (repository OrdersLocalRepository) Save(order types.Order, products []types.OrderProduct) error {
+
+	internal.ORDERS = append(internal.ORDERS, order)
+	internal.ORDER_PRODUCTS = append(internal.ORDER_PRODUCTS, products...)
+
 	return nil
 }
 

@@ -29,7 +29,7 @@ import DialogUtils from "../../../../../utils/dialog";
                     <div class="flex flex-col gap-4">
                         <label for="name">
                             <p class="font-sans text-slate-700">Nombre</p>
-                            <input formControlName="name" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="name" id="name"/>
+                            <input autofocus="true" formControlName="name" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="name" id="name"/>
                         </label>
                     </div>
                     <div>

@@ -1,27 +1,31 @@
 import { Component, computed } from "@angular/core";
 import OrderService from "./order-service";
-import OrderListItem from "./order-list-item";
 import ClientInformationContainer from "./client-information-container";
+import OrderListItems from "./order-list-items";
 
 @Component({
     selector: `app-order-items-container`,
     template: `
-    <div class="flex flex-col gap-2 p-2 h-full">
-
-        <app-client-information-container/>
-        <div class="flex flex-col gap-2 flex-1">
-
-            @for (product of products(); track $index) {
+    <div class="flex flex-col h-full overflow-auto">
+        <div class="border-b border-slate-300">
+            <app-client-information-container/>
+        </div>
+        <div class="flex-1 border-b border-slate-300 overflow-auto">
+            <!-- @for (product of products(); track $index) {
                 <app-order-list-item [product]="product"/>
                 
-            }
+            } -->
+            <app-order-list-items [products]="products()"/>    
         </div>
-        <div class="flex items-end justify-end">
-            <p class="text-2xl font-bold">{{total()}} $</p>
+        <div>
+            <div class="p-3 flex justify-center items-center">
+                <p class="flex-1 text-xl">Total:</p>
+                <p class="text-2xl font-bold">{{total()}} $</p>
+            </div>
         </div>
     </div>
     `,
-    imports: [OrderListItem, ClientInformationContainer],
+    imports: [ClientInformationContainer, OrderListItems],
 })
 export default class OrderItemsContainer {
 

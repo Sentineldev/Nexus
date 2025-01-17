@@ -9,6 +9,7 @@ type SaveOrderDto struct {
 }
 
 type SaveOrderProductDto struct {
-	ProductId string `json:"productId"`
-	Count     string `json:"count"`
+	ProductId string  `json:"productId"`
+	Count     int64   `json:"count"`
+	Total     float64 `json:"total"`
 }

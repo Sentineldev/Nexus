@@ -8,4 +8,5 @@ type ProductRepository interface {
 	Delete(string) error
 	GetPage(types.PageFilter[any]) types.PageData[types.Product]
 	GetById(string) (types.Product, error)
+	GetByIds([]string) []types.Product
 }

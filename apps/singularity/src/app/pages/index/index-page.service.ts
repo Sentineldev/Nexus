@@ -31,4 +31,9 @@ export default class IndexPageService {
 
         this.state.update((current) => ({...current, excludeTopBar: true }));
     }
+
+    showTopBar() {
+
+        this.state.update((current) => ({...current, excludeTopBar: false }));
+    }
 }

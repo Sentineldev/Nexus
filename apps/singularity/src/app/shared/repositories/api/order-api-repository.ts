@@ -12,7 +12,7 @@ export default class ApiOrderRepository implements OrderRepository {
 
     private URL: string;
     constructor(private readonly http: HttpClient) {
-        this.URL = `${CONFIGURATION.API_URL}/menus`;
+        this.URL = `${CONFIGURATION.API_URL}/orders`;
     }
     save(body: SaveOrder): Observable<string> {
         return this.http.post(this.URL,body,{ observe: "response" })

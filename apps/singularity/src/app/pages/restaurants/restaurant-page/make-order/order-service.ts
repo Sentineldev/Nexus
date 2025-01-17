@@ -67,9 +67,8 @@ export default class OrderService {
             readyToProcess: false,
             total: 0,
             type: "RESTAURANT"
-        })
+        });
     }
-
     isRoomService() {
         return this.state().type === "ROOM_SERVICE";
     }

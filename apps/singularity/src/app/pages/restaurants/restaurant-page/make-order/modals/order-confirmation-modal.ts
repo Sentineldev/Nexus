@@ -13,10 +13,15 @@ import SlideAlert from "../../../../../shared/alerts/slide-alert/slide-alert";
     imports: [CustomDialog, Loader, SlideAlert],
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
-        @if (showMessage()) {
-            <app-slide-alert message="hello world!"/>
+        @if (successMessage().length > 0 || errorMessage().length > 0) {
+            @if (successMessage().length > 0) {
+                <app-slide-alert [message]="successMessage()"/>
+            }
+            @if (errorMessage().length > 0) {
+                <app-slide-alert [message]="errorMessage()"/>
+            }
         }
-        <div class="p-6 bg-white m-auto lg:w-[380px] h-full rounded-xl flex flex-col gap-4 overflow-auto">
+        <div class="p-6 bg-white m-auto lg:w-[480px] h-full rounded-xl flex flex-col gap-4 overflow-auto">
             <div class="flex-1">
                 <h1 class="text-center font-sans text-xl font-bold text-slate-600">Procesar Orden</h1>
                 <div class="text-center">
@@ -63,7 +68,6 @@ import SlideAlert from "../../../../../shared/alerts/slide-alert/slide-alert";
                 </div>
             </div>
             <div>
-                <button (click)="showMessageHandler()">Mostrar</button>
                 <button [disabled]="loading()" (click)="onConfirmHandler()" class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">
                     @if (!loading()) {
                         Procesar
@@ -86,7 +90,7 @@ export default class OrderConfirmationModal {
     public restaurant = computed(() => this.restaurantPageService.getRestaurant());
 
 
-    public showMessage = signal(false);
+    public successMessage = signal("");
 
     public loading = signal<boolean>(false);
     public errorMessage = signal<string>("");
@@ -97,16 +101,11 @@ export default class OrderConfirmationModal {
         @Inject(ApiOrderRepository)
         private readonly repository: OrderRepository
     ) {}
-
-    showMessageHandler() {
-        this.showMessage.update((current) => !current);
-    }
- 
     onConfirmHandler() {
 
         const order = this.order();
 
-        const products: SaveOrderProduct[] = order.products.map(({ product: { id }, quantity }) => ({ productId: id, quantity: quantity }))
+        const products: SaveOrderProduct[] = order.products.map(({ product: { product: { id } }, quantity, total }) => ({ productId: id, quantity: quantity, total }))
         const body: SaveOrder = {
             clientId: order.client.identification,
             location: order.location,
@@ -119,6 +118,10 @@ export default class OrderConfirmationModal {
             setTimeout(() => {
                 this.loading.set(false);
                 if (result.length === 0) {
+                    this.successMessage.set("Orden procesada correctamente");
+                    setTimeout(() => {
+                        this.service.reset();
+                    }, 2000);
                     return;
                 }
                 this.errorMessage.set(result);

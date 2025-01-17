@@ -93,3 +93,17 @@ func (repository LocalProductRepository) GetById(id string) (types.Product, erro
 	}
 	return types.Product{}, errors.New("product not found")
 }
+
+func (repository LocalProductRepository) GetByIds(ids []string) []types.Product {
+
+	products := []types.Product{}
+	for _, id := range ids {
+		for _, val := range internal.PRODUCTS {
+			if id == val.Id {
+				products = append(products, val)
+			}
+		}
+	}
+
+	return products
+}

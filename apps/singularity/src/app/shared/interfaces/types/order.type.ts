@@ -8,4 +8,5 @@ export type SaveOrder = {
 export type SaveOrderProduct = {
     productId: string;
     quantity: number;
+    total: number;
 };

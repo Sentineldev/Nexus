@@ -1,19 +1,25 @@
 package types
 
 type Order struct {
-	Id          string  `json:"id"`
-	CreationLog UserLog `json:"creationLog"`
-	UpdateLog   UserLog `json:"updateLog"`
-	Client      Client  `json:"client"`
+	Id string `json:"id"`
+	// CreationLog UserLog `json:"creationLog"`
+	// UpdateLog   UserLog `json:"updateLog"`
+	Client   Client  `json:"client"`
+	Type     string  `json:"type"`
+	Location string  `json:"location"`
+	Total    float64 `json:"total"`
 }
 
-func NewOrder(id string, creationLog, updateLog UserLog, client Client) *Order {
+func NewOrder(client Client, id, orderType, location string, total float64) *Order {
 
 	return &Order{
 		id,
-		creationLog,
-		updateLog,
+		// creationLog,
+		// updateLog,
 		client,
+		orderType,
+		location,
+		total,
 	}
 }
 
@@ -23,14 +29,16 @@ type OrderProduct struct {
 	Product     Product `json:"product"`
 	Description string  `json:"description"`
 	Count       int64   `json:"count"`
+	Total       float64 `json:"total"`
 }
 
-func NewOrderProduct(id, description string, order Order, product Product, count int64) *OrderProduct {
+func NewOrderProduct(id, description string, order Order, product Product, count int64, total float64) *OrderProduct {
 	return &OrderProduct{
 		id,
 		order,
 		product,
 		description,
 		count,
+		total,
 	}
 }

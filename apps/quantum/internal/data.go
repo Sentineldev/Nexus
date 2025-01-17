@@ -3,6 +3,8 @@ package internal
 import "quantum/internal/types"
 
 var (
+	ORDERS            = []types.Order{}
+	ORDER_PRODUCTS    = []types.OrderProduct{}
 	CATEGORY_PRODUCTS = []types.CategoryProduct{}
 	CATEGORIES        = []types.MenuCategory{}
 	RESTAURANTS       = []types.Restaurant{}
@@ -20,11 +22,6 @@ var (
 			Id:          "id-2",
 			Name:        "Ensalada César con Camarones",
 			Description: "Lechuga romana, crotones, camarones, aderezado con salsa césar y queso parmesano",
-		},
-		{
-			Id:          "id-2",
-			Name:        "Ensalada César con Pollo",
-			Description: "Lechuga romana, crotones, pollo, aderezado con salsa césar y queso parmesano.",
 		},
 		{
 			Id:          "id-3",

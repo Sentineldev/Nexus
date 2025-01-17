@@ -14,8 +14,20 @@ import OrderService from "./order-service";
                 </div>
             </div>            
         } -->
-        <div class="flex flex-col gap-2">
-            <div class="bg-slate-700 text-center text-white p-1">
+        <div class="flex flex-col gap-1 p-3">
+            <h1 class="text-xl font-bold">Informacion del Cliente</h1>
+            <div class="flex items-center justify-center">
+                <div class="flex-1">
+                    <h1 class="text-lg font-bold">{{state().client.name}}</h1>
+                    <p class="text-slate-500">{{state().type}}</p>
+                </div>
+                @if (isRoomService()) {
+                    <div class="h-12 w-12 bg-slate-800 rounded-xl px-2 text-xs text-white flex items-center justify-center">
+                        <span>H{{state().location}}</span>
+                    </div>
+                }
+            </div>
+            <!-- <div class="bg-slate-700 text-center text-white p-1">
                 {{state().type}}
             </div>
             <div class="flex items-center gap-2">
@@ -30,7 +42,7 @@ import OrderService from "./order-service";
                         <span>H{{state().location}}</span>
                     </div>
                 }
-            </div>
+            </div> -->
         </div>
     `
 })
