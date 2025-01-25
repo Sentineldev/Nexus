@@ -1,0 +1,13 @@
+
+.dropdown {
+    position: absolute;
+    z-index: 10000;
+}
+.open-menu-id:hover + .dropdown{
+
+    display: inherit;
+}
+
+.dropdown:hover {
+    display: inherit;
+}

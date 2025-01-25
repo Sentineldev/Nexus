@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit, signal } from "@angular/core";
+import DropDownMenu from "./drop-down-menu";
 
 @Component({
     selector: `app-map-selector`,
     template: `
         <div class="flex items-center h-full justify-center p-2">
-            <div id="main-container" class="w-full h-full bg-red-300 relative overflow-hidden">
+            <div id="main-container" class="w-full h-full rounded-lg bg-slate-100 border relative overflow-hidden">
                 <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
@@ -13,6 +14,11 @@ import { Component, HostListener, OnInit, signal } from "@angular/core";
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 absolute m-0 p-0"></div>    
                 </div>
                 <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
+                    <div data-isDraggable="false" class="absolute top-[-30px]">
+                        <app-dropdown-menu>
+                            <h1>hola mundo</h1>
+                        </app-dropdown-menu>
+                    </div>
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
@@ -31,7 +37,8 @@ import { Component, HostListener, OnInit, signal } from "@angular/core";
                 <h1>hola muindo</h1>
             </div>
         </div>
-    `
+    `,
+    imports: [DropDownMenu]
 })
 
 export default class MapSelectorPage implements OnInit {
@@ -55,10 +62,25 @@ export default class MapSelectorPage implements OnInit {
             for (const children of childrens) {
 
                 const element = children as HTMLElement;
+
+                const elementChildrens = element.children ;
+                const childrenCoordinates = [];
+                for (const elementChildren of elementChildrens) {
+
+                    const childrenElement = elementChildren as HTMLElement;
+
+                    childrenCoordinates.push({
+                        x: Number(childrenElement.style.left.split("px")[0] || 0),
+                        y: Number(childrenElement.style.top.split("px")[0] || 0)
+                    });
+                }
+
                 coordinates.push({
                     x: Number(element.style.left.split("px")[0] || 0),
-                    y: Number(element.style.top.split("px")[0] || 0)
+                    y: Number(element.style.top.split("px")[0] || 0),
+                    children: childrenCoordinates
                 });
+                
             }
 
             localStorage.setItem("data", JSON.stringify(coordinates));
@@ -68,18 +90,31 @@ export default class MapSelectorPage implements OnInit {
 
     loadData() {
 
-        const data = (JSON.parse(localStorage.getItem("data") || "[]")) as {x: number, y:number}[];
+        const data = (JSON.parse(localStorage.getItem("data") || "[]")) as {x: number, y:number, children: Array<{x: number, y: number}> }[];
 
         const container = document.getElementById("main-container") as HTMLElement;
 
-        const children = container.children;
+        const containerChildren = container.children;
 
-        data.forEach(({ x, y }, index) => {
+        data.forEach(({ x, y, children }, index) => {
 
-            const element = children[index] as HTMLElement;
+            const element = containerChildren[index] as HTMLElement;
 
-            element.style.left = `${x}px`;
-            element.style.top = `${y}px`;
+            if (element.dataset['isdraggable'] === "true") {
+                element.style.left = `${x}px`;
+                element.style.top = `${y}px`;
+            }
+
+            const elementChildren = element.children;
+
+            children.forEach((value, index) =>  {
+                const childrenElement = elementChildren[index] as HTMLElement;
+                if (childrenElement.dataset['isdraggable'] === "true") {
+                    childrenElement.style.left = `${value.x}px`;
+                    childrenElement.style.top = `${value.y}px`;
+                }
+            });
+
         });
 
     }
@@ -226,6 +261,7 @@ export default class MapSelectorPage implements OnInit {
 
 
         const button = event.button;
+
 
         if (button === 1) {
 
