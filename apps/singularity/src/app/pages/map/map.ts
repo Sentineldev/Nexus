@@ -1,121 +1,189 @@
-import { Component, HostListener, OnInit, signal } from "@angular/core";
+import { Component, computed, HostListener, input, OnInit, signal } from "@angular/core";
 import DropDownMenu from "./drop-down-menu";
+import DialogToggler from "../../shared/dialog/dialog-toggler";
+import MapService from "./map.service";
+import CreateMapContainerModal from "./modals/create-map-container-modal";
+import { MapContainer } from "./types/map_types";
+import CreateContainerElementModal from "./modals/create-container-element";
+import DeleteMapContainerModal from "./modals/delete-container-modal";
+import EditMapContainerModal from "./modals/edit-map-container-modal";
 
 @Component({
     selector: `app-map-selector`,
     template: `
+
+
+        <app-create-map-container-modal [dialogId]="createTableDialogId()"/>
+        <app-dialog-toggler [dialogId]="createTableDialogId()">
+            <button type="button" class="p-3 bg-slate-700 text-white rounded-lg m-2">Crear Contenedor</button>
+        </app-dialog-toggler>
         <div class="flex items-center h-full justify-center p-2">
             <div id="main-container" class="w-full h-full rounded-lg bg-slate-100 border relative overflow-hidden">
-                <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
+                
+                @for (container of mapState().containers; track $index) {
+                    <app-create-container-element-modal [container]="container"/>
+                    <app-delete-map-container-modal [container]="container"/>
+                    <app-edit-map-container-modal [container]="container"/>
+                    <div 
+                        [id]="container.id"
+                        style="borderColor:{{container.properties.color}}; width: {{container.properties.width}}px; height: {{container.properties.height}}px; left: {{container.properties.posX}}px; top: {{container.properties.posY}}px;"
+                        class="map-element border" 
+                        oncontextmenu="return false" 
+                        data-isDraggable="true" 
+                        data-boundary="false"
+                        data-type="container" >
+                        <div data-isDraggable="false" class="absolute top-[-30px]">
+                            <app-dropdown-menu>
+                                <app-dialog-toggler [dialogId]="'unique-modal-to-add-element-'+container.id">
+                                    <h1 class="text-white p-2">Agregar elemento</h1>
+                                </app-dialog-toggler>
+                                <app-dialog-toggler [dialogId]="'unique-modal-to-edit-container-'+container.id">
+                                    <h1 class="text-white p-2">Modificar</h1>
+                                </app-dialog-toggler>
+                                <app-dialog-toggler [dialogId]="'delete-map--container-modal-unique-'+container.id">
+                                    <h1 class="text-white p-2">Eliminar</h1>
+                                </app-dialog-toggler>
+                            </app-dropdown-menu>
+                        </div>
+                        @for (element of container.elements; track $index) {
+                            <div [id]="element.id" 
+                            data-boundary="true"
+                            data-type="element" 
+                            data-isDraggable="true" 
+                            class="map-element"
+                            style="width: {{element.properties.width}}px; height: {{element.properties.height}}px; backgroundColor:{{element.properties.color}}; left: {{element.properties.posX}}px; top: {{element.properties.posY}}px;"
+                            
+                            ></div>
+                        }
+                    </div>
+                }
+                <!-- <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 absolute m-0 p-0"></div>    
-                </div>
-                <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
+                </div> -->
+                <!-- <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border map-element">
                     <div data-isDraggable="false" class="absolute top-[-30px]">
                         <app-dropdown-menu>
                             <h1>hola mundo</h1>
                         </app-dropdown-menu>
                     </div>
+                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 map-element"></div>  
+                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 map-element"></div>  
+                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 map-element"></div>    
+                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 map-element"></div>    
+                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 map-element"></div>    
+                </div> -->
+                <!-- <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 absolute m-0 p-0"></div>    
-                </div>
-                <div oncontextmenu="return false" data-isDraggable="true" class="h-32 w-64 bg-transparent border absolute m-0 p-0">
-                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
-                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>  
-                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
-                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-8 bg-red-600 absolute m-0 p-0"></div>    
-                    <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 absolute m-0 p-0"></div>    
-                </div>
+                </div> -->
             </div>
             <div>
                 <h1>hola muindo</h1>
             </div>
         </div>
     `,
-    imports: [DropDownMenu]
+    styleUrl: `./map.css`,
+    imports: [DropDownMenu, DialogToggler, CreateMapContainerModal, CreateContainerElementModal, DeleteMapContainerModal, EditMapContainerModal]
 })
-
 export default class MapSelectorPage implements OnInit {
   
 
+    public createTableDialogId = signal<string>("create-map-container-modal-unique");
     public selectedTarget = signal<{ dom: HTMLElement,  x: number, y: number } | undefined>(undefined);
 
     public collection = signal<HTMLCollection | undefined>(undefined);
     public cursor = signal<{x: number, y: number} | undefined>(undefined);
 
 
-    saveData() {
+    public mapState = computed(() => this.mapService.getState());
 
 
-        const container = document.getElementById("main-container") as HTMLElement;
+    constructor(
+        private readonly mapService: MapService
+    ) {}
 
-        const coordinates = [];
-        if (container) {
-            const childrens = container.children;
+    saveData() {    
 
-            for (const children of childrens) {
 
-                const element = children as HTMLElement;
+        localStorage.setItem("data", JSON.stringify(this.mapState().containers));
 
-                const elementChildrens = element.children ;
-                const childrenCoordinates = [];
-                for (const elementChildren of elementChildrens) {
+        // const container = document.getElementById("main-container") as HTMLElement;
 
-                    const childrenElement = elementChildren as HTMLElement;
+        // const coordinates = [];
+        // if (container) {
+        //     const childrens = container.children;
 
-                    childrenCoordinates.push({
-                        x: Number(childrenElement.style.left.split("px")[0] || 0),
-                        y: Number(childrenElement.style.top.split("px")[0] || 0)
-                    });
-                }
+        //     for (const children of childrens) {
 
-                coordinates.push({
-                    x: Number(element.style.left.split("px")[0] || 0),
-                    y: Number(element.style.top.split("px")[0] || 0),
-                    children: childrenCoordinates
-                });
+        //         const element = children as HTMLElement;
+
+        //         const elementChildrens = element.children ;
+        //         const childrenCoordinates = [];
+        //         for (const elementChildren of elementChildrens) {
+
+        //             const childrenElement = elementChildren as HTMLElement;
+
+        //             childrenCoordinates.push({
+        //                 x: Number(childrenElement.style.left.split("px")[0] || 0),
+        //                 y: Number(childrenElement.style.top.split("px")[0] || 0)
+        //             });
+        //         }
+
+        //         coordinates.push({
+        //             x: Number(element.style.left.split("px")[0] || 0),
+        //             y: Number(element.style.top.split("px")[0] || 0),
+        //             children: childrenCoordinates
+        //         });
                 
-            }
+        //     }
 
-            localStorage.setItem("data", JSON.stringify(coordinates));
-        }   
+        //     localStorage.setItem("data", JSON.stringify(coordinates));
+        // }   
     }
 
 
     loadData() {
 
-        const data = (JSON.parse(localStorage.getItem("data") || "[]")) as {x: number, y:number, children: Array<{x: number, y: number}> }[];
 
-        const container = document.getElementById("main-container") as HTMLElement;
 
-        const containerChildren = container.children;
+        const data = JSON.parse(localStorage.getItem("data") || "[]");
 
-        data.forEach(({ x, y, children }, index) => {
 
-            const element = containerChildren[index] as HTMLElement;
+        this.mapService.setContainers(data as MapContainer[]);
+        
+        // const data = (JSON.parse(localStorage.getItem("data") || "[]")) as {x: number, y:number, children: Array<{x: number, y: number}> }[];
 
-            if (element.dataset['isdraggable'] === "true") {
-                element.style.left = `${x}px`;
-                element.style.top = `${y}px`;
-            }
+        // const container = document.getElementById("main-container") as HTMLElement;
 
-            const elementChildren = element.children;
+        // const containerChildren = container.children;
 
-            children.forEach((value, index) =>  {
-                const childrenElement = elementChildren[index] as HTMLElement;
-                if (childrenElement.dataset['isdraggable'] === "true") {
-                    childrenElement.style.left = `${value.x}px`;
-                    childrenElement.style.top = `${value.y}px`;
-                }
-            });
+        // data.forEach(({ x, y, children }, index) => {
 
-        });
+        //     const element = containerChildren[index] as HTMLElement;
+
+        //     if (element.dataset['isdraggable'] === "true") {
+        //         element.style.left = `${x}px`;
+        //         element.style.top = `${y}px`;
+        //     }
+
+        //     const elementChildren = element.children;
+
+        //     children.forEach((value, index) =>  {
+        //         const childrenElement = elementChildren[index] as HTMLElement;
+        //         if (childrenElement.dataset['isdraggable'] === "true") {
+        //             childrenElement.style.left = `${value.x}px`;
+        //             childrenElement.style.top = `${value.y}px`;
+        //         }
+        //     });
+
+        // });
 
     }
 
@@ -238,6 +306,28 @@ export default class MapSelectorPage implements OnInit {
             target.dom.style.left = (newLeft) + 'px';
             target.dom.style.top = (newTop) + 'px';
             target.dom.style.cursor = "grab";
+
+
+            if (target.dom.dataset['type'] === "container") {
+                const result = this.mapState().containers.findIndex((container) => container.id === target.dom.id);
+                this.mapState().containers[result].properties.posX = newLeft;
+                this.mapState().containers[result].properties.posY = newTop;
+            }
+
+            if (target.dom.dataset['type'] === "element") {
+                const parent = target.dom.parentElement;
+                if (parent) {
+                    const parentId = parent.id; 
+                    const containerIndex = this.mapState().containers.findIndex((container) => container.id === parentId);
+
+                    const elementIndex = this.mapState().containers[containerIndex].elements.findIndex((element) => element.id === target.dom.id);
+                    this.mapState().containers[containerIndex].elements[elementIndex].properties.posX = newLeft; 
+                    this.mapState().containers[containerIndex].elements[elementIndex].properties.posY = newTop;
+                }
+            }
+
+
+            
 
             this.saveData();
         }
