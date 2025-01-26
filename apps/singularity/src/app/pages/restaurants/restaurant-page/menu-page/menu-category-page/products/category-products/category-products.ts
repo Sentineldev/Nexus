@@ -9,12 +9,17 @@ import { Loader } from "../../../../../../../shared/loader/loader";
     selector: `app-category-products`,
     template: `
     <div class="flex flex-col  h-full">
-        <div class=" border-slate-400 border-r flex-1 flex flex-col gap-3">
-            <div (dragleave)="onDragLeaveHandler($event)" (drop)="onDropHandler($event)"  (dragover)="onDragOverHandler($event)" class="flex-1 transition-all">
-                @for (product of state().page.data; track product.id) {
-                    <app-display-category-product [product]="product"/>
-                }
-            </div>
+        <div class=" p-2 rounded-t-xl">
+            <h1 class="text-slate-700 font-sans text-[1.2rem] font-bold text-center">Menu</h1>
+        </div>
+        <div class=" lg:border-slate-400 lg:border-r flex-1 flex flex-col gap-3">
+            @if (!state().loading) {
+                <div (dragleave)="onDragLeaveHandler($event)" (drop)="onDropHandler($event)"  (dragover)="onDragOverHandler($event)" class="flex-1 transition-all">
+                    @for (product of state().page.data; track product.id) {
+                        <app-display-category-product [product]="product"/>
+                    }
+                </div>
+            }
             @if(state().loading){
                 <app-loader [color]="'secondary'"/>
             }

@@ -27,7 +27,9 @@ import CategoryTopHero from "../../../components/category-top-hero";
         <div class="flex-1 h-full overflow-auto flex flex-col gap-2">
             <app-menu-top-hero [menu]="category().menu"/>
             <app-category-top-hero [category]="category()"/>
-            <router-outlet/>
+            <div class="flex-1">
+                <router-outlet/>
+            </div>
         </div>
     </div>
     `
