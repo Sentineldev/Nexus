@@ -2,11 +2,11 @@ export type ElementProperties = {
     width: number;
     height: number;
     color: string;
+    fontColor: string;
     posX: number;
     posY: number;
-    isDraggable: boolean;
-    boundary: boolean;
     type: string;
+    borderRadius: number;
 };
 
 export type MapContainer = {

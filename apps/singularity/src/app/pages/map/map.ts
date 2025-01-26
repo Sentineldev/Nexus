@@ -7,12 +7,11 @@ import { MapContainer } from "./types/map_types";
 import CreateContainerElementModal from "./modals/create-container-element";
 import DeleteMapContainerModal from "./modals/delete-container-modal";
 import EditMapContainerModal from "./modals/edit-map-container-modal";
+import ContainerElementsModal from "./modals/container-elements-modal";
 
 @Component({
     selector: `app-map-selector`,
     template: `
-
-
         <app-create-map-container-modal [dialogId]="createTableDialogId()"/>
         <app-dialog-toggler [dialogId]="createTableDialogId()">
             <button type="button" class="p-3 bg-slate-700 text-white rounded-lg m-2">Crear Contenedor</button>
@@ -20,11 +19,13 @@ import EditMapContainerModal from "./modals/edit-map-container-modal";
         <div class="flex items-center h-full justify-center p-2">
             <div id="main-container" class="w-full h-full rounded-lg bg-slate-100 border relative overflow-hidden">
                 
-                @for (container of mapState().containers; track $index) {
+                @for (container of mapState().containers; track container.id) {
                     <app-create-container-element-modal [container]="container"/>
                     <app-delete-map-container-modal [container]="container"/>
                     <app-edit-map-container-modal [container]="container"/>
+                    <app-container-elements-modal [container]="container"/>
                     <div 
+                        draggable="false"
                         [id]="container.id"
                         style="borderColor:{{container.properties.color}}; width: {{container.properties.width}}px; height: {{container.properties.height}}px; left: {{container.properties.posX}}px; top: {{container.properties.posY}}px;"
                         class="map-element border" 
@@ -32,7 +33,7 @@ import EditMapContainerModal from "./modals/edit-map-container-modal";
                         data-isDraggable="true" 
                         data-boundary="false"
                         data-type="container" >
-                        <div data-isDraggable="false" class="absolute top-[-30px]">
+                        <div data-isDropdown="true" data-isDraggable="false" class="absolute top-[-30px] flex gap-2 items-center">
                             <app-dropdown-menu>
                                 <app-dialog-toggler [dialogId]="'unique-modal-to-add-element-'+container.id">
                                     <h1 class="text-white p-2">Agregar elemento</h1>
@@ -40,20 +41,27 @@ import EditMapContainerModal from "./modals/edit-map-container-modal";
                                 <app-dialog-toggler [dialogId]="'unique-modal-to-edit-container-'+container.id">
                                     <h1 class="text-white p-2">Modificar</h1>
                                 </app-dialog-toggler>
+                                <app-dialog-toggler [dialogId]="'some-unique-display-for-elements-'+container.id">
+                                    <h1 class="text-white p-2">Elementos</h1>
+                                </app-dialog-toggler>
                                 <app-dialog-toggler [dialogId]="'delete-map--container-modal-unique-'+container.id">
                                     <h1 class="text-white p-2">Eliminar</h1>
                                 </app-dialog-toggler>
                             </app-dropdown-menu>
+                            <p class="text-slate-700">{{container.label}}</p>
                         </div>
                         @for (element of container.elements; track $index) {
-                            <div [id]="element.id" 
+                            <div [id]="element.id"
+                            draggable="false"
                             data-boundary="true"
                             data-type="element" 
                             data-isDraggable="true" 
-                            class="map-element"
-                            style="width: {{element.properties.width}}px; height: {{element.properties.height}}px; backgroundColor:{{element.properties.color}}; left: {{element.properties.posX}}px; top: {{element.properties.posY}}px;"
+                            class="map-element flex items-center justify-center"
+                            style="color:{{element.properties.fontColor}}; border-radius:{{element.properties.borderRadius}}px; width: {{element.properties.width}}px; height: {{element.properties.height}}px; backgroundColor:{{element.properties.color}}; left: {{element.properties.posX}}px; top: {{element.properties.posY}}px;"
                             
-                            ></div>
+                            >
+                            <span class="text-center text-sm">{{element.label}}</span>
+                        </div>
                         }
                     </div>
                 }
@@ -84,13 +92,10 @@ import EditMapContainerModal from "./modals/edit-map-container-modal";
                     <div draggable="false" data-boundary="true" data-isDraggable="true" class="h-8 w-32 bg-red-600 absolute m-0 p-0"></div>    
                 </div> -->
             </div>
-            <div>
-                <h1>hola muindo</h1>
-            </div>
         </div>
     `,
     styleUrl: `./map.css`,
-    imports: [DropDownMenu, DialogToggler, CreateMapContainerModal, CreateContainerElementModal, DeleteMapContainerModal, EditMapContainerModal]
+    imports: [DropDownMenu, DialogToggler, CreateMapContainerModal, CreateContainerElementModal, DeleteMapContainerModal, EditMapContainerModal, ContainerElementsModal]
 })
 export default class MapSelectorPage implements OnInit {
   
@@ -352,7 +357,6 @@ export default class MapSelectorPage implements OnInit {
 
         const button = event.button;
 
-
         if (button === 1) {
 
             const target = event.target as HTMLElement;
@@ -366,12 +370,12 @@ export default class MapSelectorPage implements OnInit {
         }
 
 
-
         if (button === 0) {
             
             const x = event.clientX;
             const y = event.clientY;
             const target = event.target as HTMLDivElement;
+
     
             if (!(target.dataset['isdraggable'] === "true")) {
                 return;

@@ -51,6 +51,24 @@ export default class MapService {
         
     }
 
+    deleteContainerElement(container: MapContainer, element: ContainerElement) {
+
+        this.state.update((current) => {
+
+
+            const containerIndex = current.containers.findIndex((val) => val.id === container.id);
+
+            const aux = current.containers;
+
+
+            aux[containerIndex].elements = aux[containerIndex].elements.filter((val) => val.id !== element.id);
+
+            current.containers = aux;
+            return current;
+        });
+        
+    }
+
 
     updateContainer(container: MapContainer) {
         this.state.update((current) => {
@@ -59,6 +77,26 @@ export default class MapService {
             const aux  = current.containers;
 
             aux[index] = container;
+
+            current.containers = aux;
+
+            return current;
+        });
+    }
+
+    updateContainerElement(container: MapContainer, element: ContainerElement) {
+        this.state.update((current) => {
+
+            const containerIndex = current.containers.findIndex((val) => val.id === container.id);
+            const aux  = current.containers;
+
+
+
+            aux[containerIndex] = container;
+
+            const elementIndex = aux[containerIndex].elements.findIndex((val) => val.id === element.id);
+
+            aux[containerIndex].elements[elementIndex] = element;
 
             current.containers = aux;
 

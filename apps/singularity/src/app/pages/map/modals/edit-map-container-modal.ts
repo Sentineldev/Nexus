@@ -31,10 +31,24 @@ import CustomDialog from "../../../shared/dialog/custom-dialog";
                             
                         </div>
                         <div>
-                            <label for="color" class="flex flex-col gap-1">
+                            <label for="label" class="flex flex-col gap-1">
                                 <p class="text-slate-700">Color</p>
-                                <input formControlName="color" type="color" name="color" id="color" class="border rounded p-1 w-full">
+                                <input formControlName="label" type="text" name="label" id="label" class="border rounded p-1 w-full">
                             </label>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="color" class="flex flex-col gap-1">
+                                    <p class="text-slate-700">Background Color</p>
+                                    <input formControlName="color" type="color" name="color" id="color" class="border rounded p-1 w-full">
+                                </label>
+                            </div>
+                            <div>
+                                <label for="fontColor" class="flex flex-col gap-1">
+                                    <p class="text-slate-700">Font Color</p>
+                                    <input formControlName="fontColor" type="color" name="fontColor" id="fontColor" class="border rounded p-1 w-full">
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -55,9 +69,12 @@ export default class EditMapContainerModal implements OnInit {
     public dialogId = computed(() => `unique-modal-to-edit-container-${this.container().id}`);
 
     public formGroup = new FormGroup({
+        label: new FormControl("",[Validators.required]),
         width: new FormControl("",[Validators.required]),
         height: new FormControl("",[Validators.required]),
-        color: new FormControl("",[Validators.required])
+        color: new FormControl("",[Validators.required]),
+        fontColor: new FormControl("",[Validators.required]),
+        
     });
     
     constructor(
@@ -66,9 +83,11 @@ export default class EditMapContainerModal implements OnInit {
     ngOnInit(): void {
 
         this.formGroup.setValue({
+            label: this.container().label,
             color: this.container().properties.color,
             width: this.container().properties.width.toString(),
             height: this.container().properties.height.toString(),
+            fontColor: this.container().properties.fontColor || "",
         });
     }
     
@@ -82,14 +101,17 @@ export default class EditMapContainerModal implements OnInit {
 
 
             const body =  {
+                label: value.label!,
                 width: Number(value.width!),
                 height: Number(value.height!),
                 color: value.color!,
+                fontColor: value.fontColor!,
             };
 
 
             this.mapService.updateContainer({
                 ...this.container(),
+                label: body.label,
                 properties: {
                     ...this.container().properties,
                     width: body.width,
@@ -97,8 +119,6 @@ export default class EditMapContainerModal implements OnInit {
                     color: body.color,
                 }
             });
-
-            this.formGroup.reset();
         }
     }
 }
