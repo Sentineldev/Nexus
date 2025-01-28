@@ -3,6 +3,7 @@ package feed_stock
 import (
 	"quantum/internal/types"
 
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -16,17 +17,46 @@ func NewFeedStockService() *FeedStockService {
 	}
 }
 
-func (service FeedStockService) Save(body any) error {
+func (service FeedStockService) Save(body SaveFeedStockDto) error {
 
+	if _, err := service.Repository.GetByName(body.Name); err == nil {
+		return echo.ErrConflict
+	}
+	newFeedStock := types.NeedFeedStock(
+		uuid.NewString(),
+		body.Name,
+		body.Unit,
+	)
+
+	if err := service.Repository.Save(*newFeedStock); err != nil {
+
+		return echo.ErrInternalServerError
+	}
 	return nil
 }
 
-func (service FeedStockService) Update(id string, body any) error {
+func (service FeedStockService) Update(id string, body SaveFeedStockDto) error {
 
-	_, err := service.GetById(id)
+	current, err := service.GetById(id)
 
 	if err != nil {
 		return err
+	}
+
+	if current.Name != body.Name {
+
+		if _, err := service.Repository.GetByName(body.Name); err == nil {
+			return echo.ErrConflict
+		}
+	}
+
+	current.Name = body.Name
+	current.Unit = body.Unit
+
+	err = service.Repository.Update(current)
+
+	if err != nil {
+		return echo.ErrInternalServerError
 	}
 
 	return nil

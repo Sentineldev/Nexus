@@ -4,6 +4,7 @@ import (
 	"quantum/internal/auth"
 	"quantum/internal/category_product"
 	"quantum/internal/clients"
+	"quantum/internal/feed_stock"
 	"quantum/internal/menu_category"
 	"quantum/internal/menus"
 	"quantum/internal/orders"
@@ -27,4 +28,5 @@ func ApiGroup(server *echo.Echo) {
 	users.UsersRoutes(group)
 	clients.ClientsRoutes(group)
 	orders.OrdersRoutes(group)
+	feed_stock.FeedStockRoutes(group)
 }

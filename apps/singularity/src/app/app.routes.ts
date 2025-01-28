@@ -20,6 +20,7 @@ import ClientsPage from './pages/clients/clients-page';
 import MapSelectorPage from './pages/map/map';
 import OrdersPage from './pages/restaurants/restaurant-page/orders-page/orders-page';
 import MakeOrderPage from './pages/restaurants/restaurant-page/make-order/make-order';
+import FeedStockPage from './pages/feed-stock/feed-stock.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -42,6 +43,10 @@ export const routes: Routes = [
             {
                 path: "products",
                 component: ProductsPage
+            },
+            {
+                path: "feed-stock",
+                component: FeedStockPage
             },
             {
                 path: "clients",
