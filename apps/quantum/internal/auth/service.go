@@ -16,7 +16,7 @@ type AuthService struct {
 
 func NewAuthService() *AuthService {
 	return &AuthService{
-		Repository: users.NewLocalUserRepository(),
+		Repository: users.NewDatabaseRepository(),
 	}
 }
 

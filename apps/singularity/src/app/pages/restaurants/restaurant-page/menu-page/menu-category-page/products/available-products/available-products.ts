@@ -14,7 +14,7 @@ import ProductSelectionService from "../product-selection.service";
         <div class="flex-1 flex flex-col gap-3">
             <div class="flex-1">
                 @for (product of state().page.data; track $index) {
-                    <div (dragend)="onDragEndHandler()" (dragstart)="onDragStartHandler(product)" draggable="true" class="p-4 transition-all hover:bg-slate-200 cursor-pointer">
+                    <div (click)="onClickHandler(product)" (dragend)="onDragEndHandler()" (dragstart)="onDragStartHandler(product)" draggable="true" class="p-4 transition-all hover:bg-slate-200 cursor-pointer">
                         <p class="font-sans text-slate-700 text-[0.95rem]">{{product.name}}</p>
                     </div>
                 }
@@ -37,6 +37,11 @@ export default class AvailableProducts implements OnInit {
     ) {}
     ngOnInit(): void {
         this.productService.getPage(this.state().filter);
+    }
+
+    onClickHandler(product: Product) {
+        this.selectionService.onDragStart(product);
+        this.selectionService.onDrop();
     }
 
     onDragStartHandler(product: Product) {

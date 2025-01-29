@@ -16,7 +16,7 @@ import { Loader } from "../../../shared/loader/loader";
         <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Registrar Ingrediente</h1>
+                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Crear Ingrediente</h1>
                     @if (errorMessage().length > 0 || successMessage().length > 0) {
                         @if (errorMessage().length > 0) {
                             <app-error-alert [message]="errorMessage()"/>
@@ -58,7 +58,7 @@ import { Loader } from "../../../shared/loader/loader";
                                 @if(loading()) {
                                     <app-loader/>
                                 } @else {
-                                    Registrar
+                                    Crear
                                 }
                             </button>
                         </div>

@@ -17,7 +17,6 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Eliminar usuario</h1>
 
             
-            <app-user-container [user]="user()"/>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
                 @if (errorMessage().length > 0) {
@@ -27,6 +26,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
                     <app-success-alert [message]="successMessage()"/>
                 }
             }
+            <app-user-container [user]="user()"/>
             <div class="w-full flex flex-col gap-6">
                 <div>
                     <button (click)="onSubmitHandler()" [disabled]="loading()" class="p-3 bg-red-500 rounded-lg w-full text-white transition-all" type="button">
@@ -66,12 +66,12 @@ export default class DeleteUserModal {
         this.successMessage.set("");
         this.repository.delete(this.user().id).subscribe((result) => {
             setTimeout(() => {
-                this.loading.set(false);
                 if (result.length === 0) {
                     this.successMessage.set("Usuario eliminado correctamente");
                     this.pageService.getUsers();
                     return;
                 }
+                this.loading.set(false);
                 this.errorMessage.set(result);
             }, 1000);
         })

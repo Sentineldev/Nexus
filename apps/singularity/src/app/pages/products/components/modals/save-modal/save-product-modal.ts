@@ -9,6 +9,7 @@ import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../../../shared/alerts/success-alert";
 import ProductRepository from "../../../../../shared/interfaces/product-repository.interface";
 import ApiProductRepository from "../../../../../shared/repositories/api/product-api.repository";
+import { Loader } from "../../../../../shared/loader/loader";
 
 @Component({
     selector: "app-save-product-modal",
@@ -46,7 +47,7 @@ import ApiProductRepository from "../../../../../shared/repositories/api/product
         grid-area: 1 / 1 / 2 / 2;
         }
     `,
-    imports: [CustomDialog, DialogToggler, ErrorAlert, SuccessAlert, ReactiveFormsModule]
+    imports: [CustomDialog, DialogToggler, ErrorAlert, SuccessAlert, ReactiveFormsModule, Loader]
 })
 export default class SaveProductModal {
 

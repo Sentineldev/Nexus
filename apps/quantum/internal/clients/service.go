@@ -13,7 +13,7 @@ type ClientService struct {
 
 func NewClientService() *ClientService {
 	return &ClientService{
-		Repository: NewLocalClientRepository(),
+		Repository: NewDatabaseRepository(),
 	}
 }
 
@@ -40,7 +40,7 @@ func (service ClientService) Save(body SaveClientDto) error {
 
 func (service ClientService) Update(id string, body SaveClientDto) error {
 
-	client, err := service.Repository.GetByIdentification(body.Identification)
+	client, err := service.Repository.GetById(id)
 
 	if err != nil {
 		return echo.ErrNotFound

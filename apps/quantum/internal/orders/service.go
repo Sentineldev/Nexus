@@ -19,7 +19,7 @@ func NewOrdersService() *OrdersService {
 
 	return &OrdersService{
 		Repository:         NewOrdersLocalRepository(),
-		ProductsRepository: products.NewLocalRepository(),
+		ProductsRepository: products.NewDatabaseRepository(),
 		ClientService:      *clients.NewClientService(),
 	}
 }

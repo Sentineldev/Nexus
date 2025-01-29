@@ -15,8 +15,9 @@ import { Loader } from "../../shared/loader/loader";
             <app-loader color="secondary"/>
         }
         <div class="flex flex-col gap-4 p-1">
-            <app-clients-display [clients]="state().page.data"/>
+            
             @if (state().page.data.length !== 0) {
+                <app-clients-display [clients]="state().page.data"/>
                 <div class="self-center">
                     <app-paginator 
                     (pageChangeEvent)="pageChangeHandler($event)" 
@@ -25,6 +26,9 @@ import { Loader } from "../../shared/loader/loader";
                     [defaultPage]="state().page.meta.page" 
                     />
                 </div>
+            }
+            @if(state().page.data.length === 0 && !state().loading) {
+                <p class="text-slate-600">No hay clientes registrados...</p>
             }
         </div>
     </div>

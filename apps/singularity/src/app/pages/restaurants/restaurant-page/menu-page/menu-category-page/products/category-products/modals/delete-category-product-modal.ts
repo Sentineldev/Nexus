@@ -7,6 +7,7 @@ import { ErrorAlert } from "../../../../../../../../shared/alerts/error-alert";
 import CategoryProductsService from "../category-products.service";
 import CategoryProductRepository from "../../../../../../interfaces/category-product.repository";
 import ApiCategoryProductRepository from "../../../../../../../../shared/repositories/api/category-product-api.repository";
+import { SuccessAlert } from "../../../../../../../../shared/alerts/success-alert";
 
 @Component({
     selector: `app-delete-category-product-modal`,
@@ -17,10 +18,15 @@ import ApiCategoryProductRepository from "../../../../../../../../shared/reposit
             <div>
                 <h1 class="text-slate-700 text-[1.1rem] text-center font-sans">Remover producto</h1>
             </div>
-            <app-product-fieldset-container [product]="product()"/>
-            @if (errorMessage().length > 0) {
-                <app-error-alert [message]="errorMessage()"/>
+            @if (errorMessage().length > 0 || successMessage().length > 0) {
+                @if (errorMessage().length > 0) {
+                    <app-error-alert [message]="errorMessage()"/>
+                }
+                @if (successMessage().length > 0) {
+                    <app-success-alert [message]="successMessage()"/>
+                }
             }
+            <app-product-fieldset-container [product]="product()"/>
             <div>
                 <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="bg-red-500 p-3 w-full rounded-lg text-white font-sans">
                     @if (loading()) {
@@ -34,7 +40,7 @@ import ApiCategoryProductRepository from "../../../../../../../../shared/reposit
     </app-custom-dialog>
 
     `,
-    imports: [CustomDialog, ProductFieldsetContainer, Loader, ErrorAlert]
+    imports: [CustomDialog, ProductFieldsetContainer, Loader, ErrorAlert, SuccessAlert]
 })
 export default class DeleteCategoryProductModal {
 
@@ -58,13 +64,15 @@ export default class DeleteCategoryProductModal {
         this.loading.set(true);
         this.repository.delete(this.product().id).subscribe((result) => {
 
-            if (result.length === 0) {
-                this.successMessage.set("Eliminado correctamente");
-                this.categoriesPageService.refreshPage();
-                return;
-            }
-            this.loading.set(false);
-            this.errorMessage.set(result);
+            setTimeout(() => {
+                if (result.length === 0) {
+                    this.successMessage.set("Eliminado correctamente");
+                    this.categoriesPageService.refreshPage();
+                    return;
+                }
+                this.loading.set(false);
+                this.errorMessage.set(result);
+            }, 1000);
         })
     }
 }

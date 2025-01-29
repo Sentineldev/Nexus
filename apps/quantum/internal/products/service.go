@@ -14,7 +14,7 @@ type ProductService struct {
 
 func NewProductService() *ProductService {
 	return &ProductService{
-		Repository: NewLocalRepository(),
+		Repository: NewDatabaseRepository(),
 	}
 }
 

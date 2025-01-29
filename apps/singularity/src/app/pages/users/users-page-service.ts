@@ -37,10 +37,12 @@ export default class UsersPageService {
 
     getUsers() {
 
-        this.state.update((current) => ({...current, loading: true, users: [] }));
-        this.repository.getAll().subscribe((result) => {
-            this.state.update((current) => ({...current, users: result,  loading: false }));
-        })
+        this.state.update((current) => ({...current, loading: true }));
+        setTimeout(() => {
+            this.repository.getAll().subscribe((result) => {
+                this.state.update((current) => ({...current, users: result,  loading: false }));
+            })
+        }, 1000);
     }
 
 }

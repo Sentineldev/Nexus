@@ -15,7 +15,7 @@ type UserService struct {
 func NewUserService() *UserService {
 
 	return &UserService{
-		Repository: NewLocalUserRepository(),
+		Repository: NewDatabaseRepository(),
 	}
 }
 

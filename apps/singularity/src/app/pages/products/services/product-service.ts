@@ -52,8 +52,10 @@ export default class ProductService {
 
     getPage(filter: PageFilter<{}>) {
         this.state.update((current) => ({...current, loading: true }));
-        this.repository.getPage(filter).subscribe((result) => {
-            this.state.update((current) => ({ ...current, page: result, loading: false, filter: filter }));
-        });
+        setTimeout(() => {
+            this.repository.getPage(filter).subscribe((result) => {
+                this.state.update((current) => ({ ...current, page: result, loading: false, filter: filter }));
+            });
+        }, 1000);
     }
 }

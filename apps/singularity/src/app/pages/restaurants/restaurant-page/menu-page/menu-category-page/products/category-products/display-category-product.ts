@@ -28,7 +28,7 @@ import DialogToggler from "../../../../../../../shared/dialog/dialog-toggler";
     <app-dialog-toggler></app-dialog-toggler>
     <div class="relative">
         <div 
-        class="dropdown-toggler p-4 flex items-center transition-all hover:cursor-pointer }}">
+        class="dropdown-toggler p-2 flex items-center transition-all hover:cursor-pointer }}">
             <div class="flex-1 flex flex-col">
                 <p class="font-sans text-slate-700 text-[1.3rem]">{{product().product.name}}</p>
                 <p class="text-slate-500 text-sm">{{product().isActive ? "Activo" : "Inactivo"}}</p>
@@ -39,13 +39,13 @@ import DialogToggler from "../../../../../../../shared/dialog/dialog-toggler";
             <ul class="w-full">
                 <li>
                     <app-dialog-toggler [dialogId]="updateDialogId()">
-                        <div class="hover:bg-slate-200 p-3 w-full text-start font-sans text-sm">Actualizar</div>
+                        <div class="hover:bg-slate-200 p-3 w-44 text-start font-sans text-sm">Actualizar</div>
                     </app-dialog-toggler>
                     <!-- <button (click)="openModal('update')" class="hover:bg-slate-200 p-3 w-full text-start font-sans text-sm">Actualizar</button> -->
                 </li>
                 <li>
                     <app-dialog-toggler [dialogId]="deleteDialogId()">
-                        <div class="hover:bg-slate-200 p-3 w-full text-start font-sans text-sm">Remover</div>
+                        <div class="hover:bg-slate-200 p-3 w-44 text-start font-sans text-sm">Remover</div>
                     </app-dialog-toggler>
                     <!-- <button (click)="openModal('delete')" class="hover:bg-slate-200 p-3 text-start w-full font-sans text-sm">Remover</button> -->
                 </li>

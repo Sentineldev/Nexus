@@ -18,7 +18,7 @@ import { OrderProductState } from "./order-service";
         </div>
     </div> -->
     <button (click)="onClickHandler()" class="w-full  flex flex-col gap-1">
-        <div class="flex items-center justify-center ">
+        <div class="flex items-center justify-center w-full">
             <h2 class="flex-1 text-slate-800 text-lg text-start">{{product().product.product.name}}</h2>
             <p>{{product().quantity}}x</p>
         </div>

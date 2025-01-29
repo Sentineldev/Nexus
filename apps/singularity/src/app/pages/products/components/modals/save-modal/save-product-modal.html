@@ -37,7 +37,10 @@
                         </div>
                         
                         <div>
-                            <button [disabled]="loading()" class="bg-slate-700  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">Registrar</button>
+                            <button [disabled]="loading()" class="bg-slate-700  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">
+                                @if (loading()) { <app-loader/> }
+                                @if (!loading()) { Registrar }
+                            </button>
                         </div>
                     </form>
                 </div>

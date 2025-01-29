@@ -52,7 +52,6 @@ export default class CategoryProductsService {
         return this.state();
     }
     refreshPage() {
-        // this.state.update((current) => ({...current, page: {  ...current.page, data: [] } }))
         const filter = this.state().filter ;
         this.getPage(filter);
     }

@@ -17,7 +17,6 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Actualizar usuario</h1>
-            <app-user-container [user]="user()"/>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
                 @if (errorMessage().length > 0) {
@@ -27,6 +26,8 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
                     <app-success-alert [message]="successMessage()"/>
                 }
             }
+            <app-user-container [user]="user()"/>
+            
             <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
                     <label for="username">

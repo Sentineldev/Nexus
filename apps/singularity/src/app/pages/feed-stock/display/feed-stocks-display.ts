@@ -6,19 +6,11 @@ import FeedStockDisplay from "./feed-stock-display";
     selector: `app-feed-stocks-display`,
     template: `
     <div class="flex flex-col gap-4">
-        <div class="grid grid-cols-3 items-center gap-3">
-            <div>
-                <h1 class="text-2xl text-slate-600">Nombre</h1>
-            </div>
-            <div>
-                <h1 class="text-2xl text-slate-600">Unidad</h1>
-            </div>
-        </div>
-        <div class="flex flex-col gap-4">
-            @for (feedStock of feedStocks(); track feedStock.id) {
+        @for (feedStock of feedStocks(); track feedStock.id; let isLast = $last) {
+            <div [className]="!isLast && 'border-b py-2'">
                 <app-feed-stock-display [feedStock]="feedStock" />
-            }
-        </div>
+            </div>
+        }
     </div>
     `,
     imports: [FeedStockDisplay]
