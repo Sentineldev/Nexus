@@ -38,6 +38,12 @@ func CreateTables() {
 		"admin",
 		"$2a$14$jcp9oXAw1keAZ3g9hn7p8e1uBjYV7ME7E0kg9TmHg7pTCMC3Je6zK"
 	);
+
+	CREATE TABLE IF NOT EXISTS restaurant(
+		id TEXT PRIMARY KEY,
+		name TEXT NOT NULL UNIQUE,
+		is_active BOOLEAN NOT NULL DEFAULT true
+	);
 	`
 
 	if _, err := connection.Exec(sql); err != nil {

@@ -10,3 +10,13 @@ func IsStringNumber(str string) bool {
 
 	return true
 }
+
+func IsStringEmpty(str string) bool {
+
+	return len(str) == 0
+}
+
+func IsStringBoolean(str string) bool {
+
+	return str == "true" || str == "false"
+}

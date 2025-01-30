@@ -12,3 +12,14 @@ func ParseStringToInt64(str string) int64 {
 	return number
 
 }
+
+func ParseStringToBoolean(str string) bool {
+
+	value, err := strconv.ParseBool(str)
+
+	if err != nil {
+		return false
+	}
+	return value
+
+}

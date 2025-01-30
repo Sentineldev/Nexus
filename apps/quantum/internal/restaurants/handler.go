@@ -35,7 +35,7 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 func (handler RestaurantsHandler) Update(context echo.Context) error {
 
 	id := context.Param("id")
-	body := UpdateRestaurantDto{}
+	body := UpdateRestaurantHandlerBody{}
 
 	context.Bind(&body)
 
@@ -43,7 +43,7 @@ func (handler RestaurantsHandler) Update(context echo.Context) error {
 		return echo.ErrUnprocessableEntity
 	}
 
-	if err := handler.Service.Update(id, body); err != nil {
+	if err := handler.Service.Update(id, body.Parse()); err != nil {
 		return err
 	}
 

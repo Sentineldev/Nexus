@@ -14,7 +14,7 @@ type RestaurantService struct {
 func NewRestaurantService() *RestaurantService {
 
 	return &RestaurantService{
-		Repository: NewLocalRestaurantRepository(),
+		Repository: NewDatabaseRepository(),
 	}
 }
 
