@@ -39,6 +39,26 @@ func CreateTables() {
 		"$2a$14$jcp9oXAw1keAZ3g9hn7p8e1uBjYV7ME7E0kg9TmHg7pTCMC3Je6zK"
 	);
 
+
+	CREATE TABLE IF NOT EXISTS restaurant_order(
+		id TEXT PRIMARY KEY,
+		client_id TEXT NOT NULL,
+		order_type TEXT NOT NULL,
+		location TEXT NOT NULL,
+		total FLOAT default 0,
+		FOREIGN KEY(client_id) REFERENCES "client"(id)
+	);
+
+	CREATE TABLE IF NOT EXISTS order_product(
+		id TEXT PRIMARY KEY,
+		product_id TEXT NOT NULL,
+		order_id TEXT NOT NULL,
+		quantity INT default 0,
+		total FLOAT default 0,
+		FOREIGN KEY(product_id) REFERENCES"product"(id),
+		FOREIGN KEY(order_id) REFERENCES"restaurant_order"(id)
+	);
+
 	CREATE TABLE IF NOT EXISTS restaurant(
 		id TEXT PRIMARY KEY,
 		name TEXT NOT NULL UNIQUE,

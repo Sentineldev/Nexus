@@ -18,7 +18,7 @@ type OrdersService struct {
 func NewOrdersService() *OrdersService {
 
 	return &OrdersService{
-		Repository:         NewOrdersLocalRepository(),
+		Repository:         NewDatabaseRepository(),
 		ProductsRepository: products.NewDatabaseRepository(),
 		ClientService:      *clients.NewClientService(),
 	}
@@ -54,14 +54,15 @@ func (service OrdersService) Save(body SaveOrderDto) error {
 
 	for index, product := range body.Products {
 		auxProduct := products[index]
-		types.NewOrderProduct(
+		newOrderProduct := types.NewOrderProduct(
 			uuid.NewString(),
 			auxProduct.Name,
 			*newOrder,
 			auxProduct,
-			product.Count,
+			product.Quantity,
 			body.Total,
 		)
+		newOrderProducts = append(newOrderProducts, *newOrderProduct)
 	}
 
 	err = service.Repository.Save(*newOrder, newOrderProducts)

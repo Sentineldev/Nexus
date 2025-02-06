@@ -47,7 +47,7 @@ export default class RoomServiceModal {
 
             const body = value.room!;
 
-            this.service.setRoom(body);
+            this.service.setRoom(body.toString());
 
             DialogUtils.CloseModal(this.dialogId());
         }

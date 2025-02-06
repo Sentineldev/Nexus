@@ -28,17 +28,17 @@ type OrderProduct struct {
 	Order       Order   `json:"order"`
 	Product     Product `json:"product"`
 	Description string  `json:"description"`
-	Count       int64   `json:"count"`
+	Quantity    int64   `json:"quantity"`
 	Total       float64 `json:"total"`
 }
 
-func NewOrderProduct(id, description string, order Order, product Product, count int64, total float64) *OrderProduct {
+func NewOrderProduct(id, description string, order Order, product Product, quantity int64, total float64) *OrderProduct {
 	return &OrderProduct{
 		id,
 		order,
 		product,
 		description,
-		count,
+		quantity,
 		total,
 	}
 }
