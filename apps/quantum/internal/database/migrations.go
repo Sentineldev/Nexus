@@ -64,6 +64,33 @@ func CreateTables() {
 		name TEXT NOT NULL UNIQUE,
 		is_active BOOLEAN NOT NULL DEFAULT true
 	);
+
+	CREATE TABLE IF NOT EXISTS menu(
+		id TEXT PRIMARY KEY,
+		restaurant_id TEXT NOT NULL,
+		name TEXT NOT NULL,
+		is_active BOOLEAN default false,
+		FOREIGN KEY(restaurant_id) REFERENCES "restaurant"(id)
+	);
+
+	CREATE TABLE IF NOT EXISTS menu_category(
+		id TEXT PRIMARY KEY,
+		menu_id TEXT NOT NULL,
+		name TEXT NOT NULL,
+		is_active BOOLEAN default false,
+		FOREIGN KEY(menu_id) REFERENCES "menu"(id)
+	);
+
+
+	CREATE TABLE IF NOT EXISTS category_product(
+		id TEXT PRIMARY KEY,
+		product_id TEXT NOT NULL,
+		category_id TEXT NOT NULL,
+		price FLOAT default 0,
+		is_active BOOLEAN default false,
+		FOREIGN KEY(product_id) REFERENCES"product"(id),
+		FOREIGN KEY(category_id) REFERENCES"menu_category"(id)
+	);
 	`
 
 	if _, err := connection.Exec(sql); err != nil {

@@ -16,7 +16,7 @@ type MenuCategoryService struct {
 func NewMenuCategoryService() *MenuCategoryService {
 
 	return &MenuCategoryService{
-		Repository:  NewLocalMenuCategoryRepository(),
+		Repository:  NewDatabaseRepository(),
 		MenuService: *menus.NewMenuService(),
 	}
 }

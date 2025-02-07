@@ -17,7 +17,7 @@ type CategoryProductService struct {
 
 func NewCategoryProductService() *CategoryProductService {
 	return &CategoryProductService{
-		Repository:      NewLocalCategoryProductRepository(),
+		Repository:      NewDatabaseRepository(),
 		ProductService:  *products.NewProductService(),
 		CategoryService: *menu_category.NewMenuCategoryService(),
 	}
