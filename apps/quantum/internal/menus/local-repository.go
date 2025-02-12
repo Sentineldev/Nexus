@@ -51,10 +51,10 @@ func (repository LocalMenuRepository) GetById(id string) (types.Menu, error) {
 	return types.Menu{}, errors.New("menu not found")
 }
 
-func (repository LocalMenuRepository) GetByName(name string) (types.Menu, error) {
+func (repository LocalMenuRepository) GetByName(restaurantId, name string) (types.Menu, error) {
 
 	for _, v := range internal.MENUS {
-		if v.Name == name {
+		if v.Name == name && v.Restaurant.Id == restaurantId {
 			return v, nil
 		}
 	}

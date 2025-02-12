@@ -23,7 +23,7 @@ func NewMenuService() *MenuService {
 
 func (service MenuService) Save(body SaveMenuDto) error {
 
-	if _, err := service.Repository.GetByName(body.Name); err == nil {
+	if _, err := service.Repository.GetByName(body.RestaurantId, body.Name); err == nil {
 		return echo.ErrConflict
 	}
 
@@ -50,7 +50,7 @@ func (service MenuService) Update(id string, body UpdateMenuDto) error {
 		return err
 	}
 	if body.Name != menu.Name {
-		if _, err := service.Repository.GetByName(body.Name); err == nil {
+		if _, err := service.Repository.GetByName(menu.Restaurant.Id, body.Name); err == nil {
 			return echo.ErrConflict
 		}
 	}

@@ -37,6 +37,7 @@ func (repository DatabaseRepository) Update(body types.CategoryProduct) error {
 	sql := `
 	UPDATE category_product
 	SET price = ?, is_active = ?
+	WHERE id = ?
 	`
 
 	_, err := repository.DataSource.Exec(sql, body.Price, body.IsActive, body.Id)
@@ -224,53 +225,107 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 	data := types.PageData[types.CategoryProduct]{}
 	data.Data = []types.CategoryProduct{}
 	offset := (body.Page - 1) * body.PageSize
-	sql := `
-	SELECT 
-		cp.id, cp.price, cp.is_active,
-		p.id,p.name,p.description,
-		mc.id, mc.name, mc.is_active,
-		m.id, m.name, m.is_active,
-		r.id,r.name,r.is_active
-	FROM
-		category_product cp
-	JOIN product p ON p.id =  cp.product_id
-	JOIN menu_category mc ON mc.id = cp.category_id
-	JOIN menu m ON m.id = mc.menu_id
-	JOIN restaurant r ON r.id = m.restaurant_id
-	
-	WHERE r.id = ? LIMIT ? OFFSET ?
-	`
-	rows, err := repository.DataSource.Query(sql, body.Filter.RestaurantId, body.PageSize, offset)
 
-	if err != nil {
-		return data
-	}
-	defer rows.Close()
+	var sql string
 
-	for rows.Next() {
+	if len(body.Filter.MenuId) > 0 {
+		sql = `
+		SELECT 
+			cp.id, cp.price, cp.is_active,
+			p.id,p.name,p.description,
+			mc.id, mc.name, mc.is_active,
+			m.id, m.name, m.is_active,
+			r.id,r.name,r.is_active
+		FROM
+			category_product cp
+		JOIN product p ON p.id =  cp.product_id
+		JOIN menu_category mc ON mc.id = cp.category_id
+		JOIN menu m ON m.id = mc.menu_id
+		JOIN restaurant r ON r.id = m.restaurant_id
+		
+		WHERE r.id = ? AND m.id = ?  LIMIT ? OFFSET ?
+		`
+		rows, err := repository.DataSource.Query(sql, body.Filter.RestaurantId, body.Filter.MenuId, body.PageSize, offset)
 
-		record := types.CategoryProduct{}
-		err := rows.Scan(
-			&record.Id,
-			&record.Price,
-			&record.IsActive,
-			&record.Product.Id,
-			&record.Product.Name,
-			&record.Product.Description,
-			&record.Category.Id,
-			&record.Category.Name,
-			&record.Category.IsActive,
-			&record.Category.Menu.Id,
-			&record.Category.Menu.Name,
-			&record.Category.Menu.IsActive,
-			&record.Category.Menu.Restaurant.Id,
-			&record.Category.Menu.Restaurant.Name,
-			&record.Category.Menu.Restaurant.IsActive,
-		)
 		if err != nil {
 			return data
 		}
-		data.Data = append(data.Data, record)
+		defer rows.Close()
+
+		for rows.Next() {
+
+			record := types.CategoryProduct{}
+			err := rows.Scan(
+				&record.Id,
+				&record.Price,
+				&record.IsActive,
+				&record.Product.Id,
+				&record.Product.Name,
+				&record.Product.Description,
+				&record.Category.Id,
+				&record.Category.Name,
+				&record.Category.IsActive,
+				&record.Category.Menu.Id,
+				&record.Category.Menu.Name,
+				&record.Category.Menu.IsActive,
+				&record.Category.Menu.Restaurant.Id,
+				&record.Category.Menu.Restaurant.Name,
+				&record.Category.Menu.Restaurant.IsActive,
+			)
+			if err != nil {
+				return data
+			}
+			data.Data = append(data.Data, record)
+		}
+	} else {
+		sql = `
+		SELECT 
+			cp.id, cp.price, cp.is_active,
+			p.id,p.name,p.description,
+			mc.id, mc.name, mc.is_active,
+			m.id, m.name, m.is_active,
+			r.id,r.name,r.is_active
+		FROM
+			category_product cp
+		JOIN product p ON p.id =  cp.product_id
+		JOIN menu_category mc ON mc.id = cp.category_id
+		JOIN menu m ON m.id = mc.menu_id
+		JOIN restaurant r ON r.id = m.restaurant_id
+		
+		WHERE r.id = ? LIMIT ? OFFSET ?
+		`
+		rows, err := repository.DataSource.Query(sql, body.Filter.RestaurantId, body.PageSize, offset)
+
+		if err != nil {
+			return data
+		}
+		defer rows.Close()
+
+		for rows.Next() {
+
+			record := types.CategoryProduct{}
+			err := rows.Scan(
+				&record.Id,
+				&record.Price,
+				&record.IsActive,
+				&record.Product.Id,
+				&record.Product.Name,
+				&record.Product.Description,
+				&record.Category.Id,
+				&record.Category.Name,
+				&record.Category.IsActive,
+				&record.Category.Menu.Id,
+				&record.Category.Menu.Name,
+				&record.Category.Menu.IsActive,
+				&record.Category.Menu.Restaurant.Id,
+				&record.Category.Menu.Restaurant.Name,
+				&record.Category.Menu.Restaurant.IsActive,
+			)
+			if err != nil {
+				return data
+			}
+			data.Data = append(data.Data, record)
+		}
 	}
 
 	data.Meta.Page = body.Page
@@ -286,9 +341,12 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 		`
 		row := repository.DataSource.QueryRow(sql, body.Filter.RestaurantId, body.Filter.MenuId)
 
-		err = row.Scan(
+		err := row.Scan(
 			&data.Meta.DataSize,
 		)
+		if err != nil {
+			return data
+		}
 
 	} else {
 		sql = `
@@ -298,12 +356,13 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 			WHERE m.restaurant_id = ?
 		`
 		row := repository.DataSource.QueryRow(sql, body.Filter.RestaurantId)
-		err = row.Scan(
+		err := row.Scan(
 			&data.Meta.DataSize,
 		)
+		if err != nil {
+			return data
+		}
 	}
-	if err != nil {
-		return data
-	}
+
 	return data
 }

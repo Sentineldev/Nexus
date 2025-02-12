@@ -64,7 +64,7 @@ func (repository DatabaseRepository) Delete(body string) error {
 	return nil
 }
 
-func (repository DatabaseRepository) GetByName(body string) (types.Menu, error) {
+func (repository DatabaseRepository) GetByName(restaurantId, body string) (types.Menu, error) {
 
 	result := types.Menu{}
 	sql := `
@@ -74,10 +74,10 @@ func (repository DatabaseRepository) GetByName(body string) (types.Menu, error) 
 	FROM
 		menu m
 	JOIN restaurant r on r.id = m.restaurant_id
-	WHERE m.name = ?
+	WHERE m.name = ? AND r.id = ?
 	`
 
-	row := repository.DataSource.QueryRow(sql, body)
+	row := repository.DataSource.QueryRow(sql, body, restaurantId)
 
 	err := row.Scan(
 		&result.Id,
