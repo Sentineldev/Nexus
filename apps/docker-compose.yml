@@ -1,0 +1,19 @@
+services:
+  server:
+    build: 
+      context: ./quantum
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./quantum:/app
+  client:
+    build: 
+      context: ./singularity
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./singularity:/app
+      - /app/node_modules
+  
