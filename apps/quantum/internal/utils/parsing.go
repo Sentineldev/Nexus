@@ -13,6 +13,16 @@ func ParseStringToInt64(str string) int64 {
 
 }
 
+func ParseStringToFloat64(str string) float64 {
+
+	number, err := strconv.ParseFloat(str, 64)
+
+	if err != nil {
+		return 0.00
+	}
+	return number
+}
+
 func ParseStringToBoolean(str string) bool {
 
 	value, err := strconv.ParseBool(str)

@@ -1,14 +1,15 @@
 package utils
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func IsStringNumber(str string) bool {
 
-	if _, err := strconv.ParseFloat(str, 64); err != nil {
-		return false
-	}
+	_, err := strconv.ParseFloat(str, 64)
 
-	return true
+	return err == nil
 }
 
 func IsStringEmpty(str string) bool {
@@ -18,5 +19,7 @@ func IsStringEmpty(str string) bool {
 
 func IsStringBoolean(str string) bool {
 
-	return str == "true" || str == "false"
+	value := strings.ToLower(str)
+
+	return value == "true" || value == "false"
 }
