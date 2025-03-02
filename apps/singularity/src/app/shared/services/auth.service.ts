@@ -43,6 +43,7 @@ export default class AuthService {
     }
 
     logIn(token: string) {
+
         const data: JwtData = jwtDecode(token);
 
         if (!JwtUtils.IsJwtExpired(data.exp)) {

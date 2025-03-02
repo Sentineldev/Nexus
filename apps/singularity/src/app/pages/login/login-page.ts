@@ -9,10 +9,7 @@ import { Loader } from "../../shared/loader/loader";
 import { ErrorAlert } from "../../shared/alerts/error-alert";
 import { catchError, finalize, map, of } from 'rxjs';
 import { Result } from '../../shared/types/result';
-import { jwtDecode } from 'jwt-decode';
-import { JwtData } from '../../shared/types/jwt';
 import LocalStorageUtils from '../../utils/local-storage';
-import JwtUtils from '../../utils/jwt';
 @Component({
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, Loader, ErrorAlert],
@@ -65,28 +62,42 @@ export default class LoginPage implements OnInit {
 
       this.loading.set(true);
       this.errorMessage.set("");
-      this.repository.logIn(body).pipe(
-        map((success) => {
+      this.repository.logIn(body).subscribe((result) => {
 
-          const token = success.body;
-
+        if (result.status === 201) {
+          const token = result.body;
           this.authService.logIn(token);
 
-
           LocalStorageUtils.SaveToken(token);
-
           this.router.navigate(['/admin']);
+          return;
+        }
 
-        }),
-        catchError((error: Result<string>) => {
-          this.errorMessage.set(error.message)
-          return of()
-        })
-        ,
-        finalize(() => {
-          this.loading.set(false);
-        })
-      ).subscribe()
+        this.loading.set(false);
+        this.errorMessage.set(result.message);
+      })
+      // this.repository.logIn(body).pipe(
+      //   map((success) => {
+
+      //     const token = success.body;
+
+      //     this.authService.logIn(token);
+
+
+      //     LocalStorageUtils.SaveToken(token);
+
+      //     this.router.navigate(['/admin']);
+
+      //   }),
+      //   catchError((error: Result<string>) => {
+      //     this.errorMessage.set(error.message)
+      //     return of()
+      //   })
+      //   ,
+      //   finalize(() => {
+      //     this.loading.set(false);
+      //   })
+      // ).subscribe()
     }
 
   }

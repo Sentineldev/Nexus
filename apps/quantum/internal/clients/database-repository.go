@@ -11,7 +11,6 @@ type DatabaseRepository struct {
 }
 
 func NewDatabaseRepository() *DatabaseRepository {
-
 	return &DatabaseRepository{
 		DataSource: database.GetConnection(),
 	}
