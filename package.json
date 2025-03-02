@@ -1,0 +1,30 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "description": "This is repo where my thesis project its supposed to be.😶‍🌫️ When? Nobody knows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Hello world!",
+    "dev:backend": "cd apps/quantum && air .",
+    "dev:frontend": "cd apps/singularity && npm run start",
+    "dev": "npm-run-all --parallel dev:backend dev:frontend",
+    "build": "Something here to build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sentineldev/Nexus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sentineldev/Nexus/issues"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "homepage": "https://github.com/Sentineldev/Nexus#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
