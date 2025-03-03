@@ -1,6 +1,6 @@
 <div>
     <app-custom-dialog [dialogId]="dialogId()">
-        <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
+        <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
                     <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Actualizar producto</h1>
@@ -16,7 +16,7 @@
                         <div>
                             <label [htmlFor]="'name'" class="flex flex-col gap-1">
                                 <p class="text-slate-700">Nombre</p>
-                                <input autocomplete="on" formControlName="name" type="text" name="name" id="name" class="border rounded p-1">
+                                <input autocomplete="on" formControlName="name" type="text" name="name" id="name" class="border rounded-sm p-1">
                             </label>
                             @if (formGroup.dirty && formGroup.controls.name.dirty && formGroup.controls.name.getError("required")) {
                                 <p class="text-red-500">Ingrese el nombre</p>
@@ -25,7 +25,7 @@
                         <div>
                             <label [htmlFor]="'description'" class="flex flex-col gap-1">
                                 <p class="text-slate-700">Descripcion</p>
-                                <input autocomplete="on" formControlName="description" type="text" name="description" id="description" class="border rounded p-1">
+                                <input autocomplete="on" formControlName="description" type="text" name="description" id="description" class="border rounded-sm p-1">
                             </label>
                             @if ( formGroup.dirty && formGroup.controls.description.dirty && formGroup.controls.description.getError("required")) {
                                 <p class="text-red-500">Ingrese la descripcion</p>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div>
-                        <button [disabled]="loading()" class="bg-slate-700 text-white w-full p-2 rounded font-sans text-[1.1rem]">
+                        <button [disabled]="loading()" class="bg-slate-700 text-white w-full p-2 rounded-sm font-sans text-[1.1rem]">
                             @if (loading()) {
                                 <app-loader/>
                             }

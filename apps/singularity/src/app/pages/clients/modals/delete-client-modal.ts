@@ -14,7 +14,7 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
     template: `
     <div>
     <app-custom-dialog [dialogId]="dialogId()">
-        <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
+        <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
                     <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Eliminar Cliente</h1>

@@ -16,7 +16,7 @@ import ApiCategoryProductRepository from "../../../../../../../shared/repositori
     template: `
     
     <app-custom-dialog (onCloseEvent)="onCloseHandler()"  [dialogId]="dialogId()">
-        <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[400px] flex flex-col gap-4">
+        <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[400px] flex flex-col gap-4">
             <div>
                 <h1 class="text-slate-700 text-[1.1rem] text-center font-sans">Agregar al menu</h1>
             </div>
@@ -36,7 +36,7 @@ import ApiCategoryProductRepository from "../../../../../../../shared/repositori
                     <div>
                         <label [htmlFor]="'price'" class="flex flex-col gap-1" for="name">
                             <p class="text-slate-700">Precio</p>
-                            <input class="border rounded border-slate-300 outline-none p-1" type="text" id="price" name="price" formControlName="price">
+                            <input class="border rounded-sm border-slate-300 outline-hidden p-1" type="text" id="price" name="price" formControlName="price">
                         </label>
                     </div>
                     <div>

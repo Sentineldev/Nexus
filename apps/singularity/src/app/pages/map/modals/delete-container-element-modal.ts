@@ -8,7 +8,7 @@ import MapService from "../map.service";
     template: `
     
     <app-custom-dialog [dialogId]="dialogId()">
-        <div class="bg-white shadow flex flex-col gap-2 p-4 rounded-xl m-auto w-full lg:w-[480px]">
+        <div class="bg-white shadow-sm flex flex-col gap-2 p-4 rounded-xl m-auto w-full lg:w-[480px]">
             <div>
                 <h1 class="text-center font-bold">Eliminar Elemento</h1>
             </div>

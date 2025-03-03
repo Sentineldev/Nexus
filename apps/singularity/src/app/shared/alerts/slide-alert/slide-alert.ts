@@ -4,7 +4,7 @@ import { Component, input } from "@angular/core";
     selector: `app-slide-alert`,
     styleUrl: `./slide-alert.css`,
     template: `
-    <div class="flex gap-2 items-center shadow bg-white h-20 w-80 rounded-lg absolute bottom-0 transition-all duration-500">
+    <div class="flex gap-2 items-center shadow-sm bg-white h-20 w-80 rounded-lg absolute bottom-0 transition-all duration-500">
         <div class="w-[24px] h-full bg-orange-300 rounded-l-lg"></div>
         <div class="flex flex-col flex-1 p-3">
             <h1 class="font-bold">Alerta</h1>

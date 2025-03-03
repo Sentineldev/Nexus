@@ -31,11 +31,11 @@ import ApiCategoryProductRepository from "../../../../../../../../../shared/repo
             </label> 
             <label for="price">
                 <p>Precio</p>
-                <input type="text" name="price" id="price" formControlName="price" class="border p-1 outline-none font-sans text-lg w-full rounded border-slate-400"/>
+                <input type="text" name="price" id="price" formControlName="price" class="border p-1 outline-hidden font-sans text-lg w-full rounded-sm border-slate-400"/>
             </label>
         </div>
         <div>
-            <button [disabled]="loading()" type="submit" class="bg-slate-700 text-white font-sans p-3 w-full rounded">
+            <button [disabled]="loading()" type="submit" class="bg-slate-700 text-white font-sans p-3 w-full rounded-sm">
                 @if (loading()) {
                     <app-loader/>
                 } @else {

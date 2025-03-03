@@ -16,7 +16,7 @@ import ClientsService from "../client.service";
     template: `
     <div>
         <app-custom-dialog [dialogId]="dialogId">
-            <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
+            <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-col gap-4">
                         <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Registrar Cliente</h1>
@@ -35,7 +35,7 @@ import ClientsService from "../client.service";
                                 <div>
                                     <label for="fullName" class="flex flex-col gap-1">
                                         <p class="text-slate-700">Nombre</p>
-                                        <input autocomplete="on" formControlName="fullName" type="text" name="fullName" id="fullName" class="border rounded p-1">
+                                        <input autocomplete="on" formControlName="fullName" type="text" name="fullName" id="fullName" class="border rounded-sm p-1">
                                     </label>
                                     @if (formGroup.dirty && formGroup.controls.fullName.dirty && formGroup.controls.fullName.getError("required")) {
                                         <p class="text-red-500">Ingrese el nombre</p>
@@ -45,8 +45,8 @@ import ClientsService from "../client.service";
                                     <div>
                                         <label for="identificationType" class="flex flex-col gap-1">
                                             <p class="text-slate-700">Tipo</p>
-                                            <!-- <input autocomplete="on" formControlName="identificationType" type="text" name="name" id="name" class="border rounded p-1"> -->
-                                            <select formControlName="identificationType" class="border p-1 text-lg rounded" name="identificationType" id="identificationType">
+                                            <!-- <input autocomplete="on" formControlName="identificationType" type="text" name="name" id="name" class="border rounded-sm p-1"> -->
+                                            <select formControlName="identificationType" class="border p-1 text-lg rounded-sm" name="identificationType" id="identificationType">
                                                 <option value="V">Venezolano</option>
                                                 <option value="G">Gubernamental</option>
                                                 <option value="J">Juridico</option>
@@ -60,7 +60,7 @@ import ClientsService from "../client.service";
                                     <div>
                                         <label for="identification" class="flex flex-col gap-1">
                                             <p class="text-slate-700">Identificacion</p>
-                                            <input autocomplete="on" formControlName="identification" type="text" name="identification" id="identification" class="border rounded p-1">
+                                            <input autocomplete="on" formControlName="identification" type="text" name="identification" id="identification" class="border rounded-sm p-1">
                                         </label>
                                         @if (formGroup.dirty && formGroup.controls.identification.dirty && formGroup.controls.identification.getError("required")) {
                                             <p class="text-red-500">Ingrese la identificacion</p>
@@ -71,7 +71,7 @@ import ClientsService from "../client.service";
                                 <div>
                                     <label for="email" class="flex flex-col gap-1">
                                         <p class="text-slate-700">Email</p>
-                                        <input autocomplete="on" formControlName="email" type="text" name="email" id="email" class="border rounded p-1">
+                                        <input autocomplete="on" formControlName="email" type="text" name="email" id="email" class="border rounded-sm p-1">
                                     </label>
                                     @if (formGroup.dirty && formGroup.controls.email.dirty && formGroup.controls.email.getError("required")) {
                                         <p class="text-red-500">Ingrese una direccion de correo valida</p>
@@ -92,7 +92,7 @@ import ClientsService from "../client.service";
             </div>
         </app-custom-dialog>
         <app-dialog-toggler [dialogId]="dialogId">
-            <div class="bg-slate-700 border-none text-white p-3 rounded-lg transition-all hover:opacity-90 outline-none">
+            <div class="bg-slate-700 border-none text-white p-3 rounded-lg transition-all hover:opacity-90 outline-hidden">
                 <h1>Registrar Cliente</h1>
             </div>
         </app-dialog-toggler>

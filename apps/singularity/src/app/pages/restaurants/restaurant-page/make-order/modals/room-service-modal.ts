@@ -15,7 +15,7 @@ import DialogUtils from "../../../../../utils/dialog";
                 <div class="flex flex-col gap-4">
                     <label for="room">
                         <p class="font-sans text-slate-700">Habitacion</p>
-                        <input step="0" formControlName="room" class="border border-slate-300 rounded w-full outline-none p-1" type="number" name="room" id="room"/>
+                        <input step="0" formControlName="room" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="number" name="room" id="room"/>
                     </label>
                 </div>
                 <div>

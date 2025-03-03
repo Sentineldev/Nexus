@@ -30,11 +30,11 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
                 <div class="flex flex-col gap-4">
                     <label for="username">
                         <p class="font-sans text-slate-700">Nombre de Usuario</p>
-                        <input formControlName="username" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="username" id="username"/>
+                        <input formControlName="username" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="text" name="username" id="username"/>
                     </label>
                     <label for="passsword">
                         <p class="font-sans text-slate-700">Clave</p>
-                        <input formControlName="password" class="border border-slate-300 rounded w-full outline-none p-1" type="password" name="passsword" id="passsword"/>
+                        <input formControlName="password" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="password" name="passsword" id="passsword"/>
                     </label>
                 </div>
                 <div>

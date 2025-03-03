@@ -8,7 +8,7 @@ import CustomDialog from "../../../shared/dialog/custom-dialog";
     selector: `app-edit-map-container-modal`,
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
-        <div class="bg-white shadow flex flex-col gap-2 p-4 rounded-xl m-auto w-full lg:w-[480px]">
+        <div class="bg-white shadow-sm flex flex-col gap-2 p-4 rounded-xl m-auto w-full lg:w-[480px]">
             <div>
                 <h1 class="text-center font-bold">Modificar Contenedor</h1>
             </div>
@@ -19,13 +19,13 @@ import CustomDialog from "../../../shared/dialog/custom-dialog";
                             <div>
                                 <label for="width" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Width</p>
-                                    <input formControlName="width" type="text" name="width" id="width" class="border rounded p-1">
+                                    <input formControlName="width" type="text" name="width" id="width" class="border rounded-sm p-1">
                                 </label>
                             </div>
                             <div>
                                 <label for="height" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Height</p>
-                                    <input formControlName="height" type="text" name="height" id="height" class="border rounded p-1">
+                                    <input formControlName="height" type="text" name="height" id="height" class="border rounded-sm p-1">
                                 </label>
                             </div>
                             
@@ -33,20 +33,20 @@ import CustomDialog from "../../../shared/dialog/custom-dialog";
                         <div>
                             <label for="label" class="flex flex-col gap-1">
                                 <p class="text-slate-700">Color</p>
-                                <input formControlName="label" type="text" name="label" id="label" class="border rounded p-1 w-full">
+                                <input formControlName="label" type="text" name="label" id="label" class="border rounded-sm p-1 w-full">
                             </label>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="color" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Background Color</p>
-                                    <input formControlName="color" type="color" name="color" id="color" class="border rounded p-1 w-full">
+                                    <input formControlName="color" type="color" name="color" id="color" class="border rounded-sm p-1 w-full">
                                 </label>
                             </div>
                             <div>
                                 <label for="fontColor" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Font Color</p>
-                                    <input formControlName="fontColor" type="color" name="fontColor" id="fontColor" class="border rounded p-1 w-full">
+                                    <input formControlName="fontColor" type="color" name="fontColor" id="fontColor" class="border rounded-sm p-1 w-full">
                                 </label>
                             </div>
                         </div>

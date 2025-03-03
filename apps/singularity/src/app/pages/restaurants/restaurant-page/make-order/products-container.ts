@@ -17,10 +17,10 @@ import MakeOrderPageService from "./make-order-page.service";
         <div class="flex items-center gap-2 p-1">
             <label for="search" class="flex-1 flex items-center gap-2 border-b py-2 border-slate-300 cursor-text">
                 <img src="/svg/search-svgrepo-com.svg" alt="search icon svg" width="24" height="24">
-                <input (change)="inputChangeHandler($event)" class="outline-none w-full bg-transparent" type="search" name="search" id="search">
+                <input (change)="inputChangeHandler($event)" class="outline-hidden w-full bg-transparent" type="search" name="search" id="search">
             </label>
             <label for="select-menu">
-                <select (change)="selectChangeHandler($event)" class="hover:cursor-pointer outline-none p-3 bg-transparent" name="select-menu" id="select-menu">
+                <select (change)="selectChangeHandler($event)" class="hover:cursor-pointer outline-hidden p-3 bg-transparent" name="select-menu" id="select-menu">
                     <option value="">Seleccionar Menu</option>
                     @for (menu of state().menus; track $index) {
                         <option [value]="menu.id">{{ menu.name }}</option>

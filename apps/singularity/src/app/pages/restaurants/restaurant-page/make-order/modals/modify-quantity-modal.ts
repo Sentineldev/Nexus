@@ -13,9 +13,9 @@ import DialogUtils from "../../../../../utils/dialog";
             <h1 class="text-center font-sans text-xl font-bold text-slate-600">Modificar cantidad</h1>
             <div class="flex flex-col gap-1">
                 <div>
-                    <button (click)="onRemoveHandler()" type="button" class="bg-red-600 p-2 rounded text-white">Remover</button>
+                    <button (click)="onRemoveHandler()" type="button" class="bg-red-600 p-2 rounded-sm text-white">Remover</button>
                 </div>
-                <fieldset class="border p-2 rounded">
+                <fieldset class="border p-2 rounded-sm">
                     <legend>Producto Seleccionado</legend>
                     <div class="flex items-center justify-center">
                         <p class="flex-1 text-slate-800">{{product().product.product.name}}</p>
@@ -30,7 +30,7 @@ import DialogUtils from "../../../../../utils/dialog";
                 <div class="flex flex-col gap-4">
                     <label for="quantity">
                         <p class="font-sans text-slate-700">Ingresar cantidad</p>
-                        <input  autofocus="true" step="0" formControlName="quantity" class="border border-slate-300 rounded w-full outline-none p-1" type="number" name="quantity" id="quantity"/>
+                        <input  autofocus="true" step="0" formControlName="quantity" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="number" name="quantity" id="quantity"/>
                     </label>
                 </div>
                 <div>

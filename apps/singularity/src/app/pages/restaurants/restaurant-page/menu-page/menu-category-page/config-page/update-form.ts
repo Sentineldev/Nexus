@@ -18,7 +18,7 @@ import ApiMenuCategoryRepository from "../../../../../../shared/repositories/api
             <p class="font-sans text-lg text-slate-700">Habilitar / Deshabilitar</p>
         </label>    
         <label for="name">
-            <input formControlName="name" class="border-b border-slate-700 font-sans text-lg w-full outline-none py-2" type="text" name="name" id="name" placeholder="Nombre">
+            <input formControlName="name" class="border-b border-slate-700 font-sans text-lg w-full outline-hidden py-2" type="text" name="name" id="name" placeholder="Nombre">
         </label>
         <div>
             <button [disabled]="loading()" type="submit" class="bg-slate-700 text-white font-sans text-lg rounded-lg p-3 px-6">

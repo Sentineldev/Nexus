@@ -11,7 +11,7 @@
                 <div>
                     <label for="username" class="flex flex-col gap-1">
                         <p class="font-sans text-cyan-500">Nombre de usuario</p>
-                        <input autocomplete="on" formControlName="username" class="border-b border-cyan-500 w-full p-1 outline-none" type="text" name="username" id="username">
+                        <input autocomplete="on" formControlName="username" class="border-b border-cyan-500 w-full p-1 outline-hidden" type="text" name="username" id="username">
                     </label>
                     @if (formGroup.controls.username.getError("required") && formGroup.controls.username.dirty) {
                         <p class="text-red-500">Ingrese el nombre de usuario</p>
@@ -20,14 +20,14 @@
                 <div>
                     <label for="password" class="flex flex-col gap-1">
                         <p class="font-sans text-cyan-500">Contraseña</p>
-                        <input autocomplete="on" formControlName="password" class="border-b border-cyan-500 w-full  p-1 outline-none" type="password" name="password" id="password">
+                        <input autocomplete="on" formControlName="password" class="border-b border-cyan-500 w-full  p-1 outline-hidden" type="password" name="password" id="password">
                     </label>
                     @if (formGroup.controls.password.getError("required") && formGroup.controls.password.dirty) {
                         <p class="text-red-500">Ingrese la contraseña</p>
                     }
                 </div>
                 <div>
-                    <button [disabled]="loading()" type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow font-sans text-[1.2rem]">
+                    <button [disabled]="loading()" type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow-sm font-sans text-[1.2rem]">
                         @if (loading()) {
                             <app-loader/>
                         } @else {
@@ -61,7 +61,7 @@
                     <div>
                         <label for="username" class="flex flex-col gap-1">
                             <p class="font-sans text-cyan-500">Nombre de usuario</p>
-                            <input autocomplete="on" formControlName="username" class="border-b border-cyan-500 w-full p-1 outline-none" type="text" name="username" id="username">
+                            <input autocomplete="on" formControlName="username" class="border-b border-cyan-500 w-full p-1 outline-hidden" type="text" name="username" id="username">
                         </label>
                         @if (formGroup.controls.username.getError("required") && formGroup.controls.username.dirty) {
                             <p class="text-red-500">Ingrese el nombre de usuario</p>
@@ -70,7 +70,7 @@
                     <div>
                         <label for="password" class="flex flex-col gap-1">
                             <p class="font-sans text-cyan-500">Contraseña</p>
-                            <input autocomplete="on" formControlName="password" class="border-b border-cyan-500 w-full  p-1 outline-none" type="password" name="password" id="password">
+                            <input autocomplete="on" formControlName="password" class="border-b border-cyan-500 w-full  p-1 outline-hidden" type="password" name="password" id="password">
                         </label>
                         @if (formGroup.controls.password.getError("required") && formGroup.controls.password.dirty) {
                             <p class="text-red-500">Ingrese la contraseña</p>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div>
-                    <button [disabled]="loading()" type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow font-sans text-[1.2rem]">
+                    <button [disabled]="loading()" type="submit" class="bg-cyan-500 text-white p-2 px-6 rounded-md border w-full border-none shadow-sm font-sans text-[1.2rem]">
                         @if (loading()) {
                             <app-loader/>
                         } @else {

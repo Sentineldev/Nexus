@@ -13,7 +13,7 @@ import { Loader } from "../../../shared/loader/loader";
     selector: `app-save-feed-stock-modal`,
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
-        <div class="bg-white shadow p-4 rounded-xl m-auto w-full lg:w-[380px]">
+        <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
                     <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Crear Ingrediente</h1>
@@ -32,7 +32,7 @@ import { Loader } from "../../../shared/loader/loader";
                             <div>
                                 <label for="name" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Nombre</p>
-                                    <input autocomplete="on" formControlName="name" type="text" name="name" id="name" class="border rounded p-1">
+                                    <input autocomplete="on" formControlName="name" type="text" name="name" id="name" class="border rounded-sm p-1">
                                 </label>
                                 @if (formGroup.dirty && formGroup.controls.name.dirty && formGroup.controls.name.getError("required")) {
                                     <p class="text-red-500">Ingrese el nombre</p>
@@ -41,7 +41,7 @@ import { Loader } from "../../../shared/loader/loader";
                             <div>
                                 <label for="identificationType" class="flex flex-col gap-1">
                                     <p class="text-slate-700">Tipo</p>
-                                    <select formControlName="unit" class="border p-1 text-lg rounded" name="unit" id="unit">
+                                    <select formControlName="unit" class="border p-1 text-lg rounded-sm" name="unit" id="unit">
                                         <option selected value="">Selecciona una unidad</option>    
                                         <option value="KG">Kilos</option>
                                         <option value="LT">Litros</option>

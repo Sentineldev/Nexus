@@ -17,7 +17,7 @@ import DialogUtils from "../../../../../utils/dialog";
                 <div class="flex flex-col gap-4">
                     <label for="identification">
                         <p class="font-sans text-slate-700">Ingresar identificacion</p>
-                        <input formControlName="identification" class="border border-slate-300 rounded w-full outline-none p-1" type="tel" name="identification" id="identification"/>
+                        <input formControlName="identification" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="tel" name="identification" id="identification"/>
                     </label>
                 </div>
                 <div>
@@ -29,7 +29,7 @@ import DialogUtils from "../../../../../utils/dialog";
                     <div class="flex flex-col gap-4">
                         <label for="name">
                             <p class="font-sans text-slate-700">Nombre</p>
-                            <input autofocus="true" formControlName="name" class="border border-slate-300 rounded w-full outline-none p-1" type="text" name="name" id="name"/>
+                            <input autofocus="true" formControlName="name" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="text" name="name" id="name"/>
                         </label>
                     </div>
                     <div>

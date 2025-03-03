@@ -12,7 +12,7 @@ import { Loader } from "../../shared/loader/loader";
     <div class="p-6 flex flex-col gap-4">
         <app-save-feed-stock-modal dialogId="save-feed-stock-modal-id"/>
         <app-dialog-toggler dialogId="save-feed-stock-modal-id">
-            <div class="p-3 bg-slate-700 text-white rounded-lg outline-none">Crear Ingrediente</div>
+            <div class="p-3 bg-slate-700 text-white rounded-lg outline-hidden">Crear Ingrediente</div>
         </app-dialog-toggler>
         @if (state().loading) {
             <app-loader color="secondary"/>

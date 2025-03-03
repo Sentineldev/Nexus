@@ -28,7 +28,7 @@ import OrderService from "./order-service";
             <div class="h-full p-2 bg-gray-100 overflow-auto">
                 <app-products-container/>
             </div>
-            <div class="flex-grow h-full p-2 bg-gray-100 overflow-auto">
+            <div class="grow h-full p-2 bg-gray-100 overflow-auto">
                 <app-options-container/>
             </div>
         </div>

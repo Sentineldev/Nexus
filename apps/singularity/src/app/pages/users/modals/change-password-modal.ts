@@ -30,7 +30,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
                 <div class="flex flex-col gap-4">
                     <label for="password">
                         <p class="font-sans text-slate-700">Ingrese nueva clave</p>
-                        <input formControlName="password" class="border border-slate-300 rounded w-full outline-none p-1" type="password" name="password" id="password"/>
+                        <input formControlName="password" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="password" name="password" id="password"/>
                     </label>
                 </div>
                 <div>
