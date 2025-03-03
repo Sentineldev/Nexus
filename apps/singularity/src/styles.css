@@ -36,6 +36,8 @@
   width: 100%;
   border: none;
   transition: 0.2s all;
+  cursor: pointer;
+  border-radius: 1rem;
 }
 .btn:active {
   transform: scale(0.95);
