@@ -21,16 +21,22 @@ import MapSelectorPage from './pages/map/map';
 import OrdersPage from './pages/restaurants/restaurant-page/orders-page/orders-page';
 import MakeOrderPage from './pages/restaurants/restaurant-page/make-order/make-order';
 import FeedStockPage from './pages/feed-stock/feed-stock.page';
+import RestaurantsPage2 from './pages/restaurants-2/restaurants-page';
+import AppIndex from './pages/main';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
     {
         path: "admin",
-        component: IndexPage,
+        component: AppIndex,
         children: [
+            // {
+            //     path: "",
+            //     component: RestaurantsPage,
+            // },
             {
                 path: "",
-                component: RestaurantsPage,
+                component: RestaurantsPage2,
             },
             {
                 path: "map",

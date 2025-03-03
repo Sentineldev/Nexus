@@ -1,0 +1,26 @@
+<div class="h-screen flex bg-secondary">
+    <nav class="w-[300px] bg-white border flex flex-col">
+        <div class="border-b p-4 py-2">
+            <h1 class="font-bold text-primary text-3xl p-3">Nexus</h1>
+        </div>
+        <div class="p-4 py-5 pt-6 h-full">
+            <ul class="flex flex-col gap-2">
+                <li>
+                    <a class=" bg-red-100 rounded-lg text-primary block  font-medium text-lg p-3" href="#">Restaurantes</a>
+                </li>
+                <li>
+                    <a class="block text-neutral font-medium text-lg p-3" href="#">Clientes</a>
+                </li>
+                <li>
+                    <a class="block text-neutral font-medium text-lg p-3" href="#">Usuarios</a>
+                </li>
+                <li>
+                    <a class="block text-neutral font-medium text-lg p-3" href="#">Materia Prima</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="flex-1">
+        <router-outlet/>
+    </div>
+</div>

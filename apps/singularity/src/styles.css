@@ -18,3 +18,29 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+
+@theme {
+  --color-primary: #FF4E15;
+  --color-primary-500: #e13700;
+  --color-secondary: #f0f2ef;
+  --color-neutral: var(--color-slate-400);
+}
+
+
+.btn {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  font-weight: bold;
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  width: 100%;
+  border: none;
+  transition: 0.2s all;
+}
+.btn:active {
+  transform: scale(0.95);
+  background-color: var(--color-primary-500);
+}
+.btn:disabled {
+  background-color: var(--color-primary-500);
+}

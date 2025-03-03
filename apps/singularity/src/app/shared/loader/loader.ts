@@ -11,6 +11,8 @@ import { Component, computed, input } from '@angular/core';
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+    padding: 0;
+    margin: 0;
     }
 
     @keyframes rotation {

@@ -10,9 +10,11 @@ import { ErrorAlert } from "../../shared/alerts/error-alert";
 import { catchError, finalize, map, of } from 'rxjs';
 import { Result } from '../../shared/types/result';
 import LocalStorageUtils from '../../utils/local-storage';
+import ReactiveFormInput from "../../shared/forms/reactive-input";
+import ReactiveFormPasswordInput from "../../shared/forms/reactive-password-input";
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule, Loader, ErrorAlert],
+  imports: [ReactiveFormsModule, Loader, ErrorAlert, ReactiveFormInput, ReactiveFormPasswordInput],
   templateUrl: './login-page.html',
 })
 export default class LoginPage implements OnInit {
@@ -22,10 +24,12 @@ export default class LoginPage implements OnInit {
   public errorMessage = signal("");
   public loading = signal(false);
 
+
   public formGroup = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+
 
   constructor(
     private readonly router: Router,
@@ -64,40 +68,20 @@ export default class LoginPage implements OnInit {
       this.errorMessage.set("");
       this.repository.logIn(body).subscribe((result) => {
 
-        if (result.status === 201) {
-          const token = result.body;
-          this.authService.logIn(token);
-
-          LocalStorageUtils.SaveToken(token);
-          this.router.navigate(['/admin']);
-          return;
-        }
-
-        this.loading.set(false);
-        this.errorMessage.set(result.message);
-      })
-      // this.repository.logIn(body).pipe(
-      //   map((success) => {
-
-      //     const token = success.body;
-
-      //     this.authService.logIn(token);
-
-
-      //     LocalStorageUtils.SaveToken(token);
-
-      //     this.router.navigate(['/admin']);
-
-      //   }),
-      //   catchError((error: Result<string>) => {
-      //     this.errorMessage.set(error.message)
-      //     return of()
-      //   })
-      //   ,
-      //   finalize(() => {
-      //     this.loading.set(false);
-      //   })
-      // ).subscribe()
+        setTimeout(() => {
+          if (result.status === 201) {
+            const token = result.body;
+            this.authService.logIn(token);
+  
+            LocalStorageUtils.SaveToken(token);
+            this.router.navigate(['/admin']);
+            return;
+          }
+  
+          this.loading.set(false);
+          this.errorMessage.set(result.message);
+        }, 1000);
+      });
     }
 
   }
