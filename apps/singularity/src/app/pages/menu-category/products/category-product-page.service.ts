@@ -14,7 +14,7 @@ type ServiceState = {
 @Injectable({
     providedIn: "root"
 })
-export default class CategoryProductPageService {
+export default class CategoryProductPageService2 {
 
 
     private state: WritableSignal<ServiceState>;
