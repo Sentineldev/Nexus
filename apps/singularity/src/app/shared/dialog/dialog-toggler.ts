@@ -3,7 +3,7 @@ import { Component, input } from '@angular/core';
   selector: 'app-dialog-toggler',
   imports: [],
   template: `
-    <button class="w-max" (click)="onClickHandler()" type="button">
+    <button class="w-full" (click)="onClickHandler()" type="button">
         <ng-content></ng-content>
     </button>
   `,

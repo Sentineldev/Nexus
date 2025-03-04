@@ -1,27 +1,65 @@
-import { Component, input } from "@angular/core";
+import { Component, computed, input } from "@angular/core";
 import CategoryProduct from "../../../restaurants/classes/category-product.class";
+import DialogToggler from "../../../../shared/dialog/dialog-toggler";
+import UpdateMenuProductModal from "../modals/update-menu-product-modal";
 
 @Component({
     selector: `app-category-product-display2`,
+    styles: `
+
+        .dropdown {
+            display: none;
+        }
+        .dropdown-toggler:hover + .dropdown {
+            display: inherit;
+
+        }
+        .dropdown:hover ~ .dropdown-toggler {
+            background-color: red;
+        }
+        .dropdown:hover {
+            display: inherit;
+        }
+    `,
     template: `
-    <div class="flex items-center">
-        <div class="flex-1">
-            <h1 class="font-medium text-2xl text-black">{{product().product.name}}</h1>
-            <p class="text-neutral text-lg">
-                @if (product().isActive) {
-                    Activo
-                } @else {
-                    Inactivo
-                }
-            </p>
+    <app-update-menu-product-modal [product]="product()" [dialogId]="updateDialogId()"/>
+    <div class="relative">
+        <div class="dropdown-toggler p-2 flex items-center transition-all hover:cursor-pointer">
+            <div class="flex-1">
+                <h1 class="font-medium text-2xl text-black">{{product().product.name}}</h1>
+                <p class="text-neutral text-lg">
+                    @if (product().isActive) {
+                        Activo
+                    } @else {
+                        Inactivo
+                    }
+                </p>
+            </div>
+            <div>
+                <p class="font-medium text-primary text-2xl">{{product().price}} $</p>
+            </div>
         </div>
-        <div>
-            <p class="font-medium text-primary text-2xl">{{product().price}} $</p>
+        <div class="dropdown absolute  bg-white shadow-lg border w-44 z-50">
+            <ul class="w-full">
+                <li>
+                    <app-dialog-toggler [dialogId]="updateDialogId()">
+                        <div class="p-3 w-44 text-start font-sans text-sm cursor-pointer">Actualizar</div>
+                    </app-dialog-toggler>
+                </li>
+                <!-- <li>
+                    <app-dialog-toggler [dialogId]="deleteDialogId()">
+                        <div class="hover:bg-slate-200 p-3 w-44 text-start font-sans text-sm">Remover</div>
+                    </app-dialog-toggler>
+                </li> -->
+            </ul>
         </div>
     </div>
-    `
+    `,
+    imports: [DialogToggler, UpdateMenuProductModal]
 })
 export default class CategoryProductDisplay2 {
 
     public product = input.required<CategoryProduct>();
+
+    public updateDialogId = computed(() => `update-menu-product-unique-${this.product().id}`);
 }

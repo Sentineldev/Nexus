@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from "@angular/core";
+import { Component, computed, OnInit, signal } from "@angular/core";
 import CategoryProductsDisplay2 from "./display/category-products-display";
 import CategoryProductPageService2 from "./category-product-page.service";
 import MenuCategoryPageService2 from "../menu-category-page.service";
@@ -15,15 +15,31 @@ import ProductOptionsDisplay from "./display/products-display";
             </div>
         }
         @if (!state().loading && !productsState().loading) {
-            <div class="grid grid-cols-2 p-12 gap-6 h-full ">
-                <div class="border-r px-4 border-neutral">
-                    @if (state().products) {
-                        <app-category-products-display2 [products]="state().products!.data"/>
-                    }
+            <div class="flex flex-col gap-8 p-12 h-full">
+                <div class="w-fit">
+                    <button (click)="onShowProductsHandler()" type="button" class="btn">Agregar producto</button>
                 </div>
-                <div class="px-4">
-                    @if (productsState().page) {
-                        <app-product-options-display [products]="productsState().page.data"/>
+                <div class="grid grid-cols-3 gap-6 h-full transition-all">
+
+                    <div [className]="showProducts() ? ' pr-4 border-r border-neutral col-span-2 flex flex-col gap-8' : 'pr-4 border-neutral col-span-3 flex flex-col gap-8'">
+                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
+                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="text" name="" id="" class="outline-none" placeholder="Buscar en el menu... ">
+                        </div>
+                        @if (state().products) {
+                            <app-category-products-display2 [products]="state().products!.data"/>
+                        }
+                    </div>
+                    @if (showProducts()) {
+                        <div class="flex flex-col gap-8">
+                            <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-full">
+                                <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                                <input type="text" name="" id="" class="outline-none" placeholder="Buscar productos... ">
+                            </div>
+                            @if (productsState().page) {
+                                <app-product-options-display [products]="productsState().page.data"/>
+                            }
+                        </div>
                     }
                 </div>
             </div>
@@ -38,6 +54,8 @@ export default class CategoryProductsPage implements OnInit {
     public productsState = computed(() => this.productsService.getState());
 
 
+    public showProducts = signal(false);
+
 
     constructor(
         private readonly service: CategoryProductPageService2, 
@@ -48,5 +66,9 @@ export default class CategoryProductsPage implements OnInit {
     ngOnInit(): void {
         this.service.getPage({ filter: { categoryId: this.category().id }, page: 1, pageSize: 5 });
         this.productsService.getPage(this.productsState().filter);
+    }
+
+    onShowProductsHandler() {
+        this.showProducts.update((current) => !current);
     }
 }
