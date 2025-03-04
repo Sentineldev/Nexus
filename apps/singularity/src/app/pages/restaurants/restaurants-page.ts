@@ -1,8 +1,7 @@
 import { Component, computed, OnInit, signal } from "@angular/core";
-import { SaveRestaurant } from "./dto/restaurant.dto";
 import RestaurantService from "./restaurant.service";
-import RestaurantsDisplay from "./components/display/restaurants-display";
 import SaveRestaurantForm from "./components/forms/save-restaurant-form";
+import RestaurantsDisplay from "../restaurants-2/display/restaurants-display";
 
 @Component({
     selector: 'app-restaurants-page',

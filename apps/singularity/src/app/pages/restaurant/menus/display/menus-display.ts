@@ -1,7 +1,7 @@
 import { Component, EventEmitter, input, Output, signal } from "@angular/core";
-import Menu from "../../../classes/menu.class";
-import { SaveMenuCategory } from "../../../dto/menu-category.dto";
 import MenuDisplay from "./menu-display";
+import Menu from "../../../restaurants/classes/menu.class";
+import { SaveMenuCategory } from "../../../restaurants/dto/menu-category.dto";
 
 @Component({
     selector: `app-menus-display`,

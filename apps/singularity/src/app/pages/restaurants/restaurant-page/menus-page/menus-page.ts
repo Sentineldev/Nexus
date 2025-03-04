@@ -1,9 +1,9 @@
 import { Component, computed, OnInit } from "@angular/core";
-import MenusDisplay from "./display/menus-display";
 import RestaurantPageService from "../restaurant-page.service";
 import MenusPageService from "./menus-page.service";
 import SaveMenuForm from "./forms/save-menu-form";
 import { Loader } from "../../../../shared/loader/loader";
+import MenusDisplay from "../../../restaurant/menus/display/menus-display";
 
 @Component({
     selector: `app-restaurant-menus-page`,

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, input, Output } from "@angular/core";
+import { Component, computed, input} from "@angular/core";
 import { RouterLink } from "@angular/router";
-import Menu from "../../../classes/menu.class";
+import Menu from "../../../restaurants/classes/menu.class";
 
 @Component({
     selector: `app-menu-display`,
@@ -11,7 +11,7 @@ import Menu from "../../../classes/menu.class";
     }
     `,
     template: `
-    <a routerLink="/admin/restaurant/{{menu().restaurant.id}}/menu/{{menu().id}}/categories" class=" flex items-end hover:opacity-90 transition-all ">
+    <a [routerLink]="routerLink()" class=" flex items-end hover:opacity-90 transition-all ">
         <div class="relative h-[180px] rounded-xl">
             <img src="/placeholder-menu.jpg" class="rounded-xl h-[180px] min-w-[280px] w-[500px] object-cover">
             <div class="gradient-selector w-full h-full flex items-end p-7 absolute top-0 rounded-xl">
@@ -28,5 +28,8 @@ import Menu from "../../../classes/menu.class";
 export default class MenuDisplay {
 
     public menu = input.required<Menu>();
+
+
+    public routerLink = computed(() => `/admin/restaurant/${this.menu().restaurant.id}/menu/${this.menu().id}/categories`)
 
 }

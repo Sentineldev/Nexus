@@ -18,10 +18,20 @@ export default class CustomDialog {
     this.onCloseEvent.emit();
   }
 
+  onContainerClick(event: MouseEvent) {
+    const dialog = (event.target as HTMLDivElement).parentElement as HTMLDialogElement;
+
+    if (!dialog) {
+      return;
+    }
+    if (!(dialog.tagName === "DIALOG")) {
+      return;
+    }
+    dialog.close();
+
+  }
+
   onClickHandler(event: MouseEvent) {
-
-    
-
 
 
     const dialog = event.target as HTMLDialogElement;
@@ -32,12 +42,6 @@ export default class CustomDialog {
     }
 
     dialog.close();
-    // var rect = dialog.getBoundingClientRect();
-    // var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-    //   rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-    // if (!isInDialog) {
-    //   dialog.close();
-    // }
   }
 
 }

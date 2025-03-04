@@ -1,3 +1,8 @@
-<dialog  (click)="onClickHandler($event)" (close)="onCloseHandler()" id="{{ dialogId() }}" class=" bg-red-300 overflow-auto transition-all w-full h-full bg-transparent backdrop:bg-[rgba(0,0,0,0.4)] outline-hidden">
-    <ng-content></ng-content>
-</dialog>
+<dialog  
+    (click)="onClickHandler($event)" 
+    (close)="onCloseHandler()" id="{{ dialogId() }}" 
+    class=" bg-transparent z-auto  overflow-auto transition-all w-full h-full backdrop:bg-[rgba(0,0,0,0.4)] m-auto outline-hidden">
+    <div (click)="onContainerClick($event)" class="flex w-full h-full items-center justify-center">
+        <ng-content></ng-content>
+    </div>
+ </dialog>

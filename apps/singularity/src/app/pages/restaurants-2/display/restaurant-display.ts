@@ -1,6 +1,6 @@
-import { Component, input } from "@angular/core";
+import { Component, computed, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import Restaurant from "../../classes/restaurant.class";
+import Restaurant from "../../restaurants/classes/restaurant.class";
 
 @Component({
     selector: 'app-restaurant-display',
@@ -12,7 +12,7 @@ import Restaurant from "../../classes/restaurant.class";
     }
     `,
     template: `
-        <a routerLink="/admin/restaurant/{{restaurant().id}}/home/menus" class="transition-all hover:opacity-90 duration-300 border-slate-200 lg:w-[380px] flex flex-col gap-2 border-none">
+        <a [routerLink]="routerLink()" class="transition-all hover:opacity-90 duration-300 border-slate-200 lg:w-[380px] flex flex-col gap-2 border-none">
             <div class="border-none min-h-[180px] relative">
                 <img src="/default-restaurant-img.jpg" class="rounded-xl opacity-80" alt="Restaurant Placeholder Image">
                 <div class="gradient-selector w-full h-full flex items-center rounded-xl absolute bottom-0">
@@ -28,4 +28,7 @@ import Restaurant from "../../classes/restaurant.class";
 export default class RestaurantDisplay {  
 
     public restaurant = input.required<Restaurant>();
+
+    public routerLink = computed(() => `/admin/restaurant/${this.restaurant().id}/menus`)
+    // public routerLink = computed(() => `/admin/restaurant/${this.restaurant().id}/home/menus`)
 }

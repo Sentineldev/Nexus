@@ -1,6 +1,6 @@
 import { Component, computed, OnInit } from "@angular/core";
 import MenuPageService from "../menu-page.service";
-import CategoriesDisplay from "./display/categories";
+import CategoriesDisplay from "../../../../menu/categories/display/categories";
 import SaveMenuCategoryForm from "./save-menu-category/save-menu-category-form";
 import CategoriesPageService from "./categories-page.service";
 import { Loader } from "../../../../../shared/loader/loader";

@@ -1,22 +1,24 @@
-import { Component, Inject, input, signal } from "@angular/core";
-import CustomDialog from "../../shared/dialog/custom-dialog";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import ReactiveFormInput from "../../shared/forms/reactive-input";
-import RestaurantsPageService from "./restaurants-page.service";
-import RestaurantRepository from "../restaurants/interfaces/restaurant-repository.interface";
-import ApiRestaurantRepository from "../../shared/repositories/api/restaurant-api.repository";
-import { SaveRestaurant } from "../restaurants/dto/restaurant.dto";
-import { ErrorAlert } from "../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../shared/alerts/success-alert";
-import { Loader } from "../../shared/loader/loader";
+import { Component, input, signal, Inject } from "@angular/core";
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
+import { ErrorAlert } from "../../../shared/alerts/error-alert";
+import { SuccessAlert } from "../../../shared/alerts/success-alert";
+import CustomDialog from "../../../shared/dialog/custom-dialog";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import { Loader } from "../../../shared/loader/loader";
+import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
+import Restaurant from "../../restaurants/classes/restaurant.class";
+import { SaveMenu } from "../../restaurants/dto/menu.dto";
+import MenusService from "./menus.service";
+
 
 @Component({
-    selector: `app-create-restaurant-modal`,
+    selector: `app-create-menu-modal`,
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="shadow-xl bg-white rounded-xl p-6  w-full lg:w-[450px] flex flex-col gap-6">
             <div>
-                <h1 class="text-black font-medium text-center text-xl">Crear Restaurante</h1>
+                <h1 class="text-black font-medium text-center text-xl">Crear Menu</h1>
             </div>
 
             @if (errorMessage().length > 0 || successMessage().length > 0) {
@@ -53,8 +55,10 @@ import { Loader } from "../../shared/loader/loader";
     `,
     imports: [CustomDialog, ReactiveFormsModule, ReactiveFormInput, ErrorAlert, SuccessAlert, Loader]
 })
-export default class CreateRestaurantModal {
+export default class CreateMenuModal {
 
+
+    public restaurant = input.required<Restaurant>();
     public dialogId = input.required<string>();
 
     public errorMessage = signal<string>("");
@@ -66,9 +70,9 @@ export default class CreateRestaurantModal {
     });
 
     constructor(
-        private readonly service: RestaurantsPageService,
-        @Inject(ApiRestaurantRepository)
-        private readonly repository: RestaurantRepository,
+        private readonly service: MenusService,
+        @Inject(ApiMenuRepository)
+        private readonly repository: MenuRepository,
     ) {}
 
 
@@ -78,7 +82,8 @@ export default class CreateRestaurantModal {
             this.errorMessage.set("");
             this.successMessage.set("");
             const value = this.form.value;
-            const body: SaveRestaurant = {
+            const body: SaveMenu = {
+                restaurantId: this.restaurant().id,
                 name: value.name!
             };
 
@@ -89,7 +94,7 @@ export default class CreateRestaurantModal {
                     if (result.length === 0) {
                         this.form.reset();
                         this.successMessage.set("Creado correctamente");
-                        this.service.fetch();
+                        this.service.getMenus();
                         return;
                     }
                     this.errorMessage.set(result);

@@ -1,19 +1,19 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
 import RestaurantRepository from "../restaurants/interfaces/restaurant-repository.interface";
 import ApiRestaurantRepository from "../../shared/repositories/api/restaurant-api.repository";
-import { PageData, PageFilter } from "../../shared/types/pagination";
 import Restaurant from "../restaurants/classes/restaurant.class";
 
 
 type ServiceState = {
     loading: boolean;
-    data: PageData<Restaurant> | undefined;
-    filter: PageFilter<{}>;
+    restaurant: Restaurant | undefined;
+    hasError: boolean;
 };
+
 @Injectable({
     providedIn: "root"
 })
-export default class RestaurantsPageService {
+export default class RestaurantPageService2 {
 
 
     private state: WritableSignal<ServiceState>;
@@ -21,39 +21,37 @@ export default class RestaurantsPageService {
         @Inject(ApiRestaurantRepository)
         private readonly repository: RestaurantRepository
     ) {
-
         this.state = signal<ServiceState>({
-            data: undefined,
-            loading: false,
-            filter: {
-                page: 1,
-                pageSize: 5,
-                filter: {}
-            }
+            restaurant: undefined,
+            loading: true,
+            hasError: false,
         });
-
-        this.fetch();
     }
+
+
     getState() {
         return this.state();
     }
+    getRestaurant() {
 
+        const restaurant =  this.state().restaurant;
 
-    fetch() {
-        this.getPage(this.state().filter);
+        if (restaurant) {
+            return restaurant;
+        }
+        throw new Error(); 
     }
-
-    getPage(filter: PageFilter<{}>) {
-
-
+    loadRestaurant(id: string) {
         this.state.update((current) => ({...current, loading: true}));
-        this.repository.getPage(filter).subscribe((result) => {
+        this.repository.getById(id).subscribe((restaurant) => {
             setTimeout(() => {
-                this.state.update((current) => {
-                    return { ...current, data: result, loading: false, filter }
-                });
+                if (restaurant) {
+                    this.state.update((current) => ({...current, restaurant, loading: false, hasError: false }));
+                    return;
+                }
+                this.state.update((current) => ({ ...current, loading: false, hasError: true, restaurant: undefined }));
             }, 1000);
-        });
-
+        })
     }
+
 }

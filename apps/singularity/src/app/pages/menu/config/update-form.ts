@@ -1,27 +1,31 @@
 import { Component, Inject, input, OnInit, signal } from "@angular/core";
-import Menu from "../../../classes/menu.class";
+import Menu from "../../restaurants/classes/menu.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Loader } from "../../../../../shared/loader/loader";
-import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
-import MenuRepository from "../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.repository";
-import { UpdateMenu } from "../../../dto/menu.dto";
+import { Loader } from "../../../shared/loader/loader";
+import { ErrorAlert } from "../../../shared/alerts/error-alert";
+import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
+import { UpdateMenu } from "../../restaurants/dto/menu.dto";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
 
 @Component({
     selector: `app-update-menu-form`,
-    imports: [ReactiveFormsModule, Loader, ErrorAlert],
+    imports: [ReactiveFormsModule, ErrorAlert, Loader, ReactiveFormInput],
     template: `
     
     <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="flex flex-col gap-6">
         <label for="is_active" class="flex items-center gap-2  text-wrap ">
-            <input formControlName="isActive" class="h-6 w-6" type="checkbox" name="is_active" id="is_active">
-            <p class="font-sans text-lg text-slate-700">Habilitar / Deshabilitar</p>
+            <input formControlName="isActive" class="h-6 w-6 accent-primary" type="checkbox" name="is_active" id="is_active">
+            <p class="font-sans text-lg text-black font-medium">Habilitar / Deshabilitar</p>
         </label>    
-        <label for="name">
-            <input formControlName="name" class="border-b border-slate-700 font-sans text-lg w-full outline-hidden py-2" type="text" name="name" id="name" placeholder="Nombre">
-        </label>
-        <div>
-            <button [disabled]="loading()" type="submit" class="bg-slate-700 text-white font-sans text-lg rounded-lg p-3 px-6">
+        <app-reactive-form-input
+        id="name"
+        label="Nombre"
+        [errors]="{ required: 'No puedes dejar este campo vacio' }"
+        [control]="formGroup.controls.name"
+        />
+        <div class="w-fit">
+            <button [disabled]="loading()" type="submit" class="btn">
                 @if (loading()) {
                     <app-loader/>
                 } @else {

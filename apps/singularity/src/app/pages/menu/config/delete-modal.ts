@@ -1,11 +1,11 @@
 import { Component, computed, Inject, input, signal } from "@angular/core";
-import Menu from "../../../classes/menu.class";
-import DialogToggler from "../../../../../shared/dialog/dialog-toggler";
-import CustomDialog from "../../../../../shared/dialog/custom-dialog";
-import { ErrorAlert } from "../../../../../shared/alerts/error-alert";
-import { Loader } from "../../../../../shared/loader/loader";
-import MenuRepository from "../../../interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.repository";
+import Menu from "../../restaurants/classes/menu.class";
+import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import CustomDialog from "../../../shared/dialog/custom-dialog";
+import { ErrorAlert } from "../../../shared/alerts/error-alert";
+import { Loader } from "../../../shared/loader/loader";
+import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
 
 @Component({
     selector: `app-delete-menu-modal`,
@@ -26,7 +26,7 @@ import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.r
                 </div>
             </fieldset>
             <div>
-                <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="bg-red-500 p-3 w-full rounded-lg text-white font-sans">
+                <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="btn">
                     @if (loading()) {
                         <app-loader/>
                     } @else {
@@ -37,7 +37,7 @@ import ApiMenuRepository from "../../../../../shared/repositories/api/menu-api.r
         </div>
     </app-custom-dialog>
     <app-dialog-toggler [dialogId]="dialogId()">
-        <div class="hover:opacity-60 transition-all flex items-center gap-2">
+        <div class="hover:opacity-60 transition-all flex items-center gap-2 cursor-pointer">
             <img src="./svg/trash-svgrepo-com-red.svg" alt="trash icon" width="28" height="28">
             <p class="text-red-500 font-sans text-lg">Eliminar Menu</p>
         </div>

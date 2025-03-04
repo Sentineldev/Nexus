@@ -1,7 +1,7 @@
 import { Component, EventEmitter, input, Output, output } from "@angular/core";
 import CustomDialog from "../../../../../../../../../shared/dialog/custom-dialog";
 import CategoryProduct from "../../../../../../../classes/category-product.class";
-import UpdateMenuCategoryForm from "../../../../config-page/update-form";
+import UpdateMenuCategoryForm from "../../../../../../../../menu-category/config/update-form";
 import UpdateCategoryProductForm from "./update-form";
 import ProductFieldsetContainer from "../product-fieldset-container";
 

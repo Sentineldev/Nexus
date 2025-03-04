@@ -1,11 +1,11 @@
 import { Component, computed } from "@angular/core";
-import MenuCategoryPageService from "../menu-category-page.service";
 import UpdateMenuCategoryForm from "./update-form";
+import MenuCategoryPageService2 from "../menu-category-page.service";
 
 @Component({
     selector: `app-menu-category-config-page`,
     template: `
-    <div class="py-4">
+    <div class="p-12">
         <app-update-menu-category-form [category]="category()"/>
     </div>
     `,
@@ -18,6 +18,6 @@ export default class MenuCategoryConfigPage {
     public category = computed(() => this.menuCategoryService.getCategory());
 
     constructor(
-        private readonly menuCategoryService: MenuCategoryPageService
+        private readonly menuCategoryService: MenuCategoryPageService2
     ) {}
 }

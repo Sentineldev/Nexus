@@ -2,9 +2,9 @@ import { Component, computed } from "@angular/core";
 import TopBar2 from "../../shared/topbar2/top-bar-2";
 import RestaurantsPageService from "./restaurants-page.service";
 import { Loader } from "../../shared/loader/loader";
-import RestaurantsDisplay from "../restaurants/components/display/restaurants-display";
 import DialogToggler from "../../shared/dialog/dialog-toggler";
 import CreateRestaurantModal from "./create-restaurant-modal";
+import RestaurantsDisplay from "./display/restaurants-display";
 
 @Component({
     selector: `app-restaurants-page-2`,
@@ -20,7 +20,10 @@ import CreateRestaurantModal from "./create-restaurant-modal";
                 <div class="w-full flex flex-col gap-8">
                     <div class="flex">
                         <div class="flex-1">
-                            <input type="text" name="" id="" class="border p-3 rounded-lg border-slate-300 outline-none" placeholder="Buscar restaurante ">
+                            <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
+                                <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                                <input type="text" name="" id="" class="outline-none" placeholder="Buscar restaurante ">
+                            </div>
                         </div>
                         <div>
                             <app-dialog-toggler dialogId="create-restaurant-modal">
@@ -34,7 +37,7 @@ import CreateRestaurantModal from "./create-restaurant-modal";
         </div>
     </div>
     `,
-    imports: [TopBar2, Loader, RestaurantsDisplay, DialogToggler, CreateRestaurantModal],
+    imports: [TopBar2, Loader, DialogToggler, CreateRestaurantModal, RestaurantsDisplay],
 })
 export default class RestaurantsPage2 {
 

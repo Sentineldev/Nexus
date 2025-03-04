@@ -6,20 +6,17 @@ import RestaurantUpdateForm from "./update-form";
     selector: `app-restaurant-config-page`,
     template: `
 
-    <div class="flex flex-col gap-4 p-2 pt-4">
+    <div class="flex flex-col gap-4 p-12">
         <!-- <app-restaurant-top-hero [restaurant]="restaurant()"/> -->
         <app-restaurant-update-form [restaurant]="restaurant()"/>
     </div>
     `,
     imports: [RestaurantUpdateForm]
 })
-export default class RestaurantConfigPage implements OnInit {
+export default class RestaurantConfigPage  {
     public restaurant = computed(() => this.restaurantPageService.getRestaurant());
 
     constructor(
         private readonly restaurantPageService: RestaurantPageService
     ) {}
-    ngOnInit(): void {
-        this.restaurantPageService.stopLoading();
-    }
 }
