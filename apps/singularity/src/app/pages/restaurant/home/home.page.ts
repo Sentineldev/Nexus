@@ -1,7 +1,7 @@
 import { Component, computed } from "@angular/core";
 import RestaurantPageService2 from "../restaurant-page.service";
 import TopBar2 from "../../../shared/topbar2/top-bar-2";
-import { RouterLink, RouterOutlet} from "@angular/router";
+import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 
 @Component({
     selector: `app-restaurant-home-page`,
@@ -11,13 +11,10 @@ import { RouterLink, RouterOutlet} from "@angular/router";
         <div class="bg-white ">
             <ul class="flex gap-0">
                 <li>
-                    <a class="block border-primary border-b-2 py-5 px-8 text-xl">Dashboard</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="menusUrl()" class="block py-5 px-8 text-xl">Menus</a>    
                 </li>
                 <li>
-                    <a [routerLink]="menusUrl()" class="block border-primary  py-5 px-8 text-xl">Menus</a>    
-                </li>
-                <li>
-                    <a [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
                 </li>
             </ul>
         </div>
@@ -27,7 +24,7 @@ import { RouterLink, RouterOutlet} from "@angular/router";
     </div>
         
     `,
-    imports: [TopBar2, RouterLink, RouterOutlet]
+    imports: [TopBar2, RouterLink, RouterLinkActive, RouterOutlet]
 })
 export default class RestaurantHomePage2 {
 

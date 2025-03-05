@@ -20,5 +20,5 @@ export default class CategoryDisplay {
 
     public category = input.required<MenuCategory>();
 
-    public routerLink = computed(() => `/admin/restaurant/${this.category().menu.restaurant.id}/menu/${this.category().menu.id}/category/${this.category().id}/config`);
+    public routerLink = computed(() => `/admin/restaurant/${this.category().menu.restaurant.id}/menu/${this.category().menu.id}/category/${this.category().id}/products`);
 }

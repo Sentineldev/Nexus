@@ -98,6 +98,7 @@ export default class SaveCategoryProductModal implements AfterViewInit {
                 price: Number(data.price),
                 categoryId: this.category().id,
                 productId: this.product().id,
+                count: 0,
             };
 
             this.errorMessage.set("");

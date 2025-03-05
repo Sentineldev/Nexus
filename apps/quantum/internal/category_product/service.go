@@ -45,6 +45,7 @@ func (service CategoryProductService) Save(body SaveCategoryProductDto) error {
 		product,
 		category,
 		body.Price,
+		body.Count,
 	)
 
 	service.Repository.Save(*newCategoryProduct)
@@ -63,6 +64,7 @@ func (service CategoryProductService) Update(id string, body UpdateCategoryProdu
 
 	product.Price = body.Price
 	product.IsActive = body.IsActive
+	product.Count = body.Count
 
 	err = service.Repository.Update(product)
 

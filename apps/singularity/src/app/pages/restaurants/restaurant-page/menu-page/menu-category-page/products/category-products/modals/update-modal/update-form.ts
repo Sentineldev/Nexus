@@ -86,7 +86,8 @@ export default class UpdateCategoryProductForm implements OnInit {
 
             const body: UpdateCategoryProduct = {
                 isActive: data.isActive!,
-                price: Number(data.price!)
+                price: Number(data.price!),
+                count: 0,
             };
 
             this.successMessage.set("");

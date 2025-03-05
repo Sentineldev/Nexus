@@ -20,11 +20,11 @@ func NewDatabaseRepository() *DatabaseRepository {
 func (repository DatabaseRepository) Save(body types.CategoryProduct) error {
 
 	sql := `
-		INSERT INTO category_product(id, product_id, category_id, price, is_active)
-		VALUES (?,?,?,?,?)
+		INSERT INTO category_product(id, product_id, category_id, price, count, is_active)
+		VALUES (?,?,?,?,?,?)
 	`
 
-	_, err := repository.DataSource.Exec(sql, body.Id, body.Product.Id, body.Category.Id, body.Price, body.IsActive)
+	_, err := repository.DataSource.Exec(sql, body.Id, body.Product.Id, body.Category.Id, body.Price, body.Count, body.IsActive)
 
 	if err != nil {
 		return err
@@ -36,11 +36,11 @@ func (repository DatabaseRepository) Update(body types.CategoryProduct) error {
 
 	sql := `
 	UPDATE category_product
-	SET price = ?, is_active = ?
+	SET price = ?, is_active = ?, count = ?
 	WHERE id = ?
 	`
 
-	_, err := repository.DataSource.Exec(sql, body.Price, body.IsActive, body.Id)
+	_, err := repository.DataSource.Exec(sql, body.Price, body.IsActive, body.Count, body.Id)
 
 	if err != nil {
 		return err
@@ -68,7 +68,7 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 	result := types.CategoryProduct{}
 	sql := `
 	SELECT 
-		cp.id, cp.price, cp.is_active,
+		cp.id, cp.price, cp.is_active, cp.count,
 		p.id,p.name,p.description,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
@@ -88,6 +88,7 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 		&result.Id,
 		&result.Price,
 		&result.IsActive,
+		&result.Count,
 		&result.Product.Id,
 		&result.Product.Name,
 		&result.Product.Description,
@@ -113,7 +114,7 @@ func (repository DatabaseRepository) GetByProductId(categoryId, productId string
 	result := types.CategoryProduct{}
 	sql := `
 	SELECT 
-		cp.id, cp.price, cp.is_active,
+		cp.id, cp.price, cp.is_active,cp.count,
 		p.id,p.name,p.description,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
@@ -133,6 +134,7 @@ func (repository DatabaseRepository) GetByProductId(categoryId, productId string
 		&result.Id,
 		&result.Price,
 		&result.IsActive,
+		&result.Count,
 		&result.Product.Id,
 		&result.Product.Name,
 		&result.Product.Description,
@@ -159,7 +161,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[CategoryPageF
 	offset := (body.Page - 1) * body.PageSize
 	sql := `
 	SELECT 
-		cp.id, cp.price, cp.is_active,
+		cp.id, cp.price, cp.is_active,cp.count,
 		p.id,p.name,p.description,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
@@ -187,6 +189,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[CategoryPageF
 			&record.Id,
 			&record.Price,
 			&record.IsActive,
+			&record.Count,
 			&record.Product.Id,
 			&record.Product.Name,
 			&record.Product.Description,
@@ -231,7 +234,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 	if len(body.Filter.MenuId) > 0 {
 		sql = `
 		SELECT 
-			cp.id, cp.price, cp.is_active,
+			cp.id, cp.price, cp.is_active,cp.count,
 			p.id,p.name,p.description,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
@@ -259,6 +262,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 				&record.Id,
 				&record.Price,
 				&record.IsActive,
+				&record.Count,
 				&record.Product.Id,
 				&record.Product.Name,
 				&record.Product.Description,
@@ -280,7 +284,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 	} else {
 		sql = `
 		SELECT 
-			cp.id, cp.price, cp.is_active,
+			cp.id, cp.price, cp.is_active,cp.count
 			p.id,p.name,p.description,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
@@ -308,6 +312,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 				&record.Id,
 				&record.Price,
 				&record.IsActive,
+				&record.Count,
 				&record.Product.Id,
 				&record.Product.Name,
 				&record.Product.Description,

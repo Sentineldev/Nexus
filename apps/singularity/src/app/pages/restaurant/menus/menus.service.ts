@@ -21,26 +21,28 @@ export default class MenusService  {
     constructor(
         @Inject(ApiMenuRepository)
         private readonly repository: MenuRepository,
-        private readonly service: RestaurantPageService2,
     ) {
 
 
-        const restaurant = this.service.getRestaurant();
         this.state = signal<ServiceState>({
             loading: false,
             menus: [],
-            restaurantId: restaurant.id,
+            restaurantId: "",
         });
     }
 
     getState() {
         return this.state();
     }
-    getMenus() {
+    fetch() {
+        this.getMenus(this.state().restaurantId);
+    }
 
-        this.state.update((current) => ({...current, loading: true }));
+    getMenus(restaurantId: string) {
 
-        this.repository.getAll(this.state().restaurantId).subscribe((menus) => {
+        this.state.update((current) => ({...current, loading: true, restaurantId }));
+
+        this.repository.getAll(restaurantId).subscribe((menus) => {
             setTimeout(() => {
                 this.state.update((current) => {
                     return{ ...current, loading: false, menus }

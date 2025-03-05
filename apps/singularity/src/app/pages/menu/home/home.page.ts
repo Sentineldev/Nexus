@@ -1,6 +1,6 @@
 import { Component, computed } from "@angular/core";
 import MenuPageService2 from "../menu-page.service";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import TopBar2 from "../../../shared/topbar2/top-bar-2";
 
 @Component({
@@ -15,10 +15,10 @@ import TopBar2 from "../../../shared/topbar2/top-bar-2";
                     <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Volver</a>    
                 </li>    
                 <li>
-                    <a [routerLink]="categoriesUrl()" class="block border-primary border-b-2 py-5 px-8 text-xl">Categorias</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="categoriesUrl()" class="block border-b-2 py-5 px-8 text-xl">Categorias</a>    
                 </li>
                 <li>
-                    <a [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block py-5 px-8 text-xl">Configuracion</a>    
                 </li>
             </ul>
         </div>
@@ -27,7 +27,7 @@ import TopBar2 from "../../../shared/topbar2/top-bar-2";
         </div>
     </div>
     `,
-    imports: [RouterOutlet, RouterLink, TopBar2]
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, TopBar2]
 })
 export default class MenuHomePage2 {
 

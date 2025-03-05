@@ -87,6 +87,7 @@ func CreateTables() {
 		product_id TEXT NOT NULL,
 		category_id TEXT NOT NULL,
 		price FLOAT default 0,
+		count INT default 0,
 		is_active BOOLEAN default false,
 		FOREIGN KEY(product_id) REFERENCES"product"(id),
 		FOREIGN KEY(category_id) REFERENCES"menu_category"(id)

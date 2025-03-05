@@ -94,7 +94,7 @@ export default class CreateMenuModal {
                     if (result.length === 0) {
                         this.form.reset();
                         this.successMessage.set("Creado correctamente");
-                        this.service.getMenus();
+                        this.service.fetch();
                         return;
                     }
                     this.errorMessage.set(result);

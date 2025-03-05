@@ -1,4 +1,4 @@
-import { Component, computed } from "@angular/core";
+import { Component, computed, OnInit } from "@angular/core";
 import CategoriesPageService2 from "./categories-page.service";
 import CategoriesDisplay from "./display/categories";
 import { Loader } from "../../../shared/loader/loader";
@@ -9,7 +9,6 @@ import CreateCategoryModal from "./create-menu-modal";
 @Component({
     selector: `app-categories-page2`,
     template: `
-    
         <app-create-category-modal [dialogId]="dialogId()" [menu]="menu()"/>
         <div>
         @if (state().loading) {
@@ -40,7 +39,7 @@ import CreateCategoryModal from "./create-menu-modal";
     `,
     imports: [CategoriesDisplay, Loader, DialogToggler, CreateCategoryModal]
 })
-export default class CategoriesPage2 {
+export default class CategoriesPage2 implements OnInit {
 
 
 
@@ -51,4 +50,7 @@ export default class CategoriesPage2 {
         private readonly menuPageService: MenuPageService2,
         private readonly service: CategoriesPageService2,
     ) {}
+    ngOnInit(): void {
+        this.service.getCategories(this.menu().id);
+    }
 }

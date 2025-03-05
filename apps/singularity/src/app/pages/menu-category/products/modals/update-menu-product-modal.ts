@@ -45,6 +45,15 @@ import { Loader } from "../../../../shared/loader/loader";
                       isNumberAndTwoDecimals: 'Debe ser un numero con maximo 2 decimales'
                     }"
                     />
+                    <app-reactive-form-input
+                    label="Cantidad"
+                    id="count"
+                    [control]="form.controls.count"
+                    [errors]="
+                    { required: 'No puedes dejar este campo vacio', 
+                      isNumberInteger: 'Debe ser un numero entero'
+                    }"
+                    />
                 </div>
                 <div>
                     <button type="submit" [disabled]="loading()" class="btn">
@@ -72,6 +81,7 @@ export default class UpdateMenuProductModal implements OnInit {
     public product = input.required<CategoryProduct>();
     public form = new FormGroup({
         price: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberAndTwoDecimals]),
+        count: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberInteger]),
         isActive: new FormControl<boolean>(false),
     });
     constructor(
@@ -84,7 +94,8 @@ export default class UpdateMenuProductModal implements OnInit {
     
         this.form.setValue({
             isActive: this.product().isActive,
-            price: this.product().price.toString()
+            price: this.product().price.toString(),
+            count: this.product().count.toString(),
         })
     }
 
@@ -98,6 +109,7 @@ export default class UpdateMenuProductModal implements OnInit {
                 const body: UpdateCategoryProduct = {
                     isActive: value.isActive!,
                     price: Number(value.price!),
+                    count: Number(value.count!),
                 };
     
                 this.loading.set(true);

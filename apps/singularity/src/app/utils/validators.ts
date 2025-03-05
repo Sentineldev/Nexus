@@ -24,7 +24,7 @@ export default class ValidatorsUtils {
             return null;
         }
 
-        return ValidationUtils.IsStringNumberInteger(value) ? null : { isInteger: true };
+        return ValidationUtils.IsStringNumberInteger(value) ? null : { isNumberInteger: true };
 
     }
     static IsNumberAndTwoDecimals(control: AbstractControl): ValidationErrors | null {

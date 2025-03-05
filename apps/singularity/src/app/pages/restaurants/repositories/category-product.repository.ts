@@ -25,7 +25,7 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
    
     save(body: SaveCategoryProduct): Observable<string> {
 
-        const { categoryId, price, productId } = body;
+        const { categoryId, price, productId,count } = body;
 
 
 
@@ -47,7 +47,8 @@ export default class LocalCategoryProductRepository implements CategoryProductRe
                 product,
                 id,
                 isActive: false,
-                price
+                price,
+                count: count,
             });
             CATEGORY_PRODUCTS.push(newProduct);
             return of("Created");

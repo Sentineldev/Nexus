@@ -52,6 +52,6 @@ export default class RestaurantMenusPage implements OnInit {
     ) {}
     ngOnInit(): void {
 
-        this.service.getMenus();
+        this.service.getMenus(this.restaurant().id);
     }
 }

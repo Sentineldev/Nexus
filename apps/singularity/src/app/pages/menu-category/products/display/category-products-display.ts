@@ -10,6 +10,9 @@ import CategoryProductDisplay2 from "./category-product-display";
         @for (product of products(); track product.id) {
             <app-category-product-display2 [product]="product"/>
         }
+        @if (products().length === 0) {
+            <p class="text-neutral">No hay productos registrados...</p>
+        }
     </div>
     `,
     imports: [CategoryProductDisplay2]

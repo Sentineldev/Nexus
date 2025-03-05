@@ -1,5 +1,5 @@
 import { Component, computed } from "@angular/core";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import TopBar2 from "../../../shared/topbar2/top-bar-2";
 import MenuCategoryPageService2 from "../menu-category-page.service";
 
@@ -15,13 +15,13 @@ import MenuCategoryPageService2 from "../menu-category-page.service";
                     <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
                 </li>    
                 <li>
-                    <a [routerLink]="menuUrl()" class="block border-primary border-b-2 py-5 px-8 text-xl">Menu</a>    
+                    <a [routerLink]="menuUrl()" class="block py-5 px-8 text-xl">Menu</a>    
                 </li>
                 <li>
-                    <a [routerLink]="productsUrl()" class="block border-primary  py-5 px-8 text-xl">Productos</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="productsUrl()" class="block border-primary  py-5 px-8 text-xl">Productos</a>    
                 </li>
                 <li>
-                    <a [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
                 </li>
             </ul>
         </div>
@@ -30,7 +30,7 @@ import MenuCategoryPageService2 from "../menu-category-page.service";
         </div>
     </div>
     `,
-    imports: [RouterOutlet, RouterLink, TopBar2]
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, TopBar2]
 })
 export default class MenuCategoryHomePage2 {
 

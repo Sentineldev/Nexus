@@ -33,7 +33,7 @@ import ValidatorsUtils from "../../../../utils/validators";
                 </div>
             }
             <form (ngSubmit)="onSubmitHandler()" [formGroup]="form" class="flex flex-col gap-6">
-                <div>
+                <div class="flex flex-col gap-2">
                     <app-reactive-form-input
                     label="Precio"
                     id="price"
@@ -41,6 +41,15 @@ import ValidatorsUtils from "../../../../utils/validators";
                     [errors]="
                     { required: 'No puedes dejar este campo vacio', 
                       isNumberAndTwoDecimals: 'Debe ser un numero con maximo 2 decimales'
+                    }"
+                    />
+                    <app-reactive-form-input
+                    label="Cantidad"
+                    id="count"
+                    [control]="form.controls.count"
+                    [errors]="
+                    { required: 'No puedes dejar este campo vacio', 
+                      isNumberInteger: 'Debe ser un numero entero'
                     }"
                     />
                 </div>
@@ -73,7 +82,8 @@ export default class AddProductToMenuModal {
     public category = computed(() => this.service.getCategory());
 
     public form = new FormGroup({
-        price: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberAndTwoDecimals])
+        price: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberAndTwoDecimals]),
+        count: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberInteger])
     });
 
     constructor(
@@ -95,6 +105,7 @@ export default class AddProductToMenuModal {
                 categoryId: this.category().id,
                 price: Number(value.price!),
                 productId: this.product().id,
+                count: Number(value.count!),
             };
 
             this.loading.set(true);

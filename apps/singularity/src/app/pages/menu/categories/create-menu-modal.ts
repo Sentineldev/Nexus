@@ -93,7 +93,7 @@ export default class CreateCategoryModal {
                     if (result.length === 0) {
                         this.form.reset();
                         this.successMessage.set("Creado correctamente");
-                        this.service.getCategories();
+                        this.service.fetch();
                         return;
                     }
                     this.errorMessage.set(result);

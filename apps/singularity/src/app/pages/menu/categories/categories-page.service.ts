@@ -18,19 +18,16 @@ export default class CategoriesPageService2 {
 
     private state: WritableSignal<ServiceState>;
     constructor(
-        private readonly service: MenuPageService2,
         @Inject(ApiMenuCategoryRepository)
         private readonly repository: MenuCategoryRepository
     ) {
 
 
-        const menuId = this.service.getMenu().id;
         this.state = signal<ServiceState>({
             categories: [],
             loading: false,
-            menuId,
+            menuId: "",
         });
-        this.getCategories();
     }
 
 
@@ -38,14 +35,18 @@ export default class CategoriesPageService2 {
         return this.state();
     }
 
-    getCategories() {
+    fetch() {
+        this.getCategories(this.state().menuId);
+    }
+
+    getCategories(menuId: string) {
 
 
-        this.state.update((current) => ({ ...current, loading: true }));
+        this.state.update((current) => ({ ...current, loading: true, menuId }));
 
-        this.repository.getAll(this.state().menuId).subscribe((categories) => {
+        this.repository.getAll(menuId).subscribe((categories) => {
             setTimeout(() => {
-                this.state.update((current)  => ({...current, categories, loading: false}));
+                this.state.update((current)  => ({...current, categories, loading: false }));
             }, 1000);
         })
     }
