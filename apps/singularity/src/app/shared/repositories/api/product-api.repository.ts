@@ -21,7 +21,7 @@ export default class ApiProductRepository implements ProductRepository {
     save(body: SaveProduct): Observable<string> {
 
         return this.http.post<HttpResponse<unknown>>(this.URL,body,{ observe: "response" }).pipe(
-            map(() => "Created"),
+            map(() => ""),
             catchError((response: HttpErrorResponse) => {
                 let err = "";
 
@@ -47,7 +47,7 @@ export default class ApiProductRepository implements ProductRepository {
     update(id: string, body: SaveProduct): Observable<string> {
 
         return this.http.put<HttpResponse<unknown>>(`${this.URL}/${id}`, body, { observe: "response" }).pipe(
-            map(() => "Updated"),
+            map(() => ""),
             catchError((response: HttpErrorResponse) => {
                 let err = "";
                 if (response.status === 401) {

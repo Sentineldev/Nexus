@@ -33,6 +33,7 @@ import MenuCategoryPage2 from './pages/menu-category/menu-category.page';
 import MenuCategoryHomePage2 from './pages/menu-category/home/home.page';
 import CategoryProductsPage from './pages/menu-category/products/category-products.page';
 import ProductsHome from './pages/products/components/products-home';
+import ProductsPage2 from './pages/products-2/products-2.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -62,7 +63,7 @@ export const routes: Routes = [
                 children: [
                     {
                         path: "products",
-                        component: ProductsPage,
+                        component: ProductsPage2,
                     },
                     {
                         path: "feed-stock",

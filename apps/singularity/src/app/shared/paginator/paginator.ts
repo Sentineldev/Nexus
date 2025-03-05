@@ -8,7 +8,7 @@ import { Component, computed, EventEmitter, input, Output, signal } from '@angul
   @if ( page() <= 1) {
         <button disabled (click)="decrementPage()" type="button" class="bg-slate-300 p-2 px-3 rounded-l-xl"> < </button>
     } @else {
-        <button (click)="decrementPage()" type="button" class="p-2 px-3 rounded-l-xl bg-slate-700 text-white"> < </button>
+        <button (click)="decrementPage()" type="button" class="p-2 px-3 rounded-l-xl bg-primary text-white"> < </button>
     }
     
     
@@ -17,7 +17,7 @@ import { Component, computed, EventEmitter, input, Output, signal } from '@angul
 
         <button disabled (click)="incrementPage()" type="button" class="bg-slate-300 p-2 px-3 rounded-r-xl"> > </button>
     } @else {
-        <button (click)="incrementPage()" type="button" class="p-2 px-3 rounded-r-xl bg-slate-700 text-white"> > </button>
+        <button (click)="incrementPage()" type="button" class="p-2 px-3 rounded-r-xl bg-primary text-white"> > </button>
     }
   </div>
   `,
