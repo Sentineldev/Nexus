@@ -3,18 +3,20 @@ import { Component, input } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
-    selector: 'app-reactive-form-input',
+    selector: 'app-reactive-select-input',
     imports: [ReactiveFormsModule, CommonModule],
     template: `
     <label [htmlFor]="id()" class="w-full">
         <p>{{label()}}</p>
-        <input
+        <select
+        [id]="id()"
+        [name]="id()"
+        [formControl]="control()"
         autocomplete="on"
-        class="border w-full border-neutral p-2 rounded outline-none" 
-        type="text" 
-        [formControl]="control()" 
-        [name]="id()" 
-        [id]="id()"/>
+        class="border w-full border-neutral p-2 rounded outline-none"
+        >
+        <ng-content></ng-content>
+        </select>
     </label>
     @if (control().invalid && control().touched)  {
         <div *ngFor="let error of control().errors | keyvalue">
@@ -23,7 +25,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
     }
     `,
 })
-export default class ReactiveFormInput {
+export default class ReactiveSelectInput {
 
     public id = input.required<string>();
     public label = input.required<string>();

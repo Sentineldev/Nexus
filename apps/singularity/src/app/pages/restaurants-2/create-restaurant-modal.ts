@@ -33,7 +33,7 @@ import { Loader } from "../../shared/loader/loader";
                 <div>
                     <app-reactive-form-input
                     label="Nombre"
-                    id="name"
+                    [id]="'name'"
                     [control]="form.controls.name"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
                     />

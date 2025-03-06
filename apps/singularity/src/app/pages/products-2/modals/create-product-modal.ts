@@ -31,13 +31,13 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
                 <div class="flex flex-col gap-2">
                     <app-reactive-form-input
                     label="Nombre"
-                    id="name"
+                    [id]="'name'"
                     [control]="formGroup.controls.name"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
                     />
                     <app-reactive-form-textarea
                     label="Descripcion"
-                    id="description"
+                    [id]="'description'"
                     [control]="formGroup.controls.description"
                     [rows]="4"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"

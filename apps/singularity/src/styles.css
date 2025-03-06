@@ -45,3 +45,25 @@
 .btn:disabled {
   background-color: var(--color-primary-500);
 }
+
+.modal-body {
+  animation: animation;
+  animation-duration: 0.45s;
+  animation-iteration-count: 1;
+}
+
+.link-activate {
+  background-color: var(--color-red-50);
+  color: var(--color-primary);
+  border-radius: 12px;
+}
+
+@keyframes animation {
+
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

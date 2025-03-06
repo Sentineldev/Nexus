@@ -35,13 +35,13 @@ import MenusService from "./menus.service";
                 <div>
                     <app-reactive-form-input
                     label="Nombre"
-                    id="name"
+                    [id]="'name'"
                     [control]="form.controls.name"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
                     />
                 </div>
                 <div>
-                    <button type="submit" [disabled]="loading()" class="btn">
+                    <button type="submit" [disabled]="loading()" class="btn w-full">
                         @if (!loading()) {
                             Crear
                         } @else {

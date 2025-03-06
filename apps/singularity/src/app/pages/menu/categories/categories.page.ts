@@ -4,7 +4,7 @@ import CategoriesDisplay from "./display/categories";
 import { Loader } from "../../../shared/loader/loader";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import MenuPageService2 from "../menu-page.service";
-import CreateCategoryModal from "./create-menu-modal";
+import CreateCategoryModal from "./create-category-modal";
 
 @Component({
     selector: `app-categories-page2`,
@@ -23,7 +23,7 @@ import CreateCategoryModal from "./create-menu-modal";
                     <div class="flex-1">
                         <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
                             <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="text" name="" id="" class="outline-none" placeholder="Buscar Categoria... ">
+                            <input type="text" name="search" id="search" class="outline-none" placeholder="Buscar Categoria... ">
                         </div>
                     </div>
                     <div>

@@ -14,6 +14,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
         [id]="id()" 
         [formControl]="control()" 
         [rows]="rows()"
+        autocomplete="on"
         >
         </textarea>
     </label>

@@ -38,7 +38,7 @@ import { Loader } from "../../../../shared/loader/loader";
                     </label> 
                     <app-reactive-form-input
                     label="Precio"
-                    id="price"
+                    [id]="'price-'+product().id"
                     [control]="form.controls.price"
                     [errors]="
                     { required: 'No puedes dejar este campo vacio', 
@@ -47,7 +47,7 @@ import { Loader } from "../../../../shared/loader/loader";
                     />
                     <app-reactive-form-input
                     label="Cantidad"
-                    id="count"
+                    [id]="'count-'+product().id"
                     [control]="form.controls.count"
                     [errors]="
                     { required: 'No puedes dejar este campo vacio', 

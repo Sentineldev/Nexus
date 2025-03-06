@@ -11,16 +11,26 @@ import { Loader } from "../../shared/loader/loader";
     template: `
     <div class="p-6 flex flex-col gap-4">
         <app-save-feed-stock-modal dialogId="save-feed-stock-modal-id"/>
-        <app-dialog-toggler dialogId="save-feed-stock-modal-id">
-            <div class="p-3 bg-slate-700 text-white rounded-lg outline-hidden">Crear Ingrediente</div>
-        </app-dialog-toggler>
+        
         @if (state().loading) {
             <app-loader color="secondary"/>
         }
         @if (state().data) {
-            <div class="flex flex-col gap-4 p-1">
-                <app-feed-stocks-display [feedStocks]="state().data!.data"/>
+            <div class="flex flex-col gap-8 p-4">
+                <div class="flex">
+                    <div class="flex-1">
+                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
+                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="text" name="search" id="search" class="outline-none" placeholder="Buscar Categoria... ">
+                        </div>
+                    </div>
+                    <app-dialog-toggler dialogId="save-feed-stock-modal-id">
+                        <div class="btn ">Crear Ingrediente</div>
+                    </app-dialog-toggler>
+                </div>
+                
                 @if (state().data!.data.length !== 0) {
+                    <app-feed-stocks-display [feedStocks]="state().data!.data"/>
                     <div class="self-center">
                         <app-paginator 
                             (pageChangeEvent)="pageChangeHandler($event)" 

@@ -21,7 +21,7 @@ import Paginator from "../../shared/paginator/paginator";
                     <div class="flex-1">
                         <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
                             <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="text" name="" id="" class="outline-none" placeholder="Buscar producto...">
+                            <input  type="text" name="search" id="search" class="outline-none" placeholder="Buscar producto...">
                         </div>
                     </div>
                     <div>

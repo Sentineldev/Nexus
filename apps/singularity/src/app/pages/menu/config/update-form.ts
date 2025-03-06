@@ -19,7 +19,7 @@ import ReactiveFormInput from "../../../shared/forms/reactive-input";
             <p class="font-sans text-lg text-black font-medium">Habilitar / Deshabilitar</p>
         </label>    
         <app-reactive-form-input
-        id="name"
+        [id]="'name'"
         label="Nombre"
         [errors]="{ required: 'No puedes dejar este campo vacio' }"
         [control]="formGroup.controls.name"

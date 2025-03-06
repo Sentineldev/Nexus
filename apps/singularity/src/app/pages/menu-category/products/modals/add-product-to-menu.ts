@@ -36,7 +36,7 @@ import ValidatorsUtils from "../../../../utils/validators";
                 <div class="flex flex-col gap-2">
                     <app-reactive-form-input
                     label="Precio"
-                    id="price"
+                    [id]="'add-price-'+product().id"
                     [control]="form.controls.price"
                     [errors]="
                     { required: 'No puedes dejar este campo vacio', 
@@ -45,7 +45,7 @@ import ValidatorsUtils from "../../../../utils/validators";
                     />
                     <app-reactive-form-input
                     label="Cantidad"
-                    id="count"
+                    [id]="'add-count-'+product().id"
                     [control]="form.controls.count"
                     [errors]="
                     { required: 'No puedes dejar este campo vacio', 

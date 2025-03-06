@@ -24,7 +24,7 @@ import ProductOptionsDisplay from "./display/products-display";
                     <div [className]="showProducts() ? ' pr-4 border-r border-neutral col-span-2 flex flex-col gap-8' : 'pr-4 border-neutral col-span-3 flex flex-col gap-8'">
                         <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
                             <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="text" name="" id="" class="outline-none" placeholder="Buscar en el menu... ">
+                            <input type="text" name="search-in-menu" id="search-in-menu" class="outline-none" placeholder="Buscar en el menu... ">
                         </div>
                         @if (state().products) {
                             <app-category-products-display2 [products]="state().products!.data"/>
@@ -34,7 +34,7 @@ import ProductOptionsDisplay from "./display/products-display";
                         <div class="flex flex-col gap-8">
                             <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-full">
                                 <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                                <input type="text" name="" id="" class="outline-none" placeholder="Buscar productos... ">
+                                <input type="text" name="search-product" id="search-product" class="outline-none" placeholder="Buscar productos... ">
                             </div>
                             @if (productsState().page) {
                                 <app-product-options-display [products]="productsState().page.data"/>

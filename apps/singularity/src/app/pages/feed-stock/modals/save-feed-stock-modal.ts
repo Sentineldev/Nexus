@@ -8,6 +8,8 @@ import CustomDialog from "../../../shared/dialog/custom-dialog";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import { Loader } from "../../../shared/loader/loader";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import ReactiveSelectInput from "../../../shared/forms/reactive-select-input";
 
 @Component({
     selector: `app-save-feed-stock-modal`,
@@ -16,7 +18,7 @@ import { Loader } from "../../../shared/loader/loader";
         <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Crear Ingrediente</h1>
+                    <h1 class="text-center text-[1.2rem] font-sans text-primary">Crear Ingrediente</h1>
                     @if (errorMessage().length > 0 || successMessage().length > 0) {
                         @if (errorMessage().length > 0) {
                             <app-error-alert [message]="errorMessage()"/>
@@ -29,32 +31,26 @@ import { Loader } from "../../../shared/loader/loader";
                 <div>
                     <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-6">
                         <div class="flex flex-col gap-4">
-                            <div>
-                                <label for="name" class="flex flex-col gap-1">
-                                    <p class="text-slate-700">Nombre</p>
-                                    <input autocomplete="on" formControlName="name" type="text" name="name" id="name" class="border rounded-sm p-1">
-                                </label>
-                                @if (formGroup.dirty && formGroup.controls.name.dirty && formGroup.controls.name.getError("required")) {
-                                    <p class="text-red-500">Ingrese el nombre</p>
-                                }
-                            </div>
-                            <div>
-                                <label for="identificationType" class="flex flex-col gap-1">
-                                    <p class="text-slate-700">Tipo</p>
-                                    <select formControlName="unit" class="border p-1 text-lg rounded-sm" name="unit" id="unit">
-                                        <option selected value="">Selecciona una unidad</option>    
-                                        <option value="KG">Kilos</option>
-                                        <option value="LT">Litros</option>
-                                        <option value="GR">Gramos</option>
-                                    </select>
-                                </label>
-                                @if (formGroup.dirty && formGroup.controls.unit.dirty && formGroup.controls.unit.getError("required")) {
-                                    <p class="text-red-500">Ingrese la unidad</p>
-                                }
-                            </div>
+                            <app-reactive-form-input
+                            label="Nombre"
+                            [control]="formGroup.controls.name"
+                            [id]="'name'"
+                            [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                            />
+                            <app-reactive-select-input
+                            label="Unidad"
+                            [id]="'unit'"
+                            [control]="formGroup.controls.unit"
+                            [errors]="{ required: 'Selecciona una unidad' }"
+                            >
+                                <option selected value="">Selecciona una unidad</option>    
+                                <option value="KG">Kilos</option>
+                                <option value="LT">Litros</option>
+                                <option value="GR">Gramos</option>
+                            </app-reactive-select-input>
                         </div>
                         <div>
-                            <button [disabled]="loading()" class="bg-slate-700  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">
+                            <button [disabled]="loading()" class="btn w-full">
                                 @if(loading()) {
                                     <app-loader/>
                                 } @else {
@@ -68,7 +64,7 @@ import { Loader } from "../../../shared/loader/loader";
         </div>
     </app-custom-dialog>
     `,
-    imports: [ReactiveFormsModule, CustomDialog, ErrorAlert, SuccessAlert, Loader]
+    imports: [ReactiveFormsModule, CustomDialog, ErrorAlert, SuccessAlert, Loader, ReactiveFormInput, ReactiveSelectInput]
 })
 
 export default class SaveFeedStockModal {
@@ -110,7 +106,7 @@ export default class SaveFeedStockModal {
                     this.loading.set(false);
                     if (result.length === 0) {
                         this.service.refresh();
-                        this.successMessage.set("Registrado correctamente");
+                        this.successMessage.set("Creado correctamente");
                         this.formGroup.reset();
                         return;
                     }

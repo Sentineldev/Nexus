@@ -17,7 +17,7 @@ import FeedStock from "../classes/feed-stock.class";
         <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Eliminar Ingrediente</h1>
+                    <h1 class="text-center text-[1.2rem] font-sans text-primary">Eliminar Ingrediente</h1>
                     @if (errorMessage().length > 0 || successMessage().length > 0) {
                         @if (errorMessage().length > 0) {
                             <app-error-alert [message]="errorMessage()"/>
@@ -35,7 +35,7 @@ import FeedStock from "../classes/feed-stock.class";
                             <p>Unidad: <strong>{{feedStock().unit}}</strong></p>
                         </fieldset>
                         <div>
-                            <button [disabled]="loading()" class="bg-red-600  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">
+                            <button [disabled]="loading()" class="btn w-full">
                                 @if(loading()) {
                                     <app-loader/>
                                 } @else {

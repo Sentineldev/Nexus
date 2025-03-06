@@ -17,7 +17,6 @@ export default class CustomDialog {
   onCloseHandler() {
     this.onCloseEvent.emit();
   }
-
   onContainerClick(event: MouseEvent) {
     const dialog = (event.target as HTMLDivElement).parentElement as HTMLDialogElement;
 

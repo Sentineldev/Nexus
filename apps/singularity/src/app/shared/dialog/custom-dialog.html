@@ -1,8 +1,10 @@
 <dialog  
+    
     (click)="onClickHandler($event)" 
-    (close)="onCloseHandler()" id="{{ dialogId() }}" 
+    (close)="onCloseHandler()" 
+    id="{{ dialogId() }}" 
     class=" bg-transparent z-auto  overflow-auto transition-all w-full h-full backdrop:bg-[rgba(0,0,0,0.4)] m-auto outline-hidden">
-    <div (click)="onContainerClick($event)" class="flex w-full h-full items-center justify-center">
+    <div (click)="onContainerClick($event)" class="flex w-full h-full items-center justify-center modal-body">
         <ng-content></ng-content>
     </div>
  </dialog>

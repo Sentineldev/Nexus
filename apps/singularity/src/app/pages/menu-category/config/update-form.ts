@@ -21,7 +21,7 @@ import ReactiveFormInput from "../../../shared/forms/reactive-input";
         <app-reactive-form-input
         [control]="formGroup.controls.name"
         label="Nombre"
-        id="name"
+        [id]="'name'"
         [errors]="{ required: 'No puedes dejar este campo vacio' }"
         />
         <div class="w-fit">

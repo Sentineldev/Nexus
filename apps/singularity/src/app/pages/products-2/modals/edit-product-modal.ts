@@ -32,13 +32,13 @@ import Product from "../../products/classes/product.class";
                 <div class="flex flex-col gap-2">
                     <app-reactive-form-input
                     label="Nombre"
-                    id="name"
+                    [id]="'name-'+product().id"
                     [control]="formGroup.controls.name"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
                     />
                     <app-reactive-form-textarea
                     label="Descripcion"
-                    id="description"
+                    [id]="'description'+product().id"
                     [control]="formGroup.controls.description"
                     [rows]="4"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
