@@ -29,7 +29,7 @@ export default class ApiClientRepository implements ClientRepository {
                 let err = "";
 
                 if (error.status === 401) {
-        err = "No tienes permisos para realizar esta accion";
+                     err = "No tienes permisos para realizar esta accion";
                 }
                 else if(error.status === 409) {
                     err = "El cliente ya fue registrado";

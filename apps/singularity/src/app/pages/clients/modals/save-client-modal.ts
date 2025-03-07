@@ -9,94 +9,77 @@ import ApiClientRepository from "../../../shared/repositories/api/api-client-rep
 import { SaveClient } from "../dto/client.dto";
 import { Loader } from "../../../shared/loader/loader";
 import ClientsService from "../client.service";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import ReactiveSelectInput from "../../../shared/forms/reactive-select-input";
 
 @Component({
     selector: `app-save-client-modal`,
-    imports: [CustomDialog, DialogToggler, ErrorAlert, SuccessAlert, ReactiveFormsModule, Loader],
+    imports: [CustomDialog, ErrorAlert, SuccessAlert, ReactiveFormsModule, Loader, ReactiveFormInput, ReactiveSelectInput],
     template: `
-    <div>
-        <app-custom-dialog [dialogId]="dialogId">
-            <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
-                <div class="flex flex-col gap-6">
-                    <div class="flex flex-col gap-4">
-                        <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Registrar Cliente</h1>
-                        @if (errorMessage().length > 0 || successMessage().length > 0) {
-                            @if (errorMessage().length > 0) {
-                                <app-error-alert [message]="errorMessage()"/>
-                            }
-                            @if (successMessage().length > 0) {
-                                <app-success-alert [message]="successMessage()"/>
-                            }
+    <app-custom-dialog [dialogId]="dialogId()">
+        <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[600px]">
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-4">
+                    <h1 class="text-center text-[1.2rem] font-sans text-primary font-medium">Registrar Cliente</h1>
+                    @if (errorMessage().length > 0 || successMessage().length > 0) {
+                        @if (errorMessage().length > 0) {
+                            <app-error-alert [message]="errorMessage()"/>
                         }
-                    </div>
-                    <div>
-                        <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-6">
-                            <div class="flex flex-col gap-4">
-                                <div>
-                                    <label for="fullName" class="flex flex-col gap-1">
-                                        <p class="text-slate-700">Nombre</p>
-                                        <input autocomplete="on" formControlName="fullName" type="text" name="fullName" id="fullName" class="border rounded-sm p-1">
-                                    </label>
-                                    @if (formGroup.dirty && formGroup.controls.fullName.dirty && formGroup.controls.fullName.getError("required")) {
-                                        <p class="text-red-500">Ingrese el nombre</p>
-                                    }
-                                </div>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <div>
-                                        <label for="identificationType" class="flex flex-col gap-1">
-                                            <p class="text-slate-700">Tipo</p>
-                                            <!-- <input autocomplete="on" formControlName="identificationType" type="text" name="name" id="name" class="border rounded-sm p-1"> -->
-                                            <select formControlName="identificationType" class="border p-1 text-lg rounded-sm" name="identificationType" id="identificationType">
-                                                <option value="V">Venezolano</option>
-                                                <option value="G">Gubernamental</option>
-                                                <option value="J">Juridico</option>
-                                                <option value="E">Extranjero</option>
-                                            </select>
-                                        </label>
-                                        @if (formGroup.dirty && formGroup.controls.identificationType.dirty && formGroup.controls.identificationType.getError("required")) {
-                                            <p class="text-red-500">Ingrese</p>
-                                        }
-                                    </div>
-                                    <div>
-                                        <label for="identification" class="flex flex-col gap-1">
-                                            <p class="text-slate-700">Identificacion</p>
-                                            <input autocomplete="on" formControlName="identification" type="text" name="identification" id="identification" class="border rounded-sm p-1">
-                                        </label>
-                                        @if (formGroup.dirty && formGroup.controls.identification.dirty && formGroup.controls.identification.getError("required")) {
-                                            <p class="text-red-500">Ingrese la identificacion</p>
-                                        }
-                                    </div>
-                                </div>
+                        @if (successMessage().length > 0) {
+                            <app-success-alert [message]="successMessage()"/>
+                        }
+                    }
+                </div>
+                <div>
+                    <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-6">
+                        <div class="flex flex-col gap-4">
+                            <app-reactive-form-input
+                            label="Nombre completo"
+                            [id]="'client-name'"
+                            [control]="formGroup.controls.fullName"
+                            [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                            />
+                            <div class="grid grid-cols-2 gap-2">
+                                <app-reactive-select-input
+                                label="Tipo de documento"
+                                [id]="'client-id-type'"
+                                [control]="formGroup.controls.identificationType"
+                                [errors]="{ required: 'Debe especificar el tipo' }"
+                                >
+                                    <option value="V">Venezolano</option>
+                                    <option value="G">Gubernamental</option>
+                                    <option value="J">Juridico</option>
+                                    <option value="E">Extranjero</option>
+                                </app-reactive-select-input>
+                                    
+                                <app-reactive-form-input
+                                label="Identificacion"
+                                [id]="'client-id'"
+                                [control]="formGroup.controls.identification"
+                                [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                                />
                             </div>
-                                <div>
-                                    <label for="email" class="flex flex-col gap-1">
-                                        <p class="text-slate-700">Email</p>
-                                        <input autocomplete="on" formControlName="email" type="text" name="email" id="email" class="border rounded-sm p-1">
-                                    </label>
-                                    @if (formGroup.dirty && formGroup.controls.email.dirty && formGroup.controls.email.getError("required")) {
-                                        <p class="text-red-500">Ingrese una direccion de correo valida</p>
-                                    }
-                                </div>
-                            <div>
-                                <button [disabled]="loading()" class="bg-slate-700  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">
-                                    @if(loading()) {
-                                        <app-loader/>
-                                    } @else {
-                                        Registrar
-                                    }
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            <app-reactive-form-input
+                            label="Correo electronico"
+                            [id]="'client-email'"
+                            [control]="formGroup.controls.email"
+                            [errors]="{ required: 'No puedes dejar este campo vacio', email: 'Debe ingresar un correo valido' }"
+                            />
+                        </div>
+                        <div>
+                            <button [disabled]="loading()" class="btn w-full">
+                                @if(loading()) {
+                                    <app-loader/>
+                                } @else {
+                                    Registrar
+                                }
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </app-custom-dialog>
-        <app-dialog-toggler [dialogId]="dialogId">
-            <div class="bg-slate-700 border-none text-white p-3 rounded-lg transition-all hover:opacity-90 outline-hidden">
-                <h1>Registrar Cliente</h1>
-            </div>
-        </app-dialog-toggler>
-    </div>
+        </div>
+    </app-custom-dialog>
     `
 })
 export default class SaveClientModal {
@@ -105,7 +88,8 @@ export default class SaveClientModal {
     public errorMessage = signal("");
     public successMessage = signal("");
     public loading = signal(false);
-    public dialogId = `save-product-modal`;
+
+    public dialogId = input.required<string>();
 
 
     public formGroup = new FormGroup({

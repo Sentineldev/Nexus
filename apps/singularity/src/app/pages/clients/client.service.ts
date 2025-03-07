@@ -7,7 +7,7 @@ import Client from "./classes/client.class";
 
 type ServiceState = {
 
-    page: PageData<Client>
+    page: PageData<Client> | undefined;
     filter: PageFilter<any>
     loading: boolean;
 };
@@ -24,14 +24,7 @@ export default class ClientsService {
     ) {
 
         this.state = signal({
-            page: {
-                data: [],
-                meta: {
-                    dataSize: 0,
-                    page: 1,
-                    pageSize: 5,
-                },
-            },
+            page: undefined,
             filter: {
                 filter: {},
                 page: 1,

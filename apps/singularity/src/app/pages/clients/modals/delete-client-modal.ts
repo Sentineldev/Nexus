@@ -17,7 +17,7 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
         <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
             <div class="flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Eliminar Cliente</h1>
+                    <h1 class="text-center text-[1.2rem] font-sans text-primary font-medium">Eliminar Cliente</h1>
                     @if (errorMessage() || successMessage()) {
                         @if(errorMessage()) {
                             <app-error-alert [message]="errorMessage()"/>
@@ -34,7 +34,7 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
                     <p class="font-sans text-[0.9rem]">Correo: {{ client().email }}</p>
                 </div>
                 <div>
-                    <button [disabled]="loading()" (click)="onClickHandler()" type="button" class="w-full bg-red-500 p-2 text-white rounded-lg">
+                    <button [disabled]="loading()" (click)="onClickHandler()" type="button" class="btn w-full">
                         @if (loading()) {
                             <app-loader/>
                         }
@@ -47,9 +47,9 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
         </div>
     </app-custom-dialog>
     <app-dialog-toggler [dialogId]="dialogId()">
-        <h1 class="text-slate-700 text-[1rem]">
-            <img class="" src="./svg/trash-svgrepo-com.svg" alt="trash-icon" width="32" height="32">
-        </h1>
+        <div class="btn">
+            <img class="" src="./svg/trash-svgrepo-com.svg" alt="trash-icon" width="24" height="24">
+        </div>
     </app-dialog-toggler>
 </div>
     `,

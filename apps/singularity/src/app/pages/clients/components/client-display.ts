@@ -6,11 +6,11 @@ import DeleteClientModal from "../modals/delete-client-modal";
 @Component({
     selector: `app-client-display`,
     template: `
-    <div class="grid grid-cols-5 gap-2 items-center justify-center text-slate-700">
-        <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words">{{client().identificationType}}{{client().identification}}</p>
-        <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words">{{client().fullName}}</p>
-        <p class="font-sans text-slate-700 text-[1.2rem] text-wrap break-words col-span-2">{{client().email}}</p>
-        <div class="flex gap-2">
+    <div class="grid grid-cols-5 gap-2 items-center justify-center ">
+        <p class="">{{client().identificationType}}{{client().identification}}</p>
+        <p class="">{{client().fullName}}</p>
+        <p class="col-span-2">{{client().email}}</p>
+        <div class="flex gap-4">
             <app-update-client-modal [client]="client()" [dialogId]="updateDialogId()"/>
             <app-delete-client-modal [client]="client()" [dialogId]="deleteDialogId()"/>
         </div>
