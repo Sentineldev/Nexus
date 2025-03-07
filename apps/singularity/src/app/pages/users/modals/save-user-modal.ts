@@ -1,4 +1,4 @@
-import { Component, Inject, signal } from "@angular/core";
+import { Component, Inject, input, signal } from "@angular/core";
 import CustomDialog from "../../../shared/dialog/custom-dialog";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import UserRepository from "../../../shared/interfaces/user-repository";
@@ -9,13 +9,15 @@ import UsersPageService from "../users-page-service";
 import { ErrorAlert } from "../../../shared/alerts/error-alert";
 import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-input";
 
 @Component({
     selector: `app-save-user-modal`,
     template: `
-    <app-custom-dialog [dialogId]="dialogId">
+    <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
-            <h1 class="text-center font-sans text-xl font-bold text-slate-600">Crear usuario</h1>
+            <h1 class="text-center font-sans text-xl font-medium text-primary">Crear usuario</h1>
 
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
@@ -28,17 +30,21 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
             }
             <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <label for="username">
-                        <p class="font-sans text-slate-700">Nombre de Usuario</p>
-                        <input formControlName="username" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="text" name="username" id="username"/>
-                    </label>
-                    <label for="passsword">
-                        <p class="font-sans text-slate-700">Clave</p>
-                        <input formControlName="password" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="password" name="passsword" id="passsword"/>
-                    </label>
+                    <app-reactive-form-input
+                    label="Nombre de usuario"
+                    [id]="'username'"
+                    [control]="formGroup.controls.username"
+                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    />
+                    <app-reactive-form-password-input
+                    label="Clave"
+                    [control]="formGroup.controls.password"
+                    [id]="'password'"
+                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    />
                 </div>
                 <div>
-                    <button [disabled]="loading()" class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">
+                    <button [disabled]="loading()" class="btn w-full" type="submit">
                         @if (loading()) {
                             <app-loader/>
                         } @else {
@@ -48,19 +54,14 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
                 </div>
             </form>
         </div>
-        
     </app-custom-dialog>
-    <app-dialog-toggler [dialogId]="dialogId">
-        <div class="bg-slate-700 text-white p-3 rounded-lg font-sans transition-all">
-            <h1>Crear Usuario</h1>
-        </div>
-    </app-dialog-toggler>
+   
     `,
-    imports: [CustomDialog, DialogToggler, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert]
+    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, ReactiveFormInput, ReactiveFormPasswordInput]
 })
 export default class SaveUserModal {
 
-    public dialogId = "save-user-modal-unique";
+    public dialogId = input.required<string>();
 
     public loading = signal(false);
     public errorMessage = signal("");

@@ -27,6 +27,19 @@ func CreateTables() {
 		email TEXT default ""	
 	);
 
+	CREATE TABLE IF NOT EXISTS employee(
+		id TEXT PRIMARY KEY,
+		first_names TEXT NOT NULL,
+		last_names TEXT NOT NULL,
+		identification TEXT NOT NULL UNIQUE,
+		personal_email TEXT NOT NULL,
+		corporative_email TEXT NOT NULL,
+		job_entry_date DATE NOT NULL,
+		job_departure_date DATE NOT NULL,
+		department TEXT NOT NULL,
+		position TEXT NOT NULL
+	);
+
 	CREATE TABLE IF NOT EXISTS user(
 		id TEXT PRIMARY KEY,
 		username TEXT NOT NULL UNIQUE,

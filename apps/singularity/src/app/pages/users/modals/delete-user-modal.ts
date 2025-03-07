@@ -14,7 +14,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
-            <h1 class="text-center font-sans text-xl font-bold text-slate-600">Eliminar usuario</h1>
+            <h1 class="text-center font-sans text-xl font-bold text-primary">Eliminar usuario</h1>
 
             
             @if (errorMessage().length > 0 || successMessage().length > 0) {
@@ -29,7 +29,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
             <app-user-container [user]="user()"/>
             <div class="w-full flex flex-col gap-6">
                 <div>
-                    <button (click)="onSubmitHandler()" [disabled]="loading()" class="p-3 bg-red-500 rounded-lg w-full text-white transition-all" type="button">
+                    <button (click)="onSubmitHandler()" [disabled]="loading()" class="btn w-full" type="button">
                         @if (loading()) {
                             <app-loader/>
                         } @else {

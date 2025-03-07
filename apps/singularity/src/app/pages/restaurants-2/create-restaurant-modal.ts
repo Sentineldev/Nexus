@@ -39,7 +39,7 @@ import { Loader } from "../../shared/loader/loader";
                     />
                 </div>
                 <div>
-                    <button type="submit" [disabled]="loading()" class="btn">
+                    <button type="submit" [disabled]="loading()" class="btn w-full">
                         @if (!loading()) {
                             Crear
                         } @else {

@@ -11,6 +11,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
         <div class="bg-white ">
             <ul class="flex gap-0">
                 <li>
+                    <a [routerLink]="restaurantsUrl()" class="block py-5 px-8 text-xl">Restaurantes</a>    
+                </li>
+                <li>
                     <a routerLinkActive="border-primary border-b-2" [routerLink]="menusUrl()" class="block py-5 px-8 text-xl">Menus</a>    
                 </li>
                 <li>
@@ -31,6 +34,7 @@ export default class RestaurantHomePage2 {
 
     public restaurant = computed(() => this.service.getRestaurant());
 
+    public restaurantsUrl = computed(() => `/admin/restaurants`);
     public menusUrl = computed(() => `/admin/restaurant/${this.restaurant().id}/menus`);
     public configUrl = computed(() => `/admin/restaurant/${this.restaurant().id}/config`);
 

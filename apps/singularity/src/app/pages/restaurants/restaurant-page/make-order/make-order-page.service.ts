@@ -13,6 +13,7 @@ import MenuCategoryRepository from "../../interfaces/menu-category-repository.in
 import MenuCategory from "../../classes/menu-category.class";
 import { PageFilter } from "../../../../shared/types/pagination";
 import { AllProductsFilter } from "../../repositories/category-product.repository";
+import RestaurantPageService2 from "../../../restaurant/restaurant-page.service";
 
 
 
@@ -39,11 +40,11 @@ export default class MakeOrderPageService  {
         private readonly categoryProducts: CategoryProductRepository,
         @Inject(ApiMenuRepository)
         private readonly menuRepository: MenuRepository,
-        private readonly restaurantPageService: RestaurantPageService,
+        private readonly restaurantPageService: RestaurantPageService2,
     ) {
 
-        this.restaurant = this.restaurantPageService.getRestaurant();
 
+        this.restaurant = this.restaurantPageService.getRestaurant();
         this.state = signal<ServiceState>({
             products: [],
             menus: [],
@@ -52,7 +53,7 @@ export default class MakeOrderPageService  {
                 page: 1,
                 pageSize: 5,
                 filter: {
-                    restaurantId: this.restaurant.id,
+                    restaurantId: "",
                     menuId: "",
                     search: ""
                 }
@@ -81,7 +82,7 @@ export default class MakeOrderPageService  {
     }
 
     firstLoad() {
-        this.restaurantPageService.startLoading("Cargando Productos");
+        // this.restaurantPageService.startLoading("Cargando Productos");
         const products = this.categoryProducts.getAllProductsPaginate({
             page: 1,
             pageSize: 5,
@@ -95,7 +96,7 @@ export default class MakeOrderPageService  {
         
         zip([products, menus]).subscribe(([ productsPage, menus ]) => {
             setTimeout(() => {
-                this.restaurantPageService.stopLoading();
+                // this.restaurantPageService.stopLoading();
                 this.state.update((current) => ({
                     ...current,
                     products: productsPage.data,

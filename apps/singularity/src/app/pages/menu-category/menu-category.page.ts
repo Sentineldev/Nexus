@@ -6,7 +6,7 @@ import { ActivatedRoute, RouterOutlet } from "@angular/router";
 @Component({
     selector: `app-menu-category-page2`,
     template: `
-    <div class="h-full">
+    <div class="h-full overflow-auto">
         @if (state().loading) {
             <app-loading-screen label="Cargando categoria..."/>
         }

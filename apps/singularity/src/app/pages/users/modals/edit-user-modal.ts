@@ -10,13 +10,14 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import User from "../user.class";
 import UserContainer from "../display/user-container";
 import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
 
 @Component({
     selector: `app-edit-user-modal`,
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
-            <h1 class="text-center font-sans text-xl font-bold text-slate-600">Actualizar usuario</h1>
+            <h1 class="text-center font-sans text-xl font-bold text-primary">Actualizar usuario</h1>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
 
                 @if (errorMessage().length > 0) {
@@ -30,13 +31,15 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
             
             <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <label for="username">
-                        <p class="font-sans text-slate-700">Nombre de Usuario</p>
-                        <input formControlName="username" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="text" name="username" id="username"/>
-                    </label>
+                    <app-reactive-form-input
+                    label="Nombre de usuario"
+                    [id]="'username-'+user().id"
+                    [control]="formGroup.controls.username"
+                    [errors]="{ required: 'No puede dejar este campo vacio' }"
+                    />
                 </div>
                 <div>
-                    <button [disabled]="loading()" class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">
+                    <button [disabled]="loading()" class="btn w-full" type="submit">
                         @if (loading()) {
                             <app-loader/>
                         } @else {
@@ -48,7 +51,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
         </div>
     </app-custom-dialog>
     `,
-    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer]
+    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer, ReactiveFormInput]
 })
 export default class SaveUserModal implements OnInit {
 

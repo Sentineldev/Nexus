@@ -12,7 +12,7 @@ import TopBar2 from "../../../shared/topbar2/top-bar-2";
         <div class="bg-white ">
             <ul class="flex gap-0">
                 <li>
-                    <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Volver</a>    
+                    <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
                 </li>    
                 <li>
                     <a routerLinkActive="border-primary border-b-2" [routerLink]="categoriesUrl()" class="block border-b-2 py-5 px-8 text-xl">Categorias</a>    

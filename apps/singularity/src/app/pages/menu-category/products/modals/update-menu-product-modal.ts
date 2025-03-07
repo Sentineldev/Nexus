@@ -18,7 +18,7 @@ import { Loader } from "../../../../shared/loader/loader";
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="shadow-xl bg-white rounded-xl p-6  w-full lg:w-[450px] flex flex-col gap-6">
             <div>
-                <h1 class="text-black font-medium text-center text-xl">Actualizar Producto</h1>
+                <h1 class="text-primary font-medium text-center text-xl">Actualizar Producto</h1>
             </div>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
                 <div>
@@ -56,7 +56,7 @@ import { Loader } from "../../../../shared/loader/loader";
                     />
                 </div>
                 <div>
-                    <button type="submit" [disabled]="loading()" class="btn">
+                    <button type="submit" [disabled]="loading()" class="btn w-full">
                         @if (!loading()) {
                             Actualizar
                         } @else {

@@ -45,6 +45,7 @@ export default class CategoryProductPageService2 {
     }
 
     getPage(filter: PageFilter<CategoryProductFilter>) {
+
         this.state.update((current) => ({ ...current, loading: true, filter }));
         this.repository.getPage(filter).subscribe((result) => {
             setTimeout(() => {

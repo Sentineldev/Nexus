@@ -8,7 +8,7 @@ import Restaurant from "../../restaurants/classes/restaurant.class";
     styles: `
     .restaurants-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(380px, auto))
+        grid-template-columns: repeat(auto-fit,minmax(300px, auto))
     }
     `,
     template: `

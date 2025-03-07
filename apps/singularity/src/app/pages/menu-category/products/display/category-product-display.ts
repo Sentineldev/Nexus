@@ -28,7 +28,7 @@ import DeleteCategoryProductModal2 from "../modals/delete-menu-product-modal";
     <div class="relative">
         <div class="dropdown-toggler p-2 flex items-center transition-all hover:cursor-pointer">
             <div class="flex-1">
-                <h1 class="font-medium text-2xl text-black">{{product().product.name}}</h1>
+                <h1 class="font-medium text-lg text-wrap text-start text-black">{{product().product.name}}</h1>
                 <p class="text-neutral text-lg">
                     @if (product().isActive) {
                         Activo
@@ -46,7 +46,7 @@ import DeleteCategoryProductModal2 from "../modals/delete-menu-product-modal";
             <ul class="w-full">
                 <li>
                     <app-dialog-toggler [dialogId]="updateDialogId()">
-                        <div class="p-3 w-44 text-start font-sans text-sm cursor-pointer">Actualizar</div>
+                        <div class="hover:bg-slate-200 p-3 w-44 text-start font-sans text-sm cursor-pointer">Actualizar</div>
                     </app-dialog-toggler>
                 </li>
                 <li>

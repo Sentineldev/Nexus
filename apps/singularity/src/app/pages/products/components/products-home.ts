@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import TopBar2 from "../../../shared/topbar2/top-bar-2";
 
 @Component({
@@ -24,7 +24,13 @@ import TopBar2 from "../../../shared/topbar2/top-bar-2";
     </div>
     `
 })
-export default class ProductsHome {
+export default class ProductsHome implements OnInit {
 
 
+    constructor(
+        private readonly router: Router
+    ) {}
+    ngOnInit(): void {
+        this.router.navigate(['/admin/product-management/products']);
+    }
 }

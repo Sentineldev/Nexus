@@ -5,8 +5,8 @@ import FeedStockDisplay from "./feed-stock-display";
 @Component({
     selector: `app-feed-stocks-display`,
     template: `
-    <div class="flex flex-col gap-4">
-        <div class="grid grid-cols-3">
+    <div class="flex flex-col gap-8">
+        <div class="grid grid-cols-3 py-4 border-b border-b-neutral">
             <div>
                 <h1 class="font-medium text-primary text-lg">Ingrediente</h1>
             </div>

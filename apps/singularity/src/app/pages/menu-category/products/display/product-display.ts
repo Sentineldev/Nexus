@@ -10,8 +10,8 @@ import AddProductToMenuModal from "../modals/add-product-to-menu";
     <app-add-product-to-menu-modal [dialogId]="dialogId()" [product]="product()"/>
     <app-dialog-toggler [dialogId]="dialogId()">
         <div class="flex flex-col items-start cursor-pointer">
-            <h1 class="font-medium text-2xl">{{product().name}}</h1>
-            <p>{{product().description}}</p>
+            <h1 class="font-medium text-lg text-wrap text-start">{{product().name}}</h1>
+            <p class="text-wrap text-start">{{product().description}}</p>
         </div>
     </app-dialog-toggler>
     `,

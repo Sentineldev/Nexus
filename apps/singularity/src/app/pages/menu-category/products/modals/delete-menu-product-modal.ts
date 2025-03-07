@@ -16,7 +16,7 @@ import CategoryProductPageService2 from "../category-product-page.service";
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[400px] flex flex-col gap-4">
             <div>
-                <h1 class="text-slate-700 text-[1.1rem] text-center font-sans">Remover producto</h1>
+                <h1 class="text-primary text-[1.1rem] text-center font-sans">Remover producto</h1>
             </div>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
                 @if (errorMessage().length > 0) {
@@ -28,7 +28,7 @@ import CategoryProductPageService2 from "../category-product-page.service";
             }
             <app-product-fieldset-container [product]="product()"/>
             <div>
-                <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="bg-red-500 p-3 w-full rounded-lg text-white font-sans">
+                <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="btn w-full">
                     @if (loading()) {
                         <app-loader/>
                     } @else {

@@ -9,41 +9,42 @@ import ProductOptionsDisplay from "./display/products-display";
 @Component({
     selector: `app-category-products-page`,
     template: `
-        @if (state().loading || productsState().loading) {
-            <div class="p-12">
-                <app-loader color="secondary"/>
-            </div>
-        }
-        @if (!state().loading && !productsState().loading) {
-            <div class="flex flex-col gap-8 p-12 h-full">
+        
+        
+        <div class="flex flex-col gap-8 p-12 h-full overflow-auto">
+            <div class="gap-4">
+                @if (state().loading || productsState().loading) {
+                        <div class="py-4 px-2">
+                            <app-loader color="secondary"/>
+                        </div>
+                }
                 <div class="w-fit">
                     <button (click)="onShowProductsHandler()" type="button" class="btn">Agregar producto</button>
                 </div>
-                <div class="grid grid-cols-3 gap-6 h-full transition-all">
-
-                    <div [className]="showProducts() ? ' pr-4 border-r border-neutral col-span-2 flex flex-col gap-8' : 'pr-4 border-neutral col-span-3 flex flex-col gap-8'">
-                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
-                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="text" name="search-in-menu" id="search-in-menu" class="outline-none" placeholder="Buscar en el menu... ">
-                        </div>
-                        @if (state().products) {
-                            <app-category-products-display2 [products]="state().products!.data"/>
-                        }
+            </div>
+            <div class="grid grid-cols-3 gap-6 flex-1 transition-all overflow-auto">
+                <div [className]="showProducts() ? ' pr-4 border-r border-neutral col-span-2 flex flex-col gap-8' : 'pr-4 border-neutral col-span-3 flex flex-col gap-8'">
+                    <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
+                        <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                        <input type="text" name="search-in-menu" id="search-in-menu" class="outline-none" placeholder="Buscar en el menu... ">
                     </div>
-                    @if (showProducts()) {
-                        <div class="flex flex-col gap-8">
-                            <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-full">
-                                <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                                <input type="text" name="search-product" id="search-product" class="outline-none" placeholder="Buscar productos... ">
-                            </div>
-                            @if (productsState().page) {
-                                <app-product-options-display [products]="productsState().page.data"/>
-                            }
-                        </div>
+                    @if (state().products) {
+                        <app-category-products-display2 [products]="state().products!.data"/>
                     }
                 </div>
+                @if (showProducts()) {
+                    <div class="flex flex-col gap-8">
+                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-full">
+                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="text" name="search-product" id="search-product" class="outline-none" placeholder="Buscar productos... ">
+                        </div>
+                        @if (productsState().page) {
+                            <app-product-options-display [products]="productsState().page.data"/>
+                        }
+                    </div>
+                }
             </div>
-        }
+        </div>
     `,
     imports: [CategoryProductsDisplay2, Loader, ProductOptionsDisplay]
 })
@@ -64,8 +65,8 @@ export default class CategoryProductsPage implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.service.getPage({ filter: { categoryId: this.category().id }, page: 1, pageSize: 5 });
-        this.productsService.getPage(this.productsState().filter);
+        this.service.getPage({ filter: { categoryId: this.category().id }, page: 1, pageSize: 10 });
+        this.productsService.getPage({ ...this.productsState().filter, pageSize: 10, });
     }
 
     onShowProductsHandler() {

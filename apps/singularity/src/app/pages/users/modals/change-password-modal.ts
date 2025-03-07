@@ -10,13 +10,14 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import User from "../user.class";
 import UserContainer from "../display/user-container";
 import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
+import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-input";
 
 @Component({
     selector: `app-change-password-modal`,
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
-            <h1 class="text-center font-sans text-xl font-bold text-slate-600">Actualizar clave</h1>
+            <h1 class="text-center font-sans text-xl font-bold text-primary">Actualizar clave</h1>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
                 @if (errorMessage().length > 0) {
                     <app-error-alert [message]="errorMessage()"/>
@@ -28,13 +29,16 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
             <app-user-container [user]="user()"/>
             <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <label for="password">
-                        <p class="font-sans text-slate-700">Ingrese nueva clave</p>
-                        <input formControlName="password" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="password" name="password" id="password"/>
-                    </label>
+                    
+                    <app-reactive-form-password-input
+                    label="Ingrese nueva clave"
+                    [id]="'password-'+user().id"
+                    [control]="formGroup.controls.password"
+                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    />
                 </div>
                 <div>
-                    <button [disabled]="loading()" class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">
+                    <button [disabled]="loading()" class="btn w-full" type="submit">
                         @if (loading()) {
                             <app-loader/>
                         } @else {
@@ -46,7 +50,7 @@ import ApiUserRepository from "../../../shared/repositories/api/api-user-reposit
         </div>
     </app-custom-dialog>
     `,
-    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer]
+    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer, ReactiveFormPasswordInput]
 })
 export default class ChangePasswordModal {
 

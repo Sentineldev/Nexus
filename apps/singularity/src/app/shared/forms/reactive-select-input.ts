@@ -13,7 +13,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
         [name]="id()"
         [formControl]="control()"
         autocomplete="on"
-        class="border w-full border-neutral p-2 text-xl rounded outline-none"
+        class="border w-full border-neutral p-2 text-[1.17rem] rounded outline-none"
         >
         <ng-content></ng-content>
         </select>
