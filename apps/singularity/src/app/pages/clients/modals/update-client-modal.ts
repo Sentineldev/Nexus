@@ -10,17 +10,19 @@ import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import { Loader } from "../../../shared/loader/loader";
 import DialogToggler from "../../../shared/dialog/dialog-toggler";
 import ClientsService from "../client.service";
+import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import ReactiveSelectInput from "../../../shared/forms/reactive-select-input";
 
 @Component({
     selector: `app-update-client-modal`,
-    imports: [CustomDialog, ErrorAlert, SuccessAlert, Loader, DialogToggler, ReactiveFormsModule],
+    imports: [CustomDialog, ErrorAlert, SuccessAlert, Loader, DialogToggler, ReactiveFormsModule, ReactiveFormInput, ReactiveSelectInput],
     template: `
     <div>
         <app-custom-dialog [dialogId]="dialogId()">
-            <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[380px]">
+            <div class="bg-white shadow-sm p-4 rounded-xl m-auto w-full lg:w-[600px]">
                 <div class="flex flex-col gap-6">
                     <div class="flex flex-col gap-4">
-                        <h1 class="text-center text-[1.2rem] font-sans text-slate-700">Actualizar Cliente</h1>
+                        <h1 class="text-center text-[1.2rem] font-sans text-primary font-medium">Actualizar Cliente</h1>
                         @if (errorMessage().length > 0 || successMessage().length > 0) {
                             @if (errorMessage().length > 0) {
                                 <app-error-alert [message]="errorMessage()"/>
@@ -33,53 +35,41 @@ import ClientsService from "../client.service";
                     <div>
                         <form (ngSubmit)="onSubmitHandler()" [formGroup]="formGroup" class="flex flex-col gap-6">
                             <div class="flex flex-col gap-4">
-                                <div>
-                                    <label for="fullName" class="flex flex-col gap-1">
-                                        <p class="text-slate-700">Nombre</p>
-                                        <input autocomplete="on" formControlName="fullName" type="text" name="fullName" id="fullName" class="border rounded-sm p-1">
-                                    </label>
-                                    @if (formGroup.dirty && formGroup.controls.fullName.dirty && formGroup.controls.fullName.getError("required")) {
-                                        <p class="text-red-500">Ingrese el nombre</p>
-                                    }
-                                </div>
+                                <app-reactive-form-input
+                                label="Nombre completo"
+                                [id]="'client-name-'+client().id"
+                                [control]="formGroup.controls.fullName"
+                                [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                                />
                                 <div class="grid grid-cols-2 gap-2">
-                                    <div>
-                                        <label for="identificationType" class="flex flex-col gap-1">
-                                            <p class="text-slate-700">Tipo</p>
-                                            <!-- <input autocomplete="on" formControlName="identificationType" type="text" name="name" id="name" class="border rounded-sm p-1"> -->
-                                            <select formControlName="identificationType" class="border p-1 text-lg rounded-sm" name="identificationType" id="identificationType">
-                                                <option value="V">Venezolano</option>
-                                                <option value="G">Gubernamental</option>
-                                                <option value="J">Juridico</option>
-                                                <option value="E">Extranjero</option>
-                                            </select>
-                                        </label>
-                                        @if (formGroup.dirty && formGroup.controls.identificationType.dirty && formGroup.controls.identificationType.getError("required")) {
-                                            <p class="text-red-500">Ingrese</p>
-                                        }
-                                    </div>
-                                    <div>
-                                        <label for="identification" class="flex flex-col gap-1">
-                                            <p class="text-slate-700">Identificacion</p>
-                                            <input autocomplete="on" formControlName="identification" type="text" name="identification" id="identification" class="border rounded-sm p-1">
-                                        </label>
-                                        @if (formGroup.dirty && formGroup.controls.identification.dirty && formGroup.controls.identification.getError("required")) {
-                                            <p class="text-red-500">Ingrese la identificacion</p>
-                                        }
-                                    </div>
+                                    <app-reactive-select-input
+                                    label="Tipo de documento"
+                                    [id]="'client-id-type-'+client().id"
+                                    [control]="formGroup.controls.identificationType"
+                                    [errors]="{ required: 'Debe especificar el tipo' }"
+                                    >
+                                        <option value="V">Venezolano</option>
+                                        <option value="G">Gubernamental</option>
+                                        <option value="J">Juridico</option>
+                                        <option value="E">Extranjero</option>
+                                    </app-reactive-select-input>
+                                        
+                                    <app-reactive-form-input
+                                    label="Identificacion"
+                                    [id]="'client-id-'+client().id"
+                                    [control]="formGroup.controls.identification"
+                                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                                    />
                                 </div>
+                                <app-reactive-form-input
+                                label="Correo electronico"
+                                [id]="'client-email-'+client().id"
+                                [control]="formGroup.controls.email"
+                                [errors]="{ required: 'No puedes dejar este campo vacio', email: 'Debe ingresar un correo valido' }"
+                                />
                             </div>
-                                <div>
-                                    <label for="email" class="flex flex-col gap-1">
-                                        <p class="text-slate-700">Email</p>
-                                        <input autocomplete="on" formControlName="email" type="text" name="email" id="email" class="border rounded-sm p-1">
-                                    </label>
-                                    @if (formGroup.dirty && formGroup.controls.email.dirty && formGroup.controls.email.getError("required")) {
-                                        <p class="text-red-500">Ingrese una direccion de correo valida</p>
-                                    }
-                                </div>
                             <div>
-                                <button [disabled]="loading()" class="bg-slate-700  text-white w-full p-2 rounded-lg font-sans text-[1.1rem]">
+                                <button [disabled]="loading()" class="btn w-full">
                                     @if(loading()) {
                                         <app-loader/>
                                     } @else {
@@ -93,9 +83,9 @@ import ClientsService from "../client.service";
             </div>
         </app-custom-dialog>
         <app-dialog-toggler [dialogId]="dialogId()">
-            <h1 class="text-slate-700 text-[1rem]">
-                <img class="" src="./svg/edit-svgrepo-com.svg" alt="trash-icon" width="32" height="32">
-            </h1>
+            <div class="btn">
+                <img class="" src="./svg/edit-svgrepo-com.svg" alt="trash-icon" width="24" height="24">
+            </div>
         </app-dialog-toggler>
     </div>
     `

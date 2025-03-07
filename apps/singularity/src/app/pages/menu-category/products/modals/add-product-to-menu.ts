@@ -20,7 +20,7 @@ import ValidatorsUtils from "../../../../utils/validators";
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="shadow-xl bg-white rounded-xl p-6  w-full lg:w-[450px] flex flex-col gap-6">
             <div>
-                <h1 class="text-black font-medium text-center text-xl">Crear Categoria</h1>
+                <h1 class="text-black font-medium text-center text-xl">Agregar producto</h1>
             </div>
             @if (errorMessage().length > 0 || successMessage().length > 0) {
                 <div>
@@ -54,7 +54,7 @@ import ValidatorsUtils from "../../../../utils/validators";
                     />
                 </div>
                 <div>
-                    <button type="submit" [disabled]="loading()" class="btn">
+                    <button type="submit" [disabled]="loading()" class="btn w-full">
                         @if (!loading()) {
                             Agregar
                         } @else {
