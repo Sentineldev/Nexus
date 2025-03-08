@@ -2,7 +2,7 @@ package employee
 
 import "github.com/labstack/echo/v4"
 
-func FeedStockRoutes(server *echo.Group) {
+func EmployeesRoutes(server *echo.Group) {
 
 	handler := NewEmployeeHandler()
 

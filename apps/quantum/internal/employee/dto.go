@@ -1,6 +1,11 @@
 package employee
 
-import "quantum/internal/utils"
+import (
+	"net/http"
+	"quantum/internal/utils"
+
+	"github.com/labstack/echo/v4"
+)
 
 type SaveEmployeeDto struct {
 	FirstNames       string `json:"firstNames"`
@@ -14,34 +19,43 @@ type SaveEmployeeDto struct {
 	Position         string `json:"position"`
 }
 
-func (dto SaveEmployeeDto) Validate() bool {
+func (dto SaveEmployeeDto) Validate() error {
 
+	err := ""
 	if utils.IsStringEmpty(dto.Identification) {
-		return false
+		err = "Identification can't be empty"
+
 	}
-	if utils.IsStringEmpty(dto.FirstNames) || utils.IsStringEmpty(dto.LastNames) {
-		return false
+	if utils.IsStringEmpty(dto.FirstNames) {
+		err = "First Name cant be empty"
+	}
+	if utils.IsStringEmpty(dto.LastNames) {
+		err = "Last Name cant be empty"
 	}
 	// Need to check for a valid email.
 	if utils.IsStringEmpty(dto.PersonalEmail) {
-		return false
+		err = "Personal email cant be empty"
 	}
 	if utils.IsStringEmpty(dto.CorporativeEmail) {
-		return false
+		err = "Corporative email cant be empty"
 	}
 	if utils.IsStringEmpty(dto.JobEntryDate) {
-		return false
+		err = "Job entry date cant be empty"
 	}
 	if utils.IsStringEmpty(dto.JobDepartureDate) {
-		return false
+		err = "Job departure date cant be empty"
 	}
 
 	if utils.IsStringEmpty(dto.Department) {
-		return false
+		err = "Department cant be empty"
 	}
 
 	if utils.IsStringEmpty(dto.Position) {
-		return false
+		err = "Position cant be empty"
 	}
-	return true
+	if utils.IsStringEmpty(err) {
+		return nil
+	}
+	return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+
 }

@@ -3,7 +3,6 @@ import LoginPage from './pages/login/login-page';
 import RestaurantsPage from './pages/restaurants/restaurants-page';
 import MenuConfigPage from './pages/menu/config/config-page';
 import MenuCategoryConfigPage from './pages/menu-category/config/config-page';
-import UsersPage from './pages/users/users-page';
 import ClientsPage from './pages/clients/clients-page';
 import MapSelectorPage from './pages/map/map';
 import RestaurantsPage2 from './pages/restaurants-2/restaurants-page';
@@ -22,6 +21,8 @@ import ProductsHome from './pages/products/components/products-home';
 import ProductsPage2 from './pages/products-2/products-2.page';
 import FeedStockPage from './pages/feed-stock/feed-stock.page';
 import MakeOrderPage from './pages/restaurants/restaurant-page/make-order/make-order';
+import UsersPage from './pages/user-management/users/users-page';
+import UserManagementHomePage from './pages/user-management/home.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -42,8 +43,14 @@ export const routes: Routes = [
                 component: MapSelectorPage,
             },
             {
-                path: "users",
-                component: UsersPage
+                path: "user-management",
+                component: UserManagementHomePage,
+                children: [
+                    {
+                        path: "users",
+                        component: UsersPage
+                    }
+                ]
             },
             {
                 path: "product-management",

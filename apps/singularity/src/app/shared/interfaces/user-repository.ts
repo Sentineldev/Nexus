@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
-import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../../pages/users/user.dto";
-import User from "../../pages/users/user.class";
+import User from "../../pages/user-management/users/user.class";
+import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../../pages/user-management/users/user.dto";
 
 export default interface UserRepository {
 

@@ -3,8 +3,8 @@ import UserRepository from "../../interfaces/user-repository";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import CONFIGURATION from "../../configuration";
-import User from "../../../pages/users/user.class";
-import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../../../pages/users/user.dto";
+import User from "../../../pages/user-management/users/user.class";
+import { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../../../pages/user-management/users/user.dto";
 
 
 @Injectable({

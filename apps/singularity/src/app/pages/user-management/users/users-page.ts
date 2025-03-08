@@ -2,14 +2,13 @@ import { Component, computed, OnInit, signal } from "@angular/core";
 import UsersPageService from "./users-page-service";
 import SaveUserModal from "./modals/save-user-modal";
 import UsersDisplay from "./display/users-display";
-import { Loader } from "../../shared/loader/loader";
-import DialogToggler from "../../shared/dialog/dialog-toggler";
-import TopBar2 from "../../shared/topbar2/top-bar-2";
+import TopBar2 from "../../../shared/topbar2/top-bar-2";
+import { Loader } from "../../../shared/loader/loader";
+import DialogToggler from "../../../shared/dialog/dialog-toggler";
 
 @Component({
     selector: `app-users-page`,
     template: `
-    <app-topbar label="Usuarios"/>
     <app-save-user-modal [dialogId]="dialogId()"/>
     <div class="p-12 flex flex-col gap-6">
         @if (state().loading) {
@@ -39,7 +38,7 @@ import TopBar2 from "../../shared/topbar2/top-bar-2";
         </div>
     </div>
     `,
-    imports: [SaveUserModal, UsersDisplay, Loader, DialogToggler, TopBar2]
+    imports: [SaveUserModal, UsersDisplay, Loader, DialogToggler]
 })
 export default class UsersPage implements OnInit {
 

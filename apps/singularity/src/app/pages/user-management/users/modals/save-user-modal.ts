@@ -1,16 +1,15 @@
 import { Component, Inject, input, signal } from "@angular/core";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
-import UserRepository from "../../../shared/interfaces/user-repository";
-import { Loader } from "../../../shared/loader/loader";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { SaveUserDto } from "../user.dto";
 import UsersPageService from "../users-page-service";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
-import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
-import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-input";
+import { Loader } from "../../../../shared/loader/loader";
+import ReactiveFormPasswordInput from "../../../../shared/forms/reactive-password-input";
+import ReactiveFormInput from "../../../../shared/forms/reactive-input";
+import { SuccessAlert } from "../../../../shared/alerts/success-alert";
+import { ErrorAlert } from "../../../../shared/alerts/error-alert";
+import CustomDialog from "../../../../shared/dialog/custom-dialog";
+import UserRepository from "../../../../shared/interfaces/user-repository";
+import ApiUserRepository from "../../../../shared/repositories/api/api-user-repository";
 
 @Component({
     selector: `app-save-user-modal`,
@@ -57,7 +56,7 @@ import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-i
     </app-custom-dialog>
    
     `,
-    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, ReactiveFormInput, ReactiveFormPasswordInput]
+    imports: [ReactiveFormsModule, Loader, ReactiveFormPasswordInput, ReactiveFormInput, SuccessAlert, ErrorAlert, CustomDialog]
 })
 export default class SaveUserModal {
 

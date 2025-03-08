@@ -1,16 +1,16 @@
-import { Component, Inject, input, OnInit, signal } from "@angular/core";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import UserRepository from "../../../shared/interfaces/user-repository";
-import { Loader } from "../../../shared/loader/loader";
+import { Component, Inject, input, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { UpdateUserPasswordDto } from "../user.dto";
 import UsersPageService from "../users-page-service";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
 import User from "../user.class";
 import UserContainer from "../display/user-container";
-import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
-import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-input";
+import { SuccessAlert } from "../../../../shared/alerts/success-alert";
+import { ErrorAlert } from "../../../../shared/alerts/error-alert";
+import CustomDialog from "../../../../shared/dialog/custom-dialog";
+import ReactiveFormPasswordInput from "../../../../shared/forms/reactive-password-input";
+import { Loader } from "../../../../shared/loader/loader";
+import UserRepository from "../../../../shared/interfaces/user-repository";
+import ApiUserRepository from "../../../../shared/repositories/api/api-user-repository";
 
 @Component({
     selector: `app-change-password-modal`,
@@ -50,7 +50,7 @@ import ReactiveFormPasswordInput from "../../../shared/forms/reactive-password-i
         </div>
     </app-custom-dialog>
     `,
-    imports: [CustomDialog, Loader, ReactiveFormsModule, ErrorAlert, SuccessAlert, UserContainer, ReactiveFormPasswordInput]
+    imports: [ReactiveFormsModule, UserContainer, SuccessAlert, ErrorAlert, CustomDialog, ReactiveFormPasswordInput, Loader]
 })
 export default class ChangePasswordModal {
 

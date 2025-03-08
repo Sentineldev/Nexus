@@ -1,9 +1,9 @@
 import { Injectable, signal, WritableSignal } from "@angular/core";
-import User from "../../pages/users/user.class";
 import { JwtData } from "../types/jwt";
 import { jwtDecode } from "jwt-decode";
 import LocalStorageUtils from "../../utils/local-storage";
 import JwtUtils from "../../utils/jwt";
+import User from "../../pages/user-management/users/user.class";
 
 
 type ServiceState = {
