@@ -2,7 +2,7 @@ package types
 
 type Employee struct {
 	Id               string `json:"id"`
-	FirstNames       string `json:"names"`
+	FirstNames       string `json:"firstNames"`
 	LastNames        string `json:"lastNames"`
 	Identification   string `json:"identification"`
 	PersonalEmail    string `json:"personalEmail"`

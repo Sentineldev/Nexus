@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import TopBar2 from "../../components/topbar2/top-bar-2";
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 
 @Component({
     selector: `app-user-management-home-page`,
@@ -24,7 +24,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
     `,
     imports: [TopBar2, RouterOutlet, RouterLinkActive, RouterLink]
 })
-export default class UserManagementHomePage {
+export default class UserManagementHomePage implements OnInit {
 
 
+    constructor(
+        private readonly router: Router
+    ) {}
+    ngOnInit(): void {
+        this.router.navigate(['/admin/user-management/users']);
+    }
 }

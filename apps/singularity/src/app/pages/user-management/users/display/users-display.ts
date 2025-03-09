@@ -5,7 +5,6 @@ import UserDisplay from "./user-display";
 @Component({
     selector: `app-users-display`,
     template: `
-
         <div class="flex flex-col gap-8">
             <div class="grid grid-cols-2 gap-4 items-center justify-center border-b-neutral border-b py-4">
                 <div>

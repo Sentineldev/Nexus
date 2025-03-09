@@ -1,7 +1,6 @@
 import { map, Observable, of, switchMap, tap } from "rxjs";
 import { PageFilter, PageData } from "../types/pagination";
 import Product from "../classes/product.class";
-import { SaveProduct } from "../../pages/products/dto/product.dto";
 import { Injectable } from "@angular/core";
 import ProductRepository from "../interfaces/product-repository.interface";
 import { PRODUCTS } from "../data/variables";

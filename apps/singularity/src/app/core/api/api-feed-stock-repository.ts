@@ -41,7 +41,7 @@ export default class ApiFeedStockRepository implements FeedStockRepository {
             })
         )
     }
-    update(id: string, body: any): Observable<string> {
+    update(id: string, body: SaveFeedStockDto): Observable<string> {
         return this.http.put(`${this.URL}/${id}`, body).pipe(
             map(() => ""),
             catchError((error: HttpErrorResponse) => {

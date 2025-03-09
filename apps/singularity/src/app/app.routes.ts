@@ -22,6 +22,7 @@ import UserManagementHomePage from './pages/user-management/home.page';
 import FeedStockPage from './pages/product-management/feed-stock/feed-stock.page';
 import ProductManagementHomePage from './pages/product-management/home.page';
 import ProductsPage2 from './pages/product-management/products/products-2.page';
+import EmployeesPage from './pages/user-management/employees/employees.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -48,6 +49,10 @@ export const routes: Routes = [
                     {
                         path: "users",
                         component: UsersPage
+                    },
+                    {
+                        path: "employees",
+                        component: EmployeesPage
                     }
                 ]
             },
