@@ -1,13 +1,13 @@
 import { Component, Inject, input, signal } from "@angular/core";
 import UsersPageService from "../users-page-service";
-import User from "../user.class";
+import User from "../../../../core/classes/user.class";
 import UserContainer from "../display/user-container";
-import { Loader } from "../../../../shared/loader/loader";
-import { SuccessAlert } from "../../../../shared/alerts/success-alert";
-import { ErrorAlert } from "../../../../shared/alerts/error-alert";
-import CustomDialog from "../../../../shared/dialog/custom-dialog";
-import UserRepository from "../../../../shared/interfaces/user-repository";
-import ApiUserRepository from "../../../../shared/repositories/api/api-user-repository";
+import { Loader } from "../../../../components/loader/loader";
+import { SuccessAlert } from "../../../../components/alerts/success-alert";
+import { ErrorAlert } from "../../../../components/alerts/error-alert";
+import CustomDialog from "../../../../components/dialog/custom-dialog";
+import UserRepository from "../../../../core/interfaces/user-repository";
+import ApiUserRepository from "../../../../core/api/api-user-repository";
 
 @Component({
     selector: `app-delete-user-modal`,

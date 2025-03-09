@@ -1,6 +1,6 @@
 import { Component, computed } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import TopBar2 from "../../../shared/topbar2/top-bar-2";
+import TopBar2 from "../../../components/topbar2/top-bar-2";
 import MenuCategoryPageService2 from "../menu-category-page.service";
 
 @Component({

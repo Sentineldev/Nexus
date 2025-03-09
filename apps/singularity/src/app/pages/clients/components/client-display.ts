@@ -1,5 +1,5 @@
-import { Component, computed, EventEmitter, input, Output } from "@angular/core";
-import Client from "../classes/client.class";
+import { Component, computed, input } from "@angular/core";
+import Client from "../../../core/classes/client.class";
 import UpdateClientModal from "../modals/update-client-modal";
 import DeleteClientModal from "../modals/delete-client-modal";
 

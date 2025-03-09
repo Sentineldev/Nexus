@@ -1,7 +1,7 @@
 import { Component, computed, input } from "@angular/core";
 import { MapContainer } from "../types/map_types";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
 import EditContainerElementModal from "./edit-container-element-modal ";
 import DeleteContainerElementModal from "./delete-container-element-modal";
 

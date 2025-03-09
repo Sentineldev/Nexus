@@ -1,6 +1,6 @@
 import { Component, computed, OnInit } from "@angular/core";
 import MenuCategoryPageService2 from "./menu-category-page.service";
-import LoadingScreen from "../../shared/loader/loading-screen";
+import LoadingScreen from "../../components/loader/loading-screen";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
 
 @Component({

@@ -1,17 +1,16 @@
 import { Component, EventEmitter, Inject, input, OnInit, Output, signal } from "@angular/core";
-import Client from "../classes/client.class";
+import Client from "../../../core/classes/client.class";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
-import ClientRepository from "../../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../../shared/repositories/api/api-client-repository";
-import { SaveClient } from "../dto/client.dto";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
-import { Loader } from "../../../shared/loader/loader";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import ClientRepository, { SaveClient } from "../../../core/interfaces/client-repository.interface";
+import ApiClientRepository from "../../../core/api/api-client-repository";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import { SuccessAlert } from "../../../components/alerts/success-alert";
+import { Loader } from "../../../components/loader/loader";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
 import ClientsService from "../client.service";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
-import ReactiveSelectInput from "../../../shared/forms/reactive-select-input";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
+import ReactiveSelectInput from "../../../components/forms/reactive-select-input";
 
 @Component({
     selector: `app-update-client-modal`,

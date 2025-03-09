@@ -1,17 +1,15 @@
 import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import AuthService from '../../shared/services/auth.service';
-import AuthRepository from '../../shared/interfaces/auth-repository.interface';
-import ApiAuthRepository from '../../shared/repositories/api/api-auth-repository';
-import { LogInDto } from '../../shared/dto/auth';
-import { Loader } from "../../shared/loader/loader";
-import { ErrorAlert } from "../../shared/alerts/error-alert";
-import { catchError, finalize, map, of } from 'rxjs';
-import { Result } from '../../shared/types/result';
+import AuthRepository from '../../core/interfaces/auth-repository.interface';
+import ApiAuthRepository from '../../core/api/api-auth-repository';
+import { LogInDto } from '../../components/dto/auth';
+import { Loader } from "../../components/loader/loader";
+import { ErrorAlert } from "../../components/alerts/error-alert";
 import LocalStorageUtils from '../../utils/local-storage';
-import ReactiveFormInput from "../../shared/forms/reactive-input";
-import ReactiveFormPasswordInput from "../../shared/forms/reactive-password-input";
+import ReactiveFormInput from "../../components/forms/reactive-input";
+import ReactiveFormPasswordInput from "../../components/forms/reactive-password-input";
+import AuthService from '../../core/services/auth.service';
 @Component({
   selector: 'app-login-page',
   imports: [ReactiveFormsModule, Loader, ErrorAlert, ReactiveFormInput, ReactiveFormPasswordInput],

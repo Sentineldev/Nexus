@@ -2,7 +2,7 @@ import { Component, computed, input, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import MapService from "../map.service";
 import { MapContainer, ContainerElement } from "../types/map_types";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
+import CustomDialog from "../../../components/dialog/custom-dialog";
 
 @Component({
     selector: `app-edit-map-container-modal`,

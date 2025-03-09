@@ -1,5 +1,5 @@
-import { Component, EventEmitter, input, Output } from "@angular/core";
-import Client from "../classes/client.class";
+import { Component, input } from "@angular/core";
+import Client from "../../../core/classes/client.class";
 import ClientDisplay from "./client-display";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, input } from "@angular/core";
-import User from "../user.class";
+import User from "../../../../core/classes/user.class";
 import UserDisplay from "./user-display";
 
 @Component({

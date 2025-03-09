@@ -1,4 +1,4 @@
-import { Component, computed, OnInit } from "@angular/core";
+import { Component, computed } from "@angular/core";
 import RestaurantPageService from "../restaurant-page.service";
 import RestaurantUpdateForm from "./update-form";
 
@@ -7,7 +7,6 @@ import RestaurantUpdateForm from "./update-form";
     template: `
 
     <div class="flex flex-col gap-4 p-12">
-        <!-- <app-restaurant-top-hero [restaurant]="restaurant()"/> -->
         <app-restaurant-update-form [restaurant]="restaurant()"/>
     </div>
     `,

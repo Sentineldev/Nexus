@@ -1,9 +1,9 @@
 import { Component,computed,OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import AuthService from '../../shared/services/auth.service';
 import LocalStorageUtils from '../../utils/local-storage';
-import Topbar from "../../shared/topbar/topbar";
 import IndexPageService from './index-page.service';
+import AuthService from '../../core/services/auth.service';
+import Topbar from '../../components/topbar/topbar';
 
 @Component({
   selector: 'app-index-page',

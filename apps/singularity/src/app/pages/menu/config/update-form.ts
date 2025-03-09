@@ -1,12 +1,11 @@
 import { Component, Inject, input, OnInit, signal } from "@angular/core";
-import Menu from "../../restaurants/classes/menu.class";
+import Menu from "../../../core/classes/menu.class";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { Loader } from "../../../shared/loader/loader";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
-import { UpdateMenu } from "../../restaurants/dto/menu.dto";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import { Loader } from "../../../components/loader/loader";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import MenuRepository, { UpdateMenu } from "../../../core/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../core/api/menu-api.repository";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
 
 @Component({
     selector: `app-update-menu-form`,

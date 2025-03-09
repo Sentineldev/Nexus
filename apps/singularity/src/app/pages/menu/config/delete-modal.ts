@@ -1,11 +1,11 @@
 import { Component, computed, Inject, input, signal } from "@angular/core";
-import Menu from "../../restaurants/classes/menu.class";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { Loader } from "../../../shared/loader/loader";
-import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
+import Menu from "../../../core/classes/menu.class";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import { Loader } from "../../../components/loader/loader";
+import MenuRepository from "../../../core/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../core/api/menu-api.repository";
 
 @Component({
     selector: `app-delete-menu-modal`,

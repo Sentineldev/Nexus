@@ -1,16 +1,15 @@
 import { Component, Inject, input, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { UpdateUserPasswordDto } from "../user.dto";
 import UsersPageService from "../users-page-service";
-import User from "../user.class";
+import User from "../../../../core/classes/user.class";
 import UserContainer from "../display/user-container";
-import { SuccessAlert } from "../../../../shared/alerts/success-alert";
-import { ErrorAlert } from "../../../../shared/alerts/error-alert";
-import CustomDialog from "../../../../shared/dialog/custom-dialog";
-import ReactiveFormPasswordInput from "../../../../shared/forms/reactive-password-input";
-import { Loader } from "../../../../shared/loader/loader";
-import UserRepository from "../../../../shared/interfaces/user-repository";
-import ApiUserRepository from "../../../../shared/repositories/api/api-user-repository";
+import { SuccessAlert } from "../../../../components/alerts/success-alert";
+import { ErrorAlert } from "../../../../components/alerts/error-alert";
+import CustomDialog from "../../../../components/dialog/custom-dialog";
+import ReactiveFormPasswordInput from "../../../../components/forms/reactive-password-input";
+import { Loader } from "../../../../components/loader/loader";
+import UserRepository, { UpdateUserPasswordDto } from "../../../../core/interfaces/user-repository";
+import ApiUserRepository from "../../../../core/api/api-user-repository";
 
 @Component({
     selector: `app-change-password-modal`,

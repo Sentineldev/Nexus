@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import TopBar2 from "../../shared/topbar2/top-bar-2";
+import TopBar2 from "../../components/topbar2/top-bar-2";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 
 @Component({

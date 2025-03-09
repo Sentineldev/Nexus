@@ -1,11 +1,11 @@
 import { Component, computed, OnInit, signal } from "@angular/core"
-import Paginator from "../../shared/paginator/paginator";
+import Paginator from "../../components/paginator/paginator";
 import ClientsService from "./client.service";
 import ClientsDisplay from "./components/clients-display";
 import SaveClientModal from "./modals/save-client-modal";
-import { Loader } from "../../shared/loader/loader";
-import DialogToggler from "../../shared/dialog/dialog-toggler";
-import TopBar2 from "../../shared/topbar2/top-bar-2";
+import { Loader } from "../../components/loader/loader";
+import DialogToggler from "../../components/dialog/dialog-toggler";
+import TopBar2 from "../../components/topbar2/top-bar-2";
 
 
 @Component({

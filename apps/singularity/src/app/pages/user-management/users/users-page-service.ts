@@ -1,7 +1,7 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import User from "./user.class";
-import UserRepository from "../../../shared/interfaces/user-repository";
-import ApiUserRepository from "../../../shared/repositories/api/api-user-repository";
+import User from "../../../core/classes/user.class";
+import UserRepository from "../../../core/interfaces/user-repository";
+import ApiUserRepository from "../../../core/api/api-user-repository";
 
 
 

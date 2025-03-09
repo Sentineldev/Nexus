@@ -1,6 +1,6 @@
 import { Component, computed, input } from "@angular/core";
-import Product from "../../../products/classes/product.class";
-import DialogToggler from "../../../../shared/dialog/dialog-toggler";
+import Product from "../../../../core/classes/product.class";
+import DialogToggler from "../../../../components/dialog/dialog-toggler";
 import AddProductToMenuModal from "../modals/add-product-to-menu";
 
 @Component({

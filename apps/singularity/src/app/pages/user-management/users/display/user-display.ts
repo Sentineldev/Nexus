@@ -1,9 +1,9 @@
 import { Component, computed, input } from "@angular/core";
-import User from "../user.class";
+import User from "../../../../core/classes/user.class";
 import SaveUserModal from "../modals/edit-user-modal";
 import ChangePasswordModal from "../modals/change-password-modal";
 import DeleteUserModal from "../modals/delete-user-modal";
-import DialogToggler from "../../../../shared/dialog/dialog-toggler";
+import DialogToggler from "../../../../components/dialog/dialog-toggler";
 
 @Component({
     selector: `app-user-display`,

@@ -2,9 +2,8 @@ import { Component, computed, OnInit, signal } from "@angular/core";
 import UsersPageService from "./users-page-service";
 import SaveUserModal from "./modals/save-user-modal";
 import UsersDisplay from "./display/users-display";
-import TopBar2 from "../../../shared/topbar2/top-bar-2";
-import { Loader } from "../../../shared/loader/loader";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import { Loader } from "../../../components/loader/loader";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
 
 @Component({
     selector: `app-users-page`,

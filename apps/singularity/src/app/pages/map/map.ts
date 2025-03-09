@@ -1,6 +1,6 @@
 import { Component, computed, HostListener, input, OnInit, signal } from "@angular/core";
 import DropDownMenu from "./drop-down-menu";
-import DialogToggler from "../../shared/dialog/dialog-toggler";
+import DialogToggler from "../../components/dialog/dialog-toggler";
 import MapService from "./map.service";
 import CreateMapContainerModal from "./modals/create-map-container-modal";
 import { MapContainer } from "./types/map_types";

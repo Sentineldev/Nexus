@@ -1,12 +1,11 @@
 import { Component, signal, input, Inject } from "@angular/core";
-import { ErrorAlert } from "../../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../../shared/alerts/success-alert";
-import CustomDialog from "../../../../shared/dialog/custom-dialog";
-import { Loader } from "../../../../shared/loader/loader";
-import ApiCategoryProductRepository from "../../../../shared/repositories/api/category-product-api.repository";
-import CategoryProduct from "../../../restaurants/classes/category-product.class";
-import CategoryProductRepository from "../../../restaurants/interfaces/category-product.repository";
-import ProductFieldsetContainer from "../../../restaurants/restaurant-page/menu-page/menu-category-page/products/category-products/modals/product-fieldset-container";
+import { ErrorAlert } from "../../../../components/alerts/error-alert";
+import { SuccessAlert } from "../../../../components/alerts/success-alert";
+import CustomDialog from "../../../../components/dialog/custom-dialog";
+import { Loader } from "../../../../components/loader/loader";
+import ApiCategoryProductRepository from "../../../../core/api/category-product-api.repository";
+import CategoryProduct from "../../../../core/classes/category-product.class";
+import CategoryProductRepository from "../../../../core/interfaces/category-product.repository";
 import CategoryProductPageService2 from "../category-product-page.service";
 
 @Component({
@@ -26,7 +25,6 @@ import CategoryProductPageService2 from "../category-product-page.service";
                     <app-success-alert [message]="successMessage()"/>
                 }
             }
-            <app-product-fieldset-container [product]="product()"/>
             <div>
                 <button (click)="onClickHandler()" type="button" [disabled]="loading()" class="btn w-full">
                     @if (loading()) {
@@ -40,7 +38,7 @@ import CategoryProductPageService2 from "../category-product-page.service";
     </app-custom-dialog>
 
     `,
-    imports: [CustomDialog, ProductFieldsetContainer, Loader, ErrorAlert, SuccessAlert]
+    imports: [CustomDialog, Loader, ErrorAlert, SuccessAlert]
 })
 export default class DeleteCategoryProductModal2 {
 

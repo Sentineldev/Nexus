@@ -1,6 +1,6 @@
 import { Component, computed, input } from "@angular/core";
 import { MapContainer } from "../types/map_types";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
+import CustomDialog from "../../../components/dialog/custom-dialog";
 import MapService from "../map.service";
 
 @Component({

@@ -1,13 +1,13 @@
-import { Component, computed, EventEmitter, Inject, input, Output, signal } from "@angular/core";
-import Client from "../classes/client.class";
+import { Component, Inject, input, signal } from "@angular/core";
+import Client from "../../../core/classes/client.class";
 import ClientsService from "../client.service";
-import ClientRepository from "../../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../../shared/repositories/api/api-client-repository";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
-import { Loader } from "../../../shared/loader/loader";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
+import ClientRepository from "../../../core/interfaces/client-repository.interface";
+import ApiClientRepository from "../../../core/api/api-client-repository";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
+import { Loader } from "../../../components/loader/loader";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import { SuccessAlert } from "../../../components/alerts/success-alert";
 
 @Component({
     selector: `app-delete-client-modal`,

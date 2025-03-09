@@ -2,9 +2,9 @@ import { Component, computed, OnInit, signal } from "@angular/core";
 import CategoryProductsDisplay2 from "./display/category-products-display";
 import CategoryProductPageService2 from "./category-product-page.service";
 import MenuCategoryPageService2 from "../menu-category-page.service";
-import { Loader } from "../../../shared/loader/loader";
-import ProductService from "../../products/services/product-service";
+import { Loader } from "../../../components/loader/loader";
 import ProductOptionsDisplay from "./display/products-display";
+import ProductsPageService2 from "../../product-management/products/products-page2.service";
 
 @Component({
     selector: `app-category-products-page`,
@@ -38,8 +38,8 @@ import ProductOptionsDisplay from "./display/products-display";
                             <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
                             <input type="text" name="search-product" id="search-product" class="outline-none" placeholder="Buscar productos... ">
                         </div>
-                        @if (productsState().page) {
-                            <app-product-options-display [products]="productsState().page.data"/>
+                        @if (productsState().products) {
+                            <app-product-options-display [products]="productsState().products!.data"/>
                         }
                     </div>
                 }
@@ -61,7 +61,7 @@ export default class CategoryProductsPage implements OnInit {
     constructor(
         private readonly service: CategoryProductPageService2, 
         private readonly pageService: MenuCategoryPageService2,
-        private readonly productsService: ProductService,
+        private readonly productsService: ProductsPageService2,
     ) {}
 
     ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, computed, OnInit } from "@angular/core";
 import MenuPageService2 from "./menu-page.service";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
-import LoadingScreen from "../../shared/loader/loading-screen";
+import LoadingScreen from "../../components/loader/loading-screen";
 
 @Component({
     selector: `app-menu-page2`,

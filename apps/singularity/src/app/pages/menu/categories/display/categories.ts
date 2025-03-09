@@ -1,6 +1,5 @@
 import { Component, input } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import MenuCategory from "../../../restaurants/classes/menu-category.class";
+import MenuCategory from "../../../../core/classes/menu-category.class";
 import CategoryDisplay from "./category-display";
 
 @Component({
