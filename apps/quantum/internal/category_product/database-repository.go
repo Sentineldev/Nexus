@@ -284,7 +284,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 	} else {
 		sql = `
 		SELECT 
-			cp.id, cp.price, cp.is_active,cp.count
+			cp.id, cp.price, cp.is_active,cp.count,
 			p.id,p.name,p.description,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,

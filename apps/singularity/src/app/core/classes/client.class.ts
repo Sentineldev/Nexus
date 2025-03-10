@@ -22,4 +22,6 @@ export default class Client {
         this.identification = identification;
         this.identificationType = identificationType;
     }
+
+
 }

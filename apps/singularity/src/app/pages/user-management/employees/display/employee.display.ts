@@ -9,10 +9,10 @@ import DeleteEmployeeModal from "../modals/delete-employee-modal";
     template: `
     <app-update-employee-modal [dialogId]="updateDialogId()" [employee]="employee()"/>
     <app-delete-employee-modal [dialogId]="deleteDialogId()" [employee]="employee()"/>
-    <div class="grid grid-cols-4 items-center font-medium">
+    <div class="grid grid-cols-4 items-center">
         <div class="flex flex-col ">
             <h1>{{ employee().firstNames }} {{employee().lastNames}}</h1>
-            <p>{{employee().identification}}</p>
+            <p class="text-primary">{{employee().identification}}</p>
         </div>
         <div>
             <h1>{{ employee().position }}</h1>

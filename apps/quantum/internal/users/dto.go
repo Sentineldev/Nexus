@@ -12,6 +12,7 @@ type SaveUserDto struct {
 	Username               string `json:"username"`
 	Password               string `json:"password"`
 	EmployeeIdentification string `json:"employeeIdentification"`
+	ShortName              string `json:"shortName"`
 }
 
 func (dto SaveUserDto) Validate() error {
@@ -19,6 +20,10 @@ func (dto SaveUserDto) Validate() error {
 	err := ""
 
 	if utils.IsStringEmpty(dto.Username) {
+		err = "Username cant be empty"
+	}
+
+	if utils.IsStringEmpty(dto.ShortName) {
 		err = "Username cant be empty"
 	}
 
@@ -37,7 +42,8 @@ func (dto SaveUserDto) Validate() error {
 }
 
 type UpdateUserDto struct {
-	Username string `json:"username"`
+	Username  string `json:"username"`
+	ShortName string `json:"shortName"`
 }
 
 func (dto UpdateUserDto) Validate() error {
@@ -45,6 +51,10 @@ func (dto UpdateUserDto) Validate() error {
 	err := ""
 
 	if utils.IsStringEmpty(dto.Username) {
+		err = "Username cant be empty"
+	}
+
+	if utils.IsStringEmpty(dto.ShortName) {
 		err = "Username cant be empty"
 	}
 
@@ -75,7 +85,8 @@ func (dto UpdateUserPassword) Validate() error {
 }
 
 type OutGoingUserDto struct {
-	Id       string         `json:"id"`
-	Username string         `json:"username"`
-	Employee types.Employee `json:"employee"`
+	Id        string         `json:"id"`
+	Username  string         `json:"username"`
+	ShortName string         `json:"shortName"`
+	Employee  types.Employee `json:"employee"`
 }

@@ -34,6 +34,7 @@ func (service AuthService) LogIn(body LogInDto) (string, error) {
 	claims := &TokenData{
 		user.Id,
 		user.Username,
+		user.ShortName,
 		user.Employee,
 		jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(internal.LOGIN_TIME)),

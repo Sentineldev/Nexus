@@ -68,6 +68,7 @@ export default class MakeOrderPageService  {
     }
 
     getProductsPage(filter: PageFilter<AllProductsFilter>) {
+
         this.categoryProducts.getAllProductsPaginate(filter).subscribe((result) => {
             this.state.update((current) => ({
                 ...current, 
@@ -78,8 +79,8 @@ export default class MakeOrderPageService  {
     }
 
     firstLoad() {
-        // this.restaurantPageService.startLoading("Cargando Productos");
-        const products = this.categoryProducts.getAllProductsPaginate({
+
+        const filter = {
             page: 1,
             pageSize: 5,
             filter: {
@@ -87,12 +88,13 @@ export default class MakeOrderPageService  {
                 menuId: "",
                 search: ""
             }
-        });
+        };
+        this.state.update((current) => ({ ...current, filter }))
+        const products = this.categoryProducts.getAllProductsPaginate(filter);
         const menus = this.menuRepository.getAll(this.restaurant.id);
         
         zip([products, menus]).subscribe(([ productsPage, menus ]) => {
             setTimeout(() => {
-                // this.restaurantPageService.stopLoading();
                 this.state.update((current) => ({
                     ...current,
                     products: productsPage.data,

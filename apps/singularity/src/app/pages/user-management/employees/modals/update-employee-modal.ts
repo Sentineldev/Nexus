@@ -128,7 +128,6 @@ export default class UpdateUserModal implements OnInit {
 
     ngOnInit(): void {
 
-        console.log(this.employee());
         this.formGroup.setValue({
             firstNames: this.employee().firstNames,
             lastNames: this.employee().lastNames,
@@ -137,7 +136,7 @@ export default class UpdateUserModal implements OnInit {
             corporativeEmail: this.employee().corporativeEmail,
             department: this.employee().department,
             position: this.employee().position,
-            jobEntryDate: this.employee().jobEntryDate.split("T")[0],
+            jobEntryDate: this.employee().getJobEntryDate(),
         })
     }
 

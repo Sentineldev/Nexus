@@ -1,14 +1,14 @@
 import { Component, computed, OnInit, signal } from "@angular/core";
 import UsersPageService from "./users-page-service";
-import SaveUserModal from "./modals/save-user-modal";
 import UsersDisplay from "./display/users-display";
 import { Loader } from "../../../components/loader/loader";
 import DialogToggler from "../../../components/dialog/dialog-toggler";
+import CreateUserModal from "./modals/create-user-modal";
 
 @Component({
     selector: `app-users-page`,
     template: `
-    <app-save-user-modal [dialogId]="dialogId()"/>
+    <app-create-user-modal [dialogId]="dialogId()"/>
     <div class="p-12 flex flex-col gap-6">
         @if (state().loading) {
             <app-loader color="secondary"/>
@@ -37,7 +37,7 @@ import DialogToggler from "../../../components/dialog/dialog-toggler";
         </div>
     </div>
     `,
-    imports: [SaveUserModal, UsersDisplay, Loader, DialogToggler]
+    imports: [UsersDisplay, Loader, DialogToggler, CreateUserModal]
 })
 export default class UsersPage implements OnInit {
 

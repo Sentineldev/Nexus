@@ -34,6 +34,9 @@ export default class ApiUserRepository implements UserRepository {
                 }
                 else if (error.status === 409) {
                     err = "El usuario ya existe";
+                }
+                else if (error.status === 452) {
+                    err = "El empleado ya posee un usuario";
                 } else {
                     err = "Ocurrio un error en el servidor";
                 }

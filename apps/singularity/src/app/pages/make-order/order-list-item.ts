@@ -38,7 +38,6 @@ export default class OrderListItem {
 
     onClickHandler() {
 
-        console.log(this.dialogId());
         DialogUtils.OpenModal(this.dialogId());
     }
 }

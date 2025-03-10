@@ -12,7 +12,7 @@
                     <div>
                         <app-reactive-form-input
                         label="Nombre de usuario"
-                        id="username"
+                        [id]="'username'"
                         [control]="formGroup.controls.username"
                         [errors]="{ required: 'No puedes dejar este campo vacio' }"
                         />
@@ -20,7 +20,7 @@
                     <div>
                         <app-reactive-form-password-input
                         label="Contraseña"
-                        id="password"
+                        [id]="'password'"
                         [control]="formGroup.controls.password"
                         [errors]="{ required: 'No puedes dejar este campo vacio' }"
                         />

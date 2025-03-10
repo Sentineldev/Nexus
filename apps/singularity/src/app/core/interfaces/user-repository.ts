@@ -6,10 +6,12 @@ export type SaveUserDto = {
     username: string;
     password: string;
     employeeIdentification: string;
+    shortName: string;
 };
 
 export type UpdateUserDto = {
     username: string;
+    shortName: string;
 };
 
 export type UpdateUserPasswordDto = {

@@ -1,12 +1,20 @@
-import { Component } from "@angular/core";
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import AuthService from "./auth.service";
 
 @Component({
     selector: `app-index`,
-    templateUrl: './index-page.html',
-    imports: [RouterOutlet, RouterLinkActive, RouterLink]
+    template: `
+        <router-outlet/>
+    `,
+    imports: [RouterOutlet]
 })
-export default class AppIndex {
+export default class AppIndex implements OnInit {
 
-
+    constructor(
+        private readonly service: AuthService,
+    ) {}
+    ngOnInit(): void {
+        this.service.logIn();
+    }
 }

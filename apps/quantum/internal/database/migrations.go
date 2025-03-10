@@ -45,6 +45,7 @@ func CreateTables() {
 		employee_id TEXT NOT NULL,
 		username TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL,
+		short_name TEXT NOT NULL,
 		FOREIGN KEY(employee_id) REFERENCES"employee"(id)
 	);
 

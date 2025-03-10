@@ -27,6 +27,20 @@
 }
 
 
+.logout-btn {
+  border-radius: 0.6rem;
+  transition: 0.2s all;
+  cursor: pointer;
+}
+
+.logout-btn:active {
+  transform: scale(0.95);
+  background-color: var(--color-primary-500);
+}
+.logout-btn:disabled {
+  background-color: var(--color-primary-500);
+}
+
 .btn {
   background-color: var(--color-primary);
   color: var(--color-secondary);

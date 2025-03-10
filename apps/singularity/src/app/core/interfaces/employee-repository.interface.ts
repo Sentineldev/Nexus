@@ -2,6 +2,9 @@ import { Observable } from "rxjs";
 import { PageData, PageFilter } from "../types/pagination";
 import Employee from "../classes/employee.class";
 
+
+export const EMPLOYEE_EXISTS_ERROR_MESSAGE = "El empleado ya fue registrado";
+
 export type SaveEmployeeDto = {
     firstNames: string;
     lastNames: string;

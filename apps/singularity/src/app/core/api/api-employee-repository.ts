@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import EmployeeRepository, { SaveEmployeeDto } from "../interfaces/employee-repository.interface";
+import EmployeeRepository, { EMPLOYEE_EXISTS_ERROR_MESSAGE, SaveEmployeeDto } from "../interfaces/employee-repository.interface";
 import { catchError, map, Observable, of } from "rxjs";
 import Employee from "../classes/employee.class";
 import { PageFilter, PageData } from "../types/pagination";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import CONFIGURATION from "../../components/configuration";
-import FeedStock from "../../pages/product-management/feed-stock/classes/feed-stock.class";
 
 @Injectable({
     providedIn: "root"
@@ -30,7 +29,7 @@ export default class ApiEmployeeRepository implements EmployeeRepository {
                         err = "No tienes permisos para realizar esta accion";
                     }
                     else if(error.status === 409) {
-                        err = "El empleado ya fue registrado";
+                        err = EMPLOYEE_EXISTS_ERROR_MESSAGE;
                     }
                     else if (error.status === 422) {
                         err = "Formato de datos invalido";
@@ -88,7 +87,16 @@ export default class ApiEmployeeRepository implements EmployeeRepository {
             const params = new HttpParams({
                 fromObject: { page: filter.page, pageSize: filter.pageSize }
             });
-            return this.http.get<PageData<Employee>>(`${this.URL}`,{ params })
+            return this.http.get<PageData<Employee>>(`${this.URL}`,{ params }).pipe(
+                map((result) => {
+
+                    const mapped = result.data.map((val) => new Employee(val));
+                    return  {
+                        data: mapped,
+                        meta: result.meta,
+                    }
+                })
+            )
         }
 
 

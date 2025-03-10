@@ -23,6 +23,7 @@ import FeedStockPage from './pages/product-management/feed-stock/feed-stock.page
 import ProductManagementHomePage from './pages/product-management/home.page';
 import ProductsPage2 from './pages/product-management/products/products-2.page';
 import EmployeesPage from './pages/user-management/employees/employees.page';
+import ContentWithSideBar from './pages/main/content-with-sidebar';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -30,53 +31,51 @@ export const routes: Routes = [
         path: "admin",
         component: AppIndex,
         children: [
-            // {
-            //     path: "",
-            //     component: RestaurantsPage,
-            // },
             {
-                path: "restaurants",
-                component: RestaurantsPage2,
-            },
-            {
-                path: "map",
-                component: MapSelectorPage,
-            },
-            {
-                path: "user-management",
-                component: UserManagementHomePage,
+                path: "",
+                component: ContentWithSideBar,
                 children: [
                     {
-                        path: "users",
-                        component: UsersPage
+                        path: "map",
+                        component: MapSelectorPage,
                     },
                     {
-                        path: "employees",
-                        component: EmployeesPage
-                    }
-                ]
-            },
-            {
-                path: "product-management",
-                component: ProductManagementHomePage,
-                children: [
-                    {
-                        path: "products",
-                        component: ProductsPage2,
+                        path: "user-management",
+                        component: UserManagementHomePage,
+                        children: [
+                            {
+                                path: "users",
+                                component: UsersPage
+                            },
+                            {
+                                path: "employees",
+                                component: EmployeesPage
+                            }
+                        ]
                     },
                     {
-                        path: "feed-stock",
-                        component: FeedStockPage,
-                    }
+                        path: "product-management",
+                        component: ProductManagementHomePage,
+                        children: [
+                            {
+                                path: "products",
+                                component: ProductsPage2,
+                            },
+                            {
+                                path: "feed-stock",
+                                component: FeedStockPage,
+                            }
+                        ]
+                    },
+                    {
+                        path: "clients",
+                        component: ClientsPage
+                    },
+                    {
+                        path: "restaurants",
+                        component: RestaurantsPage2,
+                    },
                 ]
-            },
-            {
-                path: "clients",
-                component: ClientsPage
-            },
-            {
-                path: "restaurants",
-                component: RestaurantsPage2,
             },
             {
                 path: "restaurant/:restaurantId",
@@ -88,132 +87,67 @@ export const routes: Routes = [
                     },
                     {
                         path: "",
-                        component: RestaurantHomePage2,
-                        children: [
-                            {
-                                path: "menus",
-                                component: RestaurantMenusPage
-                            },
-                            {
-                                path: "config",
-                                component: RestaurantConfigPage
-                            }
-                        ]
-                    },
-                    {
-                        path: "menu/:menuId",
-                        component: MenuPage2,
+                        component: ContentWithSideBar,
                         children: [
                             {
                                 path: "",
-                                component: MenuHomePage2,
+                                component: RestaurantHomePage2,
                                 children: [
                                     {
-                                        path: "categories",
-                                        component: CategoriesPage2,
+                                        path: "menus",
+                                        component: RestaurantMenusPage
                                     },
                                     {
                                         path: "config",
-                                        component: MenuConfigPage,
+                                        component: RestaurantConfigPage
                                     }
                                 ]
                             },
                             {
-                                path: "category/:categoryId",
-                                component: MenuCategoryPage2,
+                                path: "menu/:menuId",
+                                component: MenuPage2,
                                 children: [
                                     {
                                         path: "",
-                                        component: MenuCategoryHomePage2,
+                                        component: MenuHomePage2,
                                         children: [
                                             {
-                                                path: "config",
-                                                component: MenuCategoryConfigPage,
+                                                path: "categories",
+                                                component: CategoriesPage2,
                                             },
                                             {
-                                                path: "products",
-                                                component: CategoryProductsPage,
-                                            },
+                                                path: "config",
+                                                component: MenuConfigPage,
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        path: "category/:categoryId",
+                                        component: MenuCategoryPage2,
+                                        children: [
+                                            {
+                                                path: "",
+                                                component: MenuCategoryHomePage2,
+                                                children: [
+                                                    {
+                                                        path: "config",
+                                                        component: MenuCategoryConfigPage,
+                                                    },
+                                                    {
+                                                        path: "products",
+                                                        component: CategoryProductsPage,
+                                                    },
+                                                ],
+                                            }
                                         ],
                                     }
-                                ],
+                                ]
                             }
                         ]
-                    }
+                    },
+                    
                 ]
             }
-            // {
-            //     path: "restaurant/:restaurantId",
-            //     component: RestaurantPage,
-            //     children: [
-            //         {
-            //             path: "make-order",
-            //             component: MakeOrderPage
-            //         },
-            //         {
-            //             path: "home",
-            //             component: RestaurantHomePage,
-            //             children: [
-            //                 {
-            //                     path: "menus",
-            //                     component: MenusPage,
-                                
-            //                 },
-            //                 {
-            //                     path: "orders",
-            //                     component: OrdersPage
-            //                 },
-            //                 {
-            //                     path: "config",
-            //                     component: RestaurantConfigPage,
-                                
-            //                 },
-            //             ]
-                        
-            //         },
-            //         {
-            //             path: "menu/:menuId",
-            //             component: MenuPage,
-            //             children: [
-            //                 {
-            //                     path: "",
-            //                     component: MenuHomePage,
-            //                     children: [
-            //                         {
-            //                             path: "categories",
-            //                             component: CategoriesPage
-            //                         },
-            //                         {
-            //                             path: "config",
-            //                             component: MenuConfigPage
-            //                         },
-            //                     ]
-            //                 },
-            //                 {
-            //                     path: "category/:categoryId",
-            //                     component: MenuCategoryPage,
-            //                     children: [
-            //                         {
-            //                             path: "",
-            //                             component: MenuCategoryHomePage,
-            //                             children: [
-            //                                 {
-            //                                     path: "products",
-            //                                     component: CategoryProductSelectionPage
-            //                                 },
-            //                                 {
-            //                                     path: "config",
-            //                                     component: MenuCategoryConfigPage
-            //                                 }
-            //                             ]
-            //                         },
-                                    
-            //                     ]
-            //                 }
-            //             ]
-            //         },
-            //     ]
-            // }
         ],
     }
 ];

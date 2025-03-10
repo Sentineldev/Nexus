@@ -97,5 +97,6 @@ func (service CategoryProductService) GetPage(filter types.PageFilter[CategoryPa
 }
 
 func (service CategoryProductService) GetAllProductsPaginate(filter types.PageFilter[AllProductsFilter]) types.PageData[types.CategoryProduct] {
-	return service.Repository.GetAllProductsPaginate(filter)
+	data := service.Repository.GetAllProductsPaginate(filter)
+	return data
 }

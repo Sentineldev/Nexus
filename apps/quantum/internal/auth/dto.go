@@ -12,8 +12,9 @@ type LogInDto struct {
 }
 
 type TokenData struct {
-	Id       string         `json:"id"`
-	Username string         `json:"username"`
-	Employee types.Employee `json:"employee"`
+	Id        string         `json:"id"`
+	Username  string         `json:"username"`
+	ShortName string         `json:"shortName"`
+	Employee  types.Employee `json:"employee"`
 	jwt.RegisteredClaims
 }

@@ -38,4 +38,13 @@ export default class Employee {
         this.jobEntryDate = jobEntryDate;
         this.jobDepartureDate = jobDepartureDate;
     }
+
+
+    getJobDepartureDate(): string {
+        return this.jobDepartureDate.split("T")[0];
+    }
+
+    getJobEntryDate(): string {
+        return this.jobEntryDate.split("T")[0];
+    }
 }

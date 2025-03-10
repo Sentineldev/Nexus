@@ -19,9 +19,9 @@ func NewDatabaseRepository() *DatabaseRepository {
 
 func (repository DatabaseRepository) Save(body types.User) error {
 
-	sql := `INSERT INTO user(id, username, password, employee_id) VALUES (?,?,?,?)`
+	sql := `INSERT INTO user(id, username, password, employee_id, short_name) VALUES (?,?,?,?,?)`
 
-	if _, err := repository.DataSource.Exec(sql, body.Id, body.Username, body.Password, body.Employee.Id); err != nil {
+	if _, err := repository.DataSource.Exec(sql, body.Id, body.Username, body.Password, body.Employee.Id, body.ShortName); err != nil {
 		return err
 	}
 	return nil
@@ -29,9 +29,9 @@ func (repository DatabaseRepository) Save(body types.User) error {
 
 func (repository DatabaseRepository) Update(body types.User) error {
 
-	sql := `UPDATE user SET username = ?, password = ? WHERE id = ?`
+	sql := `UPDATE user SET username = ?, password = ?, short_name = ? WHERE id = ?`
 
-	if _, err := repository.DataSource.Exec(sql, body.Username, body.Password, body.Id); err != nil {
+	if _, err := repository.DataSource.Exec(sql, body.Username, body.Password, body.ShortName, body.Id); err != nil {
 		return err
 	}
 
@@ -54,7 +54,7 @@ func (repository DatabaseRepository) GetById(id string) (types.User, error) {
 
 	sql := `
 	SELECT 
-		u.id, u.username, u.password,
+		u.id, u.username, u.password, u.short_name,
 		e.id, e.first_names,e.last_names,e.identification, e.personal_email,
 		e.corporative_email,e.position,e.department,e.job_departure_date,e.job_entry_date 
 	FROM 
@@ -69,6 +69,48 @@ func (repository DatabaseRepository) GetById(id string) (types.User, error) {
 		&result.Id,
 		&result.Username,
 		&result.Password,
+		&result.ShortName,
+		&result.Employee.Id,
+		&result.Employee.FirstNames,
+		&result.Employee.LastNames,
+		&result.Employee.Identification,
+		&result.Employee.PersonalEmail,
+		&result.Employee.CorporativeEmail,
+		&result.Employee.Position,
+		&result.Employee.Department,
+		&result.Employee.JobDepartureDate,
+		&result.Employee.JobEntryDate,
+	)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
+func (repository DatabaseRepository) GetByEmployeeId(employeeId string) (types.User, error) {
+
+	result := types.User{}
+
+	sql := `
+	SELECT 
+		u.id, u.username, u.password, u.short_name,
+		e.id, e.first_names,e.last_names,e.identification, e.personal_email,
+		e.corporative_email,e.position,e.department,e.job_departure_date,e.job_entry_date 
+	FROM 
+		user u
+	JOIN employee e ON e.id = u.employee_id
+	WHERE u.employee_id = ?
+	`
+
+	row := repository.DataSource.QueryRow(sql, employeeId)
+
+	err := row.Scan(
+		&result.Id,
+		&result.Username,
+		&result.Password,
+		&result.ShortName,
 		&result.Employee.Id,
 		&result.Employee.FirstNames,
 		&result.Employee.LastNames,
@@ -93,7 +135,7 @@ func (repository DatabaseRepository) GetByUsername(username string) (types.User,
 
 	sql := `
 	SELECT 
-		u.id, u.username, u.password,
+		u.id, u.username, u.password, u.short_name,
 		e.id, e.first_names,e.last_names,e.identification, e.personal_email,
 		e.corporative_email,e.position,e.department,e.job_departure_date,e.job_entry_date 
 	FROM 
@@ -108,6 +150,7 @@ func (repository DatabaseRepository) GetByUsername(username string) (types.User,
 		&result.Id,
 		&result.Username,
 		&result.Password,
+		&result.ShortName,
 		&result.Employee.Id,
 		&result.Employee.FirstNames,
 		&result.Employee.LastNames,
@@ -133,7 +176,7 @@ func (repository DatabaseRepository) GetAll() []types.User {
 	result := []types.User{}
 	sql := `
 	SELECT 
-		u.id, u.username, u.password,
+		u.id, u.username, u.password, u.short_name,
 		e.id, e.first_names,e.last_names,e.identification, e.personal_email,
 		e.corporative_email,e.position,e.department,e.job_departure_date,e.job_entry_date 
 	FROM 
@@ -154,6 +197,7 @@ func (repository DatabaseRepository) GetAll() []types.User {
 			&record.Id,
 			&record.Username,
 			&record.Password,
+			&record.ShortName,
 			&record.Employee.Id,
 			&record.Employee.FirstNames,
 			&record.Employee.LastNames,

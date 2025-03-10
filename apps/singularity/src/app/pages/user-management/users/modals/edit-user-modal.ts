@@ -36,6 +36,12 @@ import ApiUserRepository from "../../../../core/api/api-user-repository";
                     [control]="formGroup.controls.username"
                     [errors]="{ required: 'No puede dejar este campo vacio' }"
                     />
+                    <app-reactive-form-input
+                    label="Nombre Corto"
+                    [id]="'shortName-'+user().id"
+                    [control]="formGroup.controls.shortName"
+                    [errors]="{ required: 'No puede dejar este campo vacio' }"
+                    />
                 </div>
                 <div>
                     <button [disabled]="loading()" class="btn w-full" type="submit">
@@ -64,6 +70,7 @@ export default class SaveUserModal implements OnInit {
 
     public formGroup = new FormGroup({
         username: new FormControl("", [Validators.required]),
+        shortName: new FormControl("", [Validators.required]),
     });
 
     constructor(
@@ -73,7 +80,8 @@ export default class SaveUserModal implements OnInit {
     ) {}
     ngOnInit(): void {
         this.formGroup.setValue({
-            username: this.user().username
+            username: this.user().username,
+            shortName: this.user().shortName
         })
     }
 
@@ -85,6 +93,7 @@ export default class SaveUserModal implements OnInit {
 
             const body: UpdateUserDto = {
                 username: data.username!,
+                shortName: data.shortName!,
             };
 
             this.loading.set(true);

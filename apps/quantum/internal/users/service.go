@@ -26,6 +26,10 @@ func (service UserService) Save(body SaveUserDto) error {
 
 	employee, err := service.EmployeeRepository.GetByIdentification(body.EmployeeIdentification)
 
+	if _, err := service.Repository.GetByEmployeeId(employee.Id); err == nil {
+		return echo.NewHTTPError(452, "Employee already has a user")
+	}
+
 	if err != nil {
 		return echo.ErrNotFound
 	}
@@ -44,6 +48,7 @@ func (service UserService) Save(body SaveUserDto) error {
 		uuid.NewString(),
 		body.Username,
 		hashedPassword,
+		body.ShortName,
 		employee,
 	)
 
@@ -68,6 +73,7 @@ func (service UserService) Update(id string, body UpdateUserDto) error {
 		}
 	}
 	user.Username = body.Username
+	user.ShortName = body.ShortName
 
 	err = service.Repository.Update(user)
 

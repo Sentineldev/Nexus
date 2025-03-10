@@ -19,6 +19,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
                 <li>
                     <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
                 </li>
+                <li>
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="orderUrl()" class="block border-primary  py-5 px-8 text-xl">Crear Orden</a>    
+                </li>
             </ul>
         </div>
         <div>
@@ -37,6 +40,7 @@ export default class RestaurantHomePage2 {
     public restaurantsUrl = computed(() => `/admin/restaurants`);
     public menusUrl = computed(() => `/admin/restaurant/${this.restaurant().id}/menus`);
     public configUrl = computed(() => `/admin/restaurant/${this.restaurant().id}/config`);
+    public orderUrl = computed(() => `/admin/restaurant/${this.restaurant().id}/make-order`);
 
     constructor(
         private readonly service: RestaurantPageService2,

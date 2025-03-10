@@ -10,6 +10,7 @@ import { FormControl, ReactiveFormsModule } from "@angular/forms";
         <p>{{label()}}</p>
         <div class="flex border w-full border-neutral p-2 rounded">
             <input
+            autocomplete="on"
             class="outline-none w-full flex-1" 
             [type]="inputType()"
             [formControl]="control()" 

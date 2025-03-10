@@ -89,9 +89,10 @@ func (handler UserHandler) GetAll(context echo.Context) error {
 
 	for _, user := range data {
 		body = append(body, OutGoingUserDto{
-			Id:       user.Id,
-			Username: user.Username,
-			Employee: user.Employee,
+			Id:        user.Id,
+			Username:  user.Username,
+			ShortName: user.ShortName,
+			Employee:  user.Employee,
 		})
 	}
 	return context.JSON(http.StatusOK, body)
