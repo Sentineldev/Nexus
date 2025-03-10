@@ -1,6 +1,7 @@
 package users
 
 import (
+	"quantum/internal/employee"
 	"quantum/internal/types"
 	"quantum/internal/utils"
 
@@ -9,17 +10,25 @@ import (
 )
 
 type UserService struct {
-	Repository UserRepository
+	Repository         UserRepository
+	EmployeeRepository employee.EmployeeRepository
 }
 
 func NewUserService() *UserService {
 
 	return &UserService{
-		Repository: NewDatabaseRepository(),
+		Repository:         NewDatabaseRepository(),
+		EmployeeRepository: employee.NewEmployeeRepositoryImplemented(),
 	}
 }
 
 func (service UserService) Save(body SaveUserDto) error {
+
+	employee, err := service.EmployeeRepository.GetByIdentification(body.EmployeeIdentification)
+
+	if err != nil {
+		return echo.ErrNotFound
+	}
 
 	if _, err := service.Repository.GetByUsername(body.Username); err == nil {
 		return echo.ErrConflict
@@ -35,6 +44,7 @@ func (service UserService) Save(body SaveUserDto) error {
 		uuid.NewString(),
 		body.Username,
 		hashedPassword,
+		employee,
 	)
 
 	if err := service.Repository.Save(*newUser); err != nil {

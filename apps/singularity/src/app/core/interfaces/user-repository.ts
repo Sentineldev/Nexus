@@ -1,8 +1,11 @@
 import { Observable } from "rxjs";
 import User from "../classes/user.class";
+
+
 export type SaveUserDto = {
     username: string;
     password: string;
+    employeeIdentification: string;
 };
 
 export type UpdateUserDto = {

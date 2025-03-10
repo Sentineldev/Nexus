@@ -50,7 +50,9 @@ export default class EmployeesPageService {
 
         this.repository.getPage(filter).subscribe((data) => {
 
-            this.state.update((current) => ({ ...current, data, loading: false }));
+            setTimeout(() => {
+                this.state.update((current) => ({ ...current, data, loading: false }));
+            }, 1000);
         });
     }
 

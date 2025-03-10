@@ -42,15 +42,33 @@ func CreateTables() {
 
 	CREATE TABLE IF NOT EXISTS user(
 		id TEXT PRIMARY KEY,
+		employee_id TEXT NOT NULL,
 		username TEXT NOT NULL UNIQUE,
-		password TEXT NOT NULL
+		password TEXT NOT NULL,
+		FOREIGN KEY(employee_id) REFERENCES"employee"(id)
 	);
 
-	INSERT OR IGNORE INTO user(id, username, password) VALUES (
+	INSERT OR IGNORE INTO employee(id, first_names, last_names, identification, personal_email, corporative_email,position,department,job_entry_date,job_departure_date) VALUES (
+		"1",
+		"SYSTEM",
+		"SYSTEM",
+		"1",
+		"system@gmail.com",
+		"system@gmail.com",
+		"system",
+		"system",
+		"10-03-2001",
+		"10-03-2001"
+	);
+	
+	INSERT OR IGNORE INTO user(id, username, password, employee_id) VALUES (
 		"some",
 		"admin",
-		"$2a$14$jcp9oXAw1keAZ3g9hn7p8e1uBjYV7ME7E0kg9TmHg7pTCMC3Je6zK"
+		"$2a$14$jcp9oXAw1keAZ3g9hn7p8e1uBjYV7ME7E0kg9TmHg7pTCMC3Je6zK",
+		"1"
 	);
+
+
 
 
 	CREATE TABLE IF NOT EXISTS restaurant_order(

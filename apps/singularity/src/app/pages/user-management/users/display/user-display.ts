@@ -11,7 +11,11 @@ import DialogToggler from "../../../../components/dialog/dialog-toggler";
     <app-edit-user-modal [user]="user()" [dialogId]="updateDialogId()"/>
     <app-change-password-modal [user]="user()" [dialogId]="updateUserPasswordDialogId()"/>
     <app-delete-user-modal [user]="user()" [dialogId]="deleteDialogId()"/>
-    <div class="grid grid-cols-2 items-center">
+    <div class="grid grid-cols-3 items-center">
+        <div class="flex flex-col">
+            <h1 class="font-medium text-xl">{{user().employee.firstNames}} {{user().employee.lastNames}}</h1>
+            <p>{{user().employee.identification}}</p>
+        </div>
         <div>
             <h1 class="font-medium text-xl">{{user().username}}</h1>
         </div>
