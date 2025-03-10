@@ -1,14 +1,16 @@
-import { Component, computed, EventEmitter, input, Output } from "@angular/core";
-import Client from "../classes/client.class";
+import { Component, computed, input } from "@angular/core";
+import Client from "../../../core/classes/client.class";
 import UpdateClientModal from "../modals/update-client-modal";
 import DeleteClientModal from "../modals/delete-client-modal";
 
 @Component({
     selector: `app-client-display`,
     template: `
-    <div class="grid grid-cols-5 gap-2 items-center justify-center ">
-        <p class="">{{client().identificationType}}{{client().identification}}</p>
-        <p class="">{{client().fullName}}</p>
+    <div class="grid grid-cols-4 gap-2 items-center justify-center ">
+        <div class="flex flex-col">
+            <p class="font-medium">{{client().fullName}}</p>
+            <p class="text-neutral">{{client().identificationType}}{{client().identification}}</p>
+        </div>
         <p class="col-span-2">{{client().email}}</p>
         <div class="flex gap-4">
             <app-update-client-modal [client]="client()" [dialogId]="updateDialogId()"/>

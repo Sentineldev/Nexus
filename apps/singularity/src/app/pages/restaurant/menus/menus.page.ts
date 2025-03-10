@@ -1,9 +1,9 @@
 import { Component, computed, OnInit } from "@angular/core";
 import MenusService from "./menus.service";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
 import CreateMenuModal from "./create-menu-modal";
 import RestaurantPageService2 from "../restaurant-page.service";
-import { Loader } from "../../../shared/loader/loader";
+import { Loader } from "../../../components/loader/loader";
 import MenusDisplay from "./display/menus-display";
 
 @Component({

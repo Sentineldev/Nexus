@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
 import LoginPage from './pages/login/login-page';
-import RestaurantsPage from './pages/restaurants/restaurants-page';
 import MenuConfigPage from './pages/menu/config/config-page';
 import MenuCategoryConfigPage from './pages/menu-category/config/config-page';
-import UsersPage from './pages/users/users-page';
 import ClientsPage from './pages/clients/clients-page';
 import MapSelectorPage from './pages/map/map';
-import RestaurantsPage2 from './pages/restaurants-2/restaurants-page';
+import RestaurantsPage2 from './pages/restaurants/restaurants-page';
 import AppIndex from './pages/main';
 import RestaurantPage2 from './pages/restaurant/restaurant.page';
 import RestaurantHomePage2 from './pages/restaurant/home/home.page';
@@ -18,10 +16,13 @@ import CategoriesPage2 from './pages/menu/categories/categories.page';
 import MenuCategoryPage2 from './pages/menu-category/menu-category.page';
 import MenuCategoryHomePage2 from './pages/menu-category/home/home.page';
 import CategoryProductsPage from './pages/menu-category/products/category-products.page';
-import ProductsHome from './pages/products/components/products-home';
-import ProductsPage2 from './pages/products-2/products-2.page';
-import FeedStockPage from './pages/feed-stock/feed-stock.page';
-import MakeOrderPage from './pages/restaurants/restaurant-page/make-order/make-order';
+import MakeOrderPage from './pages/make-order/make-order';
+import UsersPage from './pages/user-management/users/users-page';
+import UserManagementHomePage from './pages/user-management/home.page';
+import FeedStockPage from './pages/product-management/feed-stock/feed-stock.page';
+import ProductManagementHomePage from './pages/product-management/home.page';
+import ProductsPage2 from './pages/product-management/products/products-2.page';
+import EmployeesPage from './pages/user-management/employees/employees.page';
 
 export const routes: Routes = [
     { path: "", component: LoginPage, children: [] },
@@ -42,12 +43,22 @@ export const routes: Routes = [
                 component: MapSelectorPage,
             },
             {
-                path: "users",
-                component: UsersPage
+                path: "user-management",
+                component: UserManagementHomePage,
+                children: [
+                    {
+                        path: "users",
+                        component: UsersPage
+                    },
+                    {
+                        path: "employees",
+                        component: EmployeesPage
+                    }
+                ]
             },
             {
                 path: "product-management",
-                component: ProductsHome,
+                component: ProductManagementHomePage,
                 children: [
                     {
                         path: "products",
@@ -65,7 +76,7 @@ export const routes: Routes = [
             },
             {
                 path: "restaurants",
-                component: RestaurantsPage,
+                component: RestaurantsPage2,
             },
             {
                 path: "restaurant/:restaurantId",

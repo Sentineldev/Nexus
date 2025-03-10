@@ -1,8 +1,8 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import ClientRepository from "../../shared/interfaces/client-repository.interface";
-import ApiClientRepository from "../../shared/repositories/api/api-client-repository";
-import { PageData, PageFilter } from "../../shared/types/pagination";
-import Client from "./classes/client.class";
+import ClientRepository from "../../core/interfaces/client-repository.interface";
+import ApiClientRepository from "../../core/api/api-client-repository";
+import { PageData, PageFilter } from "../../core/types/pagination";
+import Client from "../../core/classes/client.class";
 
 
 type ServiceState = {

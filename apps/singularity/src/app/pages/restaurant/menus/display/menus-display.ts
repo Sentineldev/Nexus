@@ -1,7 +1,6 @@
-import { Component, EventEmitter, input, Output, signal } from "@angular/core";
+import { Component, input, signal } from "@angular/core";
 import MenuDisplay from "./menu-display";
-import Menu from "../../../restaurants/classes/menu.class";
-import { SaveMenuCategory } from "../../../restaurants/dto/menu-category.dto";
+import Menu from "../../../../core/classes/menu.class";
 
 @Component({
     selector: `app-menus-display`,
@@ -24,8 +23,6 @@ import { SaveMenuCategory } from "../../../restaurants/dto/menu-category.dto";
 export default class MenusDisplay {
     
 
-
-    @Output() newCategoryEvent = new EventEmitter<SaveMenuCategory>();
 
     public selectedMenu = signal<Menu | undefined>(undefined);
 

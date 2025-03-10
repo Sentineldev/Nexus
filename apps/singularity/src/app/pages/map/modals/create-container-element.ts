@@ -1,5 +1,5 @@
 import { Component, computed, input, OnInit } from "@angular/core";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
+import CustomDialog from "../../../components/dialog/custom-dialog";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import MapService from "../map.service";
 import { ContainerElement, MapContainer } from "../types/map_types";

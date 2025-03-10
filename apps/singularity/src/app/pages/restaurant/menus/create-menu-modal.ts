@@ -1,14 +1,13 @@
 import { Component, input, signal, Inject } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
-import { Loader } from "../../../shared/loader/loader";
-import MenuRepository from "../../restaurants/interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../../shared/repositories/api/menu-api.repository";
-import Restaurant from "../../restaurants/classes/restaurant.class";
-import { SaveMenu } from "../../restaurants/dto/menu.dto";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import { SuccessAlert } from "../../../components/alerts/success-alert";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
+import { Loader } from "../../../components/loader/loader";
+import MenuRepository, { SaveMenu } from "../../../core/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../../core/api/menu-api.repository";
+import Restaurant from "../../../core/classes/restaurant.class";
 import MenusService from "./menus.service";
 
 

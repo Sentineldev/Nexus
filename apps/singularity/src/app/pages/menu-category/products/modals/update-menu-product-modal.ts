@@ -1,16 +1,15 @@
 import { Component, Inject, input, OnInit, signal } from "@angular/core";
-import CategoryProduct from "../../../restaurants/classes/category-product.class";
-import CustomDialog from "../../../../shared/dialog/custom-dialog";
-import { ErrorAlert } from "../../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../../shared/alerts/success-alert";
+import CategoryProduct from "../../../../core/classes/category-product.class";
+import CustomDialog from "../../../../components/dialog/custom-dialog";
+import { ErrorAlert } from "../../../../components/alerts/error-alert";
+import { SuccessAlert } from "../../../../components/alerts/success-alert";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import ValidatorsUtils from "../../../../utils/validators";
-import ReactiveFormInput from "../../../../shared/forms/reactive-input";
-import { UpdateCategoryProduct } from "../../../restaurants/dto/category-product.dto";
-import CategoryProductRepository from "../../../restaurants/interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../../shared/repositories/api/category-product-api.repository";
+import ReactiveFormInput from "../../../../components/forms/reactive-input";
+import CategoryProductRepository, { UpdateCategoryProduct } from "../../../../core/interfaces/category-product.repository";
+import ApiCategoryProductRepository from "../../../../core/api/category-product-api.repository";
 import CategoryProductPageService2 from "../category-product-page.service";
-import { Loader } from "../../../../shared/loader/loader";
+import { Loader } from "../../../../components/loader/loader";
 
 @Component({
     selector: `app-update-menu-product-modal`,

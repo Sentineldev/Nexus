@@ -1,8 +1,7 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import RestaurantPageService2 from "../restaurant/restaurant-page.service";
-import MenuRepository from "../restaurants/interfaces/menu-repository.interface";
-import ApiMenuRepository from "../../shared/repositories/api/menu-api.repository";
-import Menu from "../restaurants/classes/menu.class";
+import MenuRepository from "../../core/interfaces/menu-repository.interface";
+import ApiMenuRepository from "../../core/api/menu-api.repository";
+import Menu from "../../core/classes/menu.class";
 
 
 type ServiceState = {

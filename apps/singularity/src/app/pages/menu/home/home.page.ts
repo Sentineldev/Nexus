@@ -1,7 +1,7 @@
 import { Component, computed } from "@angular/core";
 import MenuPageService2 from "../menu-page.service";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import TopBar2 from "../../../shared/topbar2/top-bar-2";
+import TopBar2 from "../../../components/topbar2/top-bar-2";
 
 @Component({
     selector: `app-menu-home-page`,

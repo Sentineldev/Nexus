@@ -1,7 +1,7 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import RestaurantRepository from "../restaurants/interfaces/restaurant-repository.interface";
-import ApiRestaurantRepository from "../../shared/repositories/api/restaurant-api.repository";
-import Restaurant from "../restaurants/classes/restaurant.class";
+import RestaurantRepository from "../../core/interfaces/restaurant-repository.interface";
+import ApiRestaurantRepository from "../../core/api/restaurant-api.repository";
+import Restaurant from "../../core/classes/restaurant.class";
 
 
 type ServiceState = {

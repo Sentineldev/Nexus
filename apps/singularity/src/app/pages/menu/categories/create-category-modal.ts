@@ -1,15 +1,14 @@
 import { Component, input, signal, Inject } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { SuccessAlert } from "../../../shared/alerts/success-alert";
-import CustomDialog from "../../../shared/dialog/custom-dialog";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
-import { Loader } from "../../../shared/loader/loader";
-import Menu from "../../restaurants/classes/menu.class";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import { SuccessAlert } from "../../../components/alerts/success-alert";
+import CustomDialog from "../../../components/dialog/custom-dialog";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
+import { Loader } from "../../../components/loader/loader";
+import Menu from "../../../core/classes/menu.class";
 import CategoriesPageService2 from "./categories-page.service";
-import { SaveMenuCategory } from "../../restaurants/dto/menu-category.dto";
-import MenuCategoryRepository from "../../restaurants/interfaces/menu-category-repository.interface";
-import ApiMenuCategoryRepository from "../../../shared/repositories/api/menu-category-api.repository";
+import MenuCategoryRepository, { SaveMenuCategory } from "../../../core/interfaces/menu-category-repository.interface";
+import ApiMenuCategoryRepository from "../../../core/api/menu-category-api.repository";
 
 
 @Component({

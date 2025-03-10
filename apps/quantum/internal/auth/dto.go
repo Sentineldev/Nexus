@@ -1,6 +1,10 @@
 package auth
 
-import "github.com/golang-jwt/jwt/v5"
+import (
+	"quantum/internal/types"
+
+	"github.com/golang-jwt/jwt/v5"
+)
 
 type LogInDto struct {
 	Username string `json:"username"`
@@ -8,7 +12,8 @@ type LogInDto struct {
 }
 
 type TokenData struct {
-	Id       string `json:"id"`
-	Username string `json:"username"`
+	Id       string         `json:"id"`
+	Username string         `json:"username"`
+	Employee types.Employee `json:"employee"`
 	jwt.RegisteredClaims
 }

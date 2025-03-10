@@ -1,9 +1,8 @@
 import { Inject, Injectable, signal, WritableSignal } from "@angular/core";
-import { PageData, PageFilter } from "../../../shared/types/pagination";
-import CategoryProduct from "../../restaurants/classes/category-product.class";
-import CategoryProductRepository from "../../restaurants/interfaces/category-product.repository";
-import ApiCategoryProductRepository from "../../../shared/repositories/api/category-product-api.repository";
-import { CategoryProductFilter } from "../../restaurants/repositories/category-product.repository";
+import { PageData, PageFilter } from "../../../core/types/pagination";
+import CategoryProduct from "../../../core/classes/category-product.class";
+import CategoryProductRepository, { CategoryProductFilter } from "../../../core/interfaces/category-product.repository";
+import ApiCategoryProductRepository from "../../../core/api/category-product-api.repository";
 
 type ServiceState = {
     loading: boolean;

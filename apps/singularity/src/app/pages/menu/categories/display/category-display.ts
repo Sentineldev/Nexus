@@ -1,5 +1,5 @@
 import { Component, computed, input } from "@angular/core";
-import MenuCategory from "../../../restaurants/classes/menu-category.class";
+import MenuCategory from "../../../../core/classes/menu-category.class";
 import { RouterLink } from "@angular/router";
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, computed, input} from "@angular/core";
 import { RouterLink } from "@angular/router";
-import Menu from "../../../restaurants/classes/menu.class";
+import Menu from "../../../../core/classes/menu.class";
 
 @Component({
     selector: `app-menu-display`,

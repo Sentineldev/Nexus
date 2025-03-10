@@ -1,6 +1,6 @@
 import { Component, computed, input } from "@angular/core";
-import CategoryProduct from "../../../restaurants/classes/category-product.class";
-import DialogToggler from "../../../../shared/dialog/dialog-toggler";
+import CategoryProduct from "../../../../core/classes/category-product.class";
+import DialogToggler from "../../../../components/dialog/dialog-toggler";
 import UpdateMenuProductModal from "../modals/update-menu-product-modal";
 import DeleteCategoryProductModal2 from "../modals/delete-menu-product-modal";
 

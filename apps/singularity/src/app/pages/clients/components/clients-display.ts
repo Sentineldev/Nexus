@@ -1,14 +1,13 @@
-import { Component, EventEmitter, input, Output } from "@angular/core";
-import Client from "../classes/client.class";
+import { Component, input } from "@angular/core";
+import Client from "../../../core/classes/client.class";
 import ClientDisplay from "./client-display";
 
 @Component({
     selector: `app-clients-display`,
     template: `
     <div class="flex flex-col gap-4">
-        <div class="grid grid-cols-5 gap-2 items-center justify-center text-lg font-bold text-primary border-b border-b-neutral py-4">
-            <h1>Identificacion</h1>
-            <h1>Nombre</h1>
+        <div class="grid grid-cols-4 gap-2 items-center justify-center text-lg font-bold text-primary border-b border-b-neutral py-4">
+            <h1>Cliente</h1>
             <h1 class="col-span-2">Correo</h1>
             <div></div>
         </div>

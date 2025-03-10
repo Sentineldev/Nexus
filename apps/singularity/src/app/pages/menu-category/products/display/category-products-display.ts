@@ -1,5 +1,5 @@
 import { Component, input } from "@angular/core";
-import CategoryProduct from "../../../restaurants/classes/category-product.class";
+import CategoryProduct from "../../../../core/classes/category-product.class";
 import CategoryProductDisplay2 from "./category-product-display";
 
 @Component({

@@ -1,12 +1,11 @@
 import { Component, OnInit, input, signal, Inject } from "@angular/core";
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
-import { ErrorAlert } from "../../../shared/alerts/error-alert";
-import { Loader } from "../../../shared/loader/loader";
-import ApiRestaurantRepository from "../../../shared/repositories/api/restaurant-api.repository";
-import Restaurant from "../../restaurants/classes/restaurant.class";
-import { UpdateRestaurant } from "../../restaurants/dto/restaurant.dto";
-import RestaurantRepository from "../../restaurants/interfaces/restaurant-repository.interface";
-import ReactiveFormInput from "../../../shared/forms/reactive-input";
+import { ErrorAlert } from "../../../components/alerts/error-alert";
+import { Loader } from "../../../components/loader/loader";
+import ApiRestaurantRepository from "../../../core/api/restaurant-api.repository";
+import Restaurant from "../../../core/classes/restaurant.class";
+import RestaurantRepository, { UpdateRestaurant } from "../../../core/interfaces/restaurant-repository.interface";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
 
 @Component({
     selector: `app-restaurant-update-form`,

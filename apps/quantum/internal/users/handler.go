@@ -23,9 +23,11 @@ func (handler UserHandler) Save(context echo.Context) error {
 
 	context.Bind(&body)
 
-	err := handler.Service.Save(body)
+	if err := body.Validate(); err != nil {
+		return err
+	}
 
-	if err != nil {
+	if err := handler.Service.Save(body); err != nil {
 		return err
 	}
 	return context.JSON(http.StatusCreated, nil)
@@ -38,9 +40,11 @@ func (handler UserHandler) Update(context echo.Context) error {
 
 	context.Bind(&body)
 
-	err := handler.Service.Update(id, body)
+	if err := body.Validate(); err != nil {
+		return err
+	}
 
-	if err != nil {
+	if err := handler.Service.Update(id, body); err != nil {
 		return err
 	}
 
@@ -51,12 +55,13 @@ func (handler UserHandler) ChangePassword(context echo.Context) error {
 
 	id := context.Param("id")
 	body := UpdateUserPassword{}
-
 	context.Bind(&body)
 
-	err := handler.Service.ChangePassword(id, body)
+	if err := body.Validate(); err != nil {
+		return err
+	}
 
-	if err != nil {
+	if err := handler.Service.ChangePassword(id, body); err != nil {
 		return err
 	}
 
@@ -86,6 +91,7 @@ func (handler UserHandler) GetAll(context echo.Context) error {
 		body = append(body, OutGoingUserDto{
 			Id:       user.Id,
 			Username: user.Username,
+			Employee: user.Employee,
 		})
 	}
 	return context.JSON(http.StatusOK, body)

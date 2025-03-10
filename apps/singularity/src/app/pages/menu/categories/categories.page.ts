@@ -1,8 +1,8 @@
 import { Component, computed, OnInit } from "@angular/core";
 import CategoriesPageService2 from "./categories-page.service";
 import CategoriesDisplay from "./display/categories";
-import { Loader } from "../../../shared/loader/loader";
-import DialogToggler from "../../../shared/dialog/dialog-toggler";
+import { Loader } from "../../../components/loader/loader";
+import DialogToggler from "../../../components/dialog/dialog-toggler";
 import MenuPageService2 from "../menu-page.service";
 import CreateCategoryModal from "./create-category-modal";
 

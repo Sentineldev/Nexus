@@ -1,5 +1,5 @@
 import { Component, input } from "@angular/core";
-import Product from "../../../products/classes/product.class";
+import Product from "../../../../core/classes/product.class";
 import ProductOptionDisplay from "./product-display";
 
 @Component({
