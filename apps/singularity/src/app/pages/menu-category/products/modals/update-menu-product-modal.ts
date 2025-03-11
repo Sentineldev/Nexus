@@ -10,6 +10,7 @@ import CategoryProductRepository, { UpdateCategoryProduct } from "../../../../co
 import ApiCategoryProductRepository from "../../../../core/api/category-product-api.repository";
 import CategoryProductPageService2 from "../category-product-page.service";
 import { Loader } from "../../../../components/loader/loader";
+import { IsActiveValues } from "../../../../core/types/globa";
 
 @Component({
     selector: `app-update-menu-product-modal`,
@@ -106,7 +107,7 @@ export default class UpdateMenuProductModal implements OnInit {
                 const value = this.form.value;
                 
                 const body: UpdateCategoryProduct = {
-                    isActive: value.isActive!,
+                    isActive: JSON.stringify(value.isActive!) as IsActiveValues,
                     price: Number(value.price!),
                     count: Number(value.count!),
                 };

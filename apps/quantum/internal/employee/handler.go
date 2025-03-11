@@ -2,7 +2,6 @@ package employee
 
 import (
 	"net/http"
-	"quantum/internal/types"
 
 	"github.com/labstack/echo/v4"
 )
@@ -62,10 +61,15 @@ func (handler EmployeeHandler) Delete(context echo.Context) error {
 
 func (handler EmployeeHandler) GetPage(context echo.Context) error {
 
-	filter := types.PageFilter[any]{
-		Page:     1,
-		PageSize: 5,
+	page := context.QueryParam("page")
+	pageSize := context.QueryParam("pageSize")
+	filter := EmployeePageFilterDto{
+		Page:     page,
+		PageSize: pageSize,
 	}
-	page := handler.Service.GetPage(filter)
-	return context.JSON(http.StatusOK, page)
+
+	if err := filter.Validate(); err != nil {
+		return err
+	}
+	return context.JSON(http.StatusOK, handler.Service.GetPage(filter.Parse()))
 }

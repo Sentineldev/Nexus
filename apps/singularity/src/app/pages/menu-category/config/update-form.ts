@@ -6,6 +6,7 @@ import { ErrorAlert } from "../../../components/alerts/error-alert";
 import { Loader } from "../../../components/loader/loader";
 import ApiMenuCategoryRepository from "../../../core/api/menu-category-api.repository";
 import ReactiveFormInput from "../../../components/forms/reactive-input";
+import { IsActiveValues } from "../../../core/types/globa";
 
 @Component({
     selector: `app-update-menu-category-form`,
@@ -71,7 +72,7 @@ export default class UpdateMenuCategoryForm {
             const data = this.formGroup.value;
 
             const body: UpdateMenuCategory = {
-                isActive: data.isActive!,
+                isActive: JSON.stringify(data.isActive!) as IsActiveValues,
                 name: data.name!,
             };
             this.loading.set(true);

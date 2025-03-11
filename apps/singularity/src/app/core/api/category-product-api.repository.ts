@@ -25,7 +25,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
                     err = "El producto ya se encuentra asignado";
                 }
                 else if (result.status === 422) {
-                    err = "No puedes dejar el nombre vacio";
+                    err = "Formato de datos incorrecto";
                 }
                 else if (result.status === 401) {
                     err = "No tienes permisos para realizar esta accion";
@@ -49,7 +49,7 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
                     err = "El producto ya se encuentra asignado";
                 }
                 else if (result.status === 422) {
-                    err = "No puedes dejar el nombre vacio";
+                    err = "Formato de datos incorrecto";
                 }
                 else if (result.status === 401) {
                     err = "No tienes permisos para realizar esta accion";

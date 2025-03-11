@@ -19,8 +19,11 @@ func NewMenuHandler() *MenuHandler {
 func (handler MenuHandler) Save(context echo.Context) error {
 
 	body := SaveMenuDto{}
-
 	context.Bind(&body)
+
+	if err := body.Validate(); err != nil {
+		return err
+	}
 
 	if err := handler.Service.Save(body); err != nil {
 		return err
@@ -35,8 +38,10 @@ func (handler MenuHandler) Update(context echo.Context) error {
 	body := UpdateMenuDto{}
 
 	context.Bind(&body)
-
-	if err := handler.Service.Update(id, body); err != nil {
+	if err := body.Validate(); err != nil {
+		return err
+	}
+	if err := handler.Service.Update(id, body.Parse()); err != nil {
 		return err
 	}
 	return context.JSON(http.StatusOK, "")

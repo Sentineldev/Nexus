@@ -21,6 +21,10 @@ func (handler ClientHandler) Save(context echo.Context) error {
 
 	context.Bind(&body)
 
+	if err := body.Validate(); err != nil {
+		return err
+	}
+
 	if err := handler.Service.Save(body); err != nil {
 		return err
 	}
@@ -33,6 +37,10 @@ func (handler ClientHandler) Update(context echo.Context) error {
 	body := SaveClientDto{}
 
 	context.Bind(&body)
+
+	if err := body.Validate(); err != nil {
+		return err
+	}
 
 	if err := handler.Service.Update(id, body); err != nil {
 		return err
@@ -66,15 +74,13 @@ func (handler ClientHandler) GetPage(context echo.Context) error {
 	page := context.QueryParam("page")
 	pageSize := context.QueryParam("pageSize")
 
-	body := ClientPageFilter{
+	body := ClientPageFilterDto{
 		Page:     page,
 		PageSize: pageSize,
 	}
 
-	if filter, err := body.Validate(); err != nil {
+	if err := body.Validate(); err != nil {
 		return err
-	} else {
-		result := handler.Service.GetPage(filter)
-		return context.JSON(http.StatusOK, result)
 	}
+	return context.JSON(http.StatusOK, handler.Service.GetPage(body.Parse()))
 }

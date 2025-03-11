@@ -15,4 +15,5 @@ export default interface ProductRepository {
     delete(id: string): Observable<string>
     getById(id: string): Observable<Product | undefined>
     getPage(filter: PageFilter<{}>): Observable<PageData<Product>>
+    getGroups(): Observable<string[]>;
 }

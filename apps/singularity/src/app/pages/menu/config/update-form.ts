@@ -6,6 +6,7 @@ import { ErrorAlert } from "../../../components/alerts/error-alert";
 import MenuRepository, { UpdateMenu } from "../../../core/interfaces/menu-repository.interface";
 import ApiMenuRepository from "../../../core/api/menu-api.repository";
 import ReactiveFormInput from "../../../components/forms/reactive-input";
+import { IsActiveValues } from "../../../core/types/globa";
 
 @Component({
     selector: `app-update-menu-form`,
@@ -71,7 +72,7 @@ export default class UpdateMenuForm implements OnInit {
             const data = this.formGroup.value;
 
             const body: UpdateMenu = {
-                isActive: data.isActive!,
+                isActive: JSON.stringify((data.isActive!)) as IsActiveValues,
                 name: data.name!,
             };
             this.loading.set(true);

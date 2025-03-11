@@ -23,7 +23,7 @@ func NewCategoryProductService() *CategoryProductService {
 	}
 }
 
-func (service CategoryProductService) Save(body SaveCategoryProductDto) error {
+func (service CategoryProductService) Save(body SaveCategoryProductServiceBodyDto) error {
 
 	if _, err := service.Repository.GetByProductId(body.CategoryId, body.ProductId); err == nil {
 		return echo.ErrConflict
@@ -54,7 +54,7 @@ func (service CategoryProductService) Save(body SaveCategoryProductDto) error {
 
 }
 
-func (service CategoryProductService) Update(id string, body UpdateCategoryProductDto) error {
+func (service CategoryProductService) Update(id string, body UpdateCategoryProductServiceBodyDto) error {
 
 	product, err := service.GetById(id)
 

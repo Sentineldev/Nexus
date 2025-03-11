@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import MenuCategory from "../classes/menu-category.class";
+import { IsActiveValues } from "../types/globa";
 
 export type SaveMenuCategory = {
     name: string;
@@ -8,7 +9,7 @@ export type SaveMenuCategory = {
 
 export type UpdateMenuCategory = {
     name: string;
-    isActive: boolean;
+    isActive: IsActiveValues;
 }
 
 export default interface MenuCategoryRepository {

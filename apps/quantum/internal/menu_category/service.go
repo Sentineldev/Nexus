@@ -43,7 +43,7 @@ func (service MenuCategoryService) Save(body SaveMenuCategoryDto) error {
 	return nil
 }
 
-func (service MenuCategoryService) Update(id string, body UpdateMenuCategoryDto) error {
+func (service MenuCategoryService) Update(id string, body UpdateMenuCategoryBodyServiceDto) error {
 
 	category, err := service.GetById(id)
 	if err != nil {

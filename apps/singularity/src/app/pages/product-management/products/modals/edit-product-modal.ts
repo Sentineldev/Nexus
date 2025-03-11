@@ -1,4 +1,4 @@
-import { Component, Inject, input, OnInit, signal } from "@angular/core";
+import { Component, computed, Inject, input, OnInit, signal } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import ProductsPageService2 from "../products-page2.service";
 import ProductRepository, { SaveProduct } from "../../../../core/interfaces/product-repository.interface";
@@ -11,6 +11,7 @@ import { SuccessAlert } from "../../../../components/alerts/success-alert";
 import { ErrorAlert } from "../../../../components/alerts/error-alert";
 import CustomDialog from "../../../../components/dialog/custom-dialog";
 import ReactiveFormInputToggable from "../../../../components/forms/reactive-input-togglable";
+import ValidatorsUtils from "../../../../utils/validators";
 
 @Component({
     selector: `app-edit-product-modal2`,
@@ -47,8 +48,8 @@ import ReactiveFormInputToggable from "../../../../components/forms/reactive-inp
                     [control]="formGroup.controls.group"
                     [id]="'group'+product().id"
                     label="Grupo"
-                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
-                    [data]="[ { label : 'OPCION #1', value: 'OPCION#1' } ]"
+                    [errors]="{ required: 'No puedes dejar este campo vacio', singleStringNoSpaces: 'No puede contener espacios' }"
+                    [data]="groups()"
                     />
                 </div>
                 <div>
@@ -68,6 +69,11 @@ import ReactiveFormInputToggable from "../../../../components/forms/reactive-inp
 })
 export default class EditProductModal2 implements OnInit {
 
+    public groups = computed(() => {
+        const options = this.service.groups().map((val) => ({ label: val, value: val }));
+        return options;
+    });
+
     public dialogId = input.required<string>();
 
     public product = input.required<Product>();
@@ -79,7 +85,7 @@ export default class EditProductModal2 implements OnInit {
     public formGroup = new FormGroup({
         name: new FormControl<string>("",[Validators.required]),
         description: new FormControl<string>("",[Validators.required]),
-        group: new FormControl<string>("",[Validators.required]),
+        group: new FormControl<string>("",[Validators.required, ValidatorsUtils.SingleStringNoSpaces]),
     });
 
     constructor(

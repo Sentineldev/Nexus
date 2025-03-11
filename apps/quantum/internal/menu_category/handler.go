@@ -22,8 +22,11 @@ func (handler MenuCategoryHandler) Save(context echo.Context) error {
 
 	context.Bind(&body)
 
-	err := handler.Service.Save(body)
-	if err != nil {
+	if err := body.Validate(); err != nil {
+		return err
+	}
+
+	if err := handler.Service.Save(body); err != nil {
 		return err
 	}
 
@@ -34,14 +37,17 @@ func (handler MenuCategoryHandler) Update(context echo.Context) error {
 
 	id := context.Param("id")
 	body := UpdateMenuCategoryDto{}
-
 	context.Bind(&body)
-	err := handler.Service.Update(id, body)
-	if err != nil {
+
+	if err := body.Validate(); err != nil {
 		return err
 	}
 
-	return context.JSON(http.StatusCreated, "")
+	if err := handler.Service.Update(id, body.Parse()); err != nil {
+		return err
+	}
+
+	return context.JSON(http.StatusOK, "")
 }
 
 func (handler MenuCategoryHandler) GetById(context echo.Context) error {

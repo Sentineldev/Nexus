@@ -40,5 +40,20 @@ export default class ValidatorsUtils {
 
 
     }
+
+    static SingleStringNoSpaces(control: AbstractControl): ValidationErrors | null {
+
+
+        const value = control.value;
+
+        if (value.length === 0) {
+            return null;
+        }
+
+        return ValidationUtils.IsSingleStringNoSpaces(value) ? null : { singleStringNoSpaces: true };
+
+
+    }
+
 }
 

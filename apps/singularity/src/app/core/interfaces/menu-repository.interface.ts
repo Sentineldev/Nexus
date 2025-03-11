@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import Menu from "../classes/menu.class";
+import { IsActiveValues } from "../types/globa";
 
 export type SaveMenu = {
     restaurantId: string;
@@ -8,7 +9,7 @@ export type SaveMenu = {
 
 export type UpdateMenu = {
     name: string;
-    isActive: boolean;
+    isActive: IsActiveValues;
 };
 
 export default interface MenuRepository {

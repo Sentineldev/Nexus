@@ -1,4 +1,4 @@
-package clients
+package products
 
 import (
 	"net/http"
@@ -8,46 +8,39 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type SaveClientDto struct {
-	FullName           string `json:"fullName"`
-	Email              string `json:"email"`
-	Identification     string `json:"identification"`
-	IdentificationType string `json:"identificationType"`
+type SaveProductDto struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Group       string `json:"group"`
 }
 
-func (dto SaveClientDto) Validate() error {
+func (dto SaveProductDto) Validate() error {
 
 	err := ""
 
-	if utils.IsStringEmpty(dto.FullName) {
-		err = "FullName cant be empty"
+	if utils.IsStringEmpty(dto.Name) {
+		err = "Name cant be empty"
 	}
 
-	if utils.IsStringEmpty(dto.Email) {
-		err = "Email cant be empty"
+	if utils.IsStringEmpty(dto.Description) {
+		err = "Description cant be empty"
 	}
-
-	if utils.IsStringEmpty(dto.Identification) {
-		err = "Identification cant be empty"
+	if utils.IsStringEmpty(dto.Group) {
+		err = "Group cant be empty"
 	}
-
-	if utils.IsStringEmpty(dto.IdentificationType) {
-		err = "IdentificationType cant be empty"
-	}
-
 	if !utils.IsStringEmpty(err) {
 		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
 	}
-
 	return nil
 }
 
-type ClientPageFilterDto struct {
+type ProductsPageFilterDto struct {
 	Page     string `json:"page"`
-	PageSize string `json:"pageSize"`
+	PageSize string `json:"PageSize"`
 }
 
-func (filter ClientPageFilterDto) Validate() error {
+func (filter ProductsPageFilterDto) Validate() error {
+
 	err := ""
 
 	if utils.IsStringEmpty(filter.Page) {
@@ -73,7 +66,7 @@ func (filter ClientPageFilterDto) Validate() error {
 	return nil
 }
 
-func (filter ClientPageFilterDto) Parse() types.PageFilter[any] {
+func (filter ProductsPageFilterDto) Parse() types.PageFilter[any] {
 
 	return types.PageFilter[any]{
 		Page:     utils.ParseStringToInt64(filter.Page),

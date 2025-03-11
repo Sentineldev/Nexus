@@ -1,8 +1,11 @@
 package feed_stock
 
 import (
+	"net/http"
 	"quantum/internal/types"
 	"quantum/internal/utils"
+
+	"github.com/labstack/echo/v4"
 )
 
 type UpdateFeedStockDto struct {
@@ -10,17 +13,21 @@ type UpdateFeedStockDto struct {
 	Id   string
 }
 
-func (dto UpdateFeedStockDto) IsValid() bool {
+func (dto UpdateFeedStockDto) Validate() error {
 
-	if !dto.Body.IsValid() {
-		return false
+	err := ""
+	if err := dto.Body.Validate(); err != nil {
+		return err
 	}
 
-	if len(dto.Id) == 0 {
-		return false
+	if utils.IsStringEmpty(dto.Id) {
+		err = "Id cant be empty"
 	}
 
-	return true
+	if !utils.IsStringEmpty(err) {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+	}
+	return nil
 }
 
 type SaveFeedStockDto struct {
@@ -28,17 +35,21 @@ type SaveFeedStockDto struct {
 	Unit string `json:"unit"`
 }
 
-func (dto SaveFeedStockDto) IsValid() bool {
+func (dto SaveFeedStockDto) Validate() error {
 
-	if len(dto.Name) == 0 {
-		return false
+	err := ""
+	if utils.IsStringEmpty(dto.Name) {
+		err = "Name cant be empty"
 	}
 
-	if len(dto.Unit) == 0 {
-		return false
+	if utils.IsStringEmpty(dto.Unit) {
+		err = "Unit cant be empty"
 	}
 
-	return true
+	if !utils.IsStringEmpty(err) {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+	}
+	return nil
 }
 
 type FeedStockPageQueryDto struct {
@@ -46,17 +57,31 @@ type FeedStockPageQueryDto struct {
 	PageSize string `json:"pageSize"`
 }
 
-func (dto FeedStockPageQueryDto) IsValid() bool {
+func (dto FeedStockPageQueryDto) Validate() error {
 
-	if len(dto.Page) == 0 && !utils.IsStringNumber(dto.Page) {
-		return false
+	err := ""
+
+	if utils.IsStringEmpty(dto.Page) {
+		err = "Page cant be empty"
 	}
 
-	if len(dto.PageSize) == 0 && !utils.IsStringNumber(dto.PageSize) {
-		return false
+	if utils.IsStringEmpty(dto.PageSize) {
+		err = "PageSize cant be empty"
 	}
 
-	return true
+	if !utils.IsStringNumberIntenger(dto.Page) {
+		err = "Page should be a number"
+	}
+
+	if !utils.IsStringNumberIntenger(dto.PageSize) {
+		err = "PageSize should be a number"
+	}
+
+	if !utils.IsStringEmpty(err) {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+	}
+
+	return nil
 }
 
 func (dto FeedStockPageQueryDto) Parse() types.PageFilter[any] {

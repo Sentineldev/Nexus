@@ -10,8 +10,9 @@ import Paginator from "../../../components/paginator/paginator";
     selector: `app-products-page2`,
     template: `
 
-    <app-create-product-modal2 [dialogId]="dialogId()"/>
-    <div class="p-12">
+   
+    <div class="p-12 flex flex-col h-full overflow-auto">
+        <app-create-product-modal2 [dialogId]="dialogId()"/>
         @if (state().loading) {
             <app-loader color="secondary"/>
         }

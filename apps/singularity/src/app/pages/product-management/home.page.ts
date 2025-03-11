@@ -6,7 +6,7 @@ import TopBar2 from "../../components/topbar2/top-bar-2";
     selector: `app-products-home`,
     imports: [RouterOutlet, RouterLink, RouterLinkActive, TopBar2],
     template: `
-    <div>
+    <div class="flex flex-col h-full overflow-auto">
         <app-topbar label="Productos"/>
         <div class="bg-white ">
             <ul class="flex gap-0">
@@ -18,7 +18,7 @@ import TopBar2 from "../../components/topbar2/top-bar-2";
                 </li>
             </ul>
         </div>
-        <div>
+        <div class="flex-1 overflow-auto">
             <router-outlet/>
         </div>
     </div>

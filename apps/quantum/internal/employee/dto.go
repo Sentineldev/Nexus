@@ -2,6 +2,7 @@ package employee
 
 import (
 	"net/http"
+	"quantum/internal/types"
 	"quantum/internal/utils"
 
 	"github.com/labstack/echo/v4"
@@ -58,4 +59,43 @@ func (dto SaveEmployeeDto) Validate() error {
 	}
 	return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
 
+}
+
+type EmployeePageFilterDto struct {
+	Page     string `json:"page"`
+	PageSize string `json:"pageSize"`
+}
+
+func (filter EmployeePageFilterDto) Validate() error {
+	err := ""
+
+	if utils.IsStringEmpty(filter.Page) {
+		err = "Page cant be empty"
+	}
+
+	if utils.IsStringEmpty(filter.PageSize) {
+		err = "PageSize cant be empty"
+	}
+
+	if !utils.IsStringNumberIntenger(filter.Page) {
+		err = "Page should be integer number"
+	}
+
+	if !utils.IsStringNumberIntenger(filter.PageSize) {
+		err = "PageSize should be integer number"
+	}
+
+	if !utils.IsStringEmpty(err) {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+	}
+
+	return nil
+}
+
+func (filter EmployeePageFilterDto) Parse() types.PageFilter[any] {
+
+	return types.PageFilter[any]{
+		Page:     utils.ParseStringToInt64(filter.Page),
+		PageSize: utils.ParseStringToInt64(filter.PageSize),
+	}
 }

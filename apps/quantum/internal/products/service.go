@@ -72,3 +72,8 @@ func (service ProductService) GetPage(filter types.PageFilter[any]) types.PageDa
 
 	return service.Repository.GetPage(filter)
 }
+
+func (service ProductService) GetGroups() []string {
+
+	return service.Repository.GetGroups()
+}

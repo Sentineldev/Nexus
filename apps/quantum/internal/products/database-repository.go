@@ -71,6 +71,33 @@ func (repository DatabaseRepository) GetById(body string) (types.Product, error)
 	return result, nil
 }
 
+func (repository DatabaseRepository) GetGroups() []string {
+
+	groups := []string{}
+
+	sql := `SELECT p.grouping FROM product p GROUP BY p.grouping`
+
+	rows, err := repository.DataSource.Query(sql)
+
+	if err != nil {
+		return groups
+	}
+
+	for rows.Next() {
+
+		value := ""
+		err := rows.Scan(
+			&value,
+		)
+
+		if err != nil {
+			return groups
+		}
+		groups = append(groups, value)
+	}
+	return groups
+}
+
 func (repository DatabaseRepository) GetByIds(body []string) []types.Product {
 
 	result := []types.Product{}

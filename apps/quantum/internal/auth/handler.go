@@ -22,10 +22,13 @@ func (handler AuthHandler) LogIn(context echo.Context) error {
 
 	context.Bind(&body)
 
+	if err := body.Validate(); err != nil {
+		return err
+	}
+
 	token, err := handler.Service.LogIn(body)
 	if err != nil {
 		return err
 	}
-
 	return context.JSON(http.StatusCreated, token)
 }

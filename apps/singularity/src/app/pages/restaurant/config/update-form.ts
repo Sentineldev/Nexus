@@ -6,6 +6,7 @@ import ApiRestaurantRepository from "../../../core/api/restaurant-api.repository
 import Restaurant from "../../../core/classes/restaurant.class";
 import RestaurantRepository, { UpdateRestaurant } from "../../../core/interfaces/restaurant-repository.interface";
 import ReactiveFormInput from "../../../components/forms/reactive-input";
+import { IsActiveValues } from "../../../core/types/globa";
 
 @Component({
     selector: `app-restaurant-update-form`,
@@ -76,7 +77,7 @@ export default class RestaurantUpdateForm implements OnInit {
             
             const body: UpdateRestaurant = {
                 name: data.name!,
-                isActive: data.isActive!,
+                isActive: JSON.stringify(data.isActive!) as IsActiveValues,
             };
 
             this.loading.set(true);

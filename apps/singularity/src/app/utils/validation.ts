@@ -33,6 +33,18 @@ export default class ValidationUtils {
 
         return true;
         
+    }   
+
+    static IsSingleStringNoSpaces(str: string) {
+
+        if (this.IsStringEmpty(str)) {
+            return false;
+        }
+
+        const splited = str.split(" ");
+
+
+        return splited.length === 1;
     }
 
     static IsStringNumberAndTwoDecimals(str: string): boolean {

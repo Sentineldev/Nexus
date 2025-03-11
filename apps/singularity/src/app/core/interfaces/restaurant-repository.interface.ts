@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 import { PageData, PageFilter } from "../types/pagination";
 import Restaurant from "../classes/restaurant.class";
+import { IsActiveValues } from "../types/globa";
 
 export type SaveRestaurant = {
     name: string;
@@ -8,7 +9,7 @@ export type SaveRestaurant = {
 
 export type UpdateRestaurant = {
     name: string;
-    isActive: boolean;
+    isActive: IsActiveValues;
 }
 
 export default interface RestaurantRepository {

@@ -16,6 +16,7 @@ export default class ApiProductRepository implements ProductRepository {
 
         this.URL = `${CONFIGURATION.API_URL}/products`;
     }
+   
 
     save(body: SaveProduct): Observable<string> {
 
@@ -76,6 +77,11 @@ export default class ApiProductRepository implements ProductRepository {
     getById(id: string): Observable<Product | undefined> {
         throw new Error("Method not implemented.");
     }
+
+    getGroups(): Observable<string[]> {
+        return this.http.get<string[]>(`${this.URL}/groups`);
+    }
+
     getPage(filter: PageFilter<{}>): Observable<PageData<Product>> {
 
         const params = new HttpParams({

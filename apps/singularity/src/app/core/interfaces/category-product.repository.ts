@@ -1,6 +1,7 @@
 import { Observable } from "rxjs";
 import CategoryProduct from "../classes/category-product.class";
 import { PageData, PageFilter } from "../types/pagination";
+import { IsActiveValues } from "../types/globa";
 export type CategoryProductFilter = {
     categoryId: string;
 }
@@ -22,7 +23,7 @@ export type SaveCategoryProduct = {
 export type UpdateCategoryProduct = {
     price: number;
     count: number;
-    isActive: boolean;
+    isActive: IsActiveValues;
 };
 
 export default interface CategoryProductRepository {

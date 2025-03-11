@@ -42,7 +42,7 @@ func (service MenuService) Save(body SaveMenuDto) error {
 	return nil
 }
 
-func (service MenuService) Update(id string, body UpdateMenuDto) error {
+func (service MenuService) Update(id string, body UpdateMenuServiceBodyDto) error {
 
 	menu, err := service.getById(id)
 

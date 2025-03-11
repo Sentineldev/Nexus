@@ -24,7 +24,7 @@ func (dto SaveUserDto) Validate() error {
 	}
 
 	if utils.IsStringEmpty(dto.ShortName) {
-		err = "Username cant be empty"
+		err = "ShortName cant be empty"
 	}
 
 	if utils.IsStringEmpty(dto.Password) {
@@ -55,7 +55,7 @@ func (dto UpdateUserDto) Validate() error {
 	}
 
 	if utils.IsStringEmpty(dto.ShortName) {
-		err = "Username cant be empty"
+		err = "ShortName cant be empty"
 	}
 
 	if !utils.IsStringEmpty(err) {

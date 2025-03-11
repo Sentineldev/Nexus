@@ -9,6 +9,7 @@ type ServiceState = {
     loading: boolean;
     products: PageData<Product> | undefined;
     filter: PageFilter<{}>;
+    groups: string[];
 };
 
 @Injectable({
@@ -31,6 +32,7 @@ export default class ProductsPageService2 {
             },
             loading: false,
             products: undefined,
+            groups: [],
         });
     }
 
@@ -38,9 +40,24 @@ export default class ProductsPageService2 {
     getState() {
         return this.state();
     }
+
+    groups(): string[] {
+        return this.state().groups;
+    }
+
     fetch() {
         this.getPage(this.state().filter);
+        this.getGroups();
     }
+
+    getGroups() {
+        this.repository.getGroups().subscribe((groups) => {
+            setTimeout(() => {
+                this.state.update((current) => ({ ...current, groups }));
+            }, 1000);
+        })
+    }
+
     getPage(filter: PageFilter<{}>) {
 
         this.state.update((current) => ({ ...current, filter, loading: true }));

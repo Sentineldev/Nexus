@@ -21,8 +21,8 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 
 	context.Bind(&body)
 
-	if !body.Validate() {
-		return echo.ErrUnprocessableEntity
+	if err := body.Validate(); err != nil {
+		return err
 	}
 
 	if err := handler.Service.Save(body); err != nil {
@@ -35,12 +35,11 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 func (handler RestaurantsHandler) Update(context echo.Context) error {
 
 	id := context.Param("id")
-	body := UpdateRestaurantHandlerBody{}
-
+	body := UpdateRestaurantBodyDto{}
 	context.Bind(&body)
 
-	if !body.Validate() {
-		return echo.ErrUnprocessableEntity
+	if err := body.Validate(); err != nil {
+		return err
 	}
 
 	if err := handler.Service.Update(id, body.Parse()); err != nil {
@@ -55,17 +54,14 @@ func (handler RestaurantsHandler) GetPage(context echo.Context) error {
 	page := context.QueryParam("page")
 	pageSize := context.QueryParam("pageSize")
 
-	body := RestaurantPageFilter{
+	body := RestaurantPageFilterDto{
 		Page:     page,
 		PageSize: pageSize,
 	}
-
-	if filter, err := body.Validate(); err != nil {
+	if err := body.Validate(); err != nil {
 		return err
-	} else {
-		result := handler.Service.GetPage(filter)
-		return context.JSON(http.StatusOK, result)
 	}
+	return context.JSON(http.StatusOK, handler.Service.GetPage(body.Parse()))
 }
 
 func (handler RestaurantsHandler) GetById(context echo.Context) error {

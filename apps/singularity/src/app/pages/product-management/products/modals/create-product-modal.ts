@@ -1,4 +1,4 @@
-import { Component, Inject, input, signal } from "@angular/core";
+import { Component, computed, Inject, input, signal } from "@angular/core";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from "@angular/forms";
 import ProductRepository, { SaveProduct } from "../../../../core/interfaces/product-repository.interface";
 import ApiProductRepository from "../../../../core/api/product-api.repository";
@@ -10,6 +10,7 @@ import { SuccessAlert } from "../../../../components/alerts/success-alert";
 import { ErrorAlert } from "../../../../components/alerts/error-alert";
 import CustomDialog from "../../../../components/dialog/custom-dialog";
 import ReactiveFormInputToggable from "../../../../components/forms/reactive-input-togglable";
+import ValidatorsUtils from "../../../../utils/validators";
 
 @Component({
     selector: `app-create-product-modal2`,
@@ -40,14 +41,14 @@ import ReactiveFormInputToggable from "../../../../components/forms/reactive-inp
                     [id]="'description'"
                     [control]="formGroup.controls.description"
                     [rows]="4"
-                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    [errors]="{ required: 'No puedes dejar este campo vacio',  }"
                     />
                     <app-reactive-form-input-toggable
                     [control]="formGroup.controls.group"
                     [id]="'group'"
                     label="Grupo"
-                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
-                    [data]="[ { label : 'OPCION #1', value: 'OPCION#1' } ]"
+                    [errors]="{ required: 'No puedes dejar este campo vacio', singleStringNoSpaces: 'No puede contener espacios' }"
+                    [data]="groups()"
                     />
                 </div>
                 <div>
@@ -67,6 +68,13 @@ import ReactiveFormInputToggable from "../../../../components/forms/reactive-inp
 })
 export default class CreateProductModal2 {
 
+
+    public groups = computed(() => {
+        const options = this.service.groups().map((val) => ({ label: val, value: val }));
+        return options;
+    });
+
+
     public dialogId = input.required<string>();
 
     public loading = signal<boolean>(false);
@@ -76,7 +84,7 @@ export default class CreateProductModal2 {
     public formGroup = new FormGroup({
         name: new FormControl<string>("",[Validators.required]),
         description: new FormControl<string>("",[Validators.required]),
-        group:  new FormControl<string>("",[Validators.required])
+        group:  new FormControl<string>("",[Validators.required, ValidatorsUtils.SingleStringNoSpaces])
     });
 
     constructor(

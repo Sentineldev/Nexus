@@ -39,7 +39,7 @@ func (service RestaurantService) Save(body SaveRestaurantDto) error {
 	return nil
 }
 
-func (service RestaurantService) Update(id string, body UpdateRestaurantDto) error {
+func (service RestaurantService) Update(id string, body UpdateRestaurantServiceBodyDto) error {
 
 	restaurant, err := service.GetById(id)
 	if err != nil {

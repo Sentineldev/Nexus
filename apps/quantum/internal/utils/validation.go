@@ -12,6 +12,18 @@ func IsStringNumber(str string) bool {
 	return err == nil
 }
 
+func IsStringNumberIntenger(str string) bool {
+
+	splited := strings.Split(str, ".")
+
+	if len(splited) > 1 {
+		return false
+	}
+	_, err := strconv.ParseInt(str, 10, 64)
+
+	return err == nil
+}
+
 func IsStringEmpty(str string) bool {
 
 	return len(str) == 0

@@ -2,7 +2,6 @@ package products
 
 import (
 	"net/http"
-	"quantum/internal/restaurants"
 
 	"github.com/labstack/echo/v4"
 )
@@ -44,21 +43,24 @@ func (handler ProductsHandler) Delete(context echo.Context) error {
 	return handler.Service.Delete(id)
 }
 
+func (handler ProductsHandler) GetGroups(context echo.Context) error {
+
+	groups := handler.Service.GetGroups()
+	return context.JSON(http.StatusOK, groups)
+}
+
 func (handler ProductsHandler) GetPage(context echo.Context) error {
 
 	page := context.QueryParam("page")
 	pageSize := context.QueryParam("pageSize")
 
-	body := restaurants.RestaurantPageFilter{
+	body := ProductsPageFilterDto{
 		Page:     page,
 		PageSize: pageSize,
 	}
 
-	if filter, err := body.Validate(); err != nil {
+	if err := body.Validate(); err != nil {
 		return err
-	} else {
-		result := handler.Service.GetPage(filter)
-		return context.JSON(http.StatusOK, result)
 	}
-	// return context.JSON(http.StatusOK, handler.Service.GetPage(filter))
+	return context.JSON(http.StatusOK, handler.Service.GetPage(body.Parse()))
 }

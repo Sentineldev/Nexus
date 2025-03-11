@@ -11,6 +11,7 @@ func ProductsRoutes(server *echo.Group) {
 	group.POST("", handler.Save)
 	group.PUT("/:id", handler.Update)
 	group.DELETE("/:id", handler.Delete)
+	group.GET("/groups", handler.GetGroups)
 	group.GET("", handler.GetPage)
 
 }

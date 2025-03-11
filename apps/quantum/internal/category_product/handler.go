@@ -2,7 +2,6 @@ package category_product
 
 import (
 	"net/http"
-	"quantum/internal/types"
 
 	"github.com/labstack/echo/v4"
 )
@@ -23,8 +22,10 @@ func (handler CategoryProductHandler) Save(context echo.Context) error {
 	body := SaveCategoryProductDto{}
 
 	context.Bind(&body)
-
-	if err := handler.Service.Save(body); err != nil {
+	if err := body.Validate(); err != nil {
+		return err
+	}
+	if err := handler.Service.Save(body.Parse()); err != nil {
 		return err
 	}
 
@@ -39,7 +40,11 @@ func (handler CategoryProductHandler) Update(context echo.Context) error {
 
 	context.Bind(&body)
 
-	if err := handler.Service.Update(id, body); err != nil {
+	if err := body.Validate(); err != nil {
+		return err
+	}
+
+	if err := handler.Service.Update(id, body.Parse()); err != nil {
 		return err
 	}
 
@@ -62,30 +67,37 @@ func (handler CategoryProductHandler) Delete(context echo.Context) error {
 func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 
 	categoryId := context.Param("categoryId")
-	filter := types.PageFilter[CategoryPageFilter]{
-		Page:     1,
-		PageSize: 5,
-		Filter: CategoryPageFilter{
-			CategoryId: categoryId,
-		},
+	page := context.QueryParam("page")
+	pageSize := context.QueryParam("pageSize")
+
+	filter := CategoryPageFilterDto{
+		Page:       page,
+		PageSize:   pageSize,
+		CategoryId: categoryId,
 	}
-	return context.JSON(http.StatusOK, handler.Service.GetPage(filter))
+	if err := filter.Validate(); err != nil {
+		return err
+	}
+	return context.JSON(http.StatusOK, handler.Service.GetPage(filter.Parse()))
 }
 
 func (handler CategoryProductHandler) GetAllProductsPaginate(context echo.Context) error {
 
 	restaurantId := context.Param("restaurantId")
+	page := context.QueryParam("page")
+	pageSize := context.QueryParam("pageSize")
 	menuId := context.QueryParam("menuId")
 	search := context.QueryParam("search")
 
-	filter := types.PageFilter[AllProductsFilter]{
-		Page:     1,
-		PageSize: 5,
-		Filter: AllProductsFilter{
-			RestaurantId: restaurantId,
-			MenuId:       menuId,
-			Search:       search,
-		},
+	filter := AllProductsFilterDto{
+		Page:         page,
+		PageSize:     pageSize,
+		RestaurantId: restaurantId,
+		MenuId:       menuId,
+		Search:       search,
 	}
-	return context.JSON(http.StatusOK, handler.Service.GetAllProductsPaginate(filter))
+	if err := filter.Validate(); err != nil {
+		return err
+	}
+	return context.JSON(http.StatusOK, handler.Service.GetAllProductsPaginate(filter.Parse()))
 }
