@@ -9,6 +9,7 @@ import ReactiveFormInput from "../../../../components/forms/reactive-input";
 import { SuccessAlert } from "../../../../components/alerts/success-alert";
 import { ErrorAlert } from "../../../../components/alerts/error-alert";
 import CustomDialog from "../../../../components/dialog/custom-dialog";
+import ReactiveFormInputToggable from "../../../../components/forms/reactive-input-togglable";
 
 @Component({
     selector: `app-create-product-modal2`,
@@ -41,6 +42,13 @@ import CustomDialog from "../../../../components/dialog/custom-dialog";
                     [rows]="4"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
                     />
+                    <app-reactive-form-input-toggable
+                    [control]="formGroup.controls.group"
+                    [id]="'group'"
+                    label="Grupo"
+                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    [data]="[ { label : 'OPCION #1', value: 'OPCION#1' } ]"
+                    />
                 </div>
                 <div>
                     <button [disabled]="loading()" type="submit" class="btn w-full">
@@ -55,7 +63,7 @@ import CustomDialog from "../../../../components/dialog/custom-dialog";
         </div>
     </app-custom-dialog>
     `,
-    imports: [ReactiveFormTextArea, Loader, ReactiveFormInput, SuccessAlert, ErrorAlert, CustomDialog, ReactiveFormsModule]
+    imports: [ReactiveFormTextArea, Loader, ReactiveFormInput, SuccessAlert, ErrorAlert, CustomDialog, ReactiveFormsModule, ReactiveFormInputToggable]
 })
 export default class CreateProductModal2 {
 
@@ -68,6 +76,7 @@ export default class CreateProductModal2 {
     public formGroup = new FormGroup({
         name: new FormControl<string>("",[Validators.required]),
         description: new FormControl<string>("",[Validators.required]),
+        group:  new FormControl<string>("",[Validators.required])
     });
 
     constructor(
@@ -85,6 +94,7 @@ export default class CreateProductModal2 {
             const body: SaveProduct = {
                 description: value.description!,
                 name: value.name!,
+                group: value.group!,
             };  
 
             this.errorMessage.set("");

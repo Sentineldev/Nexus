@@ -5,6 +5,7 @@ import Product from "../classes/product.class";
 export type SaveProduct = {
     name: string;
     description: string;
+    group: string;
 }
 
 export default interface ProductRepository {

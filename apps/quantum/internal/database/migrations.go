@@ -16,7 +16,8 @@ func CreateTables() {
 	CREATE TABLE IF NOT EXISTS product(
 		id TEXT PRIMARY KEY,
 		name TEXT NOT NULL UNIQUE,
-		description TEXT default ""
+		description TEXT NOT NULL default "",
+		group TEXT NOT NULL,
 	);
 
 	CREATE TABLE IF NOT EXISTS client(

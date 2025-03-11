@@ -71,6 +71,7 @@ export default class EditProductModal2 implements OnInit {
     public formGroup = new FormGroup({
         name: new FormControl<string>("",[Validators.required]),
         description: new FormControl<string>("",[Validators.required]),
+        group: new FormControl<string>("",[Validators.required]),
     });
 
     constructor(
@@ -82,6 +83,7 @@ export default class EditProductModal2 implements OnInit {
         this.formGroup.setValue({
             description: this.product().description,
             name: this.product().name,
+            group: this.product().group,
         });
     }
 
@@ -94,6 +96,7 @@ export default class EditProductModal2 implements OnInit {
             const body: SaveProduct = {
                 description: value.description!,
                 name: value.name!,
+                group: value.group!,
             };  
 
             this.errorMessage.set("");

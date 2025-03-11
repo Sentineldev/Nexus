@@ -20,9 +20,9 @@ func NewDatabaseRepository() *DatabaseRepository {
 
 func (repository DatabaseRepository) Save(body types.Product) error {
 
-	sql := `INSERT INTO product(id, name, description) VALUES (?,?,?)`
+	sql := `INSERT INTO product(id, name, description, group) VALUES (?,?,?,?)`
 
-	if _, err := repository.DataSource.Exec(sql, body.Id, body.Name, body.Description); err != nil {
+	if _, err := repository.DataSource.Exec(sql, body.Id, body.Name, body.Description, body.Group); err != nil {
 		return err
 	}
 
@@ -31,9 +31,9 @@ func (repository DatabaseRepository) Save(body types.Product) error {
 
 func (repository DatabaseRepository) Update(body types.Product) error {
 
-	sql := `UPDATE product SET name = ?, description = ? WHERE id = ?`
+	sql := `UPDATE product SET name = ?, description = ?, group = ? WHERE id = ?`
 
-	if _, err := repository.DataSource.Exec(sql, body.Name, body.Description, body.Id); err != nil {
+	if _, err := repository.DataSource.Exec(sql, body.Name, body.Description, body.Group, body.Id); err != nil {
 		return err
 	}
 
@@ -62,6 +62,7 @@ func (repository DatabaseRepository) GetById(body string) (types.Product, error)
 		&result.Id,
 		&result.Name,
 		&result.Description,
+		&result.Group,
 	)
 
 	if err != nil {
@@ -93,6 +94,7 @@ func (repository DatabaseRepository) GetByIds(body []string) []types.Product {
 			&record.Id,
 			&record.Name,
 			&record.Description,
+			&record.Group,
 		)
 		if err != nil {
 			return result
@@ -125,6 +127,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[any]) types.P
 			&record.Id,
 			&record.Name,
 			&record.Description,
+			&record.Group,
 		)
 		if err != nil {
 			return data
