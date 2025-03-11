@@ -20,7 +20,7 @@ func NewDatabaseRepository() *DatabaseRepository {
 
 func (repository DatabaseRepository) Save(body types.Product) error {
 
-	sql := `INSERT INTO product(id, name, description, group) VALUES (?,?,?,?)`
+	sql := `INSERT INTO product(id, name, description, grouping) VALUES (?,?,?,?)`
 
 	if _, err := repository.DataSource.Exec(sql, body.Id, body.Name, body.Description, body.Group); err != nil {
 		return err
@@ -31,7 +31,7 @@ func (repository DatabaseRepository) Save(body types.Product) error {
 
 func (repository DatabaseRepository) Update(body types.Product) error {
 
-	sql := `UPDATE product SET name = ?, description = ?, group = ? WHERE id = ?`
+	sql := `UPDATE product SET name = ?, description = ?, grouping = ? WHERE id = ?`
 
 	if _, err := repository.DataSource.Exec(sql, body.Name, body.Description, body.Group, body.Id); err != nil {
 		return err

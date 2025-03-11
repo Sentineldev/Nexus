@@ -6,12 +6,15 @@ import Product from "../../../../core/classes/product.class";
     selector: `app-products-display2`,
     template: `
     <div class="flex flex-col gap-8">
-        <div class="grid grid-cols-3 gap-4 border-b border-b-neutral py-4">
+        <div class="grid grid-cols-4 gap-4 border-b border-b-neutral py-4">
             <div>
                 <h1 class="font-medium text-lg text-primary">Nombre</h1>
             </div>
             <div>
                 <h1 class="font-medium text-lg text-primary">Descripcion</h1>
+            </div>
+            <div>
+                <h1 class="font-medium text-lg text-primary">Grupo</h1>
             </div>
             <div></div>
         </div>

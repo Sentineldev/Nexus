@@ -5,43 +5,44 @@ import ReactiveSelectInput from "./reactive-select-input";
 
 @Component({
     selector: 'app-reactive-form-input-toggable',
-    imports: [ReactiveFormsModule, CommonModule, ReactiveSelectInput],
+    imports: [ReactiveFormsModule, CommonModule],
     template: `
     <div class="flex items-end gap-4">
-        <div class="flex items-end gap-4">
-            @if(toggle())  {
-                <app-reactive-select-input
-                [control]="control()"
-                [errors]="errors()"
-                [id]="id()"
-                [label]="label()"
-                >
-                @for (record of data(); track $index) {
-                    <option [value]="record.value">{{record.label}}</option>
-                }
-                </app-reactive-select-input>
-            }@else {
-                <label [htmlFor]="id()" class="w-full">
-                    <p>{{label()}}</p>
-                    <input
+        <label [htmlFor]="id()" class="w-full">
+            <p>{{label()}}</p>
+            @if (toggle()) {
+                <input
+                autocomplete="on"
+                class="border w-full border-neutral p-2 rounded outline-none" 
+                type="text" 
+                [formControl]="control()" 
+                [name]="id()" 
+                [id]="id()"/>
+            } @else {
+                <div class="w-full border border-neutral rounded p-2">
+                    <select
+                    [id]="id()"
+                    [name]="id()"
+                    [formControl]="control()"
                     autocomplete="on"
-                    class="border w-full border-neutral p-2 rounded outline-none" 
-                    type="text" 
-                    [formControl]="control()" 
-                    [name]="id()" 
-                    [id]="id()"/>
-                </label>
-                
+                    class="font-normal rounded outline-none w-full"
+                    >
+                        @for (record of data(); track $index) {
+                            <option [value]="record.value">{{record.label}}</option>
+                        }
+                    </select>
+                </div>
             }
-            <input (change)="onChangeHandler()" type="checkbox" [name]="id()+'check-box'" [id]="id()+'check-box'">
-        </div>
+        </label>
+        <label [htmlFor]="'checkbox-'+id()" class="switch">
+            <input (change)="onChangeHandler()" type="checkbox" [name]="'checkbox-'+id()" [id]="'checkbox-'+id()">
+            <span class="slider round"></span>
+        </label>
     </div>
-    @if(!toggle()) {
-        @if (control().invalid && control().touched)  {
-            <div *ngFor="let error of control().errors | keyvalue">
-                <p class="text-primary">{{errors()[error.key]}}</p>
-            </div>
-        }
+    @if (control().invalid && control().touched)  {
+        <div *ngFor="let error of control().errors | keyvalue">
+            <p class="text-primary">{{errors()[error.key]}}</p>
+        </div>
     }
     `,
 })

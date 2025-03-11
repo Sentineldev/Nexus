@@ -69,7 +69,7 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active, cp.count,
-		p.id,p.name,p.description, p.group,
+		p.id,p.name,p.description, p.grouping,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -116,7 +116,7 @@ func (repository DatabaseRepository) GetByProductId(categoryId, productId string
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active,cp.count,
-		p.id,p.name,p.description,p.group,
+		p.id,p.name,p.description,p.grouping,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -164,7 +164,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[CategoryPageF
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active,cp.count,
-		p.id,p.name,p.description,p.group,
+		p.id,p.name,p.description,p.grouping,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -238,7 +238,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 		sql = `
 		SELECT 
 			cp.id, cp.price, cp.is_active,cp.count,
-			p.id,p.name,p.description,p.group,
+			p.id,p.name,p.description,p.grouping,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
 			r.id,r.name,r.is_active
@@ -289,7 +289,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 		sql = `
 		SELECT 
 			cp.id, cp.price, cp.is_active,cp.count,
-			p.id,p.name,p.description,p.group,
+			p.id,p.name,p.description,p.grouping,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
 			r.id,r.name,r.is_active

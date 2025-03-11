@@ -10,6 +10,7 @@ import ReactiveFormTextArea from "../../../../components/forms/reactive-textarea
 import { SuccessAlert } from "../../../../components/alerts/success-alert";
 import { ErrorAlert } from "../../../../components/alerts/error-alert";
 import CustomDialog from "../../../../components/dialog/custom-dialog";
+import ReactiveFormInputToggable from "../../../../components/forms/reactive-input-togglable";
 
 @Component({
     selector: `app-edit-product-modal2`,
@@ -28,7 +29,7 @@ import CustomDialog from "../../../../components/dialog/custom-dialog";
                 }
             }
             <form (ngSubmit)="onSubmitHandler()" class="flex flex-col gap-4" [formGroup]="formGroup">
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-4">
                     <app-reactive-form-input
                     label="Nombre"
                     [id]="'name-'+product().id"
@@ -41,6 +42,13 @@ import CustomDialog from "../../../../components/dialog/custom-dialog";
                     [control]="formGroup.controls.description"
                     [rows]="4"
                     [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    />
+                    <app-reactive-form-input-toggable
+                    [control]="formGroup.controls.group"
+                    [id]="'group'+product().id"
+                    label="Grupo"
+                    [errors]="{ required: 'No puedes dejar este campo vacio' }"
+                    [data]="[ { label : 'OPCION #1', value: 'OPCION#1' } ]"
                     />
                 </div>
                 <div>
@@ -56,7 +64,7 @@ import CustomDialog from "../../../../components/dialog/custom-dialog";
         </div>
     </app-custom-dialog>
     `,
-    imports: [ReactiveFormsModule, Loader, ReactiveFormInput, ReactiveFormTextArea, SuccessAlert, ErrorAlert, CustomDialog]
+    imports: [ReactiveFormsModule, Loader, ReactiveFormInput, ReactiveFormTextArea, SuccessAlert, ErrorAlert, CustomDialog, ReactiveFormInputToggable]
 })
 export default class EditProductModal2 implements OnInit {
 

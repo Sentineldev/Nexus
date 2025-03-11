@@ -9,12 +9,15 @@ import Product from "../../../../core/classes/product.class";
     template: `
     <app-edit-product-modal2 [dialogId]="updateDialogId()" [product]="product()"/>
     <app-delete-product-modal2 [dialogId]="deleteDialogId()" [product]="product()"/>
-    <div class="grid grid-cols-3 gap-4 items-center">
-        <div>
+    <div class="grid grid-cols-4 gap-4 items-center">
+        <div class="flex flex-col">
             <h1>{{product().name}}</h1>
         </div>
         <div>
             <h1 class="text-wrap">{{product().description}}</h1>
+        </div>
+        <div>
+            <h1 class="text-wrap">{{product().group}}</h1>
         </div>
         <div class="flex gap-4">
             <app-dialog-toggler [dialogId]="updateDialogId()">
