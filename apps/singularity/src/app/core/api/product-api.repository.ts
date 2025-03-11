@@ -82,9 +82,15 @@ export default class ApiProductRepository implements ProductRepository {
             fromObject: { page: filter.page, pageSize: filter.pageSize }
         });
 
-        return this.http.get<PageData<Product>>(this.URL, {
-            params: params
-        });
+        return this.http.get<PageData<Product>>(this.URL, {params: params}).pipe(
+            map((result) => {
+                const products = result.data.map((val) => new Product(val));
+                return {    
+                    meta: result.meta,
+                    data: products,
+                };
+            })
+        )
     }
     
 }

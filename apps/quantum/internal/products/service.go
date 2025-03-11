@@ -22,7 +22,7 @@ func (service ProductService) Save(body SaveProductDto) error {
 
 	id := uuid.New().String()
 
-	newProduct := types.NewProduct(id, body.Name, body.Description)
+	newProduct := types.NewProduct(id, body.Name, body.Description, body.Group)
 
 	if err := service.Repository.Save(*newProduct); err != nil {
 		return echo.ErrInternalServerError
@@ -49,6 +49,7 @@ func (service ProductService) Update(id string, body SaveProductDto) error {
 	}
 	product.Name = body.Name
 	product.Description = body.Description
+	product.Group = body.Group
 
 	err = service.Repository.Update(product)
 	if err != nil {

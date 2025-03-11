@@ -69,7 +69,7 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active, cp.count,
-		p.id,p.name,p.description,
+		p.id,p.name,p.description, p.group,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -92,6 +92,7 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 		&result.Product.Id,
 		&result.Product.Name,
 		&result.Product.Description,
+		&result.Product.Group,
 		&result.Category.Id,
 		&result.Category.Name,
 		&result.Category.IsActive,
@@ -115,7 +116,7 @@ func (repository DatabaseRepository) GetByProductId(categoryId, productId string
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active,cp.count,
-		p.id,p.name,p.description,
+		p.id,p.name,p.description,p.group,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -138,6 +139,7 @@ func (repository DatabaseRepository) GetByProductId(categoryId, productId string
 		&result.Product.Id,
 		&result.Product.Name,
 		&result.Product.Description,
+		&result.Product.Group,
 		&result.Category.Id,
 		&result.Category.Name,
 		&result.Category.IsActive,
@@ -162,7 +164,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[CategoryPageF
 	sql := `
 	SELECT 
 		cp.id, cp.price, cp.is_active,cp.count,
-		p.id,p.name,p.description,
+		p.id,p.name,p.description,p.group,
 		mc.id, mc.name, mc.is_active,
 		m.id, m.name, m.is_active,
 		r.id,r.name,r.is_active
@@ -193,6 +195,7 @@ func (repository DatabaseRepository) GetPage(body types.PageFilter[CategoryPageF
 			&record.Product.Id,
 			&record.Product.Name,
 			&record.Product.Description,
+			&record.Product.Group,
 			&record.Category.Id,
 			&record.Category.Name,
 			&record.Category.IsActive,
@@ -235,7 +238,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 		sql = `
 		SELECT 
 			cp.id, cp.price, cp.is_active,cp.count,
-			p.id,p.name,p.description,
+			p.id,p.name,p.description,p.group,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
 			r.id,r.name,r.is_active
@@ -266,6 +269,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 				&record.Product.Id,
 				&record.Product.Name,
 				&record.Product.Description,
+				&record.Product.Group,
 				&record.Category.Id,
 				&record.Category.Name,
 				&record.Category.IsActive,
@@ -285,7 +289,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 		sql = `
 		SELECT 
 			cp.id, cp.price, cp.is_active,cp.count,
-			p.id,p.name,p.description,
+			p.id,p.name,p.description,p.group,
 			mc.id, mc.name, mc.is_active,
 			m.id, m.name, m.is_active,
 			r.id,r.name,r.is_active
@@ -316,6 +320,7 @@ func (repository DatabaseRepository) GetAllProductsPaginate(body types.PageFilte
 				&record.Product.Id,
 				&record.Product.Name,
 				&record.Product.Description,
+				&record.Product.Group,
 				&record.Category.Id,
 				&record.Category.Name,
 				&record.Category.IsActive,
