@@ -51,13 +51,9 @@ func (handler ProductsHandler) GetGroups(context echo.Context) error {
 
 func (handler ProductsHandler) GetPage(context echo.Context) error {
 
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
+	body := ProductsPageFilterDto{}
 
-	body := ProductsPageFilterDto{
-		Page:     page,
-		PageSize: pageSize,
-	}
+	context.Bind(&body)
 
 	if err := body.Validate(); err != nil {
 		return err

@@ -34,7 +34,6 @@ func (handler RestaurantsHandler) Save(context echo.Context) error {
 
 func (handler RestaurantsHandler) Update(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateRestaurantBodyDto{}
 	context.Bind(&body)
 
@@ -42,7 +41,7 @@ func (handler RestaurantsHandler) Update(context echo.Context) error {
 		return err
 	}
 
-	if err := handler.Service.Update(id, body.Parse()); err != nil {
+	if err := handler.Service.Update(body.Id, body.Parse()); err != nil {
 		return err
 	}
 
@@ -51,13 +50,9 @@ func (handler RestaurantsHandler) Update(context echo.Context) error {
 
 func (handler RestaurantsHandler) GetPage(context echo.Context) error {
 
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
+	body := RestaurantPageFilterDto{}
 
-	body := RestaurantPageFilterDto{
-		Page:     page,
-		PageSize: pageSize,
-	}
+	context.Bind(&body)
 	if err := body.Validate(); err != nil {
 		return err
 	}

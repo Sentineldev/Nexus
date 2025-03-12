@@ -35,7 +35,6 @@ func (handler CategoryProductHandler) Save(context echo.Context) error {
 
 func (handler CategoryProductHandler) Update(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateCategoryProductDto{}
 
 	context.Bind(&body)
@@ -44,7 +43,7 @@ func (handler CategoryProductHandler) Update(context echo.Context) error {
 		return err
 	}
 
-	if err := handler.Service.Update(id, body.Parse()); err != nil {
+	if err := handler.Service.Update(body.Id, body.Parse()); err != nil {
 		return err
 	}
 
@@ -66,15 +65,10 @@ func (handler CategoryProductHandler) Delete(context echo.Context) error {
 
 func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 
-	categoryId := context.Param("categoryId")
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
+	filter := CategoryPageFilterDto{}
 
-	filter := CategoryPageFilterDto{
-		Page:       page,
-		PageSize:   pageSize,
-		CategoryId: categoryId,
-	}
+	context.Bind(&filter)
+
 	if err := filter.Validate(); err != nil {
 		return err
 	}
@@ -83,19 +77,10 @@ func (handler CategoryProductHandler) GetPage(context echo.Context) error {
 
 func (handler CategoryProductHandler) GetAllProductsPaginate(context echo.Context) error {
 
-	restaurantId := context.Param("restaurantId")
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
-	menuId := context.QueryParam("menuId")
-	search := context.QueryParam("search")
+	filter := AllProductsFilterDto{}
 
-	filter := AllProductsFilterDto{
-		Page:         page,
-		PageSize:     pageSize,
-		RestaurantId: restaurantId,
-		MenuId:       menuId,
-		Search:       search,
-	}
+	context.Bind(&filter)
+
 	if err := filter.Validate(); err != nil {
 		return err
 	}

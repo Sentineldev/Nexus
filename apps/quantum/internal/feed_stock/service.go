@@ -35,7 +35,7 @@ func (service FeedStockService) Save(body SaveFeedStockDto) error {
 	return nil
 }
 
-func (service FeedStockService) Update(id string, body SaveFeedStockDto) error {
+func (service FeedStockService) Update(id string, body UpdateFeedStockDto) error {
 
 	current, err := service.GetById(id)
 

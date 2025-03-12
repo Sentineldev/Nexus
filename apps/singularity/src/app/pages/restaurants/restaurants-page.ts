@@ -18,11 +18,11 @@ import RestaurantsDisplay from "./display/restaurants-display";
             }
             @if(!state().loading && state().data) {
                 <div class="w-full flex flex-col gap-8">
-                    <div class="flex">
+                    <div class="flex flex-col gap-8 lg:flex-row lg:gap-0">
                         <div class="flex-1">
                             <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
                                 <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                                <input type="text" name="search" id="search" class="outline-none" placeholder="Buscar restaurante ">
+                                <input type="search" name="search" id="search" class="outline-none" placeholder="Buscar restaurante ">
                             </div>
                         </div>
                         <div>

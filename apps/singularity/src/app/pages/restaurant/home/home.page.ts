@@ -6,10 +6,10 @@ import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 @Component({
     selector: `app-restaurant-home-page`,
     template: `
-    <div>
+    <div class="">
         <app-topbar [label]="restaurant().name"/>
-        <div class="bg-white ">
-            <ul class="flex gap-0">
+        <div class="bg-white overflow-auto w-full">
+            <ul class="flex gap-0 w-[700px]  overflow-auto">
                 <li>
                     <a [routerLink]="restaurantsUrl()" class="block py-5 px-8 text-xl">Restaurantes</a>    
                 </li>
