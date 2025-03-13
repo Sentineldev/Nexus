@@ -3,7 +3,7 @@ import { catchError, map, Observable, of } from "rxjs";
 import { PageFilter, PageData } from "../types/pagination";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
 import ProductRepository, { SaveProduct } from "../interfaces/product-repository.interface";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 import Product from "../classes/product.class";
 
 @Injectable({

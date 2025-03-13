@@ -2,7 +2,7 @@ import { catchError, map, Observable, of } from "rxjs";
 import UserRepository, { SaveUserDto, UpdateUserDto, UpdateUserPasswordDto } from "../interfaces/user-repository";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 import User from "../classes/user.class";
 
 

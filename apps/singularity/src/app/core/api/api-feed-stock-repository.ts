@@ -3,7 +3,7 @@ import FeedStockRepository, { SaveFeedStockDto } from "../interfaces/feed-stock-
 import { catchError, map, Observable, of } from "rxjs";
 import { PageFilter, PageData } from "../types/pagination";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 import FeedStock from "../../pages/product-management/feed-stock/classes/feed-stock.class";
 
 @Injectable({

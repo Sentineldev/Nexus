@@ -9,8 +9,8 @@ import MenuCategoryPageService2 from "../menu-category-page.service";
     
     <div class="flex flex-col h-full">
         <app-topbar [label]="category().name"/>
-        <div class="bg-white overflow-x-auto w-full">
-            <ul class="flex gap-0 w-[700px] lg:w-full  overflow-x-auto">
+        <div class="bg-white">
+            <ul class="flex">
                 <li>
                     <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
                 </li>    

@@ -4,7 +4,7 @@ import { catchError, map, Observable, of } from "rxjs";
 import Employee from "../classes/employee.class";
 import { PageFilter, PageData } from "../types/pagination";
 import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn: "root"

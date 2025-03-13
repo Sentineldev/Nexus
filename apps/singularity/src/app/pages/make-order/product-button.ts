@@ -5,7 +5,7 @@ import OrderService from "./order-service";
 @Component({
     selector: `app-product-button`,
     template: `
-    <button (click)="onClickHandler()" class="  w-[180px] h-48 max-h-48 bg flex flex-col hover:opacity-90 transition-all">
+    <button (click)="onClickHandler()" class="cursor-pointer outline-none w-[200px] h-48 max-h-48 bg flex flex-col hover:opacity-90 transition-all">
         <div class="h-[70%] w-full">
             <img class="rounded-t-lg w-full h-full" src="/imgs/product-placeholder.jpg" alt="Product image">
         </div>                        

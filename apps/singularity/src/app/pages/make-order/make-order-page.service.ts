@@ -47,9 +47,9 @@ export default class MakeOrderPageService  {
             categories: [],
             filter: {
                 page: 1,
-                pageSize: 5,
+                pageSize: 100,
                 filter: {
-                    restaurantId: "",
+                    restaurantId: this.restaurant.id,
                     menuId: "",
                     search: ""
                 }
@@ -67,6 +67,24 @@ export default class MakeOrderPageService  {
         return this.state();
     }
 
+
+    setSearch(search: string ) {
+
+        const filter = this.state().filter;
+
+        filter.filter.search = search;
+
+        this.getProductsPage(filter);
+    }
+
+    setMenuId(menuId: string ) {
+
+        const filter = this.state().filter;
+
+        filter.filter.menuId = menuId;
+        this.getProductsPage(filter);
+    }
+
     getProductsPage(filter: PageFilter<AllProductsFilter>) {
 
         this.categoryProducts.getAllProductsPaginate(filter).subscribe((result) => {
@@ -80,15 +98,7 @@ export default class MakeOrderPageService  {
 
     firstLoad() {
 
-        const filter = {
-            page: 1,
-            pageSize: 5,
-            filter: {
-                restaurantId: this.restaurant.id,
-                menuId: "",
-                search: ""
-            }
-        };
+        const filter = this.state().filter;
         this.state.update((current) => ({ ...current, filter }))
         const products = this.categoryProducts.getAllProductsPaginate(filter);
         const menus = this.menuRepository.getAll(this.restaurant.id);

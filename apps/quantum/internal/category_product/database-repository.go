@@ -110,6 +110,53 @@ func (repository DatabaseRepository) GetById(body string) (types.CategoryProduct
 	return result, nil
 }
 
+func (repository DatabaseRepository) GetByMenuId(menuId, productId string) (types.CategoryProduct, error) {
+
+	result := types.CategoryProduct{}
+	sql := `
+	SELECT 
+		cp.id, cp.price, cp.is_active,cp.count,
+		p.id,p.name,p.description,p.grouping,
+		mc.id, mc.name, mc.is_active,
+		m.id, m.name, m.is_active,
+		r.id,r.name,r.is_active
+	FROM
+		category_product cp
+	JOIN product p ON p.id =  cp.product_id
+	JOIN menu_category mc ON mc.id = cp.category_id
+	JOIN menu m ON m.id = mc.menu_id
+	JOIN restaurant r ON r.id = m.restaurant_id
+	WHERE m.id = ? AND p.id = ?
+	`
+
+	row := repository.DataSource.QueryRow(sql, menuId, productId)
+
+	err := row.Scan(
+		&result.Id,
+		&result.Price,
+		&result.IsActive,
+		&result.Count,
+		&result.Product.Id,
+		&result.Product.Name,
+		&result.Product.Description,
+		&result.Product.Group,
+		&result.Category.Id,
+		&result.Category.Name,
+		&result.Category.IsActive,
+		&result.Category.Menu.Id,
+		&result.Category.Menu.Name,
+		&result.Category.Menu.IsActive,
+		&result.Category.Menu.Restaurant.Id,
+		&result.Category.Menu.Restaurant.Name,
+		&result.Category.Menu.Restaurant.IsActive,
+	)
+
+	if err != nil {
+		return result, err
+	}
+	return result, nil
+}
+
 func (repository DatabaseRepository) GetByProductId(categoryId, productId string) (types.CategoryProduct, error) {
 
 	result := types.CategoryProduct{}

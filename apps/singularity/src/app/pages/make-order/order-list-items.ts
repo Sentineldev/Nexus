@@ -7,7 +7,7 @@ import OrderListItem from "./order-list-item";
     template: `
 
     <div class="p-3 flex flex-col gap-3 overflow-auto h-full">
-        <h1 class="font-bold text-xl">Detalles de Orden</h1>
+        <h1 class="font-bold text-xl text-primary">Detalles de Orden</h1>
         <div class="flex-1 overflow-auto flex flex-col gap-2">
         @for (product of products(); track product.product.product.id; let i = $index) {
             @if (i < products().length - 1) {

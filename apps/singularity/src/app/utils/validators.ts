@@ -9,7 +9,7 @@ export default class ValidatorsUtils {
 
         const value = control.value;
 
-        if (value.length === 0) {
+        if (!value || value.length === 0) {
             return null;
         }
 
@@ -20,7 +20,7 @@ export default class ValidatorsUtils {
 
         const value = control.value;
 
-        if (value.length === 0) {
+        if (!value || value.length === 0) {
             return null;
         }
 
@@ -32,7 +32,7 @@ export default class ValidatorsUtils {
 
         const value = control.value;
 
-        if (value.length === 0) {
+        if (!value || value.length === 0) {
             return null;
         }
 
@@ -46,7 +46,9 @@ export default class ValidatorsUtils {
 
         const value = control.value;
 
-        if (value.length === 0) {
+
+
+        if (!value || value.length === 0) {
             return null;
         }
 

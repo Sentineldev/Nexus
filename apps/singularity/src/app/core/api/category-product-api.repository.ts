@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { catchError, map, Observable, of } from "rxjs";
 import { PageFilter, PageData } from "../types/pagination";
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 import CategoryProduct from "../classes/category-product.class";
 import CategoryProductRepository, { AllProductsFilter, CategoryProductFilter, SaveCategoryProduct, UpdateCategoryProduct } from "../interfaces/category-product.repository";
 

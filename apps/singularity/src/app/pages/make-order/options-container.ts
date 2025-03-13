@@ -17,14 +17,14 @@ import DialogUtils from "../../utils/dialog";
     <div class="flex flex-col gap-4 h-full">
         
         <app-dialog-toggler dialogId="save-client-modal">
-            <button class="h-24 w-24 bg-white text-sm text-black rounded-xl">Cliente</button>
+            <div class="btn w-24 h-24 flex justify-center items-center">Cliente</div>
         </app-dialog-toggler>
         <app-dialog-toggler dialogId="room-service-modal">
-            <button class="h-24 w-24 bg-white text-sm text-black rounded-xl">Room Service</button>
+            <div class="btn w-24 h-24 flex justify-center items-center">Room Service</div>
         </app-dialog-toggler>
-        <button class="h-24 w-24 bg-white text-sm text-black rounded-xl">Seleccionar Mesa</button>
+        <button class="h-24 w-24 btn flex items-center justify-center">Seleccionar Mesa</button>
         <div class="flex-1 flex items-end">
-            <button (click)="onProcessHandler()" [disabled]="!state().readyToProcess" class="h-24  w-24 bg-white text-sm text-black rounded-xl">Procesar</button>
+            <button (click)="onProcessHandler()" [disabled]="!state().readyToProcess" class="h-24  w-24 btn">Procesar</button>
         </div>
     </div>
     `,

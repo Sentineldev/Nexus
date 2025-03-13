@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import OrderRepository, { SaveOrder } from "../interfaces/order-repository.interface";
 import { catchError, map, Observable, of } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn: "root"

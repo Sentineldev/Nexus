@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { catchError, map, Observable, of } from "rxjs";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 import MenuCategory from "../classes/menu-category.class";
 import MenuCategoryRepository, { SaveMenuCategory, UpdateMenuCategory } from "../interfaces/menu-category-repository.interface";
 

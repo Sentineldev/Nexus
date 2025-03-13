@@ -6,7 +6,7 @@ import OrderListItems from "./order-list-items";
 @Component({
     selector: `app-order-items-container`,
     template: `
-    <div class="flex flex-col h-full overflow-auto">
+    <div class="flex flex-col h-full overflow-auto ">
         <div class="border-b border-slate-300">
             <app-client-information-container/>
         </div>
@@ -20,7 +20,7 @@ import OrderListItems from "./order-list-items";
         <div>
             <div class="p-3 flex justify-center items-center">
                 <p class="flex-1 text-xl">Total:</p>
-                <p class="text-2xl font-bold">{{total()}} $</p>
+                <p class="text-2xl font-bold text-primary">{{total()}} $</p>
             </div>
         </div>
     </div>

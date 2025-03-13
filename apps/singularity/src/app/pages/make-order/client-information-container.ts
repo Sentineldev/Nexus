@@ -5,44 +5,19 @@ import OrderService from "./order-service";
     selector: `app-client-information-container`,
     template: `
 
-        <!-- @if (state().isClientSet) {
-            <div class="px-3 flex items-center gap-2">
-                <img width="32" height="32" src="/svg/person-svgrepo-com.svg"/>
-                <div>
-                    <h1 class="text-[0.8rem]">{{state().client.name}}</h1>
-                    <p class="text-[0.8rem]">{{state().client.identificationType}}{{state().client.identification}}</p>
-                </div>
-            </div>            
-        } -->
         <div class="flex flex-col gap-1 p-3">
-            <h1 class="text-xl font-bold">Informacion del Cliente</h1>
+            <h1 class="text-xl font-bold text-primary">Informacion del Cliente</h1>
             <div class="flex items-center justify-center">
                 <div class="flex-1">
                     <h1 class="text-lg font-bold">{{state().client.name}}</h1>
                     <p class="text-slate-500">{{state().type}}</p>
                 </div>
                 @if (isRoomService()) {
-                    <div class="h-12 w-12 bg-slate-800 rounded-xl px-2 text-xs text-white flex items-center justify-center">
+                    <div class="h-12 w-12 bg-primary font-medium rounded-xl px-2 text-xs text-white flex items-center justify-center">
                         <span>H{{state().location}}</span>
                     </div>
                 }
             </div>
-            <!-- <div class="bg-slate-700 text-center text-white p-1">
-                {{state().type}}
-            </div>
-            <div class="flex items-center gap-2">
-                
-                <img width="48" height="48" src="/svg/person-svgrepo-com.svg"/>
-                <div class="flex-1">
-                    <h1 class="text-[0.9rem]">{{state().client.name.length === 0 ? "Cliente" : state().client.name}}</h1>
-                    <p class="text-[0.9rem]">{{state().client.identificationType}}{{state().client.identification}}</p>
-                </div>
-                @if (isRoomService()) {
-                    <div class="h-12 w-12 bg-slate-800 rounded-full text-xs text-white flex items-center justify-center">
-                        <span>H{{state().location}}</span>
-                    </div>
-                }
-            </div> -->
         </div>
     `
 })

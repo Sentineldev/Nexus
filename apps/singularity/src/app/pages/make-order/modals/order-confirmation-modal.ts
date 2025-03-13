@@ -67,7 +67,7 @@ import RestaurantPageService2 from "../../restaurant/restaurant-page.service";
                 </div>
             </div>
             <div>
-                <button [disabled]="loading()" (click)="onConfirmHandler()" class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">
+                <button [disabled]="loading()" (click)="onConfirmHandler()" class="btn w-full" type="submit">
                     @if (!loading()) {
                         Procesar
                     } @else {

@@ -1,6 +1,6 @@
 const CONFIGURATION = {
 
-    API_URL: "http://192.168.10.8:3000/api"
+    API_URL: "http://10.80.22.178:3000/api"
 };
 
 

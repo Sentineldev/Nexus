@@ -115,6 +115,7 @@ export default class AddProductToMenuModal {
                     if (result.length === 0) {
                         this.successMessage.set("Agregado correctamente");
                         this.pageService.fetch();
+                        this.form.reset();
                         return
                     }
                     this.errorMessage.set(result);

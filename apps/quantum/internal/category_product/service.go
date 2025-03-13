@@ -40,6 +40,10 @@ func (service CategoryProductService) Save(body SaveCategoryProductServiceBodyDt
 		return err
 	}
 
+	if _, err := service.Repository.GetByMenuId(category.Menu.Id, body.ProductId); err == nil {
+		return echo.ErrConflict
+	}
+
 	newCategoryProduct := types.NewCategoryProduct2(
 		uuid.NewString(),
 		product,

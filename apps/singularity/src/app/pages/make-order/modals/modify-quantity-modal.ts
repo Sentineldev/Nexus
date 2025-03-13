@@ -1,16 +1,18 @@
-import { Component, computed, input  } from "@angular/core";
+import { Component, computed, input, OnInit  } from "@angular/core";
 import CustomDialog from "../../../components/dialog/custom-dialog";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import OrderService, { OrderProductState } from "../order-service";
 import DialogUtils from "../../../utils/dialog";
+import ReactiveFormInput from "../../../components/forms/reactive-input";
+import ValidatorsUtils from "../../../utils/validators";
 
 @Component({
     selector: `app-modify-quantity-modal`,
-    imports: [ReactiveFormsModule, CustomDialog],
+    imports: [ReactiveFormsModule, CustomDialog, ReactiveFormInput],
     template: `
     <app-custom-dialog [dialogId]="dialogId()">
         <div class="p-6 bg-white m-auto lg:w-[380px] rounded-xl flex flex-col gap-4">
-            <h1 class="text-center font-sans text-xl font-bold text-slate-600">Modificar cantidad</h1>
+            <h1 class="text-center font-sans text-xl font-medium text-primary">Modificar cantidad</h1>
             <div class="flex flex-col gap-1">
                 <div>
                     <button (click)="onRemoveHandler()" type="button" class="bg-red-600 p-2 rounded-sm text-white">Remover</button>
@@ -26,22 +28,25 @@ import DialogUtils from "../../../utils/dialog";
                     </div>
                 </fieldset>
             </div>
-            <form [formGroup]="formGroup()" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmitHandler()" class="w-full flex flex-col gap-6">
                 <div class="flex flex-col gap-4">
-                    <label for="quantity">
-                        <p class="font-sans text-slate-700">Ingresar cantidad</p>
-                        <input  autofocus="true" step="0" formControlName="quantity" class="border border-slate-300 rounded-sm w-full outline-hidden p-1" type="number" name="quantity" id="quantity"/>
-                    </label>
+                   
+                    <app-reactive-form-input
+                    label="Cantidad"
+                    [id]="'quantity'"
+                    [control]="formGroup.controls.quantity"
+                    [errors]="{ required: 'Debes ingresar la cantidad', isNumberInteger: 'Debe ser un numero entero' }"
+                    />
                 </div>
                 <div>
-                    <button class="p-3 bg-slate-700 rounded-lg w-full text-white transition-all" type="submit">Actualizar</button>
+                    <button class="btn w-full" type="submit">Actualizar</button>
                 </div>
             </form>
         </div>
     </app-custom-dialog>
     `,
 })
-export default class ModifyQuantityModal {
+export default class ModifyQuantityModal implements OnInit {
     
     
     public dialogId  = input.required<string>();
@@ -49,13 +54,18 @@ export default class ModifyQuantityModal {
 
     public quantity = input.required<number>();
 
-    public formGroup = computed(() => new FormGroup({
-        quantity: new FormControl<number>(this.quantity(),[Validators.required]),
-    }));
+    public formGroup = new FormGroup({
+        quantity: new FormControl<string>("",[Validators.required, ValidatorsUtils.IsNumberInteger]),
+    })
     
     constructor(
         private readonly service: OrderService
     ) {}
+    ngOnInit(): void {
+        this.formGroup.setValue({
+            quantity: this.quantity().toString(),
+        })
+    }
  
 
     onRemoveHandler() {
@@ -64,9 +74,9 @@ export default class ModifyQuantityModal {
 
     onSubmitHandler() {
 
-        if (this.formGroup().valid) {
+        if (this.formGroup.valid) {
 
-            const value = this.formGroup().value;
+            const value = this.formGroup.value;
 
             const body = value.quantity!;
 

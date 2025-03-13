@@ -13,7 +13,7 @@ import ReactiveSelectInput from "./reactive-select-input";
             @if (toggle()) {
                 <input
                 autocomplete="on"
-                class="border w-full border-neutral p-2 rounded outline-none" 
+                class="border w-full border-neutral p-2 px-3 rounded outline-none" 
                 type="text" 
                 [formControl]="control()" 
                 [name]="id()" 
@@ -27,8 +27,10 @@ import ReactiveSelectInput from "./reactive-select-input";
                     autocomplete="on"
                     class="font-normal rounded outline-none w-full"
                     >
-                        @for (record of data(); track $index) {
-                            <option [value]="record.value">{{record.label}}</option>
+                        @if (control().invalid && control().dirty) {
+                            @for (record of data(); track $index) {
+                                <option [value]="record.value">{{record.label}}</option>
+                            }
                         }
                     </select>
                 </div>

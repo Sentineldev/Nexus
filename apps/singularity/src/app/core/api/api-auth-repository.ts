@@ -4,7 +4,7 @@ import { catchError, map, Observable, of, throwError } from "rxjs";
 import { LogInDto } from "../../components/dto/auth";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Result } from "../types/result";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn: "root"

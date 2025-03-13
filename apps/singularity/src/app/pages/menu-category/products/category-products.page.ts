@@ -24,9 +24,9 @@ import ProductsPageService2 from "../../product-management/products/products-pag
             </div>
             <div class="grid lg:grid-cols-2 gap-6 flex-1 transition-all overflow-auto">
                 <div [className]="showProducts() ? ' pr-4  border-b lg:border-b-0 lg:border-r border-neutral flex flex-col gap-8' : 'pr-4 border-neutral col-span-3 flex flex-col gap-8'">
-                    <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
+                    <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-full">
                         <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                        <input type="text" name="search-in-menu" id="search-in-menu" class="outline-none" placeholder="Buscar en el menu... ">
+                        <input type="text" name="search-in-menu" id="search-in-menu" class="outline-none w-full" placeholder="Buscar en el menu... ">
                     </div>
                     @if (state().products) {
                         <app-category-products-display2 [products]="state().products!.data"/>

@@ -3,7 +3,7 @@ import Menu from "../classes/menu.class";
 import MenuRepository, { SaveMenu, UpdateMenu } from "../interfaces/menu-repository.interface";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 
 
 @Injectable({

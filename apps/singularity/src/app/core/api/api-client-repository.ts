@@ -5,7 +5,7 @@ import Client from "../classes/client.class";
 import ClientRepository, { SaveClient } from "../interfaces/client-repository.interface";
 import { PageFilter, PageData } from "../types/pagination";
 import { Result } from "../types/result";
-import CONFIGURATION from "../../components/configuration";
+import CONFIGURATION from "../configuration";
 
 @Injectable({
     providedIn:"root"
