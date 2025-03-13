@@ -42,6 +42,7 @@ func (dto SaveUserDto) Validate() error {
 }
 
 type UpdateUserDto struct {
+	Id        string `param:"id"`
 	Username  string `json:"username"`
 	ShortName string `json:"shortName"`
 }
@@ -66,6 +67,7 @@ func (dto UpdateUserDto) Validate() error {
 }
 
 type UpdateUserPassword struct {
+	Id       string `param:"id"`
 	Password string `json:"password"`
 }
 

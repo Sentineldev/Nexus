@@ -16,7 +16,15 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
         this.URL = `${CONFIGURATION.API_URL}/category-products`;
     }
     save(body: SaveCategoryProduct): Observable<string> {
-        return this.http.post<HttpResponse<unknown>>(this.URL,body,{ observe: "response" })
+
+
+        const dto = {
+            categoryId: body.categoryId,
+            count: body.count.toString(),
+            price: body.price.toString(),
+            productId: body.productId,
+        }
+        return this.http.post<HttpResponse<unknown>>(this.URL,dto,{ observe: "response" })
         .pipe(
             map(() => ""),
             catchError((result: HttpErrorResponse) => {
@@ -40,7 +48,14 @@ export default class ApiCategoryProductRepository implements CategoryProductRepo
     }
 
     update(id: string, body: UpdateCategoryProduct): Observable<string> {
-        return this.http.put<HttpResponse<unknown>>(`${this.URL}/${id}`,body,{ observe: "response" })
+
+        const dto = {
+            count: body.count.toString(),
+            isActive: body.isActive.toString(),
+            price: body.price.toString(),
+        };
+
+        return this.http.put<HttpResponse<unknown>>(`${this.URL}/${id}`,dto,{ observe: "response" })
         .pipe(
             map(() => ""),
             catchError((result: HttpErrorResponse) => {

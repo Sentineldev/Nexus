@@ -34,14 +34,13 @@ func (handler MenuHandler) Save(context echo.Context) error {
 
 func (handler MenuHandler) Update(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateMenuDto{}
 
 	context.Bind(&body)
 	if err := body.Validate(); err != nil {
 		return err
 	}
-	if err := handler.Service.Update(id, body.Parse()); err != nil {
+	if err := handler.Service.Update(body.Id, body.Parse()); err != nil {
 		return err
 	}
 	return context.JSON(http.StatusOK, "")

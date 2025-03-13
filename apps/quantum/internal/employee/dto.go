@@ -62,8 +62,8 @@ func (dto SaveEmployeeDto) Validate() error {
 }
 
 type EmployeePageFilterDto struct {
-	Page     string `json:"page"`
-	PageSize string `json:"pageSize"`
+	Page     string `query:"page"`
+	PageSize string `query:"pageSize"`
 }
 
 func (filter EmployeePageFilterDto) Validate() error {

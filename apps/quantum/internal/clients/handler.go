@@ -71,13 +71,9 @@ func (handler ClientHandler) GetByIdentification(context echo.Context) error {
 
 func (handler ClientHandler) GetPage(context echo.Context) error {
 
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
+	body := ClientPageFilterDto{}
 
-	body := ClientPageFilterDto{
-		Page:     page,
-		PageSize: pageSize,
-	}
+	context.Bind(&body)
 
 	if err := body.Validate(); err != nil {
 		return err

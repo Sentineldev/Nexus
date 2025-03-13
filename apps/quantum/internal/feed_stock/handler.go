@@ -37,14 +37,12 @@ func (handler FeedStockHandler) Save(context echo.Context) error {
 func (handler FeedStockHandler) Update(context echo.Context) error {
 
 	body := UpdateFeedStockDto{}
-	id := context.Param(("id"))
-	body.Id = id
-	context.Bind(&body.Body)
+	context.Bind(&body)
 
 	if err := body.Validate(); err != nil {
 		return err
 	}
-	if err := handler.Service.Update(body.Id, body.Body); err != nil {
+	if err := handler.Service.Update(body.Id, body); err != nil {
 		return err
 	}
 	return context.JSON(http.StatusOK, nil)
@@ -62,14 +60,9 @@ func (handler FeedStockHandler) Delete(context echo.Context) error {
 
 func (handler FeedStockHandler) GetPage(context echo.Context) error {
 
-	page := context.QueryParam("page")
-	pageSize := context.QueryParam("pageSize")
+	query := FeedStockPageQueryDto{}
 
-	query := FeedStockPageQueryDto{
-		Page:     page,
-		PageSize: pageSize,
-	}
-
+	context.Bind(&query)
 	if err := query.Validate(); err != nil {
 		return err
 	}

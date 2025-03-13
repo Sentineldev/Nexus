@@ -66,6 +66,7 @@ type SaveCategoryProductServiceBodyDto struct {
 }
 
 type UpdateCategoryProductDto struct {
+	Id       string `param:"id"`
 	Price    string `json:"price"`
 	Count    string `json:"count"`
 	IsActive string `json:"isActive"`
@@ -75,10 +76,12 @@ func (dto UpdateCategoryProductDto) Validate() error {
 
 	err := ""
 
+	if utils.IsStringEmpty(dto.Id) {
+		err = "Id cant be empty"
+	}
 	if utils.IsStringEmpty(dto.Price) {
 		err = "Price cant be empty"
 	}
-
 	if utils.IsStringEmpty(dto.Count) {
 		err = "Count cant be empty"
 	}
@@ -119,9 +122,9 @@ type UpdateCategoryProductServiceBodyDto struct {
 }
 
 type CategoryPageFilterDto struct {
-	Page       string `json:"page"`
-	PageSize   string `json:"pageSize"`
-	CategoryId string `json:"categoryId"`
+	Page       string `query:"page"`
+	PageSize   string `query:"pageSize"`
+	CategoryId string `param:"categoryId"`
 }
 
 func (dto CategoryPageFilterDto) Validate() error {
@@ -164,11 +167,11 @@ type CategoryPageFilter struct {
 }
 
 type AllProductsFilterDto struct {
-	Page         string `json:"page"`
-	PageSize     string `json:"pageSize"`
-	RestaurantId string `json:"restaurantId"`
-	MenuId       string `json:"menuId"`
-	Search       string `json:"search"`
+	Page         string `query:"page"`
+	PageSize     string `query:"pageSize"`
+	RestaurantId string `param:"restaurantId"`
+	MenuId       string `query:"menuId"`
+	Search       string `query:"search"`
 }
 
 func (dto AllProductsFilterDto) Validate() error {

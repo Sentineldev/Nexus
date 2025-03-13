@@ -35,7 +35,6 @@ func (handler MenuCategoryHandler) Save(context echo.Context) error {
 
 func (handler MenuCategoryHandler) Update(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateMenuCategoryDto{}
 	context.Bind(&body)
 
@@ -43,7 +42,7 @@ func (handler MenuCategoryHandler) Update(context echo.Context) error {
 		return err
 	}
 
-	if err := handler.Service.Update(id, body.Parse()); err != nil {
+	if err := handler.Service.Update(body.Id, body.Parse()); err != nil {
 		return err
 	}
 

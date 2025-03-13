@@ -43,8 +43,8 @@ func (dto SaveClientDto) Validate() error {
 }
 
 type ClientPageFilterDto struct {
-	Page     string `json:"page"`
-	PageSize string `json:"pageSize"`
+	Page     string `query:"page"`
+	PageSize string `query:"pageSize"`
 }
 
 func (filter ClientPageFilterDto) Validate() error {

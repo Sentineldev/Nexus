@@ -9,8 +9,8 @@ import TopBar2 from "../../../components/topbar2/top-bar-2";
     
     <div>
         <app-topbar [label]="menu().name"/>
-        <div class="bg-white ">
-            <ul class="flex gap-0">
+        <div class="bg-white overflow-auto w-full ">
+            <ul class="flex gap-0 w-[700px]  overflow-auto">
                 <li>
                     <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
                 </li>    

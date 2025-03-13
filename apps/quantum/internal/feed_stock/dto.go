@@ -8,28 +8,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type UpdateFeedStockDto struct {
-	Body SaveFeedStockDto
-	Id   string
-}
-
-func (dto UpdateFeedStockDto) Validate() error {
-
-	err := ""
-	if err := dto.Body.Validate(); err != nil {
-		return err
-	}
-
-	if utils.IsStringEmpty(dto.Id) {
-		err = "Id cant be empty"
-	}
-
-	if !utils.IsStringEmpty(err) {
-		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
-	}
-	return nil
-}
-
 type SaveFeedStockDto struct {
 	Name string `json:"name"`
 	Unit string `json:"unit"`
@@ -52,9 +30,36 @@ func (dto SaveFeedStockDto) Validate() error {
 	return nil
 }
 
+type UpdateFeedStockDto struct {
+	Name string `json:"name"`
+	Unit string `json:"unit"`
+	Id   string `param:"id"`
+}
+
+func (dto UpdateFeedStockDto) Validate() error {
+
+	err := ""
+
+	if utils.IsStringEmpty(dto.Id) {
+		err = "Id cant be empty"
+	}
+	if utils.IsStringEmpty(dto.Name) {
+		err = "Name cant be empty"
+	}
+
+	if utils.IsStringEmpty(dto.Unit) {
+		err = "Unit cant be empty"
+	}
+
+	if !utils.IsStringEmpty(err) {
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, err)
+	}
+	return nil
+}
+
 type FeedStockPageQueryDto struct {
-	Page     string `json:"page"`
-	PageSize string `json:"pageSize"`
+	Page     string `query:"page"`
+	PageSize string `query:"pageSize"`
 }
 
 func (dto FeedStockPageQueryDto) Validate() error {

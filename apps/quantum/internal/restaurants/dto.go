@@ -27,6 +27,7 @@ func (dto SaveRestaurantDto) Validate() error {
 }
 
 type UpdateRestaurantBodyDto struct {
+	Id       string `param:"id"`
 	Name     string `json:"name"`
 	IsActive string `json:"isActive"`
 }
@@ -66,8 +67,8 @@ type UpdateRestaurantServiceBodyDto struct {
 }
 
 type RestaurantPageFilterDto struct {
-	Page     string `json:"page"`
-	PageSize string `json:"pageSize"`
+	Page     string `query:"page"`
+	PageSize string `query:"pageSize"`
 }
 
 func (filter RestaurantPageFilterDto) Validate() error {

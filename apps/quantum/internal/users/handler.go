@@ -35,7 +35,6 @@ func (handler UserHandler) Save(context echo.Context) error {
 
 func (handler UserHandler) Update(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateUserDto{}
 
 	context.Bind(&body)
@@ -44,7 +43,7 @@ func (handler UserHandler) Update(context echo.Context) error {
 		return err
 	}
 
-	if err := handler.Service.Update(id, body); err != nil {
+	if err := handler.Service.Update(body.Id, body); err != nil {
 		return err
 	}
 
@@ -53,7 +52,6 @@ func (handler UserHandler) Update(context echo.Context) error {
 
 func (handler UserHandler) ChangePassword(context echo.Context) error {
 
-	id := context.Param("id")
 	body := UpdateUserPassword{}
 	context.Bind(&body)
 
@@ -61,7 +59,7 @@ func (handler UserHandler) ChangePassword(context echo.Context) error {
 		return err
 	}
 
-	if err := handler.Service.ChangePassword(id, body); err != nil {
+	if err := handler.Service.ChangePassword(body.Id, body); err != nil {
 		return err
 	}
 

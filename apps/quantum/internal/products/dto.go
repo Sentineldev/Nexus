@@ -35,8 +35,8 @@ func (dto SaveProductDto) Validate() error {
 }
 
 type ProductsPageFilterDto struct {
-	Page     string `json:"page"`
-	PageSize string `json:"PageSize"`
+	Page     string `query:"page"`
+	PageSize string `query:"PageSize"`
 }
 
 func (filter ProductsPageFilterDto) Validate() error {

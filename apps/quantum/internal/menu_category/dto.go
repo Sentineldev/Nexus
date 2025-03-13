@@ -31,6 +31,7 @@ func (dto SaveMenuCategoryDto) Validate() error {
 }
 
 type UpdateMenuCategoryDto struct {
+	Id       string `param:"id"`
 	Name     string `json:"name"`
 	IsActive string `json:"isActive"`
 }
@@ -38,6 +39,10 @@ type UpdateMenuCategoryDto struct {
 func (dto UpdateMenuCategoryDto) Validate() error {
 
 	err := ""
+
+	if utils.IsStringEmpty(dto.Id) {
+		err = "Id cant be empty"
+	}
 
 	if utils.IsStringEmpty(dto.Name) {
 		err = "Name cant be empty"
