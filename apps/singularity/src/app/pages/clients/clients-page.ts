@@ -18,11 +18,11 @@ import TopBar2 from "../../components/topbar2/top-bar-2";
             <app-loader color="secondary"/>
         }
         <div class="flex flex-col gap-4">
-            <div class="flex flex-col lg:flex-row gap-8 lg:gap-0">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-8">
                 <div class="flex-1">
-                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
-                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="search" name="search" id="search" class="outline-none" placeholder="Buscar Cliente... ">
+                        <div class="search-bar">
+                            <img src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="search" name="search" id="search" placeholder="Buscar Cliente... ">
                         </div>
                     </div>
                 <app-dialog-toggler [dialogId]="dialogId()">

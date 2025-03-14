@@ -10,17 +10,16 @@ import Menu from "../../core/classes/menu.class";
         display: grid;
         grid-template-columns: repeat(auto-fit,minmax(200px, auto));
         gap: 2rem;
-        row-gap:2rem;
+        row-gap:3rem;
     }
     `,
     template: `
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6 p-3">
         <div class="flex items-center gap-2 p-1">
-            <label for="search" class="bg-white w-full flex items-center  p-3 border-primary rounded-lg gap-2">
-                <img src="/svg/search-svgrepo-com.svg" alt="search icon svg" width="24" height="24">
-                <input (change)="inputChangeHandler($event)" class="outline-hidden w-full bg-transparent" type="search" name="search" id="search">
+            <label for="search" class="search-bar">
+                <img src="/svg/search-svgrepo-com.svg" alt="search icon svg">
+                <input (change)="inputChangeHandler($event)" type="search" name="search" id="search">
             </label>
-           
         </div>
         <div class="p-0 flex w-full  gap-4 overflow-auto">
             <button  [disabled]="selectedMenu() === undefined" (click)="onMenuClickHandler(undefined)" class="btn h-20 w-20 text-sm flex  flex-col items-center">
@@ -34,7 +33,7 @@ import Menu from "../../core/classes/menu.class";
                 </button>
             }
         </div>
-        <div class="buttons-container">
+        <div class="buttons-container justify-start">
 
             @for (product of state().products; track $index) {
                 <app-product-button [product]="product"/>

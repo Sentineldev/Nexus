@@ -14,11 +14,11 @@ import CreateUserModal from "./modals/create-user-modal";
             <app-loader color="secondary"/>
         }
         <div>
-            <div class="flex items-center">
+            <div class="flex items-center gap-8">
                 <div class="flex-1">
-                    <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
-                        <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                        <input type="text" name="search" id="search" class="outline-none" placeholder="Buscar Usuario... ">
+                    <div class="search-bar">
+                        <img src="/svg/search-svgrepo-com.svg" alt="">
+                        <input type="text" name="search" id="search" placeholder="Buscar Usuario... ">
                     </div>
                 </div>
                 <app-dialog-toggler [dialogId]="dialogId()">

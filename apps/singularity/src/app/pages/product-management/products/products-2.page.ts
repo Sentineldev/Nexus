@@ -18,11 +18,11 @@ import Paginator from "../../../components/paginator/paginator";
         }
         @if(!state().loading && state().products) {
             <div class="flex flex-col gap-4">
-                <div class="flex">
+                <div class="flex gap-8">
                     <div class="flex-1">
-                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
-                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input  type="text" name="search" id="search" class="outline-none" placeholder="Buscar producto...">
+                        <div class="search-bar">
+                            <img src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="text" name="search" id="search" placeholder="Buscar producto...">
                         </div>
                     </div>
                     <div>

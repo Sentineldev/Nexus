@@ -17,11 +17,11 @@ import { Loader } from "../../../components/loader/loader";
         }
         @if (state().data) {
             <div class="flex flex-col gap-8 p-4">
-                <div class="flex">
+                <div class="flex gap-8">
                     <div class="flex-1">
-                        <div class="flex border p-3 rounded-lg border-slate-300 gap-2 w-[300px]">
-                            <img width="24" height="24" src="/svg/search-svgrepo-com.svg" alt="">
-                            <input type="text" name="search" id="search" class="outline-none" placeholder="Buscar Categoria... ">
+                        <div class="search-bar">
+                            <img src="/svg/search-svgrepo-com.svg" alt="">
+                            <input type="text" name="search" id="search" placeholder="Buscar Ingrediente... ">
                         </div>
                     </div>
                     <app-dialog-toggler dialogId="save-feed-stock-modal-id">

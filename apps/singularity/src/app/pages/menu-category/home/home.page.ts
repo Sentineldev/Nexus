@@ -7,21 +7,21 @@ import MenuCategoryPageService2 from "../menu-category-page.service";
     selector: `app-menu-category-home-page`,
     template: `
     
-    <div class="flex flex-col h-full">
+    <div>
         <app-topbar [label]="category().name"/>
-        <div class="bg-white">
+        <div class="bg-white overflow-x-auto w-full">
             <ul class="flex">
                 <li>
-                    <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
+                    <a [routerLink]="restaurantUrl()" class="submenu-link">Restaurante</a>    
                 </li>    
                 <li>
-                    <a [routerLink]="menuUrl()" class="block py-5 px-8 text-xl">Menu</a>    
+                    <a [routerLink]="menuUrl()" class="submenu-link">Menu</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="productsUrl()" class="block border-primary  py-5 px-8 text-xl">Productos</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="productsUrl()" class="submenu-link">Productos</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="submenu-link">Configuracion</a>    
                 </li>
             </ul>
         </div>

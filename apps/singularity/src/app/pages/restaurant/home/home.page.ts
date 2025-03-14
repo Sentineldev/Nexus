@@ -6,21 +6,21 @@ import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 @Component({
     selector: `app-restaurant-home-page`,
     template: `
-    <div class="">
+    <div>
         <app-topbar [label]="restaurant().name"/>
-        <div class="bg-white overflow-auto w-full">
-            <ul class="flex gap-0 w-[700px]  overflow-auto">
+        <div class="bg-white overflow-x-auto w-full">
+            <ul class="flex gap-0">
                 <li>
-                    <a [routerLink]="restaurantsUrl()" class="block py-5 px-8 text-xl">Restaurantes</a>    
+                    <a [routerLink]="restaurantsUrl()" class="submenu-link">Restaurantes</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="menusUrl()" class="block py-5 px-8 text-xl">Menus</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="menusUrl()" class="submenu-link">Menus</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block border-primary  py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="submenu-link">Configuracion</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="orderUrl()" class="block border-primary  py-5 px-8 text-xl">Crear Orden</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="orderUrl()" class="submenu-link">Crear Orden</a>    
                 </li>
             </ul>
         </div>

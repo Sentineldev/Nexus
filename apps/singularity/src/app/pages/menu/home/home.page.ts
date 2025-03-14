@@ -10,15 +10,15 @@ import TopBar2 from "../../../components/topbar2/top-bar-2";
     <div>
         <app-topbar [label]="menu().name"/>
         <div class="bg-white overflow-auto w-full ">
-            <ul class="flex gap-0 w-[700px]  overflow-auto">
+            <ul class="flex gap-0">
                 <li>
-                    <a [routerLink]="restaurantUrl()" class="block py-5 px-8 text-xl">Restaurante</a>    
+                    <a [routerLink]="restaurantUrl()" class="submenu-link">Restaurante</a>    
                 </li>    
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="categoriesUrl()" class="block border-b-2 py-5 px-8 text-xl">Categorias</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="categoriesUrl()" class="submenu-link">Categorias</a>    
                 </li>
                 <li>
-                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="block py-5 px-8 text-xl">Configuracion</a>    
+                    <a routerLinkActive="border-primary border-b-2" [routerLink]="configUrl()" class="submenu-link">Configuracion</a>    
                 </li>
             </ul>
         </div>

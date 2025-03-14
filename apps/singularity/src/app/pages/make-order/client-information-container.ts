@@ -13,7 +13,7 @@ import OrderService from "./order-service";
                     <p class="text-slate-500">{{state().type}}</p>
                 </div>
                 @if (isRoomService()) {
-                    <div class="h-12 w-12 bg-primary font-medium rounded-xl px-2 text-xs text-white flex items-center justify-center">
+                    <div class="h-12 w-12 text-slate-500 rounded-xl px-2 text-xl flex items-center justify-center">
                         <span>H{{state().location}}</span>
                     </div>
                 }
